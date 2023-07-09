@@ -59,8 +59,6 @@ import Timetable from './Timetable/Timetable';
                 
               </Tab.Pane>
               <Tab.Pane eventKey="tab2"  className='tab'>
-                <h4>Teacher Registration</h4>
-                <TeaReg/>
               <h4>Student Registration</h4>
               <StdReg/>
               </Tab.Pane>

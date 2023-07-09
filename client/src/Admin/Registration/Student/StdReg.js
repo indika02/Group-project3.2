@@ -30,6 +30,14 @@
         <div>
         
             <form onSubmit={sendData}>
+            <div className='form-group'>
+                    <label for="index">Student's Enrollement No</label>
+                    <input type='text' className='form-control' id='index' placeholder="Enter Student's Enrollement No"
+                    onChange={(e)=>{
+                        setName(e.target.value);
+                    }}
+                    />
+                </div>
                 <div className='form-group'>
                     <label for="name">Student's Full Name</label>
                     <input type='text' className='form-control' id='name' placeholder="Enter Student's Name"
