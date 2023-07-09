@@ -1,23 +1,31 @@
 const router=require("express").Router();
-let User=require("../models/Timetable");
+let Timetable = require("../models/Timetable");
 
 router.route("/add").post((req,res)=>{
    
-    const lecturerName=req.body.lecturerName;
-    const age=Number(req.body.age);
-    const gender=req.body.gender;
+    const date=req.body.date;
+    const teacher_name=req.body.teacher_name;
+    const subject =req.body.subject;
+    const time=req.body.time;
+    const venue=req.body.venue;
+    const classtype=req.body.classtype;
+    const type=req.body.type;
     
 
-    const newUser=new User({
+    const newtimetable=new Timetable({
         
-        name,
-        age,
-        gender,
+        date,
+       teacher_name,
+       subject,
+       time,
+       venue,
+       classtype,
+       type
       
     })
 
-    newUser.save().then(()=>{
-        res.json("User Added")
+    newtimetable.save().then(()=>{
+        res.json("Timetable Added")
     }).catch((err)=>{
         console.log(err);
     })

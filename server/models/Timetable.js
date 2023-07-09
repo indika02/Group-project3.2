@@ -3,14 +3,17 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const TimetableSchema=new Schema({
+    date : {
+        type : String,
+    },
     teacher_name: {
         type:String,
     },
     subject : {
         type:String,
     },
-    datetime : {
-        type:datetime,
+    time : {
+        type:String,
     },
     venue : {
         type:String,
