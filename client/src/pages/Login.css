@@ -1,0 +1,40 @@
+
+.login{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    
+}
+
+
+h4{
+    padding-top: 10px;
+    text-align: center;
+    font-size: 35px;
+    font-family: 'Noto Serif',serif;
+    font-weight: bold;
+    color: #460696;
+    line-height: 2;
+}
+
+.btnlogin{
+    width: 100px;
+    height: 45px;
+    background-color: #460696;
+    border-style: none;
+    border-radius: 0;
+}
+
+.btnlogin:hover{
+    background-color: #460696;
+}
+
+a{
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    flex-direction: column;
+    display: flex;
+}
+

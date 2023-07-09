@@ -1,0 +1,46 @@
+
+.row-contactus h3{
+    color: #460691;
+    font-size: 45px;
+    font-weight: 400;
+    text-align: left;
+
+}
+
+.row-contactus p{
+    line-height: 1.0;
+    text-align: left;
+    font-size: 12px;
+}
+form{
+    display: block;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin: 40px auto;
+    max-width: 800px;
+    max-height: 600px;
+    padding: 25px 40px;
+}
+  
+form input,textarea{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 10px auto;
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: none;
+}
+
+form button{
+    height: 50px;
+    width: 100px;
+    margin-right: auto;
+    border: none;
+    background-color: #460691;
+    color: #fff;
+    cursor: pointer;
+}
+ 

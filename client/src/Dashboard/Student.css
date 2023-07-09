@@ -1,0 +1,44 @@
+Nav{
+    font-weight: bold;
+    font-style: italic;
+    color: black;
+}
+
+.tab h1{
+    text-align: center;
+}
+
+.card {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: none;
+   
+  }
+  
+  .card img {
+    width: 300px;
+    height: 250px;
+    display: block;
+  }
+  
+  .card-content {
+    padding: 16px;
+  }
+  
+  .card-content h2 {
+    text-align: center;
+    font-family: 'Noto Serif Sinhala', serif;
+    padding-top: 5px;
+    font-weight: bold;
+    color: #460691;
+    font-size: 18px;
+    margin-top: 0;
+  }
+  
+  .card-content p {
+    font-size: 14px;
+    cursor: pointer;
+  }

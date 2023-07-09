@@ -1,0 +1,50 @@
+.Lecturers h1{
+    font-family: 'Noto Serif Sinhala',serif;
+    color: #460691;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+.Lecturers h3{
+    font-family: 'Noto Serif Sinhala',serif;
+    color: #460691;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 20px;
+    text-align: left;
+}
+
+.card {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px;
+   
+  }
+  
+  .card img {
+    width: 300px;
+    height: 250px;
+    display: block;
+  }
+  
+  .card-content {
+    padding: 16px;
+  }
+  
+  .card-content h2 {
+    text-align: center;
+    font-family: 'Noto Serif Sinhala', serif;
+    padding-top: 5px;
+    font-weight: bold;
+    color: #460691;
+    font-size: 18px;
+    margin-top: 0;
+  }
+  
+  .card-content p {
+    font-size: 14px;
+  }

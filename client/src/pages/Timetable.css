@@ -1,0 +1,23 @@
+.timetable h1{
+    font-family: 'Noto Serif Sinhala',serif;
+    color: #460691;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+.timetable h3{
+    font-family: 'Noto Serif Sinhala',serif;
+    color: #460691;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 20px;
+    text-align: left;
+}
+
+.timetable table{
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 10px;
+}

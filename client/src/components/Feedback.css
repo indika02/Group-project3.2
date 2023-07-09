@@ -1,0 +1,39 @@
+.feedback-section {
+    width: 100%;
+  }
+  
+  .feedback-card{
+    background-color:white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .feedback-card h4{
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  .feedback-card p{
+    line-height: 2.0;
+    font-weight: 300;
+  }
+
+  blockquote {
+    border:none;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    margin-bottom:-10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+    blockquote:before { 
+    content: open-quote;
+    font-weight: bold;
+    font-size:80px;
+    color:#460691;
+    } 
+    blockquote:after { 
+    content: close-quote;
+    font-weight: bold;
+    font-size:80px;
+    color:#460691;
+    }

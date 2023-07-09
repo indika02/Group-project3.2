@@ -1,0 +1,85 @@
+.classes h3{
+    font-family: 'Poppins',sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    color:#460691;
+    text-align: center;
+    padding-bottom: 30px;
+}
+  .image-container img {
+   width: 300px;
+   height: 300px;
+    display: block;
+  }
+  
+  .image-container h4{
+    text-align: center;
+    font-family: 'Noto Serif Sinhala', serif;
+    padding-top: 5px;
+    font-weight: bold;
+    color: #460691;
+  }
+
+  .card {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 10px 10px 5px #d4cae0
+   
+  }
+  
+  .card img {
+    width: 300px;
+    height: 300px;
+    display: block;
+  }
+/*   
+  .card-content {
+    padding: 16px;
+  }
+  
+  .card-content h2 {
+    text-align: center;
+    font-family: 'Noto Serif Sinhala', serif;
+    padding-top: 5px;
+    font-weight: bold;
+    color: #460691;
+    font-size: 18px;
+    margin-top: 0;
+  }
+  
+  .card-content p {
+    font-size: 14px;
+  }
+   */
+
+   .overlay {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color:#460691;
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: .5s ease;
+  }
+  
+  .container:hover .overlay {
+    bottom: 0;
+    height: 100%;
+  }
+  
+  .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
