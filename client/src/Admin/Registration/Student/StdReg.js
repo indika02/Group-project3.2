@@ -2,28 +2,51 @@
     import axios from 'axios';
     import { Col,Row } from 'react-bootstrap';
     import './stdreg.css';
+    import swal from 'sweetalert';
 
     export default function StdReg() {
 
+        const [index,setIndex]=useState("");
         const [name,setName]=useState("");
         const [dob,setDob]=useState("");
         const [age,setAge]=useState("");
         const [gender,setGender]=useState("");
+        const[contactpersonal,setContactpersonal]=useState("");
+        const[contacthome,setContactHome]=useState("");
+        const[address,setAddress]=useState("");
+        const[email,setEmail]=useState("");
+        const[classtype,setClasstype]=useState("");
+        const[Subject1,setSubject1]=useState("");
+        const[Subject2,setSubject2]=useState("");
+        const[Subject3,setSubject3]=useState("");
+        const[Subject4,setSubject4]=useState("");
+        const[usertype,setUsertype]=useState("");
 
         function sendData(e){
             e.preventDefault();
 
             const newStudent={
+                index,
                 name,
-                dob,setDob,
+                dob,
                 age,
-                gender
+                gender,
+                contactpersonal,
+                contacthome,
+                address,
+                email,
+                classtype,
+                Subject1,
+                Subject2,
+                Subject3,
+                Subject4,
+                usertype
             }
             
             axios.post("http://localhost:5000/user/add",newStudent).then(()=>{
-                alert("Student Added")
+               swal("Success", "Registration Successful!", "success");
             }).catch((err)=>{
-                alert(err)
+                swal("Error", "Invalid Data Input!", "error");
             })
         }
     return (
@@ -34,7 +57,7 @@
                     <label for="index">Student's Enrollement No</label>
                     <input type='text' className='form-control' id='index' placeholder="Enter Student's Enrollement No"
                     onChange={(e)=>{
-                        setName(e.target.value);
+                        setIndex(e.target.value);
                     }}
                     />
                 </div>
@@ -102,7 +125,7 @@
                     <label for="Contactno">Contact No(Personal)</label>
                     <input type='text' className='form-control' id='contact' placeholder="Contact Number(Personal)"
                     onChange={(e)=>{
-                        setName(e.target.value);
+                        setContactpersonal(e.target.value);
                     }}
                     />
                 </div>
@@ -112,7 +135,7 @@
                     <label for="Contactno">Contact No(Home)</label>
                     <input type='text' className='form-control' id='contacthome' placeholder="Contact Number(Home)"
                     onChange={(e)=>{
-                        setName(e.target.value);
+                        setContactHome(e.target.value);
                     }}
                     />
                 </div>
@@ -124,7 +147,7 @@
                     <label for="address">Address</label>
                     <input type='text' className='form-control' id='address' placeholder="address"
                     onChange={(e)=>{
-                        setName(e.target.value);
+                        setAddress(e.target.value);
                     }}
                     />
                 </div>
@@ -136,7 +159,7 @@
                     <label for="email">Email Address</label>
                     <input type='email' className='form-control' id='email' placeholder="Email Address"
                     onChange={(e)=>{
-                        setName(e.target.value);
+                        setEmail(e.target.value);
                     }}
                     />
                 </div>
@@ -146,7 +169,11 @@
                     <Col>
                     <div className='form-group'>
                         <label for="type" className='type'>Class Type</label>
-                        <select className="form-select form-control" aria-label="Default select example">
+                        <select className="form-select form-control" aria-label="Default select example"
+                         onChange={(e)=>{
+                            setClasstype(e.target.value);
+                        }}
+                        >
                             <option selected>Class type</option>
                             <option value="O/L">O/L</option>
                             <option value="A/L">A/L</option>
@@ -158,19 +185,50 @@
                     <label for="subjects">Subjects</label>
                     <Row>
                     <Col>
-                    <input type='text' className='form-control' id='sub1' placeholder="Subject1"/>
+                    <input type='text' className='form-control' id='sub1' placeholder="Subject1"
+                     onChange={(e)=>{
+                        setSubject1(e.target.value);
+                    }}
+                    />
                     </Col>
                     <Col>
-                    <input type='text' className='form-control' id='sub2' placeholder="Subject2"/>
+                    <input type='text' className='form-control' id='sub2' placeholder="Subject2"
+                     onChange={(e)=>{
+                        setSubject2(e.target.value);
+                    }}
+                    />
                     </Col>
                     <Col>
-                    <input type='text' className='form-control' id='sub3' placeholder="Subject3"/>
+                    <input type='text' className='form-control' id='sub3' placeholder="Subject3"
+                     onChange={(e)=>{
+                        setSubject3(e.target.value);
+                    }}
+                    />
                     </Col>
                     <Col>
-                    <input type='text' className='form-control' id='sub4' placeholder="Subject4"/>
+                    <input type='text' className='form-control' id='sub4' placeholder="Subject4"
+                     onChange={(e)=>{
+                        setSubject4(e.target.value);
+                    }}
+                    />
                     </Col>
                     </Row>
-                    
+                    <Row>
+                        <Col>
+                        <div className='form-group'>
+                        <label for="usertype" className='usertype'>User Type</label>
+                        <select className="form-select form-control" aria-label="Default select example"
+                         onChange={(e)=>{
+                            setUsertype(e.target.value);
+                        }}
+                        >
+                            <option selected>User Type</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                        </Col>
+                    </Row>
                 </div>
                         
             

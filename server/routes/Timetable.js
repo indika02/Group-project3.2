@@ -31,4 +31,12 @@ router.route("/add").post((req,res)=>{
     })
 })
 
+router.route("/").get((req,res)=>{
+    Timetable.find().then((Timetable)=>{
+        res.json(Timetable)
+    }).catch((err)=>{
+        console.log(err);
+    })
+})
+
 module.exports=router;
