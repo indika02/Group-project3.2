@@ -4,7 +4,7 @@
     import './stdreg.css';
     import swal from 'sweetalert';
 
-    export default function StdReg() {
+    export default function StdRegform() {
 
         const [index,setIndex]=useState("");
         const [name,setName]=useState("");
@@ -51,7 +51,7 @@
         }
     return (
         <div>
-        
+        <h4>Student Registration Form</h4>
             <form onSubmit={sendData}>
             <div className='form-group'>
                     <label for="index">Student's Enrollement No</label>
@@ -232,7 +232,7 @@
                 </div>
                         
             
-                <button type='submit' className='btn btn-primary'>Save</button>
+                <button type='submit' className='savebtn'>Save</button>
             </form>
         </div>
     

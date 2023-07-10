@@ -4,3 +4,22 @@
 button{
     padding-top: 5px;
 }
+
+.savebtn{
+    background-color: #460691;
+    border: 1px solid #460691;
+    border-radius: 0px;
+    color: rgb(255, 255, 255);
+    padding: 13px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    height: 50px;
+    width: 120px;
+    margin-top: 20px;
+    justify-content: center;
+    float: right;
+    margin-bottom: 10px;
+}
