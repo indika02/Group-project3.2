@@ -8,10 +8,10 @@ export default function StdDetails(){
     return(
         <div>
             <Container>
-            <Link to="/stdRegForm">
+            <Link to="/stdRegForm" className="reg">
              <button className="savebtn"><FaPlus/></button>
              </Link>
-            <Table striped bordered hover>
+            <Table striped bordered hover size="sm">
                
               <thead>
                 <tr>

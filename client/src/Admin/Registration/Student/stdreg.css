@@ -1,3 +1,13 @@
 .age{
     padding-bottom: 9px;
 }
+
+.reg{
+    padding-bottom: 10px;
+    float:right;
+}
+
+Table th{
+    font-size: 14px;
+    font-weight: 500;
+}
