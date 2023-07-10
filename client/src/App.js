@@ -7,6 +7,7 @@ import Timetable from './pages/Timetable';
 import Login from './pages/Login';
 import Student from './Dashboard/Student';
 import Admin from './Admin/Admin';
+import StdRegform from './Admin/Registration/Student/StdRegform';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/student' element={<Student/>}/>
+        <Route path='/stdRegForm' element={<StdRegform/>}/>
         
         </Routes>
     </BrowserRouter> 
