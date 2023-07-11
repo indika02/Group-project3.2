@@ -16,10 +16,10 @@ export default function StdRegform() {
     const[address,setAddress]=useState("");
     const[email,setEmail]=useState("");
     const[classtype,setClasstype]=useState("");
-    const[Subject1,setSubject1]=useState("");
-    const[Subject2,setSubject2]=useState("");
-    const[Subject3,setSubject3]=useState("");
-    const[Subject4,setSubject4]=useState("");
+    const[subject1,setSubject1]=useState("");
+    const[subject2,setSubject2]=useState("");
+    const[subject3,setSubject3]=useState("");
+    const[subject4,setSubject4]=useState("");
     const[usertype,setUsertype]=useState("");
 
     function sendData(e){
@@ -36,13 +36,14 @@ export default function StdRegform() {
             address,
             email,
             classtype,
-            Subject1,
-            Subject2,
-            Subject3,
-            Subject4,
+            subject1,
+            subject2,
+            subject3,
+            subject4,
             usertype
         }
         
+        console.log(newStudent);
         axios.post("http://localhost:5000/user/add",newStudent).then(()=>{
            swal("Success", "Registration Successful!", "success");
         }).catch((err)=>{

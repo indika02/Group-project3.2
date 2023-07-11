@@ -42,13 +42,27 @@ export default function Timetable() {
       type
     };
 
+
+  
+    
     try {
       await axios.post("http://localhost:5000/timetable/add", newSchedule);
       swal("Success", "Scheduled a New Class!", "success");
       fetchTimetables();
+      resetForm();
     } catch (error) {
       swal("Error!", "Invalid Input, Please Try again!", "error");
     }
+  };
+
+  const resetForm = () => {
+    setDate("");
+    setLecName("");
+    setSubject("");
+    setTime("");
+    setVenue("");
+    setClassType("");
+    setType("");
   };
 
   return (
