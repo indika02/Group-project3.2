@@ -19,7 +19,10 @@ export default function StdDetails(){
   const fetchStudentDetails = async () => {
     try {
       const response = await axios.get("http://localhost:5000/user/");
-      setStudentdetails(response.data);
+      const filteredStudents = response.data.filter(
+        (studentdetail) => studentdetail.usertype === "student"
+      );
+      setStudentdetails(filteredStudents);
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch Student Details:", error);
@@ -49,7 +52,7 @@ export default function StdDetails(){
                 </thead>
                 <tbody>
                   {studentdetails.map((studentdetail) => (
-                    <tr key={studentdetail.id}>
+                    <tr key={studentdetail._id}>
                       <td>{studentdetail.index}</td>
                       <td>{studentdetail.name}</td>
                       <td>{studentdetail.age}</td>

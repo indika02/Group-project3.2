@@ -13,7 +13,7 @@ router.route("/add").post((req,res)=>{
     
 
     const newtimetable=new Timetable({
-        
+
         date,
        teacher_name,
        subject,
@@ -60,15 +60,23 @@ router.route("/update/:id").put(async (req,res)=>{
     })
 })
 
-router.route("/delete/:id").delete(async(req,res)=>{
-let Tid=req.params.id;
-await Timetable.findByIdAndDelete(Tid).then(()=>{
-    res.status(200).send({status:"Timetable Deleted"});
-}).catch((err)=>{
-    console.log(err.message);
-    res.status(500).send({status:"Error with delete Timetable",error:err.message});
-})
-})
+router.route("/delete/:id").delete(async (req, res) => {
+    const Tid = req.params.id;
+    try {
+      const timetable = await Timetable.findByIdAndRemove(Tid);
+      if (timetable) {
+        res.status(200).send({ status: "Timetable Deleted" });
+      } else {
+        res.status(404).send({ status: "Timetable Not Found" });
+      }
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send({
+        status: "Error with delete Timetable",
+        error: err.message,
+      });
+    }
+  });
 
 router.route
 module.exports=router;

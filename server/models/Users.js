@@ -10,9 +10,6 @@ const UsersSchema=new Schema({
     name : {
         type:String,
     },
-    name : {
-        type:String,
-    },
     age : {
         type:String,
     },
@@ -30,6 +27,9 @@ const UsersSchema=new Schema({
     },
     email : {
         type:String,
+    },
+    qualifications : {
+        type : String,
     },
     classtype : {
         type:String,

@@ -12,6 +12,7 @@ router.route("/add").post((req,res)=>{
     const contacthome=req.body.contacthome;
     const address=req.body.address;
     const email=req.body.email;
+    const qualifications=req.body.qualifications;
     const classtype=req.body.classtype;
     const subject1=req.body.subject1;
     const subject2=req.body.subject2;
@@ -31,6 +32,7 @@ router.route("/add").post((req,res)=>{
         contacthome,
         address,
         email,
+        qualifications,
         classtype,
         subject1,
         subject2,

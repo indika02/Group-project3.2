@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Student from './Dashboard/Student';
 import Admin from './Admin/Admin';
 import StdRegform from './Admin/Registration/Student/StdRegform';
+import TeaReg from './Admin/Registration/Teacher/TeaReg';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/student' element={<Student/>}/>
         <Route path='/stdRegForm' element={<StdRegform/>}/>
+        <Route path='/TeaRegForm' element={<TeaReg/>}/>
         
         </Routes>
     </BrowserRouter> 

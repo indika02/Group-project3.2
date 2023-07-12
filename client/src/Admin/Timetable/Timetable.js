@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Col, Row, Table, Container } from "react-bootstrap";
 import axios from "axios";
 import swal from 'sweetalert';
-
+import { FaBitbucket } from "react-icons/fa";
 export default function Timetable() {
   const [date, setDate] = useState("");
   const [teacher_name, setLecName] = useState("");
@@ -28,6 +28,7 @@ export default function Timetable() {
       console.error("Failed to fetch timetables:", error);
     }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,6 +66,15 @@ export default function Timetable() {
     setType("");
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/timetable/delete/${id}`);
+      swal("Success", "Data Deleted!", "success");
+      fetchTimetables();
+    } catch (error) {
+      swal("Error!", "Failed to delete data!", "error");
+    }
+  };
   return (
     <div>
       <Form onSubmit={handleSubmit}>
@@ -177,7 +187,7 @@ export default function Timetable() {
                 </thead>
                 <tbody>
                   {timetables.map((timetable) => (
-                    <tr key={timetable.id}>
+                    <tr key={timetable._id}>
                       <td>{timetable.date}</td>
                       <td>{timetable.teacher_name}</td>
                       <td>{timetable.subject}</td>
@@ -185,6 +195,14 @@ export default function Timetable() {
                       <td>{timetable.venue}</td>
                       <td>{timetable.classtype}</td>
                       <td>{timetable.type}</td>
+                      <td>
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={() => handleDelete(timetable._id)}
+                        >
+                          <FaBitbucket/>
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

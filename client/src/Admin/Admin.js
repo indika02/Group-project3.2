@@ -6,6 +6,7 @@ import {Row,Col} from 'react-bootstrap';
 import { Table,Form} from 'react-bootstrap';
 import Timetable from './Timetable/Timetable';
 import StdDetails from './Registration/Student/stddetails';
+import TeacherDetails from './Registration/Teacher/teacherDetails';
 
 function Admin ()  {
 
@@ -50,8 +51,10 @@ function Admin ()  {
       </Nav>
       <Tab.Content>
         <Tab.Pane eventKey="tab1" className='tab'>
-          <h4>User Details</h4>
+          <h4>Student Details</h4>
           <StdDetails/>
+          <h4>Teacher Details</h4>
+          <TeacherDetails/>
         </Tab.Pane>
         <Tab.Pane eventKey="tab2"  className='tab'>
           <h4>User Account Management</h4>
