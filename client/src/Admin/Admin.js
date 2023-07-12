@@ -7,6 +7,7 @@ import { Table,Form} from 'react-bootstrap';
 import Timetable from './Timetable/Timetable';
 import StdDetails from './Registration/Student/stddetails';
 import TeacherDetails from './Registration/Teacher/teacherDetails';
+import Account from './Account Creation/Account';
 
 function Admin ()  {
 
@@ -58,6 +59,7 @@ function Admin ()  {
         </Tab.Pane>
         <Tab.Pane eventKey="tab2"  className='tab'>
           <h4>User Account Management</h4>
+          <Account/>
         </Tab.Pane>
         <Tab.Pane eventKey="tab3"  className='tab'>
           <h1>Timetable Management</h1>

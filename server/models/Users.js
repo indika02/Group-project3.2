@@ -48,6 +48,12 @@ const UsersSchema=new Schema({
     },
     usertype : {
         type:String,
+    },
+    dpwd : {
+        type:String,
+    },
+    accountstate : {
+        type:String,
     }
 })
 

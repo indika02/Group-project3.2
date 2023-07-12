@@ -16,10 +16,25 @@ export default function TeaReg() {
     const[subject1,setSubject1]=useState("");
     const[subject2,setSubject2]=useState("");
     const[subject3,setSubject3]=useState("");
-    const[usertype,setUsertype]=useState("");
+    const[usertype,setUsertype]=useState("teacher");
+    const[dpwd,setDpwd]=useState("1234");
+    const[accountstate,setAccountStatus]=useState("active");
 
     function sendData(e){
         e.preventDefault();
+
+        if (
+            !name ||
+            !address ||
+            !contactpersonal ||
+            !email ||
+            !qualifications ||
+            !classtype ||
+            !subject1
+          ) {
+            swal("Error!", "Please fill in all the fields!", "error");
+            return;
+          }
 
         const newTeacher={
             name,
@@ -31,7 +46,9 @@ export default function TeaReg() {
             subject1,
             subject2,
             subject3,
-            usertype
+            usertype,
+            dpwd,
+            accountstate
         }
         
         console.log(newTeacher);
@@ -139,18 +156,6 @@ export default function TeaReg() {
                     </Row>
                     <Row>
                         <Col>
-                        <div className='form-group'>
-                    <label for="usertype" className='usertype'>User Type</label>
-                    <select className="form-select form-control" aria-label="Default select example"
-                    onChange={(e)=>{
-                        setUsertype(e.target.value);
-                    }}
-                    >
-                        <option selected>User Type</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="student">Student</option>
-                    </select>
-                </div>
                         </Col>
                     </Row>
                 </div>

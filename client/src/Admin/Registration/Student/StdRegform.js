@@ -20,7 +20,9 @@ export default function StdRegform() {
     const[subject2,setSubject2]=useState("");
     const[subject3,setSubject3]=useState("");
     const[subject4,setSubject4]=useState("");
-    const[usertype,setUsertype]=useState("");
+    const[usertype,setUsertype]=useState("student");
+    const[dpwd,setDpwd]=useState("1234");
+    const[accountstate,setAccountStatus]=useState("active");
 
     function sendData(e){
         e.preventDefault();
@@ -40,7 +42,9 @@ export default function StdRegform() {
             subject2,
             subject3,
             subject4,
-            usertype
+            usertype,
+            dpwd,
+            accountstate
         }
         
         console.log(newStudent);

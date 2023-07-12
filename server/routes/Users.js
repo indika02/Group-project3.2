@@ -19,6 +19,8 @@ router.route("/add").post((req,res)=>{
     const subject3=req.body.subject3;
     const subject4=req.body.subject4;
     const usertype=req.body.usertype;
+    const dpwd=req.body.dpwd;
+    const accountstate=req.body.accountstate;
     
 
     const newUser=new User({
@@ -38,7 +40,9 @@ router.route("/add").post((req,res)=>{
         subject2,
         subject3,
         subject4,
-        usertype
+        usertype,
+        dpwd,
+        accountstate
       
     })
 

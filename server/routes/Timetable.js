@@ -39,26 +39,26 @@ router.route("/").get((req,res)=>{
     })
 })
 
-router.route("/update/:id").put(async (req,res)=>{
-    let Tid=req.params.id;
-    const {date,teacher_name,subject,time,venue,classtype,type}=req.body;
-    const updateTimetable ={
-        date,
-        teacher_name,
-        subject,
-        time,
-        venue,
-        classtype,
-        type
-    }
+// router.route("/update/:id").put(async (req,res)=>{
+//     let Tid=req.params.id;
+//     const {date,teacher_name,subject,time,venue,classtype,type}=req.body;
+//     const updateTimetable ={
+//         date,
+//         teacher_name,
+//         subject,
+//         time,
+//         venue,
+//         classtype,
+//         type
+//     }
 
-    const update=await Student.findByIdAndUpdate(Tid,updateTimetable).then(()=>{
-        res.status(200).send({status:"Timetable updated",user:update});
-    }).catch((err)=>{
-        console.log(err);
-        res.status(500).send({status:"Error with updating data"});
-    })
-})
+//     const update=await Student.findByIdAndUpdate(Tid,updateTimetable).then(()=>{
+//         res.status(200).send({status:"Timetable updated",user:update});
+//     }).catch((err)=>{
+//         console.log(err);
+//         res.status(500).send({status:"Error with updating data"});
+//     })
+// })
 
 router.route("/delete/:id").delete(async (req, res) => {
     const Tid = req.params.id;
