@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Col,Row } from 'react-bootstrap';
 import './teareg.css';
 import swal from 'sweetalert';
+import bcrypt from 'bcryptjs';
 
 export default function TeaReg() {
     
@@ -36,6 +37,8 @@ export default function TeaReg() {
             return;
           }
 
+          
+         const encryptedPassword = bcrypt.hashSync(dpwd, 10);
         const newTeacher={
             name,
             address,
@@ -47,7 +50,7 @@ export default function TeaReg() {
             subject2,
             subject3,
             usertype,
-            dpwd,
+            dpwd:encryptedPassword,
             accountstate
         }
         
