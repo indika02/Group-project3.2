@@ -47,7 +47,6 @@ export default function TeacherDetails(){
                     <th>Email Address</th>
                     <th>Education</th>
                     <th>Class</th>
-                    <th colSpan={3}>Subjects</th>
                     
                   </tr>
                 </thead>
@@ -59,9 +58,6 @@ export default function TeacherDetails(){
                       <td>{teacherdetail.email}</td>
                       <td>{teacherdetail.qualifications}</td>
                       <td>{teacherdetail.classtype}</td>
-                      <td>{teacherdetail.subject1}</td>
-                    <td> {teacherdetail.subject2}</td>
-                      <td>{teacherdetail.subject3}</td>
                     </tr>
                   ))}
                 </tbody>

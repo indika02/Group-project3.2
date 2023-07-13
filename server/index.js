@@ -27,10 +27,12 @@ connection.once("open",()=>{
 
 const userRouter=require("./routes/Users");
 const timetableRouter=require("./routes/Timetable");
+const SubjectRouter=require("./routes/Subject");
 
 
 app.use("/user",userRouter)
 app.use("/timetable",timetableRouter);
+app.use("/subject",SubjectRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port number: ${PORT}`);

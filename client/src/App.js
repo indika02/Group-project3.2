@@ -9,6 +9,7 @@ import Student from './Dashboard/Student';
 import Admin from './Admin/Admin';
 import StdRegform from './Admin/Registration/Student/StdRegform';
 import TeaReg from './Admin/Registration/Teacher/TeaReg';
+import Addsub from './Admin/Registration/subjects/AddSub';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/student' element={<Student/>}/>
         <Route path='/stdRegForm' element={<StdRegform/>}/>
         <Route path='/TeaRegForm' element={<TeaReg/>}/>
+        <Route path='/Addsub' element={<Addsub/>}/>
         
         </Routes>
     </BrowserRouter> 

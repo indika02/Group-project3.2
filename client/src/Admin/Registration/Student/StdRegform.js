@@ -4,6 +4,7 @@ import { Col,Row } from 'react-bootstrap';
 import './stdreg.css';
 import swal from 'sweetalert';
 
+
 export default function StdRegform() {
 
     const [index,setIndex]=useState("");
