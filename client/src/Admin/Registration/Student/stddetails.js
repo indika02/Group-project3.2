@@ -39,7 +39,7 @@ export default function StdDetails(){
             <div>Loading...</div>
           ) : (
             <>
-              <Table striped bordered hover>
+              <Table striped bordered hover className="table">
                 <thead>
                   <tr>
                     <th>Enrollment No.</th>

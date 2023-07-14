@@ -13,13 +13,8 @@ export default function TeaReg() {
     const[contactpersonal,setContactpersonal]=useState("");
     const[email,setEmail]=useState("");
     const[qualifications,setQualifications]=useState("");
-    const[classtype,setClasstype]=useState("");
-    const[subject1,setSubject1]=useState("");
-    const[subject2,setSubject2]=useState("");
-    const[subject3,setSubject3]=useState("");
     const[usertype,setUsertype]=useState("teacher");
     const[dpwd,setDpwd]=useState("1234");
-    const[accountstate,setAccountStatus]=useState("active");
 
     function sendData(e){
         e.preventDefault();
@@ -29,29 +24,20 @@ export default function TeaReg() {
             !address ||
             !contactpersonal ||
             !email ||
-            !qualifications ||
-            !classtype ||
-            !subject1
+            !qualifications
           ) {
             swal("Error!", "Please fill in all the fields!", "error");
             return;
           }
 
           
-         const encryptedPassword = bcrypt.hashSync(dpwd, 10);
         const newTeacher={
             name,
             address,
             contactpersonal,
             email,
-            classtype,
             qualifications,
-            subject1,
-            subject2,
-            subject3,
-            usertype,
-            dpwd:encryptedPassword,
-            accountstate
+            usertype
         }
         
         console.log(newTeacher);
@@ -111,57 +97,14 @@ export default function TeaReg() {
                     }}
                     />
                     </div>
-                    <div className='form-group'>
-                        <label for="type" className='type'>Class Type</label>
-                        <select className="form-select form-control" aria-label="Default select example"
-                         onChange={(e)=>{
-                            setClasstype(e.target.value);
-                        }}
-                        >
-                            <option selected>Class type</option>
-                            <option value="O/L">O/L</option>
-                            <option value="A/L">A/L</option>
-                            <option value="Both">Both</option>
-                        </select>
-                    </div>
-                    <div className='form-group'>
-                    <label for="subjects">Subjects</label>
-                    <Row>
-                    <Col>
-                    <input type='text' className='form-control' id='sub1' placeholder="Subject1"
-                     onChange={(e)=>{
-                        setSubject1(e.target.value);
-                    }}
-                    />
-                    </Col>
-                    <Col>
-                    <input type='text' className='form-control' id='sub2' placeholder="Subject2"
-                    onChange={(e)=>{
-                        setSubject2(e.target.value);
-                    }}
-                    />
-                    </Col>
-                    <Col>
-                    <input type='text' className='form-control' id='sub3' placeholder="Subject3"
-                    onChange={(e)=>{
-                        setSubject3(e.target.value);
-                    }}
-                    />
-                    </Col>
-                    </Row>
-                    <Row>
+
+                   
                         <Col>
                         {/* <div class="mb-3">
                             <label for="formFileMultiple" class="form-label">Upload the Profile Photo</label>
                             <input class="form-control" type="file" id="formFileMultiple" multiple/>
                         </div> */}
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                        </Col>
-                    </Row>
-                </div>
                 <button type='submit' className='savebtn'>Save</button>
                 </form>
         </div>

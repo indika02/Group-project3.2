@@ -12,7 +12,9 @@
 .AdminPanal .tab h1{
     text-align: center;
 }
-
+.AdminPanal .loginnav{
+    padding-right: 80px;
+}
 .savebtn{
     background-color: #460691;
     border: 1px solid #460691;

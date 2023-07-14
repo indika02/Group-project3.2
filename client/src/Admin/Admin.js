@@ -9,6 +9,7 @@ import StdDetails from './Registration/Student/stddetails';
 import TeacherDetails from './Registration/Teacher/teacherDetails';
 import Account from './Account Creation/Account';
 import Subject from './Registration/subjects/Subject';
+import Results from './Results/Results';
 
 function Admin ()  {
 
@@ -23,11 +24,11 @@ function Admin ()  {
           <Nav className="me-auto">
             {/* Add your navigation links here */}
           </Nav>
-          <Nav>
+          <Nav className='loginnav'>
             <NavDropdown title="Login" id="login-dropdown">
             <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#logout">Logout <FaSignOutAlt/></NavDropdown.Item>
+            <NavDropdown.Item href="/login">Logout <FaSignOutAlt/></NavDropdown.Item>
           </NavDropdown>
           </Nav>
         </Navbar.Collapse>
@@ -65,14 +66,12 @@ function Admin ()  {
           <Account/>
         </Tab.Pane>
         <Tab.Pane eventKey="tab3"  className='tab'>
-          <h1>Timetable Management</h1>
+          <h4>Timetable Management</h4>
           <Timetable/>
         </Tab.Pane>
         <Tab.Pane eventKey="tab4"  className='tab'>
-          <h1>Tab 3 Content</h1>
-          <Container>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        </Container>
+          <h4>Exam Results</h4>
+          <Results/>
         </Tab.Pane>
         <Tab.Pane eventKey="tab5"  className='tab'>
           <h1>Tab 3 Content</h1>

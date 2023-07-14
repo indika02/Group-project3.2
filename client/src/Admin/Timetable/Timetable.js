@@ -186,6 +186,7 @@
                       <th>Venue</th>
                       <th>O/L or A/L</th>
                       <th>Theory/Revision</th>
+                      <th>Modify/delete</th>
                     </tr>
                   </thead>
                   <tbody>

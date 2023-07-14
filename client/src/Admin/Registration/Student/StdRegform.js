@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Col,Row } from 'react-bootstrap';
 import './stdreg.css';
 import swal from 'sweetalert';
-
+import QRCode from 'qrcode.react';
 
 export default function StdRegform() {
 
@@ -22,8 +22,8 @@ export default function StdRegform() {
     const[subject3,setSubject3]=useState("");
     const[subject4,setSubject4]=useState("");
     const[usertype,setUsertype]=useState("student");
-    const[dpwd,setDpwd]=useState("1234");
-    const[accountstate,setAccountStatus]=useState("active");
+    
+   
 
     function sendData(e){
         e.preventDefault();
@@ -44,8 +44,6 @@ export default function StdRegform() {
             subject3,
             subject4,
             usertype,
-            dpwd,
-            accountstate
         }
         
         console.log(newStudent);
@@ -55,6 +53,8 @@ export default function StdRegform() {
             swal("Error", "Invalid Data Input!", "error");
         })
     }
+
+    const qrCodeData = `${index}\n${name}\n${email}\n${subject1}\n${subject2}\n${subject3}`;
 return (
     <div>
     <h4>Student Registration Form</h4>
@@ -219,24 +219,12 @@ return (
                 />
                 </Col>
                 </Row>
-                <Row>
-                    <Col>
-                    <div className='form-group'>
-                    <label for="usertype" className='usertype'>User Type</label>
-                    <select className="form-select form-control" aria-label="Default select example"
-                     onChange={(e)=>{
-                        setUsertype(e.target.value);
-                    }}
-                    >
-                        <option selected>User Type</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="student">Student</option>
-                    </select>
-                </div>
-                    </Col>
-                </Row>
             </div>
                     
+            <div className='qr-code-container'>
+                <hr></hr>
+        <QRCode value={qrCodeData} size={200} />
+      </div>
         
             <button type='submit' className='savebtn'>Save</button>
         </form>

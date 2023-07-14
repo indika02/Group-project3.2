@@ -2,6 +2,7 @@
 		import { FaBars, FaTimes } from "react-icons/fa";
 		import "./NavBar.css";
 		import { Link } from "react-router-dom";
+		import logo from "../images/logo.png";
 
 		function NavBar() {
 			const navRef = useRef();
@@ -15,7 +16,7 @@
 			return (
 				<div className="nav">
 				<header>
-					<img src="https://www.siyathra.lk/assets/img/logo.png" fluid></img>
+					<img src={logo} fluid></img>
 					<nav ref={navRef}>
 						<Link to="/">Home</Link>
 						<Link to="/aboutus">About us</Link>

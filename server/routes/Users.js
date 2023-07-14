@@ -1,7 +1,7 @@
 const router=require("express").Router();
 let User=require("../models/Users");
 
-router.route("/add").post((req,res)=>{
+router.route("/add").post(async(req,res)=>{
    
     const index=req.body.index;
     const name=req.body.name;
@@ -22,6 +22,12 @@ router.route("/add").post((req,res)=>{
     const dpwd=req.body.dpwd;
     const accountstate=req.body.accountstate;
     
+    try {
+        const { index, name, dob, age, gender, contactpersonal, contacthome, address, email, qualifications, classtype, subject1, subject2, subject3, subject4, usertype, dpwd, accountstate } = req.body;
+        const existingUser = await User.findOne({ index });
+        if (existingUser) {
+          return res.status(400).json({ error: 'Index number already exists' });
+        }
 
     const newUser=new User({
         
@@ -44,14 +50,16 @@ router.route("/add").post((req,res)=>{
         dpwd,
         accountstate
       
-    })
+    });
 
-    newUser.save().then(()=>{
-        res.json("User Added")
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
+    await newUser.save();
+
+    res.status(200).json({ message: 'User added successfully' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred while adding the user' });
+  }
+});
 
 router.route("/").get((req,res)=>{
     User.find().then((User)=>{

@@ -21,3 +21,8 @@
     padding: 20px;
     border-radius: 10px;
 }
+
+.timetable table th{
+    background-color: black;
+    color: white;
+}
