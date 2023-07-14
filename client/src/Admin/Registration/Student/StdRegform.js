@@ -22,6 +22,7 @@ export default function StdRegform() {
     const[subject3,setSubject3]=useState("");
     const[subject4,setSubject4]=useState("");
     const[usertype,setUsertype]=useState("student");
+    const [printVisible, setPrintVisible] = useState(false);
     
    
 
@@ -49,6 +50,7 @@ export default function StdRegform() {
         console.log(newStudent);
         axios.post("http://localhost:5000/user/add",newStudent).then(()=>{
            swal("Success", "Registration Successful!", "success");
+           
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
         })
@@ -74,7 +76,7 @@ return (
                     setName(e.target.value);
                 }}
                 />
-            </div>
+ +\             </div>
             <Row>
                 <Col>
                 <div className='form-group'>

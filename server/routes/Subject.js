@@ -13,7 +13,7 @@ router.route("/add").post(async(req,res)=>{
     
     try {
         const {Lname,classtype,subject1,subject2,subject3 } = req.body;
-        const existingSubject = await Subject.findOne({ index });
+        const existingSubject = await Subject.findOne({ Lname});
         if (existingSubject) {
           return res.status(400).json({ error: 'Index number already exists' });
         }

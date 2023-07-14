@@ -14,12 +14,11 @@ router.route("/add").post(async(req,res)=>{
     try {
       const {date,teacher_name,subject,time,venue,classtype,type} = req.body;
   
-      const existingTimetable = await Timetable.findOne({ index });
+      const existingTimetable = await Timetable.findOne({ date });
       if (existingTimetable) {
         return res.status(400).json({ error: 'Index number already exists' });
       }
     const newtimetable=new Timetable({
-
         date,
        teacher_name,
        subject,
@@ -27,7 +26,6 @@ router.route("/add").post(async(req,res)=>{
        venue,
        classtype,
        type
-      
     })
 
     await newtimetable.save();
