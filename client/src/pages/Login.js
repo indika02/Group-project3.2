@@ -19,7 +19,7 @@ const Login = () => {
       password,
     };
 
-    await axios.post("http://localhost:5000/user/", credentials)
+    await axios.post("http://localhost:5000/account/", credentials)
       .then((response) => {
         const { usertype } = response.data;
         switch (usertype) {
@@ -74,7 +74,7 @@ const Login = () => {
           >
             Login
           </button>
-          <a href="">Reset Your Password</a>
+          <Link to="/reset-password">Reset Your Password</Link>
         </Form>
       </Container>
     </div>

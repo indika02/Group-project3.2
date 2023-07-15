@@ -28,6 +28,7 @@
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
+    "react-spinners": "^0.13.8",
     "react-type-animation": "^3.1.0",
     "scrollreveal": "^4.0.9",
     "styled-components": "^5.3.11",

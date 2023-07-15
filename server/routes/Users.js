@@ -14,6 +14,7 @@ router.route("/add").post(async(req,res)=>{
     const email=req.body.email;
     const qualifications=req.body.qualifications;
     const classtype=req.body.classtype;
+    const batchyear=req.body.batchyear;
     const subject1=req.body.subject1;
     const subject2=req.body.subject2;
     const subject3=req.body.subject3;
@@ -23,7 +24,7 @@ router.route("/add").post(async(req,res)=>{
     const accountstate=req.body.accountstate;
     
     try {
-        const { index, name, dob, age, gender, contactpersonal, contacthome, address, email, qualifications, classtype, subject1, subject2, subject3, subject4, usertype, dpwd, accountstate } = req.body;
+        const { index, name, dob, age, gender, contactpersonal, contacthome, address, email, qualifications, classtype, batchyear,subject1, subject2, subject3, subject4, usertype, dpwd, accountstate } = req.body;
         const existingUser = await User.findOne({ index });
         if (existingUser) {
           return res.status(400).json({ error: 'Index number already exists' });
@@ -42,6 +43,7 @@ router.route("/add").post(async(req,res)=>{
         email,
         qualifications,
         classtype,
+        batchyear,
         subject1,
         subject2,
         subject3,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button,NavDropdown } from 'react-bootstrap';
 import './Student.css';
-import Footer from '../components/Footer';
+import Footer from '../../components/Footer';
 import { Tab } from 'react-bootstrap';
 import {Row,Col} from 'react-bootstrap';
-import cart from '../images/cart.jpg';
+import cart from '../../images/cart.jpg';
 import { useState } from 'react';
 import { Table, Form, FormControl } from 'react-bootstrap';
 
@@ -29,7 +29,7 @@ function Student() {
     <div>
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <Container>
-        <Navbar.Brand href="#home">Siyathra</Navbar.Brand>
+        <Navbar.Brand href="#home">Siyathra LMS</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

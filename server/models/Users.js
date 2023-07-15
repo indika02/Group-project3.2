@@ -34,6 +34,9 @@ const UsersSchema=new Schema({
     classtype : {
         type:String,
     },
+    batchyear : {
+        type:String,
+    },
     subject1 :{
         type:String,
     },

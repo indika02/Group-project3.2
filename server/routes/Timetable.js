@@ -9,10 +9,11 @@ router.route("/add").post(async(req,res)=>{
     const time=req.body.time;
     const venue=req.body.venue;
     const classtype=req.body.classtype;
+    const batchyear=req.body.batchyear;
     const type=req.body.type;
     
     try {
-      const {date,teacher_name,subject,time,venue,classtype,type} = req.body;
+      const {date,teacher_name,subject,time,venue,classtype,batchyear,type} = req.body;
   
       const existingTimetable = await Timetable.findOne({ date });
       if (existingTimetable) {
@@ -25,6 +26,7 @@ router.route("/add").post(async(req,res)=>{
        time,
        venue,
        classtype,
+       batchyear,
        type
     })
 

@@ -1,5 +1,7 @@
+*
 .homerow{
-    background-color: white;
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 83%, rgb(238, 237, 239) 100%);
     height: 700px;
     width: auto;
 }
@@ -61,8 +63,8 @@
         font-weight: 400;
     }
 
-    @media (max-width:500px) {
-        .homeimg{
+    @media (max-width:1000px) {
+        #homeimg{
             display: none;
         }
        *{
