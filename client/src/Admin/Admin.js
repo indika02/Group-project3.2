@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown } from 'react-bootstrap';
 import './Admin.css';
@@ -11,7 +12,9 @@ import Account from './Account Creation/Account';
 import Subject from './Registration/subjects/Subject';
 import Results from './Results/Results';
 
-function Admin() {
+
+export default function Admin ()  {
+
   return (
     <div className="AdminPanal">
        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -81,5 +84,3 @@ function Admin() {
     </div>
   );
 }
-
-export default Admin;

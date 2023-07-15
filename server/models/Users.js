@@ -6,8 +6,15 @@ const UsersSchema=new Schema({
 
     index : {
         type:String,
+
+    index : {
+        type : String
+
     },
     name : {
+        type:String,
+    },
+    dob : {
         type:String,
     },
     age : {
@@ -49,6 +56,15 @@ const UsersSchema=new Schema({
     subject4 :{
         type:String,
     },
+    subject2 : {
+        type:String,
+    },
+    subject3 : {
+        type:String,
+    },
+    subject4 : {
+        type:String,
+    },
     usertype : {
         type:String,
     },
@@ -57,6 +73,7 @@ const UsersSchema=new Schema({
     },
     accountstate : {
         type:String,
+
     }
 })
 

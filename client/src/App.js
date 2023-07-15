@@ -14,12 +14,9 @@ import StdRegform from './Admin/Registration/Student/StdRegform';
 import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
-
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
-    // Simulate initial loading
     setTimeout(() => {
       setIsLoading(false);
     }, 5000);
