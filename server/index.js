@@ -31,6 +31,7 @@ const SubjectRouter=require("./routes/Subject");
 const AccountRouter=require("./routes/Account");
 
 
+
 app.use("/user",userRouter)
 app.use("/timetable",timetableRouter);
 app.use("/subject",SubjectRouter);

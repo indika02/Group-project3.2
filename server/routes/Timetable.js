@@ -1,7 +1,10 @@
 const router=require("express").Router();
 let Timetable = require("../models/Timetable");
 
+
 router.route("/add").post(async(req,res)=>{
+
+router.route("/add").post((req,res)=>{
    
     const date=req.body.date;
     const teacher_name=req.body.teacher_name;
@@ -10,7 +13,7 @@ router.route("/add").post(async(req,res)=>{
     const venue=req.body.venue;
     const classtype=req.body.classtype;
     const type=req.body.type;
-    
+
     try {
       const {date,teacher_name,subject,time,venue,classtype,type} = req.body;
   
@@ -19,6 +22,10 @@ router.route("/add").post(async(req,res)=>{
         return res.status(400).json({ error: 'Index number already exists' });
       }
     const newtimetable=new Timetable({
+
+    const newtimetable=new Timetable({
+        
+
         date,
        teacher_name,
        subject,
@@ -36,6 +43,16 @@ router.route("/add").post(async(req,res)=>{
     res.status(500).json({ error: 'An error occurred while Scheduling the Timetable' });
   }
 });
+      
+    })
+
+    newtimetable.save().then(()=>{
+        res.json("Timetable Added")
+    }).catch((err)=>{
+        console.log(err);
+    })
+})
+
 router.route("/").get((req,res)=>{
     Timetable.find().then((Timetable)=>{
         res.json(Timetable)

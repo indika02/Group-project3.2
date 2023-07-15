@@ -106,6 +106,29 @@ export default function TeaReg() {
                         </div> */}
                         </Col>
                 <button type='submit' className='savebtn'>Save</button>
+                    <div className='form-group'>
+                    <label for="subjects">Subjects</label>
+                    <Row>
+                    <Col>
+                    <input type='text' className='form-control' id='sub1' placeholder="Subject1"/>
+                    </Col>
+                    <Col>
+                    <input type='text' className='form-control' id='sub2' placeholder="Subject2"/>
+                    </Col>
+                    <Col>
+                    <input type='text' className='form-control' id='sub3' placeholder="Subject3"/>
+                    </Col>
+                    </Row>
+                </div>
+                <div className='form-group'>
+                        <label for="usertype" className='usertype'>User Type</label>
+                        <select className="form-select form-control" aria-label="Default select example">
+                            <option selected>User Type</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                <button type='submit' className='btn btn-primary'>Save</button>
                 </form>
         </div>
     )

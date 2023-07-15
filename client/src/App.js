@@ -11,9 +11,6 @@ import StdRegform from './Admin/Registration/Student/StdRegform';
 import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 
-
-
-
 function App() {
   return (
     <div>
