@@ -3,6 +3,11 @@
     font-weight: 400;
 }
 
+.AdminPanal h4{
+    font-family: 'Poppins',sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+}
 .AdminPanal Nav{
     font-weight: bold;
     font-style: italic;
@@ -12,7 +17,9 @@
 .AdminPanal .tab h1{
     text-align: center;
 }
-
+.AdminPanal .loginnav{
+    padding-right: 80px;
+}
 .savebtn{
     background-color: #460691;
     border: 1px solid #460691;
@@ -30,4 +37,3 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     margin-top: 20px;
 }
-

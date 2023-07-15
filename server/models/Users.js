@@ -3,8 +3,13 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const UsersSchema=new Schema({
+
+    index : {
+        type:String,
+
     index : {
         type : String
+
     },
     name : {
         type:String,
@@ -30,7 +35,22 @@ const UsersSchema=new Schema({
     email : {
         type:String,
     },
-    subject1 : {
+    qualifications : {
+        type : String,
+    },
+    classtype : {
+        type:String,
+    },
+    subject1 :{
+        type:String,
+    },
+    subject2 :{
+        type:String,
+    },
+    subject3 :{
+        type:String,
+    },
+    subject4 :{
         type:String,
     },
     subject2 : {
@@ -44,6 +64,13 @@ const UsersSchema=new Schema({
     },
     usertype : {
         type:String,
+    },
+    dpwd : {
+        type:String,
+    },
+    accountstate : {
+        type:String,
+
     }
 })
 
