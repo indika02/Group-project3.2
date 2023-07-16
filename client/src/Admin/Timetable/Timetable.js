@@ -12,6 +12,7 @@
     const [time, setTime] = useState("");
     const [venue, setVenue] = useState("");
     const [classtype, setClassType] = useState("");
+    const [batchyear,setbatchYear]=useState("");
     const [type, setType] = useState("");
     const [timetables, setTimetables] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      if (!date || !teacher_name || !subject || !time || !venue || !classtype || !type) {
+      if (!date || !teacher_name || !subject || !time || !venue || !classtype || !batchyear || !type) {
         swal("Error!", "Please fill in all the fields!", "error");
         return;
       }
@@ -47,11 +48,12 @@
         time,
         venue,
         classtype,
+        batchyear,
         type
       };
 
 
-    
+    console.log(newSchedule);
       
       try {
         await axios.post("http://localhost:5000/timetable/add", newSchedule);
@@ -70,6 +72,7 @@
       setTime("");
       setVenue("");
       setClassType("");
+      setbatchYear("");
       setType("");
     };
     const handleDelete = async (id) => {
@@ -166,6 +169,22 @@
                 </Form.Select>
               </Form.Group>
             </Col>
+            <Col>
+            <Form.Group controlId="batch" className="mb-3">
+                <Form.Label>Batch Year</Form.Label>
+                <Form.Select
+                  onChange={(e) => setbatchYear(e.target.value)}
+                  required
+                >
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
           </Row>
 
           <button className="savebtn" type="submit">Save</button>
@@ -186,6 +205,7 @@
                       <th>Time</th>
                       <th>Venue</th>
                       <th>O/L or A/L</th>
+                      <th>Batch Year</th>
                       <th>Theory/Revision</th>
                       <th>Modify/delete</th>
                     </tr>
@@ -199,6 +219,7 @@
                         <td>{timetable.time}</td>
                         <td>{timetable.venue}</td>
                         <td>{timetable.classtype}</td>
+                        <td>{timetable.batchyear}</td>
                         <td>{timetable.type}</td>
                         <td>
                           <button

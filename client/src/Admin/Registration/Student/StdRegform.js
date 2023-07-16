@@ -18,6 +18,7 @@ export default function StdRegform() {
     const[address,setAddress]=useState("");
     const[email,setEmail]=useState("");
     const[classtype,setClasstype]=useState("");
+    const[batchyear,setbatchYear]=useState("");
     const[subject1,setSubject1]=useState("");
     const[subject2,setSubject2]=useState("");
     const[subject3,setSubject3]=useState("");
@@ -41,6 +42,7 @@ export default function StdRegform() {
             address,
             email,
             classtype,
+            batchyear,
             subject1,
             subject2,
             subject3,
@@ -57,7 +59,7 @@ export default function StdRegform() {
         })
     }
 
-    const qrCodeData = `${index}\n${name}\n${email}\n${subject1}\n${subject2}\n${subject3}`;
+    const qrCodeData = `${index}\n${name}\n${email}\n${subject1}\n${subject2}\n${subject3}\n${batchyear}`;
 return (
     <div>
     <h4>Student Registration Form</h4>
@@ -77,7 +79,7 @@ return (
                     setName(e.target.value);
                 }}
                 />
- +\             </div>
+       </div>
             <Row>
                 <Col>
                 <div className='form-group'>
@@ -115,7 +117,7 @@ return (
                 <Col>
                 <div className='form-group'>
                     <label for="gender" className='gender'>Gender</label>
-                    <select className="form-select form-control" aria-label="Default select example" 
+                    <select className="form-select form-control" aria-label="Default select example"
                     onChange={(e)=>{
                     setGender(e.target.value);
                 }}>
@@ -186,6 +188,21 @@ return (
                         <option selected>Class type</option>
                         <option value="O/L">O/L</option>
                         <option value="A/L">A/L</option>
+                    </select>
+                </div>
+                </Col>
+                <Col>
+                <div className='form-group'>
+                    <label for="batch" className='batch'>Batch Year</label>
+                    <select className="form-select form-control" aria-label="Default select example"
+                    onChange={(e)=>{
+                        setbatchYear(e.target.value);
+                    }}
+                    >
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
                     </select>
                 </div>
                 </Col>

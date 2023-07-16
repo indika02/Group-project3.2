@@ -1,5 +1,4 @@
-
-.AdminPanal .Adminnav{
+.header{
     font-weight: 400;
 }
 
@@ -18,8 +17,14 @@
     text-align: center;
 }
 .AdminPanal .loginnav{
-    padding-right: 80px;
+    padding-right: 100px;
 }
+
+.login-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 .savebtn{
     background-color: #460691;
     border: 1px solid #460691;

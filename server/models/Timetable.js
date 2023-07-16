@@ -21,6 +21,9 @@ const TimetableSchema=new Schema({
     classtype : {
         type : String,
     },
+    batchyear : {
+        type:String,
+    },
     type : {
         type : String,
     }
