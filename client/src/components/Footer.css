@@ -1,13 +1,14 @@
 .footer {
-  background-color: #0e021d;
+  background-color: #2c0a55;
   color: #fff;
   padding: 20px;
 }
-.footer h4{
+.footer-links h4{
     text-align: left;
     color:white;
     font-weight: 400;
     font-size: 35px;
+    font-family: "Poppins";
 }
 .footer-content {
   max-width: 1200px;

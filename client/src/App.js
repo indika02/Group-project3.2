@@ -19,14 +19,14 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 3000);
   }, []);
 
   return (
     <div>
       {isLoading ? (
         <div className="loading-spinner">
-          <ScaleLoader color="#460691" height={80} width={8} radius={2} margin={2} />
+          <ScaleLoader color="#460691" height={70} width={7} radius={2} margin={2} />
         </div>
       ) : (
         <BrowserRouter>

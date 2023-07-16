@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/esm/Col';
 import './Aboutus.css';
 import bg from '../images/bg1.jpg';
 import ScrollRevealContainer from '../components/ScrollRevealComponent';
+import poster from '../images/poster.jpg';
 
 const Aboutus = () => {
   return (
@@ -14,7 +15,7 @@ const Aboutus = () => {
       <image src={bg}></image>
     <NavBar/>
     <div class="containers">
-  <img src="https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.edu.dailymirror.lk/uploads/articles_14_2fe4654f38.jpg" alt="Nature"/>
+  <img src={poster} alt="Nature"/>
   <div class="text-block">
     <ScrollRevealContainer>
     <h1>About us</h1>

@@ -19,29 +19,23 @@ const Login = () => {
       password,
     };
 
-    await axios.post("http://localhost:5000/account/", credentials)
+    console.log(credentials);
+    await axios
+      .post("http://localhost:5000/account/login", credentials)
       .then((response) => {
-        const { usertype } = response.data;
-        switch (usertype) {
-          case "admin":
-            navigate("/admin");
-            break;
-          case "student":
-            navigate("/student");
-            break;
-          case "teacher":
-            navigate("/teacher");
-            break;
-          default:
-            alert("Invalid account type.");
-            break;
+        if (response.data.usertype === "teacher") {
+          navigate("/teacher");
+        } else if (response.data.usertype === "student") {
+          navigate("/student");
+        }else if (response.data.usertype==="admin"){
+          navigate("/admin");
         }
       })
       .catch((error) => {
         alert(error.response.data.message);
+        console.log(error)
       });
   };
-
   return (
     <div className="login">
       <Container>

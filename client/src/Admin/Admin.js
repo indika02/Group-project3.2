@@ -2,7 +2,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown } from 'react-bootstrap';
 import './Admin.css';
-import { FaCalculator, FaCalendar, FaChartBar, FaCompass,FaSignOutAlt, FaUserEdit, FaUserPlus } from "react-icons/fa";
+import { FaCalculator, FaCalendar, FaChartBar, FaCompass,FaPoll,FaSignOutAlt, FaUserEdit, FaUserPlus } from "react-icons/fa";
 import {Row,Col} from 'react-bootstrap';
 import { Table,Form} from 'react-bootstrap';
 import Timetable from './Timetable/Timetable';
@@ -11,6 +11,7 @@ import TeacherDetails from './Registration/Teacher/teacherDetails';
 import Account from './Account Creation/Account';
 import Subject from './Registration/subjects/Subject';
 import Results from './Results/Results';
+import PollingSystem from './Polling/Polls';
 
 
 export default function Admin ()  {
@@ -50,7 +51,7 @@ export default function Admin ()  {
               <Nav.Link eventKey="tab4"><FaChartBar/> Exam Results</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab5"><FaCalculator/> Payments</Nav.Link>
+              <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
             </Nav.Item>
           </Nav>
           <Tab.Content>
@@ -75,8 +76,8 @@ export default function Admin ()  {
               <Results/>
             </Tab.Pane>
             <Tab.Pane eventKey="tab5" className='tab'>
-              <h1>Tab 3 Content</h1>
-              <p>This is the content of Tab 3.</p>
+              <h4>Making Polls</h4>
+              <PollingSystem/>
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
