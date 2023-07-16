@@ -3,6 +3,7 @@ import { Row,Col } from "react-bootstrap";
 import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import './sub.css'
 
 export default function Addsub(){
 
@@ -31,7 +32,7 @@ export default function Addsub(){
         })
     }
     return(
-        <div>
+        <div className="subjects">
             <h4>Subjects</h4>
             <form onSubmit={sendData}>
                 <Row>

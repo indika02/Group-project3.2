@@ -37,3 +37,9 @@ table td{
     margin-top: 10px;
     float: right;
 }
+
+.TeaReg h4{
+    text-align: center;
+    color: #460691;
+    margin-top: 20px;
+}
