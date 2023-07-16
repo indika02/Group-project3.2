@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown } from 'react-bootstrap';
+import { useParams } from 'react-router';
 import './Admin.css';
 import { FaCalculator, FaCalendar, FaChartBar, FaCompass,FaPoll,FaSignOutAlt, FaUserEdit, FaUserPlus } from "react-icons/fa";
 import {Row,Col} from 'react-bootstrap';
@@ -15,7 +16,7 @@ import PollingSystem from './Polling/Polls';
 
 
 export default function Admin ()  {
-
+  const {email}=useParams();
   return (
     <div className="AdminPanal">
        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -27,7 +28,7 @@ export default function Admin ()  {
             {/* Add your navigation links here */}
           </Nav>
           <Nav>
-            <NavDropdown title="Login" id="login-dropdown">
+            <NavDropdown title={email}id="login-dropdown">
             <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>

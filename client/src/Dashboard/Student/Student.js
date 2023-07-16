@@ -7,8 +7,10 @@ import {Row,Col} from 'react-bootstrap';
 import cart from '../../images/cart.jpg';
 import { useState } from 'react';
 import { Table, Form, FormControl } from 'react-bootstrap';
+import { useParams } from "react-router";
 
 function Student() {
+  const {email}=useParams();
     const [searchId, setSearchId] = useState('');
 
   const handleSearchChange = (e) => {
@@ -36,7 +38,7 @@ function Student() {
             {/* Add your navigation links here */}
           </Nav>
           <Nav>
-            <NavDropdown title="Login" id="login-dropdown">
+            <NavDropdown title={email} id="login-dropdown">
             <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>

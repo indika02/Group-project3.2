@@ -58,6 +58,7 @@ export default function Account() {
         console.log(newAccount);
         axios.post("http://localhost:5000/account/add",newAccount).then(()=>{
            swal("Success", "Successfully created User Account!", "success");
+           fetchAccountDetails();
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
         })

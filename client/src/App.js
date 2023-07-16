@@ -37,9 +37,9 @@ function App() {
             <Route path="/timetable" element={<Timetable />} />
             <Route path="/contactus" element={<Contact />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/student" element={<Student />} />
-            <Route path="/teacher" element={<Teacher />} />
+            <Route path="/admin/:email" element={<Admin />} />
+            <Route path="/student/:email" element={<Student />} />
+            <Route path="/teacher/:email" element={<Teacher />} />
             <Route path="/stdRegForm" element={<StdRegform />} />
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
