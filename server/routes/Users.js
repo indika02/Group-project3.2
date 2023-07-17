@@ -1,11 +1,13 @@
 const router=require("express").Router();
 let User=require("../models/Users");
+const QrCode=require('qrcode');
+const fs=require("fs");
+const path = require('path');
+
 
 router.route("/add").post(async(req,res)=>{
 
     const index=req.body.index;
-    const index=Number(req.body.index);
-
     const name=req.body.name;
     const dob=req.body.dob;
     const age=Number(req.body.age);
@@ -53,33 +55,21 @@ router.route("/add").post(async(req,res)=>{
         usertype,
         dpwd,
         accountstate
-    const classtype=req.body.classtype;
-    const Subject1=req.body.Subject1;
-    const Subject2=req.body.Subject2;
-    const Subject3=req.body.Subject3;
-    const Subject4=req.body.Subject4;
-    const usertype=req.body.usertype;
-
-    const newUser=new User({
-        
-                index,
-                name,
-                dob,
-                age,
-                gender,
-                contactpersonal,
-                contacthome,
-                address,
-                email,
-                classtype,
-                Subject1,
-                Subject2,
-                Subject3,
-                Subject4,
-                usertype
     });
 
+    if(usertype==="student"){
+
+    const qrCodeData = `${index}\n${name}\n${classtype}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${batchyear}`;
+
+    const qrCodeFilePath = path.join('routes', 'qr_codes', `${index}.jpg`);
+
+    await QrCode.toFile(qrCodeFilePath, qrCodeData);
+    newUser.qrCode = qrCodeFilePath;
+
+    }
+
     await newUser.save();
+
 
     res.status(200).json({ message: 'User added successfully' });
   } catch (error) {

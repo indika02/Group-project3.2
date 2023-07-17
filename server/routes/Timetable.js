@@ -1,106 +1,58 @@
-const router=require("express").Router();
+const router = require("express").Router();
 let Timetable = require("../models/Timetable");
 
+router.route("/add").post(async (req, res) => {
+  const { date, teacher_name, subject, time, venue, classtype, batchyear, type } = req.body;
 
-router.route("/add").post(async(req,res)=>{
+  try {
+    const existingTimetable = await Timetable.findOne({ date });
+    if (existingTimetable) {
+      return res.status(400).json({ error: 'Timetable already exists' });
+    }
 
-router.route("/add").post((req,res)=>{
-   
-    const date=req.body.date;
-    const teacher_name=req.body.teacher_name;
-    const subject =req.body.subject;
-    const time=req.body.time;
-    const venue=req.body.venue;
-    const classtype=req.body.classtype;
-    const batchyear=req.body.batchyear;
-    const type=req.body.type;
-
-    try {
-      const {date,teacher_name,subject,time,venue,classtype,batchyear,type} = req.body;
-  
-      const existingTimetable = await Timetable.findOne({ date });
-      if (existingTimetable) {
-        return res.status(400).json({ error: 'Index number already exists' });
-      }
-    const newtimetable=new Timetable({
-
-    const newtimetable=new Timetable({
-        
-
-        date,
-       teacher_name,
-       subject,
-       time,
-       venue,
-       classtype,
-       batchyear,
-       type
-    })
+    const newtimetable = new Timetable({
+      date,
+      teacher_name,
+      subject,
+      time,
+      venue,
+      classtype,
+      batchyear,
+      type
+    });
 
     await newtimetable.save();
-
-    res.status(200).json({ message: 'Time added successfully' });
+    res.status(200).json({ message: 'Timetable added successfully' });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'An error occurred while Scheduling the Timetable' });
+    res.status(500).json({ error: 'An error occurred while scheduling the timetable' });
   }
 });
-      
+
+router.route("/").get((req, res) => {
+  Timetable.find()
+    .then((timetable) => {
+      res.json(timetable);
     })
-
-    newtimetable.save().then(()=>{
-        res.json("Timetable Added")
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
-
-router.route("/").get((req,res)=>{
-    Timetable.find().then((Timetable)=>{
-        res.json(Timetable)
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
-
-// router.route("/update/:id").put(async (req,res)=>{
-//     let Tid=req.params.id;
-//     const {date,teacher_name,subject,time,venue,classtype,type}=req.body;
-//     const updateTimetable ={
-//         date,
-//         teacher_name,
-//         subject,
-//         time,
-//         venue,
-//         classtype,
-//         type
-//     }
-
-//     const update=await Student.findByIdAndUpdate(Tid,updateTimetable).then(()=>{
-//         res.status(200).send({status:"Timetable updated",user:update});
-//     }).catch((err)=>{
-//         console.log(err);
-//         res.status(500).send({status:"Error with updating data"});
-//     })
-// })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Error fetching timetables' });
+    });
+});
 
 router.route("/delete/:id").delete(async (req, res) => {
-    const Tid = req.params.id;
-    try {
-      const timetable = await Timetable.findByIdAndRemove(Tid);
-      if (timetable) {
-        res.status(200).send({ status: "Timetable Deleted" });
-      } else {
-        res.status(404).send({ status: "Timetable Not Found" });
-      }
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send({
-        status: "Error with delete Timetable",
-        error: err.message,
-      });
+  const Tid = req.params.id;
+  try {
+    const timetable = await Timetable.findByIdAndRemove(Tid);
+    if (timetable) {
+      res.status(200).send({ status: 'Timetable deleted' });
+    } else {
+      res.status(404).send({ status: 'Timetable not found' });
     }
-  });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ status: 'Error with deleting timetable', error: err.message });
+  }
+});
 
-router.route
-module.exports=router;
+module.exports = router;

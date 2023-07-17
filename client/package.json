@@ -11,6 +11,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.0",
     "boxicons": "^2.1.4",
+    "history": "^5.3.0",
     "js": "^0.1.0",
     "mongodb": "^5.7.0",
     "qrcode.react": "^3.1.0",
@@ -31,6 +32,7 @@
     "scrollreveal": "^4.0.9",
     "styled-components": "^5.3.11",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.18",
     "swipe-js-iso": "^2.1.5",
     "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"

@@ -15,12 +15,12 @@ export default function DisplayTime(){
     },[])
 
     return(
-<div>
+<div className="timetables">
     {loading ? (
         <div>Loading...</div>
     ):(
         <>
-        <Table striped bordered hover>
+        <Table striped bordered hover className="table table-sm">
               <thead>
                 <tr>
                 <th>Date</th>

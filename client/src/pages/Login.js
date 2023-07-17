@@ -6,12 +6,12 @@ import logo from "../images/logo.png";
 import "./Login.css";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onLogin = async () => {
     const credentials = {
@@ -19,27 +19,30 @@ const Login = () => {
       password,
     };
 
-    await axios.post("http://localhost:5000/account/", credentials)
-      .then((response) => {
-        const { usertype } = response.data;
-        switch (usertype) {
-          case "admin":
-            navigate("/admin");
-            break;
-          case "student":
-            navigate("/student");
-            break;
-          case "teacher":
-            navigate("/teacher");
-            break;
-          default:
-            alert("Invalid account type.");
-            break;
-        }
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
+    try {
+      const response = await axios.post("http://localhost:5000/account/login", credentials);
+      if (response.data.usertype === "teacher") {
+        navigate(`/teacher/${email}`);
+      } else if (response.data.usertype === "student") {
+        navigate(`/student/${email}`);
+      } else if (response.data.usertype === "admin") {
+        navigate(`/admin/${email}`);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Incorrect password',
+          text: 'Please enter the correct password.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login error',
+          text: 'An error occurred while logging in.',
+        });
+      }
+    }
   };
 
   return (

@@ -19,14 +19,14 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 2000);
   }, []);
 
   return (
     <div>
       {isLoading ? (
         <div className="loading-spinner">
-          <ScaleLoader color="#460691" height={80} width={8} radius={2} margin={2} />
+          <ScaleLoader color="#460691" height={70} width={7} radius={2} margin={2} />
         </div>
       ) : (
         <BrowserRouter>
@@ -37,9 +37,9 @@ function App() {
             <Route path="/timetable" element={<Timetable />} />
             <Route path="/contactus" element={<Contact />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/student" element={<Student />} />
-            <Route path="/teacher" element={<Teacher />} />
+            <Route path="/admin/:email" element={<Admin />} />
+            <Route path="/student/:email" element={<Student />} />
+            <Route path="/teacher/:email" element={<Teacher />} />
             <Route path="/stdRegForm" element={<StdRegform />} />
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />

@@ -1,18 +1,17 @@
 .timetable h1{
-    font-family: 'Noto Serif Sinhala',serif;
-    color: #000000;
+    font-family: 'Poppins',serif;
+    color: #460691;
     font-weight: bold;
-    font-style: italic;
     text-align: center;
     padding-top : 100px;
 }
 
 .timetable h3{
    padding-top : 10px;
-    font-family: 'Noto Serif Sinhala',serif;
-    color: #460691;
-    font-weight: bold;
-    font-size: 25px;
+    font-family: 'Poppins',serif;
+    color: #000000;
+    font-weight: 400;
+    font-size: 23px;
     text-align: left;
 }
 
@@ -26,3 +25,19 @@
     background-color: black;
     color: white;
 }
+
+.timetable {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content-wrapper {
+    flex: 1;
+  }
+  
+  .footer {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  

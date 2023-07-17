@@ -45,3 +45,16 @@ button{
     float: right;
     margin-bottom: 10px;
 }
+
+.stdreg h4{
+    text-align: center;
+    color: #460691;
+    margin-top: 20px;
+}
+
+.qrcode button{
+    margin-top: 24px;
+    border-radius: 0;
+    width: 80px;
+    background-color: #460691;
+}

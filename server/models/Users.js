@@ -6,10 +6,6 @@ const UsersSchema=new Schema({
 
     index : {
         type:String,
-
-    index : {
-        type : String
-
     },
     name : {
         type:String,

@@ -105,7 +105,7 @@ export default function TeaReg() {
                             <input class="form-control" type="file" id="formFileMultiple" multiple/>
                         </div> */}
                         </Col>
-                <button type='submit' className='savebtn'>Save</button>
+                
                     <div className='form-group'>
                     <label for="subjects">Subjects</label>
                     <Row>
@@ -128,7 +128,7 @@ export default function TeaReg() {
                             <option value="student">Student</option>
                         </select>
                     </div>
-                <button type='submit' className='btn btn-primary'>Save</button>
+                    <button type='submit' className='savebtn'>Save</button>
                 </form>
         </div>
     )
