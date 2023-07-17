@@ -59,7 +59,7 @@ export default function StdRegform() {
         })
     }
 
-    const qrCodeData = `${index}\n${name}\n${email}\n${subject1}\n${subject2}\n${subject3}\n${batchyear}`;
+    const qrCodeData =  `${index}\n${name}\n${classtype}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${batchyear}`;
 return (
     <div className='stdreg'>
     <h4>Student Registration Form</h4>

@@ -108,7 +108,7 @@ export default function Account() {
               <div>Loading...</div>
             ) : (
               <>
-                <Table striped bordered hover className="account-table">
+                <Table striped bordered hover className="table table-sm account-table">
                   <thead>
                     <tr>
                       <th>Enrollement No</th>

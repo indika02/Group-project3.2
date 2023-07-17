@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table,Row,Col } from "react-bootstrap";
 import './stdreg.css';
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -39,7 +39,7 @@ export default function StdDetails(){
             <div>Loading...</div>
           ) : (
             <>
-              <Table striped bordered hover className="table">
+              <Table striped bordered hover className="table table-sm table">
                 <thead>
                   <tr>
                     <th>Enrollment No.</th>

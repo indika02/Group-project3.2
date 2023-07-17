@@ -3,6 +3,7 @@
   import { Form, Col, Row, Table, Container } from "react-bootstrap";
   import axios from "axios";
   import swal from 'sweetalert';
+  import './timetable.css'
   import { FaTrash } from "react-icons/fa";
 
   export default function Timetable() {
@@ -191,12 +192,12 @@
         </Form>
 
         <Container>
-          <div>
+          <div className="timtables">
             {loading ? (
               <div>Loading...</div>
             ) : (
               <>
-                <Table striped bordered hover>
+                <Table striped bordered hover className="table table-sm">
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -223,7 +224,7 @@
                         <td>{timetable.type}</td>
                         <td>
                           <button
-                            className="btn btn-sm btn-danger"
+                            className="btn btn-danger btn-sm"
                             onClick={() => handleDelete(timetable._id)}
                           >
                             <FaTrash/>

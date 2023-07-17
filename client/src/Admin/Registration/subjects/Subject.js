@@ -35,7 +35,7 @@ export default function Subject(){
             <div>Loading...</div>
           ) : (
             <>
-              <Table striped bordered hover>
+              <Table striped bordered hover className="table table-sm">
                 <thead>
                   <tr>
                     <th>Lecturer Name</th>

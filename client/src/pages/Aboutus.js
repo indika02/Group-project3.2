@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/esm/Col';
 import './Aboutus.css';
 import bg from '../images/bg1.jpg';
 import ScrollRevealContainer from '../components/ScrollRevealComponent';
-import poster from '../images/poster.jpg';
+import poster from '../images/studentspage.png';
 
 const Aboutus = () => {
   return (

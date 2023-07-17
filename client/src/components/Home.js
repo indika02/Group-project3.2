@@ -14,7 +14,7 @@ const Home = () => {
             {/* <h1>Siyathra E-Learning Management System</h1> */}
             <h1>Siyathra Higher Education Institute</h1>
             <h3>Polpithigama, Kurunegala</h3>
-            <Link to="/student">
+            <Link to="/login">
               <button className="lmsbtn">Student Portal</button>
             </Link>
           </div>
