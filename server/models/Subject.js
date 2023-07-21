@@ -11,13 +11,7 @@ const SubjectSchema=new Schema({
     classtype : {
         type:String,
     },
-    subject1 :{
-        type:String,
-    },
-    subject2 :{
-        type:String,
-    },
-    subject3 :{
+    subject :{
         type:String,
     }
 })

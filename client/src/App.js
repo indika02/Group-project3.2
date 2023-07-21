@@ -14,6 +14,7 @@ import StdRegform from './Admin/Registration/Student/StdRegform';
 import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
+import ProfilePage from './Admin/Profile';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/stdRegForm" element={<StdRegform />} />
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
+            <Route path='/profile' element={<ProfilePage/>}/>
           </Routes>
         </BrowserRouter>
       )}

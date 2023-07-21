@@ -39,7 +39,7 @@ function Student() {
           </Nav>
           <Nav>
             <NavDropdown title={email} id="login-dropdown">
-            <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
           </NavDropdown>

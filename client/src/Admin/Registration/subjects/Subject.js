@@ -40,7 +40,7 @@ export default function Subject(){
                   <tr>
                     <th>Lecturer Name</th>
                     <th>Class</th>
-                    <th colSpan={3}>Subjects</th>
+                    <th>Subject</th>
                     
                   </tr>
                 </thead>
@@ -49,9 +49,7 @@ export default function Subject(){
                     <tr key={subjectdetail._id}>
                       <td>{subjectdetail.Lname}</td>
                       <td>{subjectdetail.classtype}</td>
-                      <td>{subjectdetail.subject1}</td>
-                    <td> {subjectdetail.subject2}</td>
-                      <td>{subjectdetail.subject3}</td>
+                      <td>{subjectdetail.subject}</td>
                     </tr>
                   ))}
                 </tbody>
