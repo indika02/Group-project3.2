@@ -120,14 +120,6 @@ export default function TeaReg() {
                     </Col>
                     </Row>
                 </div>
-                <div className='form-group'>
-                        <label for="usertype" className='usertype'>User Type</label>
-                        <select className="form-select form-control" aria-label="Default select example">
-                            <option selected>User Type</option>
-                            <option value="teacher">Teacher</option>
-                            <option value="student">Student</option>
-                        </select>
-                    </div>
                     <button type='submit' className='savebtn'>Save</button>
                 </form>
         </div>

@@ -6,9 +6,7 @@ router.route("/add").post(async(req,res)=>{
     
     const Lname=req.body.Lname;
     const classtype=req.body.classtype;
-    const subject1=req.body.subject1;
-    const subject2=req.body.subject2;
-    const subject3=req.body.subject3;
+    const subject=req.body.subject;
     
     
     try {
@@ -22,9 +20,7 @@ router.route("/add").post(async(req,res)=>{
         
         Lname,
         classtype,
-        subject1,
-        subject2,
-        subject3,
+        subject
     })
 
     await newSubject.save();

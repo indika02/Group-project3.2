@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { Col,Row } from 'react-bootstrap';
 import './stdreg.css';
@@ -19,10 +19,16 @@ export default function StdRegform() {
     const[email,setEmail]=useState("");
     const[classtype,setClasstype]=useState("");
     const[batchyear,setbatchYear]=useState("");
+    const [Lname1,setLName1]=useState("");
     const[subject1,setSubject1]=useState("");
+    const [Lname2,setLName2]=useState("");
     const[subject2,setSubject2]=useState("");
+    const [Lname3,setLName3]=useState("");
     const[subject3,setSubject3]=useState("");
+    const [Lname4,setLName4]=useState("");
     const[subject4,setSubject4]=useState("");
+    const [subject,setSubject]=useState([]);
+    const [Lname,setLName]=useState([]);
     const[usertype,setUsertype]=useState("student");
     const [printVisible, setPrintVisible] = useState(false);
     
@@ -43,9 +49,13 @@ export default function StdRegform() {
             email,
             classtype,
             batchyear,
+            Lname1,
             subject1,
+            Lname2,
             subject2,
+            Lname3,
             subject3,
+            Lname4,
             subject4,
             usertype,
         }
@@ -59,6 +69,14 @@ export default function StdRegform() {
         })
     }
 
+    useEffect(()=>{
+        axios.get('http://localhost:5000/subject/').then((response)=>{
+            setSubject(response.data);
+            setLName(response.data);
+        }).catch((error)=>{
+            console.log('Error fetching data.',error);
+        });
+    },[]);
     const qrCodeData =  `${index}\n${name}\n${classtype}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${batchyear}`;
 return (
     <div className='stdreg'>
@@ -211,36 +229,121 @@ return (
                 <label for="subjects">Subjects</label>
                 <Row>
                 <Col>
-                <input type='text' className='form-control' id='sub1' placeholder="Subject1"
-                 onChange={(e)=>{
-                    setSubject1(e.target.value);
-                }}
-                />
+                <div className='form-group'>
+                    <select id="country" className="form-select form-control" 
+                    onChange={(e)=>{
+                        setLName1(e.target.value);
+                    }}
+                    >
+                        <option value="">Lectuer</option>
+                        {Lname.map((item) => (
+                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
+                        ))}
+                    </select>
+                    </div>
+                    </Col>
+                    <Col>
+                    <div className='form-group'>
+                    <select id="country" className="form-select form-control"
+                    onChange={(e)=>{
+                        setSubject1(e.target.value);
+                    }}
+                    >
+                        <option value="">Subject 1</option>
+                        {subject.map((item) => (
+                            <option key={item._id} value={item.subject}>{item.subject}</option>
+                        ))}
+                    </select>
+                    </div>
                 </Col>
                 <Col>
-                <input type='text' className='form-control' id='sub2' placeholder="Subject2"
-                 onChange={(e)=>{
-                    setSubject2(e.target.value);
-                }}
-                />
-                </Col>
-                <Col>
-                <input type='text' className='form-control' id='sub3' placeholder="Subject3"
-                 onChange={(e)=>{
-                    setSubject3(e.target.value);
-                }}
-                />
-                </Col>
-                <Col>
-                <input type='text' className='form-control' id='sub4' placeholder="Subject4"
-                 onChange={(e)=>{
-                    setSubject4(e.target.value);
-                }}
-                />
-                </Col>
+                <div className='form-group'>
+                    <select id="country" className="form-select form-control"
+                    onChange={(e)=>{
+                        setLName2(e.target.value);
+                    }}
+                    >
+                        <option value="">Lectuer</option>
+                        {Lname.map((item) => (
+                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
+                        ))}
+                    </select>
+                    </div>
+                    </Col>
+                    <Col>
+                    <div className='form-group'>
+                    <select id="country" className="form-select form-control" 
+                    onChange={(e)=>{
+                        setSubject2(e.target.value);
+                    }}
+                    >
+                        <option value="">Subject 2</option>
+                        {subject.map((item) => (
+                            <option key={item._id} value={item.subject}>{item.subject}</option>
+                        ))}
+                    </select>
+                    </div>
+                    </Col>
                 </Row>
-            </div>
-                    
+                <Row className='sub'>
+                <Col>
+                <div className='form-group'>
+                    <select id="country" className="form-select form-control"
+                    onChange={(e)=>{
+                        setLName3(e.target.value);
+                    }}
+                    >
+                        <option value="">Lectuer</option>
+                        {Lname.map((item) => (
+                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
+                        ))}
+                    </select>
+                    </div>
+                    </Col>
+                    <Col>
+                    <div className='form-group'>
+                    <select id="country" className="form-select form-control"
+                    onChange={(e)=>{
+                        setSubject3(e.target.value);
+                    }}
+                    >
+                        <option value="">Subject 3</option>
+                        {subject.map((item) => (
+                            <option key={item._id} value={item.subject}>{item.subject}</option>
+                        ))}
+                    </select>
+                    </div>
+                </Col>
+                <Col>
+                <div className='form-group'>
+                    <select id="country" className="form-select form-control"
+                    onChange={(e)=>{
+                        setLName4(e.target.value);
+                    }}
+                    >
+                        <option value="">Lectuer</option>
+                        {Lname.map((item) => (
+                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
+                        ))}
+                    </select>
+                    </div>
+                    </Col>
+                    <Col>
+                    <div className='form-group'>
+                    <select id="country" className="form-select form-control"
+                    onChange={(e)=>{
+                        setSubject4(e.target.value);
+                    }}
+                    >
+                        <option value="">Subject 4</option>
+                        {subject.map((item) => (
+                            <option key={item._id} value={item.subject}>{item.subject}</option>
+                        ))}
+                    </select>
+                    </div>
+                    </Col>
+                </Row>
+            </div>      
             <div className='qr-code-container'>
                 <hr></hr>
         <QRCode value={qrCodeData} size={200} />

@@ -19,9 +19,13 @@ router.route("/add").post(async(req,res)=>{
     const qualifications=req.body.qualifications;
     const classtype=req.body.classtype;
     const batchyear=req.body.batchyear;
+    const Lname1=req.body.Lname1;
     const subject1=req.body.subject1;
+    const Lname2=req.body.Lname2;
     const subject2=req.body.subject2;
+    const Lname3=req.body.Lname3;
     const subject3=req.body.subject3;
+    const Lname4=req.body.Lname4;
     const subject4=req.body.subject4;
     const usertype=req.body.usertype;
     const dpwd=req.body.dpwd;
@@ -48,9 +52,13 @@ router.route("/add").post(async(req,res)=>{
         qualifications,
         classtype,
         batchyear,
+        Lname1,
         subject1,
+        Lname2,
         subject2,
+        Lname3,
         subject3,
+        Lname4,
         subject4,
         usertype,
         dpwd,
@@ -59,7 +67,7 @@ router.route("/add").post(async(req,res)=>{
 
     if(usertype==="student"){
 
-    const qrCodeData = `${index}\n${name}\n${classtype}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${batchyear}`;
+    const qrCodeData = `${index}\n${name}\n${classtype}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${Lname1}\n${Lname2}\n${Lname3}\n${Lname4}\n${batchyear}`;
 
     const qrCodeFilePath = path.join('routes', 'qr_codes', `${index}.jpg`);
 

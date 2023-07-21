@@ -9,9 +9,7 @@ export default function Addsub(){
 
     const [Lname,setLName]=useState("");
     const [classtype,setClasstype]=useState("");
-    const[subject1,setSubject1]=useState("");
-    const[subject2,setSubject2]=useState("");
-    const[subject3,setSubject3]=useState("");
+    const[subject,setSubject]=useState("");
 
     function sendData(e){
         e.preventDefault();
@@ -19,9 +17,7 @@ export default function Addsub(){
         const newSubject={
             Lname,
             classtype,
-            subject1,
-            subject2,
-            subject3
+            subject
         }
 
         console.log(newSubject);
@@ -66,32 +62,11 @@ export default function Addsub(){
                 <Row>
                     <Col>
                     <div className='form-group'>
-                    <label for="type" className='type'>Subject 1</label>
-                    <input type='text' className='form-control' id='sub1' placeholder="Subject1"
+                    <label for="type" className='type'>Subject</label>
+                    <input type='text' className='form-control' id='sub1' placeholder="Subject"
                     onChange={(e)=>{
-                        setSubject1(e.target.value);
+                        setSubject(e.target.value);
                     }}
-                    />
-                    </div>
-                    </Col>
-                    <Col>
-                    <div className='form-group'>
-                    <label for="type" className='type'>Subject 2</label>
-                    <input type='text' className='form-control' id='sub2' placeholder="Subject2"
-                     onChange={(e)=>{
-                        setSubject2(e.target.value);
-                    }}
-                    />
-                    </div>
-                    </Col>
-                    <Col>
-                    <div className='form-group'>
-                    <label for="type" className='type'>Subject 2</label>
-                    <input type='text' className='form-control' id='sub3' placeholder="Subject3"
-                     onChange={(e)=>{
-                        setSubject3(e.target.value);
-                    }}
-
                     />
                     </div>
                     </Col>
