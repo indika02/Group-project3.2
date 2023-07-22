@@ -10,7 +10,7 @@ import { Table, Form, FormControl } from 'react-bootstrap';
 import { useParams } from "react-router";
 
 function Student() {
-  const {email}=useParams();
+     const {email}=useParams();
     const [searchId, setSearchId] = useState('');
 
   const handleSearchChange = (e) => {
@@ -78,7 +78,8 @@ function Student() {
       <img src={cart} alt="Card Image"/>
       <div class="card-content">
         <h2>Sinhala</h2>
-        <p>Card description goes here.</p>
+        <p>{email}</p>
+
       </div>
     </div>
               </Col>
