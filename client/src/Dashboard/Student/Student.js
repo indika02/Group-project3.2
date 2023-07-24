@@ -8,10 +8,12 @@ import cart from '../../images/cart.jpg';
 import { useState } from 'react';
 import { Table, Form, FormControl } from 'react-bootstrap';
 import { useParams } from "react-router";
+import { useUser } from '../../UserContext';
 
 function Student() {
      const {email}=useParams();
     const [searchId, setSearchId] = useState('');
+    const { user } = useUser();
 
   const handleSearchChange = (e) => {
     setSearchId(e.target.value);
@@ -38,7 +40,7 @@ function Student() {
             {/* Add your navigation links here */}
           </Nav>
           <Nav>
-            <NavDropdown title={email} id="login-dropdown">
+            <NavDropdown title={user.email} id="login-dropdown">
             <NavDropdown.Item href="">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
@@ -62,6 +64,7 @@ function Student() {
       <Tab.Content>
         <Tab.Pane eventKey="tab1" className='tab'>
           <h1>My Subjects</h1>
+          <p>Email: {user.email}</p>
           <Container>
           <Row>
           <Col className='col-md-3'>

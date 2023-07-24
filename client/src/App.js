@@ -15,6 +15,7 @@ import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
 import ProfilePage from './Admin/Profile';
+import { UserProvider } from './UserContext';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
   }, []);
 
   return (
+    <UserProvider>
     <div>
       {isLoading ? (
         <div className="loading-spinner">
@@ -38,9 +40,9 @@ function App() {
             <Route path="/timetable" element={<Timetable />} />
             <Route path="/contactus" element={<Contact />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin/:email" element={<Admin />} />
-            <Route path="/student/:email" element={<Student />} />
-            <Route path="/teacher/:email" element={<Teacher />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/student" element={<Student />} />
+            <Route path="/teacher" element={<Teacher />} />
             <Route path="/stdRegForm" element={<StdRegform />} />
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
@@ -49,6 +51,7 @@ function App() {
         </BrowserRouter>
       )}
     </div>
+    </UserProvider>
   );
 }
 

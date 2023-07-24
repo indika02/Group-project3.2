@@ -73,6 +73,9 @@ const UsersSchema=new Schema({
     accountstate : {
         type:String,
 
+    },
+    qrCode: { 
+        type: String 
     }
 })
 

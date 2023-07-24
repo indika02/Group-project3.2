@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from '../UserContext';
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import logo from "../images/logo.png";
@@ -12,6 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const onLogin = async () => {
     const credentials = {
@@ -21,12 +23,13 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5000/account/login", credentials);
+      setUser(response.data);
       if (response.data.usertype === "teacher") {
-        navigate(`/teacher/${email}`);
+        navigate(`/teacher`);
       } else if (response.data.usertype === "student") {
-        navigate(`/student/${email}`);
+        navigate(`/student`);
       } else if (response.data.usertype === "admin") {
-        navigate(`/admin/${email}`);
+        navigate(`/admin`);
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {

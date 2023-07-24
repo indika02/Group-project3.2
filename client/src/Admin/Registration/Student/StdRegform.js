@@ -30,7 +30,6 @@ export default function StdRegform() {
     const [subject,setSubject]=useState([]);
     const [Lname,setLName]=useState([]);
     const[usertype,setUsertype]=useState("student");
-    const [printVisible, setPrintVisible] = useState(false);
     
    
 
