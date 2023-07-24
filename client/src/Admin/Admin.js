@@ -13,9 +13,11 @@ import Account from './Account Creation/Account';
 import Subject from './Registration/subjects/Subject';
 import Results from './Results/Results';
 import PollingSystem from './Polling/Polls';
+import { useUser } from '../UserContext';
 
 
 export default function Admin ()  {
+    const { user } = useUser();
   const {email}=useParams();
   return (
     <div className="AdminPanal">
@@ -28,7 +30,7 @@ export default function Admin ()  {
             {/* Add your navigation links here */}
           </Nav>
           <Nav>
-            <NavDropdown title={email}id="login-dropdown">
+            <NavDropdown title={user.email}id="login-dropdown">
             <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
