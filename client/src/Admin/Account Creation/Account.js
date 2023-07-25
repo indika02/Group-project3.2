@@ -10,6 +10,7 @@ import { Container, Table } from "react-bootstrap";
 export default function Account() {
 
     const[index,setIndex]=useState("");
+    const[name,setName]=useState("");
     const[email,setEmail]=useState("");
     const[dpwd,setDpwd]=useState("1234");
     const[accountstate,setAccountStatus]=useState("active");
@@ -28,6 +29,7 @@ export default function Account() {
           const response = await axios.get("http://localhost:5000/account");
           setAccountdetails(response.data);
           setLoading(false);
+          console.log(response.data);
         } catch (error) {
           console.error("Failed to fetch Accounts:", error);
         }
@@ -77,6 +79,7 @@ export default function Account() {
                     }}
                     />
                 </div>
+                
                 <div className='form-group'>
                     <label for="Index">Email Address</label>
                     <input type='text' className='form-control' id='email' placeholder="Enter the email Address" 

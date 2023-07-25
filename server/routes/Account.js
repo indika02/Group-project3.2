@@ -3,7 +3,7 @@ const router = require("express").Router();
 const Account = require("../models/Account");
 
 router.route("/add").post(async (req, res) => {
-  const { index, email, usertype, dpwd, accountstate } = req.body;
+  const { index, name,email, usertype, dpwd, accountstate } = req.body;
 
   try {
     const existingAccount = await Account.findOne({ index });
@@ -13,6 +13,7 @@ router.route("/add").post(async (req, res) => {
 
     const newAccount = new Account({
       index,
+      name,
       email,
       usertype,
       dpwd,
@@ -73,6 +74,17 @@ router.post("/login", (req, res) => {
       });
     })
     .catch((err) => res.status(400).json({ message: "Could not login user", err }));
+});
+
+router.route("/").get((req, res) => {
+  Account.find()
+    .then((account) => {
+      res.json(account);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Error fetching timetables' });
+    });
 });
 
 module.exports = router;

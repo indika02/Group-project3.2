@@ -33,6 +33,9 @@ const ExamResultSchema = new Schema({
         type: String, // Change the data type to String to match the provided data
      
       },
+      grade:{
+        type:String,
+      }
 });
 
 const ExamResult = mongoose.model("ExamResult", ExamResultSchema);
