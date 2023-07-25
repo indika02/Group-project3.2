@@ -61,10 +61,7 @@ export default function Admin ()  {
             <Tab.Pane eventKey="tab1" className='tab'>
               <h4>Student Details</h4>
               <StdDetails/>
-              <h4>Teacher Details</h4>
-              <TeacherDetails/>
-              <h4>Subjects</h4>
-              <Subject/>
+              
             </Tab.Pane>
             <Tab.Pane eventKey="tab2" className='tab'>
               <h4>User Account Management</h4>

@@ -19,22 +19,22 @@ router.post("/add", async (req, res) => {
 router.route("/:studentIndex").get((req, res) => {
   const userindex = req.params.studentIndex;
 
-ExamResult.findOne({ studentIndex: userindex })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
+  ExamResult.find({ studentIndex: userindex })
+    .then((results) => {
+      if (results.length === 0) {
+        return res.status(404).json({ error: "Results not found" });
       }
 
-     
-      const userResults = {
-        classType:user.classType,
-        studentIndex:user.studentIndex,
-        batchYear:user.batchYear,
-        subject:user.subject,
-        Examno:user.Examno,
-        Doe:user.Doe,
-        marks:user.marks,
-      };
+      const userResults = results.map((result) => ({
+        classType: result.classType,
+        studentIndex: result.studentIndex,
+        batchYear: result.batchYear,
+        subject: result.subject,
+        Examno: result.Examno,
+        Doe: result.Doe,
+        marks: result.marks,
+        grade:result.grade
+      }));
 
       res.json(userResults);
     })
@@ -43,4 +43,5 @@ ExamResult.findOne({ studentIndex: userindex })
       res.status(500).json({ error: 'Error!' });
     });
 });
+
 module.exports = router;

@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from "react";
 import './results.css';
-import { Container, Row, Col, Table ,Form} from "react-bootstrap";
+import { Container, Row, Col, Table, Form } from "react-bootstrap";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import swal from 'sweetalert';
 
-export default function Results() {
+export default function Results  () {
   const [classtype, setClasstype] = useState("");
   const [batchyear, setBatchYear] = useState("");
   const [lecturerName, setLecturerName] = useState("");
   const [subject, setSubject] = useState("");
-  const [Examno,setExamno]=useState("");
-  const [Doe,setDoe]=useState("");
+  const [Examno, setExamno] = useState("");
+  const [Doe, setDoe] = useState("");
   const [students, setStudents] = useState([]);
   const [marks, setMarks] = useState([]);
   const [Allsubjects, setAllsubjects] = useState([]);
   const [AllLecturers, setAllLecturers] = useState([]);
+
+  // Define the grading system with mark ranges and corresponding grades
+  const gradingSystem = [
+    { range: [90, 100], grade: 'A+' },
+    { range: [80, 89], grade: 'A' },
+    { range: [70, 79], grade: 'B' },
+    { range: [60, 69], grade: 'C' },
+    { range: [50, 59], grade: 'D' },
+    { range: [0, 49], grade: 'F' },
+  ];
+
+  // Function to calculate the grade based on the mark using the grading system
+  const getGradeForMark = (mark) => {
+    for (const item of gradingSystem) {
+      const [min, max] = item.range;
+      if (mark >= min && mark <= max) {
+        return item.grade;
+      }
+    }
+    return 'N/A'; // Return 'N/A' if no matching grade is found
+  };
 
   const handleAddStudent = () => {
     setStudents((prevStudents) => [...prevStudents, { studentIndex: "", marks: "" }]);
@@ -39,16 +60,21 @@ export default function Results() {
   };
 
   const handleSubmit = async () => {
-    const dataToSend = students.map((student, index) => ({
-      classType: classtype,
-      batchYear: batchyear,
-      lecturerName,
-      subject,
-      Examno,
-      Doe,
-      studentIndex: student.studentIndex,
-      marks: marks[index], // marks are now strings
-    }));
+    const dataToSend = students.map((student, index) => {
+      const mark = parseFloat(marks[index]);
+      return {
+        classType: classtype,
+        batchYear: batchyear,
+        lecturerName,
+        subject,
+        Examno,
+        Doe,
+        studentIndex: student.studentIndex,
+        marks: mark, // Store the numeric mark in the database
+        grade: getGradeForMark(mark), // Calculate and store the grade in the database
+      };
+    });
+
     console.log(dataToSend);
     try {
       const response = await axios.post("http://localhost:5000/results/add", dataToSend);
@@ -57,6 +83,7 @@ export default function Results() {
       swal("Error", "Invalid Data Input!", "error");
     }
   };
+
   const handleClear = () => {
     setStudents([]);
     setMarks([]);
@@ -67,6 +94,7 @@ export default function Results() {
     setLecturerName("");
     setSubject("");
   };
+
   useEffect(() => {
     axios.get('http://localhost:5000/subject/').then((response) => {
       setAllsubjects(response.data);
@@ -75,7 +103,7 @@ export default function Results() {
       console.log('Error fetching data.', error);
     });
   }, []);
-
+  
   return (
     <Container>
       <div className="Resutls">
@@ -153,7 +181,7 @@ export default function Results() {
         <button className="savebtn" onClick={handleAddStudent}><FaPlus /></button>
 
         {students.length > 0 && (
-          <Table striped bordered hover className="table table-sm">
+          <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Student Index</th>
