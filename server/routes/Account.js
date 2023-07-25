@@ -28,16 +28,28 @@ router.route("/add").post(async (req, res) => {
   }
 });
 
-router.route("/").get((req, res) => {
-  Account.find()
-    .then((accounts) => {
-      res.json(accounts);
+router.route("/:email").get((req, res) => {
+  const userEmail = req.params.email;
+
+  Account.findOne({ email: userEmail })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+     
+      const userProfile = {
+        name:user.name
+      };
+
+      res.json(userProfile);
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json({ error: 'Error!' });
     });
 });
+
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;

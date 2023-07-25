@@ -46,3 +46,19 @@ Nav{
   .qrcode{
     padding-left: 100px;
   }
+
+  .result{
+    border: 4px dashed rgb(103, 103, 103);
+    margin-bottom: 10px;
+    height: 250px;
+  }
+
+  .result p{
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 8px;
+    color: #460691;
+    font-weight: bold;
+    
+  }
