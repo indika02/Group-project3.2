@@ -153,7 +153,7 @@ export default function Results() {
         <button className="savebtn" onClick={handleAddStudent}><FaPlus /></button>
 
         {students.length > 0 && (
-          <Table striped bordered hover>
+          <Table striped bordered hover className="table table-sm">
             <thead>
               <tr>
                 <th>Student Index</th>

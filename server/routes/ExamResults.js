@@ -15,4 +15,32 @@ router.post("/add", async (req, res) => {
   }
 });
 
+
+router.route("/:studentIndex").get((req, res) => {
+  const userindex = req.params.studentIndex;
+
+ExamResult.findOne({ studentIndex: userindex })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+     
+      const userResults = {
+        classType:user.classType,
+        studentIndex:user.studentIndex,
+        batchYear:user.batchYear,
+        subject:user.subject,
+        Examno:user.Examno,
+        Doe:user.Doe,
+        marks:user.marks,
+      };
+
+      res.json(userResults);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Error!' });
+    });
+});
 module.exports = router;

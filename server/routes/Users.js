@@ -90,4 +90,39 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/:name").get((req, res) => {
+  const username = req.params.name;
+
+  User.find({
+    $or: [
+      { Lname1: username },
+      { Lname2: username },
+      { Lname3: username },
+      { Lname4: username },
+    ],
+  })
+    .then((users) => {
+      if (users.length === 0) {
+        return res.status(404).json({ error: "No users found" });
+      }
+
+      const userProfiles = users.map((user) => ({
+        index: user.index,
+        name: user.name,
+        gender: user.gender,
+        contactpersonal: user.contactpersonal,
+        email: user.email,
+        classtype: user.classtype,
+        batchyear: user.batchyear,
+      }));
+
+      res.json(userProfiles);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Error fetching user profiles" });
+    });
+});
+
+
 module.exports = router;

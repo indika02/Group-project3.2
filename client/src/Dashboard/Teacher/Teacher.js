@@ -1,159 +1,170 @@
-import React from 'react';
-import { Navbar, Nav, Container, Button,NavDropdown } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Navbar, Nav, Container, Button, NavDropdown,Form,FormControl } from 'react-bootstrap';
 import './Teacher.css';
 import Footer from '../../components/Footer';
 import { Tab } from 'react-bootstrap';
-import {Row,Col} from 'react-bootstrap';
+import { Row, Col, Table } from 'react-bootstrap';
 import cart from '../../images/cart.jpg';
-import { useState } from 'react';
-import { Table, Form, FormControl } from 'react-bootstrap';
-import { useParams } from "react-router";
+import { useParams } from 'react-router';
+import { useUser } from '../../UserContext';
+import { FaChartBar, FaPoll, FaUser } from 'react-icons/fa';
+import Results from '../../Admin/Results/Results';
 
-function Student() {
-  const {email}=useParams();
-    const [searchId, setSearchId] = useState('');
+export default function Teacher() {
+  const { email } = useParams();
+  const { user } = useUser();
+  const [userProfile, setUserProfile] = useState(null);
+  const [stdDetails, setStdDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleSearchChange = (e) => {
-    setSearchId(e.target.value);
+  const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    fetchUserProfile(email);
+    fetchStdDetails(user.name);
+  }, [email, user.name]);
+
+  const fetchUserProfile = (email) => {
+    fetch(`http://localhost:5000/account/${email}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserProfile(data);
+      })
+      .catch((error) => {
+        console.log('Error fetching user data', error);
+      });
   };
 
-  const data = [
-    { id: 1, name: 'John', age: 25 },
-    { id: 2, name: 'Jane', age: 30 },
-    { id: 3, name: 'Bob', age: 35 },
-   
-  ];
+  const fetchStdDetails = (name) => {
+    fetch(`http://localhost:5000/user/${name}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setStdDetails(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log('Error fetching Exam Results', error);
+        setLoading(false);
+      });
+  };
 
-  const filteredData = data.filter((row) => {
-    return row.id.toString().includes(searchId);
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const filteredStdDetails = stdDetails.filter((stdData) => {
+    const fullName = stdData.name.toLowerCase();
+    const index = stdData.index.toLowerCase();
+    const searchValue = searchText.toLowerCase();
+    return fullName.includes(searchValue) || index.includes(searchValue);
   });
+
   return (
     <div>
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-      <Container>
-        <Navbar.Brand href="#home">Siyathra LMS</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            {/* Add your navigation links here */}
-          </Nav>
-          <Nav>
-            <NavDropdown title={email} id="login-dropdown">
-            <NavDropdown.Item href="">Profile</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
-          </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    <Tab.Container defaultActiveKey="tab1">
-      <Nav variant="tabs">
-        <Nav.Item>
-          <Nav.Link eventKey="tab1">Courses</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="tab2">Exam Results</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="tab3">Forum</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Tab.Content>
-        <Tab.Pane eventKey="tab1" className='tab'>
-          <h1>My Subjects</h1>
-          <Container>
-          <Row>
-          <Col className='col-md-3'>
-                <div class="card">
-      <img src={cart} alt="Card Image"/>
-      <div class="card-content">
-        <h2>Sinhala</h2>
-        <p>Card description goes here.</p>
+      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Container>
+          <Navbar.Brand href="#home">Siyathra LMS</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto"></Nav>
+            <Nav>
+              <NavDropdown title={user.email} id="login-dropdown">
+                <NavDropdown.Item href="">Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Tab.Container defaultActiveKey="tab1">
+        <Nav variant="tabs">
+          <Nav.Item>
+            <Nav.Link eventKey="tab1">
+              <FaUser /> Student Details
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="tab2">
+              <FaPoll /> Making polls
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="tab3">
+              <FaChartBar /> Exam Results
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="tab4">Forum</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Tab.Content>
+          <Tab.Pane eventKey="tab1" className="tab">
+            <h1>Student Details</h1>
+            <Container>
+            <div className="search-bar">
+        <Form>
+          <FormControl
+            type="text"
+            placeholder="Search by Name or Index No"
+            value={searchText}
+            onChange={handleSearchChange}
+          className='search'
+          />
+        </Form>
       </div>
-    </div>
-              </Col>
-              <Col className='col-md-3'>
-                <div class="card">
-      <img src={cart} alt="Card Image"/>
-      <div class="card-content">
-        <h2>Sinhala</h2>
-        <p>Card description goes here.</p>
-      </div>
-    </div>
-              </Col>
-              <Col className='col-md-3'>
-                <div class="card">
-      <img src={cart} alt="Card Image"/>
-      <div class="card-content">
-        <h2>Sinhala</h2>
-        <p>Card description goes here.</p>
-      </div>
-    </div>
-              </Col>
-              <Col className='col-md-3'>
-                <div class="card">
-      <img src={cart} alt="Card Image"/>
-      <div class="card-content">
-        <h2>Sinhala</h2>
-        <p>Card description goes here.</p>
-      </div>
-    </div>
-              </Col>
-          </Row>
-          </Container>
-        </Tab.Pane>
-        <Tab.Pane eventKey="tab2" className='tab'>
-          <h1>Exam Results</h1>
-          <Container>
-         <Row>
-            <Col>
-            <Form>
-        <FormControl
-          type="text"
-          placeholder="Enter Your Index Number"
-          value={searchId}
-          onChange={handleSearchChange}
-        />
-      </Form>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Index No.</th>
-            <th>Name</th>
-            <th>Subject</th>
-            <th>Result</th>
-            <th>Place</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((row) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>{row.age}</td>
-              <td>{row.age}</td>
-              <td>{row.age}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-            </Col>
-         </Row>
-         </Container>
-        </Tab.Pane>
-        <Tab.Pane eventKey="tab3" className='tab'>
-          <h1>Open Forum</h1>
-          <p>This is the content of Tab 3.</p>
-        </Tab.Pane>
-      </Tab.Content>
-    </Tab.Container>
-    <Footer>
-    <Footer/>
-    </Footer>
-    
+            {loading ? (
+              <div>Loading...</div>
+            ) : (
+              <>
+                <Table striped bordered hover className="table table-sm">
+                  <thead>
+                    <tr>
+                      <th>Index</th>
+                      <th>Name</th>
+                      <th>Gender</th>
+                      <th>Contact Personal</th>
+                      <th>Email</th>
+                      <th>Class Type</th>
+                      <th>Batch Year</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+            {filteredStdDetails.map((stdData) => (
+              <tr key={stdData.index}>
+                <td>{stdData.index}</td>
+                <td>{stdData.name}</td>
+                <td>{stdData.gender}</td>
+                <td>{stdData.contactpersonal}</td>
+                <td>{stdData.email}</td>
+                <td>{stdData.classtype}</td>
+                <td>{stdData.batchyear}</td>
+              </tr>
+            ))}
+          </tbody>
+                </Table>
+              </>
+            )}
+            </Container>
+          </Tab.Pane>
+          <Tab.Pane eventKey="tab2" className="tab"></Tab.Pane>
+          <Tab.Pane eventKey="tab3" className="tab">
+            <h1>Exam Results</h1>
+            <Container>
+            <Results />
+            <hr></hr>
+            </Container>
+            
+          </Tab.Pane>
+          <Tab.Pane eventKey="tab4" className="tab">
+            {userProfile && (
+              <div>
+                <p>Email: {user.name}</p>
+              </div>
+            )}
+          </Tab.Pane>
+        </Tab.Content>
+      </Tab.Container>
     </div>
   );
 }
-
-export default Student;

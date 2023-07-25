@@ -42,3 +42,9 @@ Nav{
     font-size: 14px;
     cursor: pointer;
   }
+
+.search{
+  height: 35px;
+  width: 660px;
+
+}

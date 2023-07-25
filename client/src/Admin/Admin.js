@@ -12,7 +12,7 @@ import TeacherDetails from './Registration/Teacher/teacherDetails';
 import Account from './Account Creation/Account';
 import Subject from './Registration/subjects/Subject';
 import Results from './Results/Results';
-import PollingSystem from './Polling/Polls';
+import PollingSystem from './Polling/PollingSystem';
 import { useUser } from '../UserContext';
 
 

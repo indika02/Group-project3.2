@@ -7,6 +7,9 @@ const AccountSchema=new Schema({
     index : {
         type:String,
     },
+    name : {
+        type:String,
+    },
     email : {
         type:String,
     },
