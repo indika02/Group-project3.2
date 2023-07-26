@@ -19,6 +19,8 @@ import { useUser } from '../UserContext';
 export default function Admin ()  {
     const { user } = useUser();
   const {email}=useParams();
+
+  const userEmail = user?.email;
   return (
     <div className="AdminPanal">
        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -27,7 +29,6 @@ export default function Admin ()  {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {/* Add your navigation links here */}
           </Nav>
           <Nav>
             <NavDropdown title={user.email}id="login-dropdown">

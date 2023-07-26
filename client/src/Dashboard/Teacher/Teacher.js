@@ -17,13 +17,21 @@ export default function Teacher() {
   const [stdDetails, setStdDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const userEmail = user?.email;
+  const userName = user?.name;
+
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     fetchUserProfile(email);
+    if (user?.name) {
     fetchStdDetails(user.name);
+    }
   }, [email, user.name]);
 
+
+
+  
   const fetchUserProfile = (email) => {
     fetch(`http://localhost:5000/account/${email}`)
       .then((response) => response.json())
@@ -68,7 +76,7 @@ export default function Teacher() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
             <Nav>
-              <NavDropdown title={user.email} id="login-dropdown">
+              <NavDropdown title={userEmail} id="login-dropdown">
                 <NavDropdown.Item href="">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
@@ -159,7 +167,7 @@ export default function Teacher() {
           <Tab.Pane eventKey="tab4" className="tab">
             {userProfile && (
               <div>
-                <p>Email: {user.name}</p>
+                <p>Email: {userName}</p>
               </div>
             )}
           </Tab.Pane>
