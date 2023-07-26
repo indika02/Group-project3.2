@@ -124,5 +124,4 @@ router.route("/:name").get((req, res) => {
     });
 });
 
-
 module.exports = router;
