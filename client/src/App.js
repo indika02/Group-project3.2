@@ -16,6 +16,7 @@ import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
 import ProfilePage from './Admin/Profile';
 import { UserProvider } from './UserContext';
+import Profilepage from './Dashboard/Profilepage';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
             <Route path='/profile' element={<ProfilePage/>}/>
+            <Route path='/profilepage' element={<Profilepage/>}/>
           </Routes>
         </BrowserRouter>
       )}

@@ -9,6 +9,7 @@ import { useParams } from 'react-router';
 import { useUser } from '../../UserContext';
 import { FaChartBar, FaPoll, FaUser } from 'react-icons/fa';
 import Results from '../../Admin/Results/Results';
+import { Link } from 'react-router-dom';
 
 export default function Teacher() {
   const { email } = useParams();
@@ -77,9 +78,9 @@ export default function Teacher() {
             <Nav className="me-auto"></Nav>
             <Nav>
               <NavDropdown title={userEmail} id="login-dropdown">
-                <NavDropdown.Item href="">Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
