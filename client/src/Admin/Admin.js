@@ -14,7 +14,7 @@ import Subject from './Registration/subjects/Subject';
 import Results from './Results/Results';
 import PollingSystem from './Polling/PollingSystem';
 import { useUser } from '../UserContext';
-
+import { Link } from 'react-router-dom';
 
 export default function Admin ()  {
     const { user } = useUser();
@@ -32,9 +32,9 @@ export default function Admin ()  {
           </Nav>
           <Nav>
             <NavDropdown title={user.email}id="login-dropdown">
-            <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
           </NavDropdown>
           </Nav>
         </Navbar.Collapse>

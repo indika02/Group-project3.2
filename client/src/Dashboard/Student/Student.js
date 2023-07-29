@@ -10,6 +10,8 @@
       import { useParams } from "react-router";
       import { useUser } from '../../UserContext';
       import { FaChartBar, FaChartLine, FaContao, FaFileExcel, FaForumbee, FaVoteYea } from 'react-icons/fa';
+      import { Link } from 'react-router-dom';
+
 
       function Student() {
           const {email}=useParams();
@@ -61,9 +63,9 @@
                 </Nav>
                 <Nav>
                   <NavDropdown title={userEmail} id="login-dropdown">
-                  <NavDropdown.Item href="">Profile</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
                 </NavDropdown>
                 </Nav>
               </Navbar.Collapse>

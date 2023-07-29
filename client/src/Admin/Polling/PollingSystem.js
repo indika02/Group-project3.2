@@ -1,93 +1,133 @@
 import React, { useState } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
-import './Polls.css';
-import VotingOption from './VotingOption';
-import VotingResults from './VotingResults';
 
-const PollingSystem = () => {
-  const [question, setQuestion] = useState('');
-  const [options, setOptions] = useState([]);
+function PollingSystem() {
+  const [polls, setPolls] = useState([]);
+  const [selectedPoll, setSelectedPoll] = useState(null);
 
-  const handleQuestionChange = (e) => {
-    setQuestion(e.target.value);
+  // Function to create a new poll
+  const createPoll = (question, options) => {
+    const newPoll = {
+      question,
+      options: options.map((option) => ({ text: option, votes: 0 })),
+    };
+    setPolls([...polls, newPoll]);
   };
 
-  const handleOptionChange = (e, index) => {
-    const newOptions = [...options];
-    newOptions[index] = { ...newOptions[index], text: e.target.value };
-    setOptions(newOptions);
+  // Function to handle voting
+  const handleVote = (pollIndex, optionIndex) => {
+    if (selectedPoll === null) {
+      setSelectedPoll(pollIndex);
+      const updatedPolls = polls.map((poll, index) => {
+        if (index === pollIndex) {
+          return {
+            ...poll,
+            options: poll.options.map((option, i) => {
+              if (i === optionIndex) {
+                return { ...option, votes: option.votes + 1 };
+              }
+              return option;
+            }),
+          };
+        }
+        return poll;
+      });
+      setPolls(updatedPolls);
+    }
   };
 
-  const handleAddOption = () => {
-    setOptions([...options, { text: '', votes: 0 }]);
+  // Function to add a new voting option to a poll
+  const addOption = (pollIndex, newOption) => {
+    const updatedPolls = polls.map((poll, index) => {
+      if (index === pollIndex) {
+        return {
+          ...poll,
+          options: [...poll.options, { text: newOption, votes: 0 }],
+        };
+      }
+      return poll;
+    });
+    setPolls(updatedPolls);
   };
 
-  const handleVote = (optionId) => {
-    setOptions((prevOptions) =>
-      prevOptions.map((option, index) =>
-        index === optionId ? { ...option, votes: option.votes + 1 } : option
-      )
-    );
-  };
-
-  const handleDeleteOption = (index) => {
-    const newOptions = [...options];
-    newOptions.splice(index, 1);
-    setOptions(newOptions);
-  };
-
-  const calculateTotalVotes = () => {
-    return options.reduce((total, option) => total + option.votes, 0);
-  };
-
-  const calculatePercentage = (votes) => {
-    const totalVotes = calculateTotalVotes();
-    return totalVotes > 0 ? ((votes / totalVotes) * 100).toFixed(2) : 0;
-  };
-
-  const handleReset = () => {
-    setQuestion('');
-    setOptions([]);
+  // Function to remove a voting option from a poll
+  const removeOption = (pollIndex, optionIndex) => {
+    const updatedPolls = polls.map((poll, index) => {
+      if (index === pollIndex) {
+        return {
+          ...poll,
+          options: poll.options.filter((option, i) => i !== optionIndex),
+        };
+      }
+      return poll;
+    });
+    setPolls(updatedPolls);
   };
 
   return (
-    <div className="container">
-      <Container>
-        <Form.Group>
-          <Form.Label>Add Your Question</Form.Label>
-          <Form.Control type="text" value={question} onChange={handleQuestionChange} />
-        </Form.Group>
-        <h4>Options:</h4>
-        {options.map((option, index) => (
-          <div key={index} className="option-container">
-            <Form.Control
-              type="text"
-              value={option.text}
-              onChange={(e) => handleOptionChange(e, index)}
-              className="option"
-            />
-            <Button variant="danger" onClick={() => handleDeleteOption(index)} className="delete-btn">
-              Delete
-            </Button>
+    <div>
+      {/* Poll Creation Section */}
+      <div>
+        <h2>Create a New Poll</h2>
+        <input type="text" placeholder="Poll Question" />
+        {polls.map((poll, index) => (
+          <div key={index}>
+            <input type="text" placeholder={`Option ${index + 1}`} />
+            <button onClick={() => addOption(index, `Option ${poll.options.length + 1}`)}>Add Option</button>
+            {poll.options.map((option, optionIndex) => (
+              <div key={optionIndex}>
+                <label>
+                  <input
+                    type="radio"
+                    name={`poll-${index}`}
+                    onClick={() => handleVote(index, optionIndex)}
+                    disabled={selectedPoll !== null}
+                  />
+                  {option.text}
+                  {/* Add a button to remove this option */}
+                  <button onClick={() => removeOption(index, optionIndex)}>Remove Option</button>
+                </label>
+              </div>
+            ))}
           </div>
         ))}
-        <Button variant="primary" onClick={handleAddOption} className="btn">
-          Add Option
-        </Button>
+        {/* Add more input fields for additional polls */}
+        <button onClick={() => createPoll('Your Question', ['Option 1', 'Option 2'])}>Create Poll</button>
+      </div>
 
-        {options.length > 0 && (
-          <div>
-            <VotingOption options={options} handleVote={handleVote} />
-            <VotingResults options={options} calculatePercentage={calculatePercentage} />
+      {/* Poll Voting Section */}
+      <div>
+        {polls.map((poll, index) => (
+          <div key={index}>
+            <h3>{poll.question}</h3>
+            {poll.options.map((option, optionIndex) => (
+              <div key={optionIndex}>
+                <label>
+                  <input
+                    type="radio"
+                    name={`poll-${index}`}
+                    onClick={() => handleVote(index, optionIndex)}
+                    disabled={selectedPoll !== null}
+                  />
+                  {option.text}
+                </label>
+              </div>
+            ))}
+            {selectedPoll === index && (
+              <div>
+                <p>Votes:</p>
+                {poll.options.map((option, optionIndex) => (
+                  <div key={optionIndex}>
+                    <p>{option.text}</p>
+                    <progress value={option.votes} max={poll.options.length}></progress>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-
-        <Button variant="danger" onClick={handleReset} className="btn">
-          Reset
-        </Button>
-      </Container>
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default PollingSystem;
