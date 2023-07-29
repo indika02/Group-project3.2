@@ -115,7 +115,7 @@ router.route("/:name").get((req, res) => {
         classtype: user.classtype,
         batchyear: user.batchyear,
       }));
-
+ 
       res.json(userProfiles);
     })
     .catch((err) => {
@@ -123,5 +123,68 @@ router.route("/:name").get((req, res) => {
       res.status(500).json({ error: "Error fetching user profiles" });
     });
 });
+
+router.route("/update/:email").put(async(req,res)=>{
+  let email=req.params.email;
+  const{
+    index,
+    name,
+    dob,
+    age,
+    gender,
+    contactpersonal,
+    contacthome,
+    address,
+    qualifications,
+    classtype,
+    batchyear,
+    Lname1,
+    subject1,
+    Lname2,
+    subject2,
+    Lname3,
+    subject3,
+    Lname4,
+    subject4,
+    usertype,
+    dpwd,
+  accountstate
+  }=req.body;
+
+  const updateProfile={
+    index,
+    name,
+    dob,
+    age,
+    gender,
+    contactpersonal,
+    contacthome,
+    address,
+    email,
+    qualifications,
+    classtype,
+    batchyear,
+    Lname1,
+    subject1,
+    Lname2,
+    subject2,
+    Lname3,
+    subject3,
+    Lname4,
+    subject4,
+    usertype,
+    dpwd,
+    accountstate,
+  }
+
+  const update=await User.findOneAndUpdate(email,updateProfile).then(()=>{
+    res.status(200).send({status:"user updated",User:update})
+  }).catch((err)=>{
+    res.status(500).send({status:"Error with updating data"});
+  })
+
+  
+
+})
 
 module.exports = router;
