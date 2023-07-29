@@ -177,14 +177,19 @@ router.route("/update/:email").put(async(req,res)=>{
     accountstate,
   }
 
-  const update=await User.findOneAndUpdate(email,updateProfile).then(()=>{
-    res.status(200).send({status:"user updated",User:update})
-  }).catch((err)=>{
-    res.status(500).send({status:"Error with updating data"});
-  })
+  try {
+    const updatedUser = await User.findOneAndUpdate({ email: email }, updateProfile, {
+      new: true,
+    });
 
-  
-
-})
+    if (updatedUser) {
+      res.status(200).send({ status: "User updated", User: updatedUser });
+    } else {
+      res.status(404).send({ status: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ status: "Error with updating data" });
+  }
+});
 
 module.exports = router;

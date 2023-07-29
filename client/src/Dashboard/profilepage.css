@@ -5,3 +5,25 @@
     font-weight: 400;
     
 }
+/* Set the custom div style */
+.custom-div {
+    height: 50px;
+    background-color: #dadfe3; 
+    margin-top: 10px;
+  }
+
+  .custom-div h1{
+    font-size: 30px;
+    font-weight: 300;
+    padding-top: 08px;
+    padding-left: 10px;
+  }
+  
+  .form{
+ padding-left: 250px;
+ padding-right: 250px;
+  }
+
+  .form .gender{
+    padding-top: 10px;
+  }
