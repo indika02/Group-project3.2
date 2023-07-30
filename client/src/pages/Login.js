@@ -52,7 +52,7 @@ const Login = () => {
     <div className="login">
       <Container>
         <Form>
-          <img src={logo} alt="Logo" fluid />
+          {/* <img src={logo} alt="Logo" fluid /> */}
           <h4>Login to Our LMS</h4>
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
