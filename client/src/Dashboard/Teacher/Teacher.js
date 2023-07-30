@@ -72,7 +72,7 @@ export default function Teacher() {
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">Siyathra LMS</Navbar.Brand>
+          <Navbar.Brand href="#home">Siyathra Learning management system</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>

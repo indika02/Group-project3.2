@@ -32,7 +32,7 @@ export default function Admin ()  {
           </Nav>
           <Nav>
             <NavDropdown title={user.email}id="login-dropdown">
-            <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="">Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
           </NavDropdown>

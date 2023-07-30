@@ -5,3 +5,23 @@
     align-items: center;
 }
 
+.marks .marks-submit{
+    margin-right: 10px;
+    border-radius: 0;
+}
+
+.marks .marks-clear{
+    border-radius: 0;
+}
+.marks .add{
+    float: right;
+    width: 60px;
+    border-radius: 0;
+    background-color: rgb(24, 134, 230);
+    color: white;
+}
+
+.chart{
+    float:right;
+    border-radius: 0;
+}

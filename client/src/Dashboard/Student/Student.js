@@ -123,7 +123,10 @@
         </tr>
       </thead>
       <tbody>
-        {examResults.map((result, index) => (
+      {examResults
+        .slice() // Create a copy of the examResults array before sorting
+        .sort((a, b) => new Date(b.Doe) - new Date(a.Doe)) // Sort by date in descending order
+        .map((result, index) => (
           <tr key={index}>
             <td>{result.Doe}</td>
             <td>{result.Examno}</td>
