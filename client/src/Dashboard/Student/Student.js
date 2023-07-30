@@ -1,15 +1,13 @@
       import React, { useEffect } from 'react';
-      import { Navbar, Nav, Container, Button,NavDropdown } from 'react-bootstrap';
+      import { Navbar, Nav, Container,NavDropdown } from 'react-bootstrap';
       import './Student.css';
-      import Footer from '../../components/Footer';
       import { Tab } from 'react-bootstrap';
       import {Row,Col} from 'react-bootstrap';
-      import cart from '../../images/cart.jpg';
       import { useState } from 'react';
-      import { Table, Form, FormControl } from 'react-bootstrap';
+      import { Table } from 'react-bootstrap';
       import { useParams } from "react-router";
       import { useUser } from '../../UserContext';
-      import { FaChartBar, FaChartLine, FaContao, FaFileExcel, FaForumbee, FaVoteYea } from 'react-icons/fa';
+      import { FaChartBar,FaVoteYea } from 'react-icons/fa';
       import { Link } from 'react-router-dom';
 
 

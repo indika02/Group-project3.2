@@ -3,13 +3,60 @@ import { useParams } from "react-router";
 import { useUser } from '../UserContext';
 import { Container,Navbar,Nav,NavDropdown,Row,Col,Form } from "react-bootstrap";
 import './profilepage.css';
+import { useState,useEffect } from "react";
+import swal from "sweetalert";
+
+
+
 
 
 export default function Profilepage(){
   const {email}=useParams();
   const { user } = useUser();
 
+ 
   const userEmail = user?.email;
+  const [userProfile,setUserProfile]=useState(null);
+  const [updatedProfile, setUpdatedProfile] = useState(null);
+  
+  useEffect(() => {
+    fetchUserProfile(userEmail);
+  }, [email, user?.index]);
+  
+
+  const fetchUserProfile = (email)=>{
+    fetch(`http://localhost:5000/user/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
+      setUserProfile(data);
+      console.log(data)
+    }).catch((error)=>{
+      console.log("Error fetching user data",error);
+    });
+  };
+
+
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    fetch(`http://localhost:5000/user/update/${userEmail}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userProfile),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserProfile(data.User);
+        swal("Success", "Profile Updating is Successfully completed", "success");
+        console.log(data.User)
+      })
+      .catch((error) => {
+        console.log("Error updating user profile", error);
+        swal("Error", "An error occured!", "error");
+      });
+  };
+
   return(
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -23,23 +70,23 @@ export default function Profilepage(){
         <div class="row">
           <div class="col">
             <div class="custom-div">
-              <h1>user profile</h1>
+              <h1> User profile</h1>
             </div>
           </div>
         </div>
       </div>
       <Row>
         
-      <form className="form">
+      <form className="form" onSubmit={handleFormSubmit}>
         <div className='form-group'>
                 <label for="index">Student's Enrollement No</label>
-                <input type='text' className='form-control' id='index' placeholder="Enter Student's Enrollement No"
+                <input type='text' className='form-control' id='index' value={userProfile?.index}readOnly
                
                 />
             </div>
             <div className='form-group'>
                 <label for="name">Student's Full Name</label>
-                <input type='text' className='form-control' id='name' placeholder="Enter Student's Name" readOnly
+                <input type='text' className='form-control' id='name' value={userProfile?.name} readOnly
                
                 />
        </div>
@@ -47,7 +94,7 @@ export default function Profilepage(){
                 <Col>
                 <div className='form-group'>
                 <label for="dob">Date of Birth</label>
-                <input type='date' className='form-control' id='dob' placeholder='Enter the Date of Birth'
+                <input type='date' className='form-control' id='dob'  value={userProfile?.dob} onChange={(e) => setUserProfile({ ...userProfile, dob: e.target.value })}
                 
                 />
             </div>
@@ -55,31 +102,17 @@ export default function Profilepage(){
                 <Col>
                 <div className='form-group'>
                     <label for="age" className='age'>Age</label>
-                    <select className="form-select form-control" aria-label="Default select example" 
-                 >
-                        <option selected>Select The Age</option>
-                        <option value="22">22</option>
-                        <option value="21">21</option>
-                        <option value="20">20</option>
-                        <option value="19">19</option>
-                        <option value="18">18</option>
-                        <option value="17">17</option>
-                        <option value="16">16</option>
-                        <option value="15">15</option>
-                    </select>
+                    <input type='text' className='form-control' id='age'  value={userProfile?.age} onChange={(e) => setUserProfile({ ...userProfile, age: e.target.value })}/>
                 </div>
             
                 </Col>
                 <Col>
                 <div className='form-group'>
                     <label for="gender" className='gender'>Gender</label>
-                    <select className="form-select form-control" aria-label="Default select example">
+                    <input type='text' className='form-control' id='gender'  value={userProfile?.gender}readOnly 
                
-                        <option selected>Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
+                />
+            </div>
                 </Col>
             </Row>
             
@@ -89,20 +122,16 @@ export default function Profilepage(){
                     <Col>
                     <div className='form-group'>
                 <label for="Contactno">Contact No(Personal)</label>
-                <input type='text' className='form-control' id='contact' placeholder="Contact Number(Personal)"
-                // onChange={(e)=>{
-                //     setContactpersonal(e.target.value);
-                // }}
+                <input type='text' className='form-control' id='contact' value={userProfile?.contactpersonal} onChange={(e) => setUserProfile({ ...userProfile, contactpersonal: e.target.value })}
+              
                 />
             </div>
                     </Col>
                     <Col>
                     <div className='form-group'>
                 <label for="Contactno">Contact No(Home)</label>
-                <input type='text' className='form-control' id='contacthome' placeholder="Contact Number(Home)"
-                // onChange={(e)=>{
-                //     setContactHome(e.target.value);
-                // }}
+                <input type='text' className='form-control' id='contacthome' value={userProfile?.contacthome} onChange={(e) => setUserProfile({ ...userProfile, contacthome: e.target.value })}
+              
                 />
             </div>
                     </Col>
@@ -111,10 +140,8 @@ export default function Profilepage(){
                     <Col>
                     <div className='form-group'>
                 <label for="address">Address</label>
-                <input type='text' className='form-control' id='address' placeholder="address"
-                // onChange={(e)=>{
-                //     setAddress(e.target.value);
-                // }}
+                <input type='text' className='form-control' id='address' value={userProfile?.address} onChange={(e) => setUserProfile({ ...userProfile, address: e.target.value })}
+                
                 />
             </div>
                     </Col>
@@ -123,10 +150,8 @@ export default function Profilepage(){
                     <Col>
                     <div className='form-group'>
                 <label for="email">Email Address</label>
-                <input type='email' className='form-control' id='email' placeholder="Email Address"
-                // onChange={(e)=>{
-                //     setEmail(e.target.value);
-                // }}
+                <input type='email' className='form-control' id='email' value={userProfile?.email} onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
+              
                 />
             </div>
                     </Col>
@@ -135,31 +160,18 @@ export default function Profilepage(){
                 <Col>
                 <div className='form-group'>
                     <label for="type" className='type'>Class Type</label>
-                    <select className="form-select form-control" aria-label="Default select example"
-                    //  onChange={(e)=>{
-                    //     setClasstype(e.target.value);
-                    // }}
-                    >
-                        <option selected>Class type</option>
-                        <option value="O/L">O/L</option>
-                        <option value="A/L">A/L</option>
-                    </select>
-                </div>
+                    <input type='text' className='form-control' id='Classtype' value={userProfile?.classtype} readOnly
+              
+                />
+            </div>
                 </Col>
                 <Col>
                 <div className='form-group'>
                     <label for="batch" className='batch'>Batch Year</label>
-                    <select className="form-select form-control" aria-label="Default select example"
-                    // onChange={(e)=>{
-                    //     setbatchYear(e.target.value);
-                    // }}
-                    >
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                    </select>
-                </div>
+                    <input type='text' className='form-control' id='batchyear' value={userProfile?.batchyear} readOnly
+              
+                />
+            </div>
                 </Col>
             </Row>
                     <div className='form-group'>
@@ -167,116 +179,62 @@ export default function Profilepage(){
                 <Row>
                 <Col>
                 <div className='form-group'>
-                    <select id="country" className="form-select form-control" 
-                    // onChange={(e)=>{
-                    //     setLName1(e.target.value);
-                    // }}
-                    >
-                        <option value="">Lectuer</option>
-                        {/* {Lname.map((item) => (
-                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                <input type='text' className='form-control' id='Lecturer1' value={userProfile?.Lname1} readOnly
+                
+                />
+            </div>
                     </Col>
                     <Col>
                     <div className='form-group'>
-                    <select id="country" className="form-select form-control"
-                    // onChange={(e)=>{
-                    //     setSubject1(e.target.value);
-                    // }}
-                    >
-                        <option value="">Subject 1</option>
-                        {/* {subject.map((item) => (
-                            <option key={item._id} value={item.subject}>{item.subject}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                    <input type='text' className='form-control' id='Subject1' value={userProfile?.subject1} readOnly
+                
+                />
+            </div>
                 </Col>
                 <Col>
                 <div className='form-group'>
-                    <select id="country" className="form-select form-control"
-                    // onChange={(e)=>{
-                    //     setLName2(e.target.value);
-                    // }}
-                    >
-                        <option value="">Lectuer</option>
-                        {/* {Lname.map((item) => (
-                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                <input type='text' className='form-control' id='Lecturer2' value={userProfile?.Lname2} readOnly
+               
+                />
+            </div>
                     </Col>
                     <Col>
                     <div className='form-group'>
-                    <select id="country" className="form-select form-control" 
-                    // onChange={(e)=>{
-                    //     setSubject2(e.target.value);
-                    // }}
-                    >
-                        <option value="">Subject 2</option>
-                        {/* {subject.map((item) => (
-                            <option key={item._id} value={item.subject}>{item.subject}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                    <input type='text' className='form-control' id='Subject2'  value={userProfile?.subject2} readOnly
+              
+                />
+            </div>
                     </Col>
                 </Row>
                 <Row className='sub'>
                 <Col>
                 <div className='form-group'>
-                    <select id="country" className="form-select form-control"
-                    // onChange={(e)=>{
-                    //     setLName3(e.target.value);
-                    // }}
-                    >
-                        <option value="">Lectuer</option>
-                        {/* {Lname.map((item) => (
-                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                <input type='text' className='form-control' id='Lecturer3' value={userProfile?.Lname3} readOnly
+               
+                />
+            </div>
                     </Col>
                     <Col>
                     <div className='form-group'>
-                    <select id="country" className="form-select form-control"
-                    // onChange={(e)=>{
-                    //     setSubject3(e.target.value);
-                    // }}
-                    >
-                        <option value="">Subject 3</option>
-                        {/* {subject.map((item) => (
-                            <option key={item._id} value={item.subject}>{item.subject}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                    <input type='text' className='form-control' id='Subject3'   value={userProfile?.subject3} readOnly
+               
+                />
+            </div>
                 </Col>
                 <Col>
                 <div className='form-group'>
-                    <select id="country" className="form-select form-control"
-                    // onChange={(e)=>{
-                    //     setLName4(e.target.value);
-                    // }}
-                    >
-                        <option value="">Lectuer</option>
-                        {/* {Lname.map((item) => (
-                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
-                        ))} */}
-                    </select>
-                    </div>
+                <input type='text' className='form-control' id='Lecturer4' value={userProfile?.Lname4} readOnly
+               
+                />
+            </div>
+                   
                     </Col>
                     <Col>
                     <div className='form-group'>
-                    <select id="country" className="form-select form-control"
-                    // onChange={(e)=>{
-                    //     setSubject4(e.target.value);
-                    // }}
-                    >
-                        <option value="">Subject 4</option>
-                        {/* {subject.map((item) => (
-                            <option key={item._id} value={item.subject}>{item.subject}</option>
-                        ))} */}
-                    </select>
+
+                    <input type='text' className='form-control' id='Subject4'  value={userProfile?.subject4} readOnly
+                />
+    
                     </div>
                     </Col>
                 </Row>
