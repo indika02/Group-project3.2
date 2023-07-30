@@ -124,6 +124,46 @@ router.route("/:name").get((req, res) => {
     });
 });
 
+router.route("/userdetail/:email").get((req, res) => {
+  const userEmail = req.params.email;
+
+  User.findOne({ email: userEmail })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+     
+      const userProfile = {
+      index:user.index,
+      name:user.name,
+      dob:user.dob,
+      age:user.age,
+      gender:user.gender,
+      contactpersonal:user.contactpersonal,
+      contacthome:user.contacthome,
+      address:user.address,
+      email:user.email,
+      classtype:user.classtype,
+      batchyear:user.batchyear,
+      Lname1:user.Lname1,
+      subject1:user.subject1,
+      Lname2:user.Lname2,
+      subject2:user.subject2,
+      Lname3:user.Lname3,
+      subject3:user.subject3,
+      Lname4:user.Lname4,
+      subject4:user.subject4,
+      };
+
+      res.json(userProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Error!' });
+    });
+});
+
 router.route("/update/:email").put(async(req,res)=>{
   let email=req.params.email;
   const{
