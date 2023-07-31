@@ -32,9 +32,15 @@ router.route("/add").post(async (req, res) => {
   } = req.body;
 
   try {
-    const existingUser = await User.findOne({ index });
+    const existingUser = await User.findOne({ $or: [{ index }, { email }] });
+
     if (existingUser) {
-      return res.status(400).json({ error: 'Index number already exists' });
+      if (existingUser.index === index) {
+        return res.status(400).json({ error: 'Index number already exists' });
+      }
+      if (existingUser.email === email) {
+        return res.status(400).json({ error: 'Email already exists' });
+      }
     }
 
     const newUser = new User({
@@ -64,7 +70,7 @@ router.route("/add").post(async (req, res) => {
     });
 
     if (usertype === "student") {
-      const qrCodeData = `${index}\n${name}\n${classtype}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${Lname1}\n${Lname2}\n${Lname3}\n${Lname4}\n${batchyear}`;
+      const qrCodeData = `${index}\n${name}\n${classtype}\n${email}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${Lname1}\n${Lname2}\n${Lname3}\n${Lname4}\n${batchyear}`;
       
       // Generate the QR code as a Base64 encoded string
       const qrCodeBase64 = await QrCode.toDataURL(qrCodeData);
@@ -154,6 +160,7 @@ router.route("/userdetail/:email").get((req, res) => {
       subject3:user.subject3,
       Lname4:user.Lname4,
       subject4:user.subject4,
+      qrCode:user.qrCode
       };
 
       res.json(userProfile);
