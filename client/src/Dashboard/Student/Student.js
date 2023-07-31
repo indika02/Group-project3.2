@@ -1,5 +1,5 @@
       import React, { useEffect } from 'react';
-      import { Navbar, Nav, Container,NavDropdown } from 'react-bootstrap';
+      import { Navbar, Nav, Container,Image,Button,NavDropdown } from 'react-bootstrap';
       import './Student.css';
       import { Tab } from 'react-bootstrap';
       import {Row,Col} from 'react-bootstrap';
@@ -18,6 +18,7 @@
           const userEmail = user?.email;
 
           const [userProfile,setUserProfile]=useState(null);
+          const[userProfiledata,setUserProfiledata]=useState(null);
           const [examResults, setExamResults] = useState([]);
 
           
@@ -25,6 +26,7 @@
 
           useEffect(() => {
             fetchUserProfile(email);
+            fetchUserProfiledata(userEmail);
             fetchExamResults(user?.index);
           }, [email, user?.index]);
           
@@ -46,8 +48,24 @@
             });
           };
 
+          const fetchUserProfiledata = (email)=>{
+            fetch(`http://localhost:5000/user/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
+              setUserProfiledata(data);
+              console.log(data);
+            }).catch((error)=>{
+              console.log("Error fetching user data",error);
+            });
+          };
+      
+          const handleDownloadQRCode = () => {
   
-          
+            const downloadLink = document.createElement('a');
+            downloadLink.href = userProfiledata?.qrCode;
+            downloadLink.download = `${user.index}_qr_code.png`;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          };
         
         return (
           <div>
@@ -69,6 +87,10 @@
               </Navbar.Collapse>
             </Container>
           </Navbar>
+          <Row>
+            <Col md={9}>
+            
+            
           <Tab.Container defaultActiveKey="tab1">
             <Nav variant="tabs">
               <Nav.Item>
@@ -159,8 +181,18 @@
               </Tab.Pane>
             </Tab.Content>
           </Tab.Container>
+              </Col>
+              <Col className='qrcol'>
+                <div className='qrcode'>
+              <Image src={userProfiledata?.qrCode} fluid style={{ width: '300px', height: '300px' }} className='qrimg' />
+              <Button variant="primary" className="btnqrcode"onClick={handleDownloadQRCode}>
+            Download
+          </Button>
+          </div>
+              </Col>
+</Row>
         
-          
+  
           </div>
         );
       }

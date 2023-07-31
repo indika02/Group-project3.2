@@ -266,9 +266,9 @@
               <Bar dataKey="count" fill="#8884d8" />
             </BarChart>
           </ResponsiveContainer>
-          <button className="btn btn-success chart">
+          {/* <button className="btn btn-success chart">
             Download Chart
-          </button>
+          </button> */}
           </Col>
           </Row>
       </Container>

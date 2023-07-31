@@ -43,9 +43,7 @@ Nav{
     cursor: pointer;
   }
 
-  .qrcode{
-    padding-left: 100px;
-  }
+ 
 
   .result{
     border: 4px dashed rgb(103, 103, 103);
@@ -61,4 +59,15 @@ Nav{
     color: #460691;
     font-weight: bold;
     
+  }
+
+  .qrcol .qrcode .qrimg{
+    margin-top: 100px;
+  }
+
+  .qrcode .btnqrcode{
+      width: 100px;
+      align-items: center;
+      background-color: rgb(21, 136, 224);
+      margin-left: 100px;
   }

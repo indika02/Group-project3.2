@@ -14,7 +14,7 @@ export default function Account() {
     const[email,setEmail]=useState("");
     const[dpwd,setDpwd]=useState("1234");
     const[accountstate,setAccountStatus]=useState("active");
-    const[usertype,setUsertype]=useState("");
+    const[usertype,setUsertype]=useState("student");
     const [Accountdetails, setAccountdetails] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,11 @@ export default function Account() {
       const fetchAccountDetails = async () => {
         try {
           const response = await axios.get("http://localhost:5000/account");
-          setAccountdetails(response.data);
+          const filteredAccounts = response.data.filter(
+            (studentdetail) => studentdetail.usertype === "student"
+          );
+        
+          setAccountdetails(filteredAccounts);
           setLoading(false);
           console.log(response.data);
         } catch (error) {
@@ -88,18 +92,6 @@ export default function Account() {
                     }}
                     />
                 </div>
-                <div className="form-group">
-                <label for="type" className='type'>User Type</label>
-                    <select className="form-select form-control" aria-label="Default select example"
-                     onChange={(e)=>{
-                        setUsertype(e.target.value);
-                    }}
-                    >
-                        <option selected>User Type</option>
-                        <option value="teacher">Student</option>
-                        <option value="student">Teacher</option>
-                    </select>
-                </div>
                 <button type="submit"  className="savebtn">Create</button>
                 </form>
 
@@ -116,7 +108,6 @@ export default function Account() {
                     <tr>
                       <th>Enrollement No</th>
                       <th>Email</th>
-                      <th>UserType</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -125,7 +116,6 @@ export default function Account() {
                       <tr key={account._id}>
                         <td>{account.index}</td>
                         <td>{account.email}</td>
-                        <td>{account.usertype}</td>
                         <td>{account.accountstate}</td>
                       </tr>
                     ))}
