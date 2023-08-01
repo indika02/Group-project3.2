@@ -30,6 +30,7 @@ const timetableRouter=require("./routes/Timetable");
 const SubjectRouter=require("./routes/Subject");
 const AccountRouter=require("./routes/Account");
 const Results=require("./routes/ExamResults");
+const Contactus=require("./routes/Contactus");
 
 
 
@@ -38,6 +39,7 @@ app.use("/timetable",timetableRouter);
 app.use("/subject",SubjectRouter);
 app.use("/account",AccountRouter);
 app.use("/results",Results);
+app.use("/contactus",Contactus);
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port number: ${PORT}`);

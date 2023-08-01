@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { Col,Row } from 'react-bootstrap';
 import './teareg.css';
@@ -30,7 +30,6 @@ export default function TeaReg() {
             return;
           }
 
-          
         const newTeacher={
             name,
             address,

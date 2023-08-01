@@ -10,7 +10,7 @@ const Profile = () => {
   };
 
   const handleDownloadQRCode = () => {
-    // Create a temporary link to download the QR code
+  
     const downloadLink = document.createElement('a');
     downloadLink.href = user.qrCode;
     downloadLink.download = `${user.name}_qr_code.png`;

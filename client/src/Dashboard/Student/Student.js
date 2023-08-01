@@ -109,6 +109,37 @@
             <Tab.Content>
               <Tab.Pane eventKey="tab1" className='tab'>
                 <h1>My Subjects</h1>
+                  <Container>
+
+                  {userProfiledata && (
+                     <>{userProfiledata && userProfiledata.subject1 && (
+                      <div className='subjects'>
+                        <p>{userProfiledata?.subject1} {userProfiledata?.Lname1}</p>
+                      </div>
+                    )}
+                    {userProfiledata && userProfiledata.subject2 && (
+                      <div className='subjects'>
+                        <p>{userProfiledata?.subject2} {userProfiledata?.Lname2}</p>
+                      </div>
+                    )}
+                    {userProfiledata && userProfiledata.subject3 && (
+                      <div className='subjects'>
+                        <p>{userProfiledata?.subject3} {userProfiledata?.Lname3}</p>
+                      </div>
+                    )}
+                    {userProfiledata && userProfiledata.subject4 && (
+                      <div className='subjects'>
+                        <p>{userProfiledata?.subject4} {userProfiledata?.Lname4}</p>
+                      </div>
+                    )}
+                    
+
+                      </>
+                   
+                  )
+
+                  }
+                  </Container>
                 <Container>
                 <Row>
              
@@ -182,7 +213,7 @@
             </Tab.Content>
           </Tab.Container>
               </Col>
-              <Col className='qrcol'>
+              <Col className='qrcol' md={3}>
                 <div className='qrcode'>
               <Image src={userProfiledata?.qrCode} fluid style={{ width: '300px', height: '300px' }} className='qrimg' />
               <Button variant="primary" className="btnqrcode"onClick={handleDownloadQRCode}>
