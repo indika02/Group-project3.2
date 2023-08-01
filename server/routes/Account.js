@@ -87,4 +87,43 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/update/:email").put(async(req,res)=>{
+  let email=req.params.email;
+  const{
+  accountstate
+  }=req.body;
+
+  const updateState={
+    accountstate,
+  }
+
+  try {
+    const updatedstate = await Account.findOneAndUpdate({ email: email }, updateState, {
+      new: true,
+    });
+
+    if (updatedstate) {
+      res.status(200).send({ status: "User updated" });
+    } else {
+      res.status(404).send({ status: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ status: "Error with updating data" ,err});
+  }
+});
+
+router.route("/delete/:id").delete(async (req, res) => {
+  const id = req.params.id;
+  try {
+    const account = await Account.findByIdAndRemove(id);
+    if (account) {
+      res.status(200).send({ status: 'Account deleted' });
+    } else {
+      res.status(404).send({ status: 'Account not found' });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ status: 'Error with deleting account', error: err.message });
+  }
+});
 module.exports = router;

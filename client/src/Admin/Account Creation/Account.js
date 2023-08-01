@@ -6,6 +6,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import bcrypt from 'bcryptjs';
 import { Container, Table } from "react-bootstrap";
+import { FaEdit, FaRecycle, FaRemoveFormat, FaTrash } from "react-icons/fa";
 
 export default function Account() {
 
@@ -70,6 +71,15 @@ export default function Account() {
         })
     }
 
+    const handleDelete = async (id) => {
+      try {
+        await axios.delete(`http://localhost:5000/account/delete/${id}`);
+        swal("Success", "Account Deleted!", "success");
+        fetchAccountDetails();
+      } catch (error) {
+        swal("Error!", "Failed to delete Account!", "error");
+      }
+    };
     
 
     return(
@@ -108,7 +118,7 @@ export default function Account() {
                     <tr>
                       <th>Enrollement No</th>
                       <th>Email</th>
-                      <th>Status</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -116,7 +126,7 @@ export default function Account() {
                       <tr key={account._id}>
                         <td>{account.index}</td>
                         <td>{account.email}</td>
-                        <td>{account.accountstate}</td>
+                        <button className="deluser" onClick={() => handleDelete(account._id)}><FaTrash/></button>
                       </tr>
                     ))}
                   </tbody>
