@@ -24,6 +24,7 @@ export default function Teacher() {
   const [classTypeFilter, setClassTypeFilter] = useState('');
   const [classtype, setClasstype] = useState("");
   const [batchyear, setBatchYear] = useState("");
+  const [uploadedFile, setUploadedFile] = useState(null);
 
 
   const userEmail = user?.email;
@@ -86,7 +87,34 @@ export default function Teacher() {
     return isNameOrIndexMatch && isBatchYearMatch && isClassTypeMatch;
   });
 
+  const handleUploadAndSubmit = async (e) => {
+    e.preventDefault();
   
+    try {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      // Upload the file and save the fileId
+      const uploadResponse = await axios.post('http://localhost:5000/lecturernotes/upload', formData);
+      const fileId = uploadResponse.data.fileId;
+      console.log('File uploaded successfully. File ID:', fileId);
+  
+      const dataToSave = {
+        classtype,
+        batchyear,
+        fileId: fileId,
+      };
+  
+      // Save the data
+      await axios.post('http://localhost:5000/lecturernotes/add', dataToSave);
+      console.log('Data saved successfully!');
+    } catch (error) {
+      console.log('Error uploading file or saving data:', error);
+    }
+  };
+  
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -162,9 +190,11 @@ export default function Teacher() {
             <Col sm={4}>
             <Form.Group controlId="formFileMultiple" className="mb-3">
                 <Form.Label>Upload the Note</Form.Label>
-                <Form.Control type="file" multiple />
+                <Form.Control type="file" multiple onChange={handleUploadAndSubmit}/>
             </Form.Group>
+            
             </Col>
+            <Button type='submit' className='btn btn-success' onClick={handleUploadAndSubmit}>Upload</Button>
             </Row>
             </Container>
           </Tab.Pane>
