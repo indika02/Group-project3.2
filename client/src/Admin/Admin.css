@@ -43,3 +43,25 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     margin-top: 20px;
 }
+
+.sidebar{
+    background-color: rgb(15, 3, 27);
+    height: 690px;
+    width: 241px;
+  }
+  
+  .sidebar .navitem{
+    text-align: left;
+    align-items: last baseline;
+    
+  }
+  .sidebar .navlink{
+  text-align: left;
+  float: left;
+  background-color: rgb(15, 3, 27);
+  border-radius: 0px;
+  width: 229px;
+  margin-left: 0;
+  color: white;
+  font-size: 16px;
+  }
