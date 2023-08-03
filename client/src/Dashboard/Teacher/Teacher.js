@@ -4,7 +4,6 @@ import './Teacher.css';
 import Footer from '../../components/Footer';
 import { Tab } from 'react-bootstrap';
 import { Row, Col, Table } from 'react-bootstrap';
-import cart from '../../images/cart.jpg';
 import { useParams } from 'react-router';
 import { useUser } from '../../UserContext';
 import { FaChartBar, FaFile, FaFileAlt, FaPoll, FaUser } from 'react-icons/fa';
@@ -25,7 +24,7 @@ export default function Teacher() {
   const [classtype, setClasstype] = useState("");
   const [batchyear, setBatchYear] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
-
+  const [activeTab, setActiveTab] = useState('tab1');
 
   const userEmail = user?.email;
   const userName = user?.name;
@@ -87,39 +86,58 @@ export default function Teacher() {
     return isNameOrIndexMatch && isBatchYearMatch && isClassTypeMatch;
   });
 
-  const handleUploadAndSubmit = async (e) => {
-    e.preventDefault();
-  
+  const handleFileUpload = async (e) => {
     try {
       const file = e.target.files[0];
+      setUploadedFile(file); // Set the selected file to the state
+    } catch (error) {
+      console.log('Error uploading file:', error);
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (!uploadedFile) {
+        console.log('No file selected.');
+        return;
+      }
+
       const formData = new FormData();
-      formData.append('file', file);
-  
-      // Upload the file and save the fileId
+      formData.append('file', uploadedFile);
+      formData.append('classtype', classtype);
+      formData.append('batchyear', batchyear);
+
       const uploadResponse = await axios.post('http://localhost:5000/lecturernotes/upload', formData);
-      const fileId = uploadResponse.data.fileId;
-      console.log('File uploaded successfully. File ID:', fileId);
-  
+      console.log('File uploaded successfully. Response:', uploadResponse.data);
+
       const dataToSave = {
+        fileId: uploadResponse.data.fileId,
         classtype,
         batchyear,
-        fileId: fileId,
+        subject: userProfile?.subject
       };
-  
-      // Save the data
+
       await axios.post('http://localhost:5000/lecturernotes/add', dataToSave);
-      console.log('Data saved successfully!');
+      console.log('Data saved successfully!', dataToSave);
+
+      setUploadedFile(null);
+      setClasstype('');
+      setBatchYear('');
     } catch (error) {
       console.log('Error uploading file or saving data:', error);
     }
   };
-  
+
+  const handleTabSelect = (key) => {
+    setActiveTab(key);
+  };
 
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">Siyathra Learning management system</Navbar.Brand>
+          <Navbar.Brand href="#home">Siyathra Learning Management System</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
@@ -133,162 +151,171 @@ export default function Teacher() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Tab.Container defaultActiveKey="tab1">
-        <Nav variant="tabs">
-        <Nav.Item>
-            <Nav.Link eventKey="tab1">
-              <FaFileAlt/>Notes
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tab2">
-              <FaUser /> Student Details
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tab3">
-              <FaPoll /> Making polls
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tab4">
-              <FaChartBar /> Exam Results
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tab5">Forum</Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Tab.Pane eventKey="tab1" className="tab">
-            <h1>file upload</h1>
-            <Container>
-            <Row>
-            <Col sm={4}>
-              <div className='form-group'>
-                <label htmlFor="class" className='class'>Class Type</label>
-                <select className="form-select form-control inputbox" aria-label="Default select example" onChange={(e) => setClasstype(e.target.value)}>
-                  <option value="O/L">O/L</option>
-                  <option value="A/L">A/L</option>
-                </select>
-              </div>
-            </Col>
-            <Col sm={4}>
-              <div className='form-group'>
-                <label htmlFor="batch" className='batch'>Batch Year</label>
-                <select className="form-select form-control" aria-label="Default select example" onChange={(e) => setBatchYear(e.target.value)}>
-                  <option value="2023">2023</option>
-                  <option value="2024">2024</option>
-                  <option value="2025">2025</option>
-                  <option value="2026">2026</option>
-                  <option value="2027">2027</option>
-                  <option value="2028">2028</option>
-                  <option value="2029">2029</option>
-                  <option value="2030">2030</option>
-                </select>
-              </div>
-            </Col>
-            <Col sm={4}>
-            <Form.Group controlId="formFileMultiple" className="mb-3">
-                <Form.Label>Upload the Note</Form.Label>
-                <Form.Control type="file" multiple onChange={handleUploadAndSubmit}/>
-            </Form.Group>
-            
-            </Col>
-            <Button type='submit' className='btn btn-success' onClick={handleUploadAndSubmit}>Upload</Button>
-            </Row>
-            </Container>
-          </Tab.Pane>
-        <Tab.Content>
-          <Tab.Pane eventKey="tab2" className="tab">
-            <h1>Student Details</h1>
-            <Container>
-              <div className="search-bar">
-                <Form>
-                  <Row>
-                    <Col>
-                    <FormControl
-                    type="text"
-                    placeholder="Search by Name or Index No"
-                    value={searchText}
-                    onChange={handleSearchChange}
-                    className='search'
-                  />
-                    </Col>
-                    <Col>
-                    <FormControl
-                    type="text"
-                    placeholder="Filter by Batch Year"
-                    value={batchYearFilter}
-                    onChange={handleBatchYearFilterChange}
-                    className='search'
-                  />
-                    </Col>
-                    <Col>
-                     
-                  <FormControl
-                    type="text"
-                    placeholder="Filter by Class Type"
-                    value={classTypeFilter}
-                    onChange={handleClassTypeFilterChange}
-                    className='search'
-                  />
-                    </Col>
-                  </Row>
-                  
-                 
-                </Form>
-              </div>
-              {loading ? (
-                <div>Loading...</div>
-              ) : (
-                <>
-                  <Table striped bordered hover className="table table-sm">
-                    <thead>
-                      <tr>
-                        <th>Index</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Contact Personal</th>
-                        <th>Email</th>
-                        <th>Class Type</th>
-                        <th>Batch Year</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredStdDetails.map((stdData) => (
-                        <tr key={stdData.index}>
-                          <td>{stdData.index}</td>
-                          <td>{stdData.name}</td>
-                          <td>{stdData.gender}</td>
-                          <td>{stdData.contactpersonal}</td>
-                          <td>{stdData.email}</td>
-                          <td>{stdData.classtype}</td>
-                          <td>{stdData.batchyear}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </>
-              )}
-            </Container>
-          </Tab.Pane>
-          <Tab.Pane eventKey="tab3" className="tab"></Tab.Pane>
-          <Tab.Pane eventKey="tab4" className="tab">
-            <h1>Exam Results</h1>
-            <Container>
-              <Results />
-              <hr></hr>
-            </Container>
-          </Tab.Pane>
-          <Tab.Pane eventKey="tab5" className="tab">
-            {userProfile && (
-              <div>
-                <p>Email: {userName}</p>
-              </div>
-            )}
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+      <Container fluid>
+        <Row>
+          {/* Vertical Tab Menu */}
+          <Col sm={2} className="sidebar">
+              <Nav variant="pills" className="flex-column">
+                <Nav.Item className='navitem'>
+                  <Nav.Link eventKey="tab1" active={activeTab === 'tab1'} onClick={() => handleTabSelect('tab1')} className='navlink'>
+                    <FaFileAlt /> Notes
+                  </Nav.Link>
+                </Nav.Item>
+              
+                <Nav.Item>
+                  <Nav.Link eventKey="tab2" active={activeTab === 'tab2'} onClick={() => handleTabSelect('tab2')} className='navlink'>
+                    <FaUser /> Student Details
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="tab3" active={activeTab === 'tab3'} onClick={() => handleTabSelect('tab3')} className='navlink'>
+                    <FaPoll /> Making polls
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="tab4" active={activeTab === 'tab4'} onClick={() => handleTabSelect('tab4')} className='navlink'>
+                    <FaChartBar /> Exam Results
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="tab5" active={activeTab === 'tab5'} onClick={() => handleTabSelect('tab5')} className='navlink'>Forum</Nav.Link>
+                </Nav.Item>
+              </Nav>
+           
+          </Col>
+          <Col sm={10} className="tab-content">
+            <Tab.Container activeKey={activeTab}>
+              <Tab.Content>
+                <Tab.Pane eventKey="tab1" className="tab">
+                  <h1>File Upload</h1>
+                  <Container>
+                    <Row>
+                      <Col sm={4}>
+                        <div className='form-group'>
+                          <label htmlFor="class" className='class'>Class Type</label>
+                          <select className="form-select form-control inputbox" aria-label="Default select example" onChange={(e) => setClasstype(e.target.value)}>
+                            <option value="O/L">O/L</option>
+                            <option value="A/L">A/L</option>
+                          </select>
+                        </div>
+                      </Col>
+                      <Col sm={4}>
+                        <div className='form-group'>
+                          <label htmlFor="batch" className='batch'>Batch Year</label>
+                          <select className="form-select form-control" aria-label="Default select example" onChange={(e) => setBatchYear(e.target.value)}>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                          </select>
+                        </div>
+                      </Col>
+                      <Col sm={4}>
+                        <Form.Group controlId="formFileMultiple" className="mb-3">
+                          <Form.Label>Upload the Note</Form.Label>
+                          <Form.Control type="file" multiple onChange={handleFileUpload} />
+                        </Form.Group>
+                      </Col>
+                      <Button type='submit' className='btn btn-success' onClick={handleSubmit}>Upload</Button>
+                    </Row>
+                  </Container>
+                </Tab.Pane>
+                <Tab.Pane eventKey="tab2" className="tab">
+                  <Container>
+                    <div className="search-bar">
+                      <h1>Student Details</h1>
+                      <Form>
+                        <Row>
+                          <Col>
+                            <FormControl
+                              type="text"
+                              placeholder="Search by Name or Index No"
+                              value={searchText}
+                              onChange={handleSearchChange}
+                              className='search'
+                            />
+                          </Col>
+                          <Col>
+                            <FormControl
+                              type="text"
+                              placeholder="Filter by Batch Year"
+                              value={batchYearFilter}
+                              onChange={handleBatchYearFilterChange}
+                              className='search'
+                            />
+                          </Col>
+                          <Col>
+                            <FormControl
+                              type="text"
+                              placeholder="Filter by Class Type"
+                              value={classTypeFilter}
+                              onChange={handleClassTypeFilterChange}
+                              className='search'
+                            />
+                          </Col>
+                        </Row>
+                      </Form>
+                      {loading ? (
+                        <div>Loading...</div>
+                      ) : (
+                        <>
+                          <Table striped bordered hover className="table table-sm">
+                            <thead>
+                              <tr>
+                                <th>Index</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Contact Personal</th>
+                                <th>Email</th>
+                                <th>Class Type</th>
+                                <th>Batch Year</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {filteredStdDetails.map((stdData) => (
+                                <tr key={stdData.index}>
+                                  <td>{stdData.index}</td>
+                                  <td>{stdData.name}</td>
+                                  <td>{stdData.gender}</td>
+                                  <td>{stdData.contactpersonal}</td>
+                                  <td>{stdData.email}</td>
+                                  <td>{stdData.classtype}</td>
+                                  <td>{stdData.batchyear}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </>
+                      )}
+                    </div>
+                  </Container>
+                </Tab.Pane>
+                <Tab.Pane eventKey="tab3" className="tab">
+                  {/* Put content for Tab 3 here */}
+                </Tab.Pane>
+                <Tab.Pane eventKey="tab4" className="tab">
+                  <h1>Exam Results</h1>
+                  <Container>
+                    <Results />
+                    <hr></hr>
+                  </Container>
+                </Tab.Pane>
+                <Tab.Pane eventKey="tab5" className="tab">
+                  {userProfile && (
+                    <div>
+                      <p>Email: {userName}</p>
+                    </div>
+                  )}
+                </Tab.Pane>
+              </Tab.Content>
+            </Tab.Container>
+          </Col>
+        </Row>
+      </Container>
       
     </div>
   );

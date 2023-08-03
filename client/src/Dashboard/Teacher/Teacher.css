@@ -1,4 +1,4 @@
-Nav{
+/* Nav{
     font-weight: bold;
     font-style: italic;
     color: black;
@@ -48,3 +48,23 @@ Nav{
   width: 660px;
 
 }
+
+.sidebar{
+  background-color: rgb(15, 3, 27);
+  height: 690px;
+  width: 241px;
+}
+
+.sidebar .navitem{
+  text-align: left;
+  align-items: last baseline;
+  
+}
+.sidebar .navlink{
+text-align: left;
+float: left;
+background-color: rgb(15, 3, 27);
+border-radius: 0px;
+width: 229px;
+margin-left: 0;
+} */
