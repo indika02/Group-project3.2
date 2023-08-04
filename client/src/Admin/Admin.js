@@ -15,18 +15,12 @@ import Results from './Results/Results';
 import PollingSystem from './Polling/PollingSystem';
 import { useUser } from '../UserContext';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 export default function Admin ()  {
     const { user } = useUser();
   const {email}=useParams();
-  const [activeTab, setActiveTab] = useState('tab1');
 
   const userEmail = user?.email;
-
-  const handleTabSelect = (key) => {
-    setActiveTab(key);
-  };
   return (
     <div className="AdminPanal">
        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -46,32 +40,25 @@ export default function Admin ()  {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <Container fluid>
-      <Row>
-          <Col xs={12} sm={1} className="sidebar">
-            <Tab.Container activeKey={activeTab}>
-            <Nav variant="pills" className="flex-column">
-            <Nav.Item className='navitem'>
-              <Nav.Link eventKey="tab1" active={activeTab === 'tab1'} onClick={() => handleTabSelect('tab1')} className='navlink'><FaCompass/> Dashboard</Nav.Link>
+        <Tab.Container defaultActiveKey="tab1">
+          <Nav variant="tabs" className="mb-3">
+            <Nav.Item>
+              <Nav.Link eventKey="tab1"><FaCompass/> Dashboard</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab2" active={activeTab === 'tab2'} onClick={() => handleTabSelect('tab2')} className='navlink'><FaUserEdit/> User Accounts</Nav.Link>
+              <Nav.Link eventKey="tab2"><FaUserEdit/> User Accounts</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab3" active={activeTab === 'tab3'} onClick={() => handleTabSelect('tab3')} className='navlink'><FaCalendar/> Timetable</Nav.Link>
+              <Nav.Link eventKey="tab3"><FaCalendar/> Timetable</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab4" active={activeTab === 'tab4'} onClick={() => handleTabSelect('tab4')} className='navlink'><FaChartBar/> Exam Results</Nav.Link>
+              <Nav.Link eventKey="tab4"><FaChartBar/> Exam Results</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab5" active={activeTab === 'tab5'} onClick={() => handleTabSelect('tab5')} className='navlink'><FaPoll/>Making Polls</Nav.Link>
+              <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
             </Nav.Item>
-            </Nav>
-            </Tab.Container>
-          </Col>
-          <Col sm={10} className="tab-content">
-            <Tab.Container activeKey={activeTab}>
-            <Tab.Content>
+          </Nav>
+          <Tab.Content>
             <Tab.Pane eventKey="tab1" className='tab'>
               <h4>Student Details</h4>
               <StdDetails/>
@@ -95,9 +82,7 @@ export default function Admin ()  {
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
-        </Col>
-        </Row>
-</Container>
+
     </div>
   );
 }
