@@ -34,6 +34,7 @@ export default function Teacher() {
 
   useEffect(() => {
     fetchUserProfile(email);
+    fetchUploadedFiles();
     if (user?.name) {
       fetchStdDetails(user.name);
     }
@@ -134,6 +135,14 @@ export default function Teacher() {
   }
 };
 
+const fetchUploadedFiles = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/lecturernotes/uploadedfiles');
+    setUploadedFiles(response.data);
+  } catch (error) {
+    console.error('Error fetching uploaded files:', error);
+  }
+};
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -216,20 +225,35 @@ export default function Teacher() {
             </Col>
             </Row>
             <Row>
-              {/* <div className='uploaded-files'>
-              {uploadedFiles.map((file) => (
-              <div key={file.fileId}>
-                <a
-                 href={`http://localhost:5000/lecturernotes/download/${file.originalFileName}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {file.originalFileName}
-                </a>
-                <hr />
-              </div>
-            ))}
-              </div> */}
+            <div className='uploaded-files'>
+  {Object.entries(
+    uploadedFiles.reduce((groups, file) => {
+      const key = `${file.classtype}-${file.batchyear}`;
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+      groups[key].push(file);
+      return groups;
+    }, {})
+  ).map(([groupKey, group]) => (
+    <div key={groupKey}>
+      <h5>{group[0].batchyear} {group[0].classtype}</h5>
+      {group.map((file) => (
+        <div key={file.originalFileName}>
+          <a
+            href={`http://localhost:5000/lecturernotes/download/${file.originalFileName}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {file.originalFileName}
+          </a>
+          <hr />
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
+
             </Row>
       
     

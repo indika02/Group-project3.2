@@ -1,3 +1,8 @@
 .uploaded-files a{
   text-align: left;
 }
+
+.uploaded-files h5{
+  font-weight: bold;
+  color: rgb(22, 3, 42);
+}

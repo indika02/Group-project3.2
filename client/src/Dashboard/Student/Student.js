@@ -115,21 +115,25 @@
                      <>{userProfiledata && userProfiledata.subject1 && (
                       <div className='subjects'>
                         <p>{userProfiledata?.subject1} {userProfiledata?.Lname1}</p>
+                        <h5>Notes</h5>
                       </div>
                     )}
                     {userProfiledata && userProfiledata.subject2 && (
                       <div className='subjects'>
                         <p>{userProfiledata?.subject2} {userProfiledata?.Lname2}</p>
+                        <h5>Notes</h5>
                       </div>
                     )}
                     {userProfiledata && userProfiledata.subject3 && (
                       <div className='subjects'>
                         <p>{userProfiledata?.subject3} {userProfiledata?.Lname3}</p>
+                        <h5>Notes</h5>
                       </div>
                     )}
                     {userProfiledata && userProfiledata.subject4 && (
                       <div className='subjects'>
                         <p>{userProfiledata?.subject4} {userProfiledata?.Lname4}</p>
+                        <h5>Notes</h5>
                       </div>
                     )}
                     
