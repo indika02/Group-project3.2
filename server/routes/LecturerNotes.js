@@ -62,15 +62,16 @@ router.post('/upload', (req, res) => {
   });
 
   // In your server.js or routes file
-router.get('/uploadedfiles', async (req, res) => {
-  try {
-    const uploadedFiles = await Lecnote.find({}, 'originalFileName');
-    res.status(200).json(uploadedFiles);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error fetching uploaded files' });
-  }
-});
+  router.get('/uploadedfiles', async (req, res) => {
+    try {
+      const uploadedFiles = await Lecnote.find();
+      res.status(200).json(uploadedFiles);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error fetching uploaded files' });
+    }
+  });
+  
 
   
 module.exports = router;
