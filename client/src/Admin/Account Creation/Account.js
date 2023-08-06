@@ -85,7 +85,9 @@ export default function Account() {
     return(
         <div className="Account">
                 <form onSubmit={sendData}>
-                <div className='form-group'>
+                  <Row>
+                    <Col>
+                    <div className='form-group'>
                     <label for="Index">Registration Number</label>
                     <input type='text' className='form-control' id='Index' placeholder="Enter the Registration Number" 
                      onChange={(e)=>{
@@ -93,8 +95,9 @@ export default function Account() {
                     }}
                     />
                 </div>
-                
-                <div className='form-group'>
+                    </Col>
+                    <Col>
+                    <div className='form-group'>
                     <label for="Index">Email Address</label>
                     <input type='text' className='form-control' id='email' placeholder="Enter the email Address" 
                      onChange={(e)=>{
@@ -102,7 +105,15 @@ export default function Account() {
                     }}
                     />
                 </div>
-                <button type="submit"  className="savebtn">Create</button>
+                <button type="submit"  className="btn btn-primary create">Create</button>
+                    </Col>
+                  
+                   
+                  </Row>
+                
+                
+                
+                
                 </form>
 
                 <div>

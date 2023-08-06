@@ -2,3 +2,9 @@ Table td{
     justify-content: center;
     text-align: center;
 }
+
+.timetablebtn{
+    border-radius: 0px;
+    width: 90px;
+    height: 40px;
+}

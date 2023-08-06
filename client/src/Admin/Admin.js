@@ -3,7 +3,7 @@ import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import './Admin.css';
-import { FaCalculator, FaCalendar, FaChartBar, FaCompass,FaPoll,FaSignOutAlt, FaUserEdit, FaUserPlus } from "react-icons/fa";
+import { FaCalculator, FaCalendar, FaChartBar, FaCompass,FaPoll,FaShieldAlt,FaSignOutAlt, FaUserEdit, FaUserPlus } from "react-icons/fa";
 import {Row,Col} from 'react-bootstrap';
 import { Table,Form} from 'react-bootstrap';
 import Timetable from './Timetable/Timetable';
@@ -57,28 +57,45 @@ export default function Admin ()  {
             <Nav.Item>
               <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="tab6"><FaShieldAlt/>Team </Nav.Link>
+            </Nav.Item>
           </Nav>
           <Tab.Content>
             <Tab.Pane eventKey="tab1" className='tab'>
+              <Container>
               <h4>Student Details</h4>
+             
               <StdDetails/>
               
+              </Container>
             </Tab.Pane>
             <Tab.Pane eventKey="tab2" className='tab'>
+              <Container>
               <h4>User Account Management</h4>
+              </Container>
               <Account/>
             </Tab.Pane>
             <Tab.Pane eventKey="tab3" className='tab'>
+              <Container>
               <h4>Timetable Management</h4>
+</Container>
               <Timetable/>
             </Tab.Pane>
             <Tab.Pane eventKey="tab4" className='tab'>
-              <h4>Exam Results</h4>
+              <Container>
+              <h4>Exam Results</h4></Container>
               <Results/>
             </Tab.Pane>
             <Tab.Pane eventKey="tab5" className='tab'>
-              <h4>Making Polls</h4>
+              <Container>
+              <h4>Making Polls</h4></Container>
               <PollingSystem/>
+            </Tab.Pane>
+            <Tab.Pane eventKey="tab6" className='tab'>
+              <Container>
+              <h4>TEAM</h4></Container>
+              
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>

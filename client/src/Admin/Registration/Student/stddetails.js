@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Table,Row,Col } from "react-bootstrap";
 import './stdreg.css';
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaUserAltSlash, FaUserPlus, FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "axios";
@@ -32,7 +32,7 @@ export default function StdDetails(){
         <div>
             <Container>
             <Link to="/stdRegForm" className="reg">
-             <button className="savebtn"><FaPlus/></button>
+             <button className="btn btn-success stdregbtn"><FaUserPlus/> Student Enrollment</button>
              </Link>
              <div>
           {loading ? (

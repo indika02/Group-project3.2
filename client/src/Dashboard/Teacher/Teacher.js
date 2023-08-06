@@ -196,8 +196,13 @@ const fetchUploadedFiles = async () => {
               <div className='form-group'>
                 <label htmlFor="class" className='class'>Class Type</label>
                 <select className="form-select form-control inputbox" aria-label="Default select example" onChange={(e) => setClasstype(e.target.value)}>
-                  <option value="O/L">O/L</option>
-                  <option value="A/L">A/L</option>
+                        <option value="grade06">Grade 06</option>
+                        <option value="grade07">Grade 07</option>
+                        <option value="grade08">Grade 08</option>
+                        <option value="grade09">Grade 09</option>
+                        <option value="grade10">Grade 10</option>
+                        <option value="grade11">Grade 11</option>
+                        <option value="A/L">A/L</option>
                 </select>
               </div>
             </Col>
@@ -205,6 +210,7 @@ const fetchUploadedFiles = async () => {
               <div className='form-group'>
                 <label htmlFor="batch" className='batch'>Batch Year</label>
                 <select className="form-select form-control" aria-label="Default select example" onChange={(e) => setBatchYear(e.target.value)}>
+                <option value="">None</option>
                   <option value="2023">2023</option>
                   <option value="2024">2024</option>
                   <option value="2025">2025</option>
