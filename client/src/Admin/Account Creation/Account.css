@@ -3,7 +3,7 @@
 }
 
 .account-table th{
-    background-color: green;
+    background-color: rgb(79, 29, 194);
 }
 .account-table .edituser{
     background-color: rgb(46, 105, 232);
@@ -21,4 +21,10 @@
     margin-left: 50px;
     border-style: none;
     color: white;
+}
+
+.create{
+    border-radius: 0px;
+    width: 90px;
+    height: 40px;
 }

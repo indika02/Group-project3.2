@@ -203,14 +203,19 @@ return (
                     }}
                     >
                         <option selected>Class type</option>
-                        <option value="O/L">O/L</option>
+                        <option value="grade06">Grade 06</option>
+                        <option value="grade07">Grade 07</option>
+                        <option value="grade08">Grade 08</option>
+                        <option value="grade09">Grade 09</option>
+                        <option value="grade10">Grade 10</option>
+                        <option value="grade11">Grade 11</option>
                         <option value="A/L">A/L</option>
                     </select>
                 </div>
                 </Col>
                 <Col>
                 <div className='form-group'>
-                    <label for="batch" className='batch'>Batch Year</label>
+                    <label for="batch" className='batch'>A/L Batch Year</label>
                     <select className="form-select form-control" aria-label="Default select example"
                     onChange={(e)=>{
                         setbatchYear(e.target.value);
@@ -220,6 +225,9 @@ return (
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>
                         <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
                     </select>
                 </div>
                 </Col>

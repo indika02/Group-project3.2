@@ -1,132 +1,120 @@
 import React, { useState } from 'react';
+import { Card, Form, Button, Container, Row, Col, ProgressBar } from 'react-bootstrap';
 
 function PollingSystem() {
   const [polls, setPolls] = useState([]);
-  const [selectedPoll, setSelectedPoll] = useState(null);
+  const [newQuestion, setNewQuestion] = useState('');
+  const [newOptions, setNewOptions] = useState(['', '']);
+  const [userVotes, setUserVotes] = useState({});
 
-  // Function to create a new poll
-  const createPoll = (question, options) => {
+  const handleAddOption = () => {
+    setNewOptions([...newOptions, '']);
+  };
+
+  const handleRemoveOption = (index) => {
+    const updatedOptions = newOptions.filter((_, i) => i !== index);
+    setNewOptions(updatedOptions);
+  };
+
+  const handleVote = (question, selectedOption) => {
+    setUserVotes({ ...userVotes, [question]: selectedOption });
+  };
+
+  const handleSubmit = () => {
     const newPoll = {
-      question,
-      options: options.map((option) => ({ text: option, votes: 0 })),
+      question: newQuestion,
+      options: newOptions.filter((option) => option.trim() !== ''),
+      votes: {},
     };
+
     setPolls([...polls, newPoll]);
-  };
-
-  // Function to handle voting
-  const handleVote = (pollIndex, optionIndex) => {
-    if (selectedPoll === null) {
-      setSelectedPoll(pollIndex);
-      const updatedPolls = polls.map((poll, index) => {
-        if (index === pollIndex) {
-          return {
-            ...poll,
-            options: poll.options.map((option, i) => {
-              if (i === optionIndex) {
-                return { ...option, votes: option.votes + 1 };
-              }
-              return option;
-            }),
-          };
-        }
-        return poll;
-      });
-      setPolls(updatedPolls);
-    }
-  };
-
-  // Function to add a new voting option to a poll
-  const addOption = (pollIndex, newOption) => {
-    const updatedPolls = polls.map((poll, index) => {
-      if (index === pollIndex) {
-        return {
-          ...poll,
-          options: [...poll.options, { text: newOption, votes: 0 }],
-        };
-      }
-      return poll;
-    });
-    setPolls(updatedPolls);
-  };
-
-  // Function to remove a voting option from a poll
-  const removeOption = (pollIndex, optionIndex) => {
-    const updatedPolls = polls.map((poll, index) => {
-      if (index === pollIndex) {
-        return {
-          ...poll,
-          options: poll.options.filter((option, i) => i !== optionIndex),
-        };
-      }
-      return poll;
-    });
-    setPolls(updatedPolls);
+    setNewQuestion('');
+    setNewOptions(['', '']);
   };
 
   return (
-    <div>
-      {/* Poll Creation Section */}
-      <div>
-        <h2>Create a New Poll</h2>
-        <input type="text" placeholder="Poll Question" />
-        {polls.map((poll, index) => (
-          <div key={index}>
-            <input type="text" placeholder={`Option ${index + 1}`} />
-            <button onClick={() => addOption(index, `Option ${poll.options.length + 1}`)}>Add Option</button>
-            {poll.options.map((option, optionIndex) => (
-              <div key={optionIndex}>
-                <label>
-                  <input
-                    type="radio"
-                    name={`poll-${index}`}
-                    onClick={() => handleVote(index, optionIndex)}
-                    disabled={selectedPoll !== null}
-                  />
-                  {option.text}
-                  {/* Add a button to remove this option */}
-                  <button onClick={() => removeOption(index, optionIndex)}>Remove Option</button>
-                </label>
-              </div>
-            ))}
-          </div>
+    <Container>
+      <h1>Polling and Voting System</h1>
+      <Form>
+        <Form.Group controlId="newQuestion">
+          <Form.Label>New Question:</Form.Label>
+          <Form.Control
+            type="text"
+            value={newQuestion}
+            onChange={(e) => setNewQuestion(e.target.value)}
+          />
+        </Form.Group>
+        {newOptions.map((option, index) => (
+          <Form.Group key={index} controlId={`newOption${index}`}>
+            <Form.Label>Option {index + 1}:</Form.Label>
+            <Row>
+              <Col sm={10}>
+                <Form.Control
+                  type="text"
+                  value={option}
+                  onChange={(e) => {
+                    const updatedOptions = [...newOptions];
+                    updatedOptions[index] = e.target.value;
+                    setNewOptions(updatedOptions);
+                  }}
+                />
+              </Col>
+              <Col sm={2}>
+                {index > 1 && (
+                  <Button
+                    variant="danger"
+                    onClick={() => handleRemoveOption(index)}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </Col>
+            </Row>
+          </Form.Group>
         ))}
-        {/* Add more input fields for additional polls */}
-        <button onClick={() => createPoll('Your Question', ['Option 1', 'Option 2'])}>Create Poll</button>
-      </div>
-
-      {/* Poll Voting Section */}
-      <div>
-        {polls.map((poll, index) => (
-          <div key={index}>
-            <h3>{poll.question}</h3>
-            {poll.options.map((option, optionIndex) => (
-              <div key={optionIndex}>
-                <label>
-                  <input
-                    type="radio"
-                    name={`poll-${index}`}
-                    onClick={() => handleVote(index, optionIndex)}
-                    disabled={selectedPoll !== null}
-                  />
-                  {option.text}
-                </label>
-              </div>
-            ))}
-            {selectedPoll === index && (
+        <Button variant="secondary" onClick={handleAddOption}>
+          Add Option
+        </Button>
+        <Button variant="primary" onClick={handleSubmit}>
+          Add Poll
+        </Button>
+      </Form>
+      {polls.map((poll, pollIndex) => (
+        <Card key={pollIndex} className="mt-4">
+          <Card.Body>
+            <Card.Title>{poll.question}</Card.Title>
+            <Form>
+              {poll.options.map((option, optionIndex) => (
+                <Form.Check
+                  key={optionIndex}
+                  type="radio"
+                  label={option}
+                  checked={userVotes[poll.question] === option}
+                  onChange={() => handleVote(poll.question, option)}
+                />
+              ))}
+            </Form>
+            {userVotes[poll.question] && (
               <div>
-                <p>Votes:</p>
-                {poll.options.map((option, optionIndex) => (
-                  <div key={optionIndex}>
-                    <p>{option.text}</p>
-                    <progress value={option.votes} max={poll.options.length}></progress>
-                  </div>
-                ))}
+                <h5>Your Vote: {userVotes[poll.question]}</h5>
+                <ProgressBar
+                  now={
+                    (poll.votes[userVotes[poll.question]] || 0) /
+                    Object.values(poll.votes).reduce((sum, voteCount) => sum + voteCount, 0) *
+                    100
+                  }
+                  label={`${Math.round(
+                    ((poll.votes[userVotes[poll.question]] || 0) /
+                      Object.values(poll.votes).reduce((sum, voteCount) => sum + voteCount, 0)) *
+                      100
+                  )}%`}
+                />
               </div>
             )}
-          </div>
-        ))}
-      </div>
-    </div>
+          </Card.Body>
+        </Card>
+      ))}
+    </Container>
   );
 }
 

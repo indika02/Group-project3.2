@@ -167,8 +167,14 @@
                   onChange={(e) => setClassType(e.target.value)}
                   required
                 >
-                  <option value="O/L">O/L</option>
-                  <option value="A/L">A/L</option>
+                  <option selected>Class type</option>
+                        <option value="grade06">Grade 06</option>
+                        <option value="grade07">Grade 07</option>
+                        <option value="grade08">Grade 08</option>
+                        <option value="grade09">Grade 09</option>
+                        <option value="grade10">Grade 10</option>
+                        <option value="grade11">Grade 11</option>
+                        <option value="A/L">A/L</option>
                 </Form.Select>
               </Form.Group>
             </Col>
@@ -186,7 +192,7 @@
             </Col>
             <Col>
             <Form.Group controlId="batch" className="mb-3">
-                <Form.Label>Batch Year</Form.Label>
+                <Form.Label>A/L Batch Year</Form.Label>
                 <Form.Select
                   onChange={(e) => setbatchYear(e.target.value)}
                   required
@@ -202,7 +208,7 @@
             </Col>
           </Row>
 
-          <button className="savebtn" type="submit">Save</button>
+          <button className="btn btn-success timetablebtn" type="submit">Save</button>
         </Form>
 
         <Container>
