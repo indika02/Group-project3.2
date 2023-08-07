@@ -15,12 +15,12 @@ import Results from './Results/Results';
 import PollingSystem from './Polling/PollingSystem';
 import { useUser } from '../UserContext';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Admin ()  {
-    const { user } = useUser();
-  const {email}=useParams();
+  const user = useSelector(state => state.auth.user); 
 
-  const userEmail = user?.email;
+
   return (
     <div className="AdminPanal">
        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">

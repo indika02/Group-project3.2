@@ -15,8 +15,8 @@ import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
 import ProfilePage from './Admin/Profile';
-import { UserProvider } from './UserContext';
 import Profilepage from './Dashboard/Profilepage';
+import LoggedAccount from './Dashboard/Qrcodescanner/Scanner';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -26,7 +26,7 @@ function App() {
   }, []);
 
   return (
-    <UserProvider>
+   
     <div>
       {isLoading ? (
         <div className="loading-spinner">
@@ -40,7 +40,7 @@ function App() {
             <Route path="/lecturer" element={<Lecturer />} />
             <Route path="/timetable" element={<Timetable />} />
             <Route path="/contactus" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login/>} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/student" element={<Student />} />
             <Route path="/teacher" element={<Teacher />} />
@@ -53,7 +53,7 @@ function App() {
         </BrowserRouter>
       )}
     </div>
-    </UserProvider>
+    
   );
 }
 
