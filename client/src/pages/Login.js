@@ -8,13 +8,14 @@ import "./Login.css";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser } from '../features/actions';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useUser();
-
+  const dispatch = useDispatch();
   const onLogin = async () => {
     const credentials = {
       email,
@@ -23,7 +24,12 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5000/account/login", credentials);
-      setUser(response.data);
+      // After dispatching login success action
+dispatch(loginUser(response.data));
+localStorage.setItem('user', JSON.stringify(response.data));
+
+      
+      console.log(loginUser(response.data))
       if (response.data.usertype === "teacher") {
         navigate(`/teacher`);
       } else if (response.data.usertype === "student") {

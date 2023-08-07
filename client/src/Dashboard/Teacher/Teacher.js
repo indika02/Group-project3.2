@@ -9,12 +9,10 @@ import { FaChartBar,FaFileAlt, FaPoll, FaUser } from 'react-icons/fa';
 import Results from '../../Admin/Results/Results';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-
+import { useSelector } from 'react-redux';
 
 export default function Teacher() {
-  const { email } = useParams();
-  const { user } = useUser();
+  const user = useSelector(state => state.auth.user);
   const [userProfile, setUserProfile] = useState(null);
   const [stdDetails, setStdDetails] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,19 +24,19 @@ export default function Teacher() {
   const[originalFileName,setoriginalFileName]=useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  
 
 
 
-  const userEmail = user?.email;
-  const userName = user?.name;
+  const userName = user.name;
 
   useEffect(() => {
-    fetchUserProfile(email);
+    fetchUserProfile(user.email);
     fetchUploadedFiles();
     if (user?.name) {
       fetchStdDetails(user.name);
     }
-  }, [email, user.name]);
+  }, [user.email, user.name]);
 
   const fetchUserProfile = (email) => {
     fetch(`http://localhost:5000/account/${email}`)
@@ -116,7 +114,7 @@ export default function Teacher() {
     console.log('File uploaded successfully. Response:', uploadResponse.data);
 
     const dataToSave = {
-      originalFileName: uploadedFile.name, // Get the original file name from uploadedFile object
+      originalFileName: uploadedFile.name,
       classtype,
       batchyear,
       Lname: userName,
@@ -152,7 +150,7 @@ const fetchUploadedFiles = async () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
             <Nav>
-              <NavDropdown title={userEmail} id="login-dropdown">
+              <NavDropdown title={user.email} id="login-dropdown">
                 <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
@@ -271,7 +269,7 @@ const fetchUploadedFiles = async () => {
 <h1>Student details</h1>
             <Container>
               <div className="search-bar">
-                
+               
                 <Form>
                   <Row>
                     <Col>
@@ -304,9 +302,9 @@ const fetchUploadedFiles = async () => {
                     </Col>
                   </Row>
                   
-                 
-                </Form>
-              
+                  </Form>
+                
+            <div>
               {loading ? (
                 <div>Loading...</div>
               ) : (
@@ -338,8 +336,9 @@ const fetchUploadedFiles = async () => {
                     </tbody>
                   </Table>
                 </>
-              )}
-              </div>
+                )}
+                </div>
+            </div>
             </Container>
           </Tab.Pane>
           </Tab.Content>
