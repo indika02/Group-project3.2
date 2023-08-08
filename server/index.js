@@ -31,21 +31,14 @@ const timetableRouter=require("./routes/Timetable");
 const SubjectRouter=require("./routes/Subject");
 const AccountRouter=require("./routes/Account");
 const Results=require("./routes/ExamResults");
-const Contactus=require("./routes/Contactus");
 const LecturerNotes=require("./routes/LecturerNotes");
 const fileUpload = require("express-fileupload");
 
-app.use(bodyParser.json({ limit: '50mb' })); // Adjust limit as needed
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); 
-app.use(fileUpload({
-    limits: { fileSize: 50 * 1024 * 1024 }, // Set the limit to 50MB (adjust as needed)
-  }));
 app.use("/user",userRouter)
 app.use("/timetable",timetableRouter);
 app.use("/subject",SubjectRouter);
 app.use("/account",AccountRouter);
 app.use("/results",Results);
-app.use("/contactus",Contactus);
 app.use("/lecturernotes",LecturerNotes);
 
 

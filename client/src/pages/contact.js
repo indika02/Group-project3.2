@@ -1,77 +1,53 @@
-    import React from 'react';
+    import React,{ useRef } from 'react';
     import Row from 'react-bootstrap/esm/Row';
     import Col from 'react-bootstrap/esm/Col';
     import './contact.css';
-import Footer from '../components/Footer';
-import NavBar from '../components/navBar';
-import ScrollRevealContainer from '../components/ScrollRevealComponent';
-import { useState } from 'react';
-import swal from 'sweetalert';
-import axios from 'axios';
+    import Footer from '../components/Footer';
+    import NavBar from '../components/navBar';
+    import swal from 'sweetalert';
 
+import emailjs from '@emailjs/browser';
 
-    const Contact = () => {
-      const [name,setName]=useState("");
-      const[email,setEmail]=useState("");
-      const[contactno,setContactNo]=useState("");
-      const[message,setMessage]=useState("");
+export const ContactUs = () => {
+  const form = useRef();
 
-      
-    function sendData(e){
-      e.preventDefault();
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-      if (
-          !name ||
-          !email ||
-          !message
-        ) {
-          swal("Error!", "Please fill in all the fields!", "error");
-          return;
-        }
-
+    emailjs.sendForm('service_y0rq4al', 'template_6zv0hmr', form.current, 'fmC-MjlKeVkS9u0HH')
+      .then((result) => {
+        swal("Success", "Your message sent!", "success");
+          console.log(result.text);
+          
+      }, (error) => {
+        swal("Error", "Invalid input!", "error");
+          console.log(error.text);
         
-      const newContactus={
-          name,
-         email,
-         contactno,
-         message,
-      }
-      
-      console.log(newContactus);
-      axios.post("http://localhost:5000/contactus/add",newContactus).then(()=>{
-         swal("Success", "Your message sent!", "success");
-      }).catch((err)=>{
-          swal("Error", "Invalid input!", "error");
-      })
-  }
+      });
+
+      e.target.reset();
+  };
+        
       return (
         <div>
           <NavBar/>
           <Row className='row-contactus'>
           <Col>
-          <form onSubmit={sendData}>
+          <form ref={form} onSubmit={sendEmail}>
           <h3>Send your Suggestions,inquiries and Feedback</h3>
           <p>Your email address will not be published.</p>
           
             <input type='text' name='Name' id='' placeholder='Enter Your Name'  
-            onChange={(e)=>{
-                        setName(e.target.value);
-                    }}/>
-            <input type='email' name='Email' id='' placeholder='example@gmail.com' 
-            onChange={(e)=>{
-                        setEmail(e.target.value);
-                    }}/>
-            <input type='phone' name='Contact No' id='' placeholder='+94'
-            onChange={(e)=>{
-              setContactNo(e.target.value);
-          }}
-            />
-          <textarea name='message' id='' cols="30" rows="4" placeholder='Type Here.......'
-          onChange={(e)=>{
-            setMessage(e.target.value);
-        }}
           />
-          <button type='submit' className='sendm'>Send</button>
+            <input type='email' name='Email' id='' placeholder='example@gmail.com' 
+           />
+            <input type='phone' name='Contactno' id='' placeholder='+94'
+            
+            />
+          <textarea name='Message' id='' cols="30" rows="4" placeholder='Type Here.......'
+        
+          />
+          <button type='submit' value='Send' className='sendm'>Send</button>
           </form> 
           </Col>
           </Row>
@@ -81,4 +57,4 @@ import axios from 'axios';
       );
     }
 
-    export default Contact;
+    export default ContactUs;
