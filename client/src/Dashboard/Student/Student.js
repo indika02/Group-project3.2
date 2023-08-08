@@ -8,28 +8,30 @@
           import { FaChartBar,FaVoteYea } from 'react-icons/fa';
           import { Link } from 'react-router-dom';
           import axios from 'axios';
-          import { useSelector } from 'react-redux';
+          import { useSelector,useDispatch } from 'react-redux';
+          import { setUserProfileData } from '../../features/actions';
 
           function Student() {
             const user = useSelector(state => state.auth.user);
-
-              //const userEmail = user?.email;
-
+            const userProfiledata = useSelector(state => state.userProfile.userProfiledata);
+            console.log('userProfiledata:', userProfiledata);
+    
+            const dispatch = useDispatch();
               const [userProfile,setUserProfile]=useState(null);
-              const[userProfiledata,setUserProfiledata]=useState(null);
               const [examResults, setExamResults] = useState([]);
               const [uploadedFiles, setUploadedFiles] = useState([]);
-              const[file,setFile]=useState([]);
+
 
               
               
-
               useEffect(() => {
-                fetchUserProfile(user.email);
-                fetchUserProfiledata(user.email);
-                fetchExamResults(user?.index);
-                fetchUploadedFiles();
-              }, [user.email, user?.index]);
+                if (user?.email && user?.index) {
+                  fetchUserProfile(user.email);
+                  fetchUserProfiledata(user.email);
+                  fetchExamResults(user.index);
+                  fetchUploadedFiles();
+                }
+              }, [user.email, user.index]);
               
 
               const fetchUserProfile = (email)=>{
@@ -49,19 +51,21 @@
                 });
               };
 
-              const fetchUserProfiledata = (email)=>{
-                fetch(`http://localhost:5000/user/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
-                  setUserProfiledata(data);
-                  console.log(data);
-                }).catch((error)=>{
-                  console.log("Error fetching user data",error);
-                });
+              const fetchUserProfiledata = (email) => {
+                fetch(`http://localhost:5000/user/userdetail/${email}`)
+                  .then((response) => response.json())
+                  .then((data) => {
+                    // Assuming your action creator setUserProfileData is defined and imported correctly
+                    dispatch(setUserProfileData(data));
+                    console.log("User Profile Data:", data);
+                  })
+                  .catch((error) => {
+                    console.log("Error fetching user data", error);
+                  });
               };
-          const Lename1=userProfiledata?.Lname1;
-          const Lename2=userProfiledata?.Lname2;
-          const Lename3=userProfiledata?.Lname3;
-          const Lename4=userProfiledata?.Lname4;
-          console.log(Lename1)
+              
+              
+       
               const handleDownloadQRCode = () => {
       
                 const downloadLink = document.createElement('a');
@@ -78,9 +82,12 @@
               
                   const matchingFiles = allUploadedFiles.filter((file) => {
                     const hasMatchingLname = [
-                      Lename1,Lename2,Lename3,Lename4
-                    ].some((lname) => lname === file.Lname);
-          console.log(hasMatchingLname)
+                      userProfiledata?.Lname1,
+                      userProfiledata?.Lname2,
+                      userProfiledata?.Lname3,
+                      userProfiledata?.Lname4,
+                    ].includes(file.Lname);
+              
                     const hasMatchingClassType = userProfiledata?.classtype === file.classtype;
                     const hasMatchingBatchYear = userProfiledata?.batchyear === file.batchyear;
               
@@ -93,6 +100,7 @@
                   console.error('Error fetching uploaded files:', error);
                 }
               };
+              
             return (
               <div>
               <Row>
@@ -219,7 +227,7 @@
             >
               {file.originalFileName}
             </a>
-            <hr />
+            
           </div>
         );
       }
