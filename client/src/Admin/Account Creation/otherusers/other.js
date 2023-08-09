@@ -1,6 +1,6 @@
 import React from "react";
 import{ Row,Col} from 'react-bootstrap';
-import './Account.css';
+import './other.css';
 import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
@@ -8,16 +8,15 @@ import bcrypt from 'bcryptjs';
 import { Container, Table } from "react-bootstrap";
 import { FaEdit, FaRecycle, FaRemoveFormat, FaTrash } from "react-icons/fa";
 
-export default function Account() {
+export default function OtherAccount() {
 
-    const[index,setIndex]=useState("");
     const[name,setName]=useState("");
     const[email,setEmail]=useState("");
     const[dpwd,setDpwd]=useState("1234");
     const[accountstate,setAccountStatus]=useState("active");
-    const[usertype,setUsertype]=useState("student");
+    const[usertype,setUsertype]=useState("");
     const [Accountdetails, setAccountdetails] = useState([]);
-  const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -29,7 +28,7 @@ export default function Account() {
         try {
           const response = await axios.get("http://localhost:5000/account");
           const filteredAccounts = response.data.filter(
-            (studentdetail) => studentdetail.usertype === "student"
+            (accountdetail) => ["teacher", "admin", "generaladmin", "attendancemarker"].includes(accountdetail.usertype)
           );
         
           setAccountdetails(filteredAccounts);
@@ -54,14 +53,13 @@ export default function Account() {
         const encryptedPassword = await encryptPassword(dpwd);
 
         const newAccount={
-            index,
+            name,
             email,
             usertype,
             accountstate,
             dpwd: encryptedPassword,    
             
         }
-     
         
         console.log(newAccount);
         axios.post("http://localhost:5000/account/add",newAccount).then(()=>{
@@ -70,6 +68,7 @@ export default function Account() {
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
         })
+
         e.target.reset();
     }
 
@@ -90,10 +89,10 @@ export default function Account() {
                   <Row>
                     <Col>
                     <div className='form-group'>
-                    <label for="Index">Registration Number</label>
-                    <input type='text' className='form-control' id='Index' placeholder="Enter the Registration Number" 
+                    <label for="Index">Name</label>
+                    <input type='text' className='form-control' id='Name' placeholder="Enter the Name" 
                      onChange={(e)=>{
-                        setIndex(e.target.value);
+                        setName(e.target.value);
                     }}
                     />
                 </div>
@@ -107,10 +106,25 @@ export default function Account() {
                     }}
                     />
                 </div>
-                <button type="submit"  className="btn btn-primary create">Create</button>
+               
+                    </Col>
+                    <Col>
+                    <div className='form-group'>
+                    <label for="type" className='accounttype'>Type</label>
+                    <select className="form-select form-control" aria-label="Default select example"
+                    onChange={(e)=>{
+                        setUsertype(e.target.value);
+                    }}
+                    >
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                        <option value="generaladmin">General Admin</option>
+                        <option value="attendancemarker">Attendance Marker</option>
+                    </select>
+                </div>
                     </Col>
                   
-                   
+                    <button type="submit"  className="btn btn-primary acccreate">Create</button>
                   </Row>
                 
                 
@@ -129,16 +143,18 @@ export default function Account() {
                 <Table striped bordered hover className="table table-sm account-table">
                   <thead>
                     <tr>
-                      <th>Enrollement No</th>
+                      <th>Name</th>
                       <th>Email</th>
+                      <th>Type</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Accountdetails.map((account) => (
                       <tr key={account._id}>
-                        <td>{account.index}</td>
+                        <td>{account.name}</td>
                         <td>{account.email}</td>
+                        <td>{account.usertype}</td>
                         <button className="deluser" onClick={() => handleDelete(account._id)}><FaTrash/></button>
                       </tr>
                     ))}

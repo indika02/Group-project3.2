@@ -16,6 +16,7 @@ import PollingSystem from './Polling/PollingSystem';
 import { useUser } from '../UserContext';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import OtherAccount from './Account Creation/otherusers/other';
 
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
@@ -94,7 +95,10 @@ export default function Admin ()  {
             </Tab.Pane>
             <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
-              <h4>TEAM</h4></Container>
+              <h4>TEAM</h4>
+              <h5>User Accounts</h5>
+              <OtherAccount/>
+              </Container>
               
             </Tab.Pane>
           </Tab.Content>

@@ -75,6 +75,7 @@
       setClassType("");
       setbatchYear("");
       setType("");
+      
     };
     const handleDelete = async (id) => {
       try {

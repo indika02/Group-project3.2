@@ -5,23 +5,23 @@
   import './profilepage.css';
   import { useState,useEffect } from "react";
   import swal from "sweetalert";
+  import { useSelector,useDispatch } from 'react-redux';
+  import { setUserProfileData } from '../features/actions';
 
 
 
 
 
   export default function Profilepage(){
-    const {email}=useParams();
-    const { user } = useUser();
-
+    const user = useSelector(state => state.auth.user);
   
-    const userEmail = user?.email;
+    const dispatch = useDispatch();
     const [userProfile,setUserProfile]=useState(null);
     const [updatedProfile, setUpdatedProfile] = useState(null);
     
     useEffect(() => {
-      fetchUserProfile(userEmail);
-    }, [email, user?.index]);
+      fetchUserProfile(user.email);
+    }, [user.email, user?.index]);
     
 
     const fetchUserProfile = (email)=>{
@@ -38,7 +38,7 @@
     const handleFormSubmit = (e) => {
       e.preventDefault();
 
-      fetch(`http://localhost:5000/user/update/${userEmail}`, {
+      fetch(`http://localhost:5000/user/update/${user.email}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

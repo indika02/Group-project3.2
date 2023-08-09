@@ -66,6 +66,8 @@ export default function StdRegform() {
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
         })
+
+        e.target.reset();
     }
 
     useEffect(()=>{

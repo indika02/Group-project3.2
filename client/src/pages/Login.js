@@ -12,13 +12,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../features/actions';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [emailOrIndex, setEmailOrIndex] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onLogin = async () => {
     const credentials = {
-      email,
+      emailOrIndex,
       password,
     };
 
@@ -63,10 +63,10 @@ localStorage.setItem('user', JSON.stringify(response.data));
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              type="email"
-              placeholder="Enter email"
+              type="text"
+              placeholder="Enter email or Index Number"
               className="input"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmailOrIndex(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">

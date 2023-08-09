@@ -28,7 +28,7 @@ export default function Subject(){
         <div>
               <Container>
             <Link to="/Addsub" className="reg">
-             <button className="savebtn"><FaPlus/></button>
+             <button className=" btn btn-success savesubbtn"><FaPlus/></button>
              </Link>
              <div>
           {loading ? (
