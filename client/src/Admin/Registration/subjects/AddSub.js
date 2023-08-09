@@ -26,6 +26,8 @@ export default function Addsub(){
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
         })
+
+        e.target.reset();
     }
     return(
         <div className="subjects">

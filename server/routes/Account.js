@@ -6,9 +6,12 @@ router.route("/add").post(async (req, res) => {
   const { index, name,email, usertype, dpwd, accountstate } = req.body;
 
   try {
-    const existingAccount = await Account.findOne({ index });
+    const existingAccount = await Account.findOne({
+      $or: [{ index }, { email }]
+    });
+    
     if (existingAccount) {
-      return res.status(400).json({ error: 'Index number already exists' });
+      return res.status(400).json({ error: 'Index number or email already exists' });
     }
 
     const newAccount = new Account({
@@ -53,9 +56,13 @@ router.route("/:email").get((req, res) => {
 
 
 router.post("/login", (req, res) => {
-  const { email, password } = req.body;
+  const { emailOrIndex, password } = req.body;
 
-  Account.findOne({ email })
+  // Determine if input is an email or an index
+  const isEmail = emailOrIndex.includes("@");
+  const query = isEmail ? { email: emailOrIndex } : { index: emailOrIndex };
+
+  Account.findOne(query)
     .then((account) => {
       if (!account) {
         return res.status(404).json({ message: "User not found" });
@@ -70,11 +77,17 @@ router.post("/login", (req, res) => {
           return res.status(401).json({ message: "Incorrect password" });
         }
 
-        res.json(account); // return the account object or desired data as JSON
+        // Assuming 'index' is a property of the Account model
+        const { index, ...accountData } = account.toObject();
+
+        res.json({ index, ...accountData }); // Return account index and other data as JSON
       });
     })
     .catch((err) => res.status(400).json({ message: "Could not login user", err }));
 });
+
+module.exports = router;
+
 
 router.route("/").get((req, res) => {
   Account.find()

@@ -1,0 +1,16 @@
+/* QRCodeScanner.css */
+.scanner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; 
+    margin: 20px;/* Ensure full viewport height */
+  }
+  
+  .video-element {
+    width: 100%;
+    max-width: 400px; /* Adjust maximum width for responsiveness */
+    height: auto; /* Maintain aspect ratio */
+  }
+  

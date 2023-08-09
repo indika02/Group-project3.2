@@ -45,6 +45,7 @@ export default function TeaReg() {
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
         })
+        e.target.reset();
     }
     return(
         <div className='TeaReg'>

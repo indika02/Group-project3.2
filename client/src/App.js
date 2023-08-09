@@ -47,7 +47,6 @@ function App() {
             <Route path="/stdRegForm" element={<StdRegform />} />
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
-            
             <Route path='/profilepage' element={<Profilepage/>}/>
           </Routes>
         </BrowserRouter>
