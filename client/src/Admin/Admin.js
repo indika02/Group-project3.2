@@ -98,6 +98,8 @@ export default function Admin ()  {
               <h4>TEAM</h4>
               <h5>User Accounts</h5>
               <OtherAccount/>
+              <h5>Subject Details</h5>
+              <Subject/>
               </Container>
               
             </Tab.Pane>

@@ -77,7 +77,7 @@
               };
               const fetchUploadedFiles = async () => {
                 try {
-                  const response = await axios.get('http://localhost:5000/lecturernotes/uploadedfiles');
+                  const response = await axios.get('http://localhost:5000/lecturernotes/uploadedfile');
                   const allUploadedFiles = response.data;
               
                   const matchingFiles = allUploadedFiles.filter((file) => {
@@ -153,7 +153,7 @@
                       {userProfiledata && (
                         <>{userProfiledata && userProfiledata.subject1 && (
                           <div className='subjects'>
-                            <p>{userProfiledata?.subject1} {userProfiledata?.Lname1}</p>
+                            <p>{userProfiledata?.subject1}- {userProfiledata?.Lname1}</p>
                             <h5>Notes</h5>
                             <div className='uploaded-files'>
     {uploadedFiles.map((file) => {

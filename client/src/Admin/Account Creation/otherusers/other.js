@@ -67,6 +67,7 @@ export default function OtherAccount() {
            fetchAccountDetails();
         }).catch((err)=>{
             swal("Error", "Invalid Data Input!", "error");
+            console.log(err)
         })
 
         e.target.reset();

@@ -59,7 +59,7 @@ localStorage.setItem('user', JSON.stringify(response.data));
       <Container>
         <Form>
           {/* <img src={logo} alt="Logo" fluid /> */}
-          <h4>Login to Our LMS</h4>
+          <h4>Sign In</h4>
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control

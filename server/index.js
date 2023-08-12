@@ -40,6 +40,7 @@ app.use("/subject",SubjectRouter);
 app.use("/account",AccountRouter);
 app.use("/results",Results);
 app.use("/lecturernotes",LecturerNotes);
+app.use(fileUpload());
 
 
 app.listen(PORT,()=>{

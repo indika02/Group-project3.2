@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const fileUpload = require('express-fileupload');
 const Lecnote = require('../models/LecturerNotes');
  
+router.use(fileUpload());
+
 router.post('/upload', (req, res) => {
     if (!req.files || !req.files.file) {
       return res.status(400).json({ msg: 'No file uploaded' });
@@ -31,7 +34,7 @@ router.post('/upload', (req, res) => {
         originalFileName,
         classtype,
         batchyear,
-       Lname
+        Lname
       });
   
       await newnote.save();
@@ -61,10 +64,11 @@ router.post('/upload', (req, res) => {
     });
   });
 
-  // In your server.js or routes file
-  router.get('/uploadedfiles', async (req, res) => {
+
+  router.get('/uploadedfiles/:Lname', async (req, res) => {
     try {
-      const uploadedFiles = await Lecnote.find();
+      const Lname = req.params.Lname; 
+      const uploadedFiles = await Lecnote.find({ Lname }); 
       res.status(200).json(uploadedFiles);
     } catch (error) {
       console.error(error);
@@ -72,6 +76,15 @@ router.post('/upload', (req, res) => {
     }
   });
   
-
+  
+  router.get('/uploadedfile', async (req, res) => {
+    try {
+      const uploadedFiles = await Lecnote.find();
+      res.status(200).json(uploadedFiles);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error fetching uploaded files' });
+    }
+  }); 
   
 module.exports = router;
