@@ -3,17 +3,9 @@ const router = require("express").Router();
 const Account = require("../models/Account");
 
 router.route("/add").post(async (req, res) => {
-  const { index, name,email, usertype, dpwd, accountstate } = req.body;
+  const { index, name, email, usertype, dpwd, accountstate } = req.body;
 
   try {
-    const existingAccount = await Account.findOne({
-      $or: [{ index }, { email }]
-    });
-    
-    if (existingAccount) {
-      return res.status(400).json({ error: 'Index number or email already exists' });
-    }
-
     const newAccount = new Account({
       index,
       name,
@@ -31,6 +23,7 @@ router.route("/add").post(async (req, res) => {
     res.status(500).json({ error: 'Error!' });
   }
 });
+
 
 router.route("/:email").get((req, res) => {
   const userEmail = req.params.email;
@@ -77,10 +70,10 @@ router.post("/login", (req, res) => {
           return res.status(401).json({ message: "Incorrect password" });
         }
 
-        // Assuming 'index' is a property of the Account model
+        
         const { index, ...accountData } = account.toObject();
 
-        res.json({ index, ...accountData }); // Return account index and other data as JSON
+        res.json({ index, ...accountData }); 
       });
     })
     .catch((err) => res.status(400).json({ message: "Could not login user", err }));

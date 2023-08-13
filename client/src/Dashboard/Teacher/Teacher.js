@@ -32,7 +32,7 @@ export default function Teacher() {
 
   useEffect(() => {
     fetchUserProfile(user.email);
-    fetchUploadedFiles();
+    fetchUploadedFiles(user.email);
     if (user?.name) {
       fetchStdDetails(user.name);
     }
@@ -122,6 +122,7 @@ export default function Teacher() {
 
     await axios.post('http://localhost:5000/lecturernotes/add', dataToSave);
     console.log('Data saved successfully!', dataToSave);
+    
 
     setUploadedFiles([...uploadedFiles, uploadResponse.data]);
 
@@ -133,14 +134,18 @@ export default function Teacher() {
   }
 };
 
-const fetchUploadedFiles = async () => {
-  try {
-    const response = await axios.get('http://localhost:5000/lecturernotes/uploadedfiles');
-    setUploadedFiles(response.data);
-  } catch (error) {
-    console.error('Error fetching uploaded files:', error);
-  }
+const fetchUploadedFiles = () => {
+  axios.get(`http://localhost:5000/lecturernotes/uploadedfiles/${user.name}`)
+    .then(response => {
+      setUploadedFiles(response.data);
+      console.log(user.name);
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.error('Error fetching uploaded files:', error);
+    });
 };
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
