@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 const URL=process.env.MONGO_URI;
 
 mongoose.connect(URL,{
-    // userCreateIndex:true,
+     //userCreateIndex:true,
     useNewUrlParser:true,
-    // useUnifiedTopologyL:true,
-    // useFindAndModify:false
+    //useUnifiedTopologyL:true,
+    //useFindAndModify:false
 });
 
 const connection=mongoose.connection;

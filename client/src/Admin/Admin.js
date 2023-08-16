@@ -47,59 +47,67 @@ export default function Admin ()  {
               <Nav.Link eventKey="tab1"><FaCompass/> Dashboard</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab2"><FaUserEdit/> User Accounts</Nav.Link>
+              <Nav.Link eventKey="tab2"><FaUserPlus/>Students Details</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab3"><FaCalendar/> Timetable</Nav.Link>
+              <Nav.Link eventKey="tab3"><FaUserEdit/> User Accounts</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab4"><FaChartBar/> Exam Results</Nav.Link>
+              <Nav.Link eventKey="tab4"><FaCalendar/> Timetable</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
+              <Nav.Link eventKey="tab5"><FaChartBar/> Exam Results</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab6"><FaShieldAlt/>Team </Nav.Link>
+              <Nav.Link eventKey="tab6"><FaPoll/>Making Polls</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="tab7"><FaShieldAlt/>Team </Nav.Link>
             </Nav.Item>
           </Nav>
           <Tab.Content>
-            <Tab.Pane eventKey="tab1" className='tab'>
+          <Tab.Pane eventKey="tab1" className='tab'>
+          <Container>
+          <h4>Subject and Lecturer Details</h4>
+          <Subject/>
+          </Container>
+        </Tab.Pane>
+            <Tab.Pane eventKey="tab2" className='tab'>
               <Container>
               <h4>Student Details</h4>
-             
-              <StdDetails/>
+             <StdDetails/>
+          
               
               </Container>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab2" className='tab'>
+            <Tab.Pane eventKey="tab3" className='tab'>
               <Container>
-              <h4>User Account Management</h4>
+              <h4>Students  User Account Management</h4>
               </Container>
               <Account/>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab3" className='tab'>
+            <Tab.Pane eventKey="tab4" className='tab'>
               <Container>
               <h4>Timetable Management</h4>
 </Container>
               <Timetable/>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab4" className='tab'>
+            <Tab.Pane eventKey="tab5" className='tab'>
               <Container>
               <h4>Exam Results</h4></Container>
               <Results/>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab5" className='tab'>
+            <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>Making Polls</h4></Container>
               <PollingSystem/>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab6" className='tab'>
+            <Tab.Pane eventKey="tab7" className='tab'>
               <Container>
               <h4>TEAM</h4>
               <h5>User Accounts</h5>
               <OtherAccount/>
-              <h5>Subject Details</h5>
-              <Subject/>
+              
               </Container>
               
             </Tab.Pane>

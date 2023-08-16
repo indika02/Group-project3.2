@@ -24,7 +24,7 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5000/account/login", credentials);
-      // After dispatching login success action
+      
 dispatch(loginUser(response.data));
 localStorage.setItem('user', JSON.stringify(response.data));
 
@@ -36,6 +36,8 @@ localStorage.setItem('user', JSON.stringify(response.data));
         navigate(`/student`);
       } else if (response.data.usertype === "admin") {
         navigate(`/admin`);
+      }else if(response.data.usertype==="attendancemarker"){
+        navigate(`/qrcodescanner`);
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
