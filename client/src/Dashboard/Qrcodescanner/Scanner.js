@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserMultiFormatReader } from '@zxing/library';
 import './Scanner.css'; // Import custom CSS for styling
+import swal from 'sweetalert'; // Import SweetAlert library
 
 const QRCodeScanner = () => {
   const [result, setResult] = useState('');
@@ -9,11 +10,16 @@ const QRCodeScanner = () => {
   const handleScan = (result) => {
     if (result) {
       setResult(result.text);
+      showQRCodeDetectedAlert(result.text); // Show SweetAlert when QR code is detected
     }
   };
 
   const handleError = (error) => {
     console.error(error);
+  };
+
+  const showQRCodeDetectedAlert = (qrCodeText) => {
+    swal('QR Code Detected', 'success');
   };
 
   useEffect(() => {

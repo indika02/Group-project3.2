@@ -1,4 +1,4 @@
-  import React, { useState, useEffect } from "react";
+  import React, { useState, useEffect,useCallback } from "react";
   import './results.css';
   import { Container, Row, Col, Table, Form } from "react-bootstrap";
   import axios from "axios";
@@ -6,7 +6,8 @@
   import swal from 'sweetalert';
   import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
   import { useRef } from "react";
-
+  import * as FileSaver from 'file-saver';
+  import { useRechartToPng } from "recharts-to-png";
 
   export default function Results  () {
     const [classtype, setClasstype] = useState("");
@@ -20,9 +21,11 @@
     const [Allsubjects, setAllsubjects] = useState([]);
     const [AllLecturers, setAllLecturers] = useState([]);
     const [chartData, setChartData] = useState([]);
+    
 
 
-    const chartRef = useRef(null);
+
+  const chartRef = useRef(null);
   
     
     const gradingSystem = [
@@ -76,8 +79,8 @@
           Examno,
           Doe,
           studentIndex: student.studentIndex,
-          marks: mark, // Store the numeric mark in the database
-          grade: getGradeForMark(mark), // Calculate and store the grade in the database
+          marks: mark, 
+          grade: getGradeForMark(mark), 
         };
       });
 
@@ -114,7 +117,7 @@
     }, []);
     
     const getChartData = () => {
-      // Count the number of students with each grade
+      
       const gradeCounts = {
         A: 0,
         B: 0,
@@ -129,7 +132,7 @@
         gradeCounts[grade]++;
       });
 
-      // Convert the grade counts into an array of objects for the bar chart
+    
       const chartData = Object.entries(gradeCounts).map(([grade, count]) => ({
         grade,
         count,
@@ -137,8 +140,9 @@
 
       return chartData;
     };
-
-
+    
+  
+    
     
     return (
       <Container>
@@ -162,8 +166,9 @@
             </Col>
             <Col>
               <div className='form-group'>
-                <label htmlFor="batch" className='batch'>A/L Batch Year</label>
+                <label htmlFor="batch" className='batch'>Batch Year</label>
                 <select className="form-select form-control" aria-label="Default select example" onChange={(e) => setBatchYear(e.target.value)}>
+                  <option value="">None</option>
                   <option value="2023">2023</option>
                   <option value="2024">2024</option>
                   <option value="2025">2025</option>
@@ -261,9 +266,9 @@
           </div>
           </Col>
           
-            <Col>
-            <ResponsiveContainer width="100%" height={250}>
-            <BarChart  id="chart-container" data={getChartData()}>
+          <Col>
+          <ResponsiveContainer width="100%" height={350} ref={chartRef}>
+            <BarChart data={getChartData()}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="grade" />
               <YAxis />
@@ -272,10 +277,8 @@
               <Bar dataKey="count" fill="#8884d8" />
             </BarChart>
           </ResponsiveContainer>
-          {/* <button className="btn btn-success chart">
-            Download Chart
-          </button> */}
-          </Col>
+         
+        </Col>
           </Row>
       </Container>
     );

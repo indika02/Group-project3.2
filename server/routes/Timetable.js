@@ -5,11 +5,6 @@ router.route("/add").post(async (req, res) => {
   const { date, teacher_name, subject, time, venue, classtype, batchyear, type } = req.body;
 
   try {
-    const existingTimetable = await Timetable.findOne({ date });
-    if (existingTimetable) {
-      return res.status(400).json({ error: 'Timetable already exists' });
-    }
-
     const newtimetable = new Timetable({
       date,
       teacher_name,
@@ -28,6 +23,7 @@ router.route("/add").post(async (req, res) => {
     res.status(500).json({ error: 'An error occurred while scheduling the timetable' });
   }
 });
+
 
 router.route("/").get((req, res) => {
   Timetable.find()

@@ -14,9 +14,8 @@ import StdRegform from './Admin/Registration/Student/StdRegform';
 import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
-import ProfilePage from './Admin/Profile';
 import Profilepage from './Dashboard/Profilepage';
-import LoggedAccount from './Dashboard/Qrcodescanner/Scanner';
+import QRCodeScanner from './Dashboard/Qrcodescanner/Scanner';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -48,6 +47,7 @@ function App() {
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
             <Route path='/profilepage' element={<Profilepage/>}/>
+            <Route path='/qrcodescanner' element={<QRCodeScanner/>}/>
           </Routes>
         </BrowserRouter>
       )}

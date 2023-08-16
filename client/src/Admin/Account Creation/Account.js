@@ -75,13 +75,26 @@ export default function Account() {
 
     const handleDelete = async (id) => {
       try {
-        await axios.delete(`http://localhost:5000/account/delete/${id}`);
-        swal("Success", "Account Deleted!", "success");
-        fetchAccountDetails();
+        const result = await swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this account!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        });
+    
+        if (result) {
+          await axios.delete(`http://localhost:5000/account/delete/${id}`);
+          swal("Success", "Account Deleted!", "success");
+          fetchAccountDetails();
+        } else {
+          swal("Cancelled", "Account was not deleted.", "info");
+        }
       } catch (error) {
         swal("Error!", "Failed to delete Account!", "error");
       }
     };
+    
     
 
     return(

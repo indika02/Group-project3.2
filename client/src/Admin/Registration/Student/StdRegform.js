@@ -217,12 +217,13 @@ return (
                 </Col>
                 <Col>
                 <div className='form-group'>
-                    <label for="batch" className='batch'>A/L Batch Year</label>
+                    <label for="batch" className='batch'>Batch Year</label>
                     <select className="form-select form-control" aria-label="Default select example"
                     onChange={(e)=>{
                         setbatchYear(e.target.value);
                     }}
                     >
+                        <option value="">None</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>

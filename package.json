@@ -1,5 +1,14 @@
 {
   "dependencies": {
     "react-typist": "^2.0.5"
-  }
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+
+"scripts": {
+  "start": "concurrently \"npm run server\" \"npm run client\"",
+  "server": "node server/index.js",
+  "client": "cd client && npm start"
+}
 }
