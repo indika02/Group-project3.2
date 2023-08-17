@@ -17,6 +17,7 @@ export default function OtherAccount() {
     const[usertype,setUsertype]=useState("");
     const [Accountdetails, setAccountdetails] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [Lname,setLName]=useState([]);
 
 
     useEffect(() => {
@@ -95,7 +96,14 @@ export default function OtherAccount() {
       }
     };
     
-    
+    useEffect(()=>{
+      axios.get('http://localhost:5000/subject/').then((response)=>{
+          
+          setLName(response.data);
+      }).catch((error)=>{
+          console.log('Error fetching data.',error);
+      });
+  },[]);
 
     return(
         <div className="Account">
@@ -104,17 +112,22 @@ export default function OtherAccount() {
                     <Col>
                     <div className='form-group'>
                     <label for="Index">Name</label>
-                    <input type='text' className='form-control' id='Name' placeholder="Enter the Name" 
-                     onChange={(e)=>{
+                    <select id="country" className="form-select form-control" 
+                    onChange={(e)=>{
                         setName(e.target.value);
                     }}
-                    />
-                </div>
+                    >
+                        <option value="">Lectuer</option>
+                        {Lname.map((item) => (
+                            <option key={item._id} value={item.Lname}>{item.Lname}</option>
+                        ))}
+                    </select>
+                    </div>
                     </Col>
                     <Col>
                     <div className='form-group'>
                     <label for="Index">Email Address</label>
-                    <input type='text' className='form-control' id='email' placeholder="Enter the email Address" 
+                    <input type='text' className='form-control' id='email' placeholder="Email Address" 
                      onChange={(e)=>{
                         setEmail(e.target.value);
                     }}

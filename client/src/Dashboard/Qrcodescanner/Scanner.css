@@ -4,8 +4,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; 
-    margin: 20px;/* Ensure full viewport height */
+    min-height: 70vh; 
+    min-width: 100%;
+   margin: 20px;
+   box-sizing: border-box;
   }
   
   .video-element {
@@ -14,3 +16,9 @@
     height: auto; /* Maintain aspect ratio */
   }
   
+.select{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 30px;
+}
+
