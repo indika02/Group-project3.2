@@ -44,7 +44,7 @@ export default function StdDetails(){
                   <tr>
                     <th>Enrollment No.</th>
                     <th>Name</th>
-                    <th>Age</th>
+                    <th>Email</th>
                     <th>Class</th>
                     <th>Batch</th>
                     <th colSpan={4}>Subjects</th>
@@ -56,7 +56,7 @@ export default function StdDetails(){
                     <tr key={studentdetail._id}>
                       <td>{studentdetail.index}</td>
                       <td>{studentdetail.name}</td>
-                      <td>{studentdetail.age}</td>
+                      <td>{studentdetail.email}</td>
                       <td>{studentdetail.classtype}</td>
                       <td>{studentdetail.batchyear}</td>
                       <td>{studentdetail.subject1}</td>

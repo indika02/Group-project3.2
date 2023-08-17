@@ -70,7 +70,7 @@ router.route("/add").post(async (req, res) => {
     });
 
     if (usertype === "student") {
-      const qrCodeData = `${index}\n${name}\n${classtype}\n${email}\n${subject1}\n${subject2}\n${subject3}\n${subject4}\n${Lname1}\n${Lname2}\n${Lname3}\n${Lname4}\n${batchyear}`;
+      const qrCodeData = `${index};\n${name};\n${classtype};\n${batchyear};`;
       
       // Generate the QR code as a Base64 encoded string
       const qrCodeBase64 = await QrCode.toDataURL(qrCodeData);

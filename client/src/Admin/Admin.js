@@ -44,7 +44,7 @@ export default function Admin ()  {
         <Tab.Container defaultActiveKey="tab1">
           <Nav variant="tabs" className="mb-3">
             <Nav.Item>
-              <Nav.Link eventKey="tab1"><FaCompass/> Dashboard</Nav.Link>
+              <Nav.Link eventKey="tab1" ><FaCompass/> Dashboard</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="tab2"><FaUserPlus/>Students Details</Nav.Link>
