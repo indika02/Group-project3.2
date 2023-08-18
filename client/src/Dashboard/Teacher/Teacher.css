@@ -2,8 +2,48 @@
   text-align: left;
 }
 
-.uploaded-files h5{
+
+
+.uploadtitle{
+  text-align: center;
+  text-transform: capitalize;
   font-weight: bold;
-  color: rgb(22, 3, 42);
+  font-size: 25px;
+  color: rgb(155, 155, 165);
+  border: 5px solid rgb(191, 177, 196);
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
+.lecnote{
+  margin-left: 40px;
+  margin-top: 20px;
+  text-decoration: none;
+  border-bottom: 2px dashed grey;
+}
+
+.notelink{
+  text-align: left;
+}
+
+.upload{
+ margin-top: 33px;
+ border-radius: 0;
+ background-color: blueviolet;
+ border-color: blueviolet;
+}
+
+.uploadfile{
+  margin-top: 9px;
+}
+
+.uploadsec{
+  background-color: rgb(233, 237, 236);
+  margin-top: 40px;
+}
+
+.topiclec{
+  margin-top: 20px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+}

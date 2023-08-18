@@ -6,7 +6,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import bcrypt from 'bcryptjs';
 import { Container, Table } from "react-bootstrap";
-import { FaEdit, FaRecycle, FaRemoveFormat, FaTrash } from "react-icons/fa";
+import { FaAccusoft, FaEdit, FaRecycle, FaRemoveFormat, FaTrash, FaUserAlt } from "react-icons/fa";
 
 export default function Account() {
 
@@ -50,6 +50,11 @@ export default function Account() {
 
     async function sendData(e){
         e.preventDefault();
+
+        if (!index || !email) {
+          swal("Error", "Please fill in all the fields!", "error");
+          return;
+      }
 
         const encryptedPassword = await encryptPassword(dpwd);
 
@@ -101,26 +106,29 @@ export default function Account() {
         <div className="Account">
                 <form onSubmit={sendData}>
                   <Row>
-                    <Col>
+                    <Col sm={4}>
                     <div className='form-group'>
                     <label for="Index">Registration Number</label>
-                    <input type='text' className='form-control' id='Index' placeholder="Enter the Registration Number" 
+                    <input type='text' className='form-control' id='Index' placeholder="Enrollment No" 
                      onChange={(e)=>{
                         setIndex(e.target.value);
                     }}
                     />
                 </div>
                     </Col>
-                    <Col>
+                    <Col sm={4}>
                     <div className='form-group'>
                     <label for="Index">Email Address</label>
-                    <input type='text' className='form-control' id='email' placeholder="Enter the email Address" 
+                    <input type='text' className='form-control' id='email' placeholder="Email Address" 
                      onChange={(e)=>{
                         setEmail(e.target.value);
                     }}
                     />
                 </div>
-                <button type="submit"  className="btn btn-primary create">Create</button>
+                
+                    </Col>
+                    <Col sm={4}>
+                    <button type="submit"  className="btn btn-primary create"><FaUserAlt/> Create</button>
                     </Col>
                   
                    

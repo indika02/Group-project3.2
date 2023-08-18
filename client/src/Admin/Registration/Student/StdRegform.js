@@ -31,6 +31,7 @@ export default function StdRegform() {
     const [Lname,setLName]=useState([]);
     const[usertype,setUsertype]=useState("student");
     
+    
    
 
     function sendData(e){

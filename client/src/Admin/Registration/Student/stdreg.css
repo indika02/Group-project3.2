@@ -26,9 +26,7 @@ table td{
 
 
 .stdregbtn{
-    width: 400px;
-    margin-top: 40px;
-    background-color: #460691;
+    width: 300px;
     border-radius: 0;
 }
 
@@ -47,4 +45,8 @@ table td{
 
 .sub{
     padding-top: 15px;
+}
+
+.stdfilter{
+    margin-top: 50px;
 }
