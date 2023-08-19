@@ -4,6 +4,7 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const fileUpload = require('express-fileupload');
 const Lecnote = require('../models/LecturerNotes');
+const fs = require('fs');
  
 router.use(fileUpload());
 
@@ -51,10 +52,10 @@ router.post('/upload', (req, res) => {
   router.get('/download/:originalFileName', (req, res) => {
     const originalFileName = req.params.originalFileName;
     const folderPath = path.join(__dirname, './uploads');
-    const filePath = path.join(folderPath, originalFileName); // Use the original file name
+    const filePath = path.join(folderPath, originalFileName);
   
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="${originalFileName}"`); // Suggest the original file name for download
+    res.setHeader('Content-Disposition', `attachment; filename="${originalFileName}"`); 
   
     res.sendFile(filePath, (err) => {
       if (err) {
@@ -87,4 +88,29 @@ router.post('/upload', (req, res) => {
     }
   }); 
   
+  router.delete('/delete/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+
+      const deletedNote = await Lecnote.findByIdAndRemove(id);
+  
+      if (!deletedNote) {
+        return res.status(404).json({ error: 'File not found' });
+      }
+  
+     
+      const folderPath = path.join(__dirname, './uploads');
+      const filePath = path.join(folderPath, deletedNote.originalFileName);
+  
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath); 
+        res.status(200).json({ message: 'File deleted successfully' });
+      } else {
+        res.status(404).json({ error: 'File not found in local folder' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error deleting file' });
+    }
+  });
 module.exports = router;

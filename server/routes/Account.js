@@ -9,7 +9,13 @@ router.route("/add").post(async (req, res) => {
     const newAccount = new Account({
       index,
       name,
+      dob,
+      age,
+      address,
       email,
+      contactpersonal,
+      contacthome,
+      educationalqualification,
       usertype,
       dpwd,
       accountstate,

@@ -147,7 +147,7 @@
     return (
       <Container>
         <div className="Resutls">
-          <Row>
+          <Row className="resultsbox">
             <Col>
               <div className='form-group'>
                 <label htmlFor="class" className='class'>Class Type</label>
@@ -225,7 +225,7 @@
           </Row>
         </div>
 
-        <Row>
+        <Row className="graph">
           <Col>
         <div className="marks">
           <button className="btn btn-info add" onClick={handleAddStudent}><FaPlus /></button>

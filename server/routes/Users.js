@@ -70,7 +70,7 @@ router.route("/add").post(async (req, res) => {
     });
 
     if (usertype === "student") {
-      const qrCodeData = `${index};\n${name};\n${classtype};\n${batchyear};`;
+      const qrCodeData = `${index};\n${name};\n${classtype};\n${Lname1};\n${subject1}${Lname2};\n${subject2};\n${Lname3};\n${subject3}${Lname4};\n${subject4};\n${batchyear};`;
       
       // Generate the QR code as a Base64 encoded string
       const qrCodeBase64 = await QrCode.toDataURL(qrCodeData);
@@ -160,6 +160,30 @@ router.route("/userdetail/:email").get((req, res) => {
       subject3:user.subject3,
       Lname4:user.Lname4,
       subject4:user.subject4,
+      qrCode:user.qrCode
+      };
+
+      res.json(userProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Error!' });
+    });
+});
+
+router.route("/userdetails/:index").get((req, res) => {
+  const userindex = req.params.index;
+
+  User.findOne({ index: userindex })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "No Qr Found" });
+      }
+
+     
+      const userProfile = {
+      index:user.index,
+      name:user.name,
       qrCode:user.qrCode
       };
 

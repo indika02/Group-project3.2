@@ -1,29 +1,44 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-const Schema=mongoose.Schema;
-
-const AttendanceSchema=new Schema({
-
-    index: {
-        type:String,
+const AttendanceSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    
+  },
+  time:{
+     type:String,
+  },
+  classType: {
+    type: String,
+    
+  },
+  batchYear: {
+    type: Number,
+   
+  },
+  lecturerName: {
+    type: String,
+    
+  },
+  subject: {
+    type: String,
+    
+  },
+  attendedStudents: [
+    {
+      index: {
+        type: String,
+       
+      },
+      name: {
+        type: String,
+        
+      },
     },
-   classtype:{
-        type:String,
-   },
-   batchyear:{
-        type:String,
-   },
-   Lname:{
-        type:String,
-   },
-   subject : {
-    type:String,
-   },
-   date:{
-        type:date,
-   }
-})
+  ],
+});
 
-const Attendance=mongoose.model("Attendance",AttendanceSchema);
 
-module.exports=Attendance;
+const Attendance = mongoose.model('Attendance', AttendanceSchema);
+
+module.exports = Attendance;

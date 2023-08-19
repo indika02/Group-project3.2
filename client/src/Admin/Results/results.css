@@ -25,3 +25,13 @@
     float:right;
     border-radius: 0;
 }
+
+.resultsbox{
+    background-color:  rgb(248, 251, 252);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.graph{
+    background-color: rgb(248, 251, 252);
+}
