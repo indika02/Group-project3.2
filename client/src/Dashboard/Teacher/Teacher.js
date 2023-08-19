@@ -5,11 +5,12 @@ import { Tab } from 'react-bootstrap';
 import { Row, Col, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { useUser } from '../../UserContext';
-import { FaChartBar,FaFileAlt, FaPoll, FaUser } from 'react-icons/fa';
+import { FaChartBar,FaFileAlt, FaFileDownload, FaPenAlt, FaPoll, FaUpload, FaUser } from 'react-icons/fa';
 import Results from '../../Admin/Results/Results';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import swal from 'sweetalert';
 
 export default function Teacher() {
   const user = useSelector(state => state.auth.user);
@@ -91,7 +92,7 @@ export default function Teacher() {
   const handleFileUpload = async (e) => {
     try {
       const file = e.target.files[0];
-      setUploadedFile(file); // Set the selected file to the state
+      setUploadedFile(file);
     } catch (error) {
       console.log('Error uploading file:', error);
     }
@@ -112,6 +113,7 @@ export default function Teacher() {
 
     const uploadResponse = await axios.post('http://localhost:5000/lecturernotes/upload', formData);
     console.log('File uploaded successfully. Response:', uploadResponse.data);
+    swal("Success", "Uploading Successful!", "success");
 
     const dataToSave = {
       originalFileName: uploadedFile.name,
@@ -122,6 +124,7 @@ export default function Teacher() {
 
     await axios.post('http://localhost:5000/lecturernotes/add', dataToSave);
     console.log('Data saved successfully!', dataToSave);
+
     
 
     setUploadedFiles([...uploadedFiles, uploadResponse.data]);
@@ -131,6 +134,7 @@ export default function Teacher() {
     setBatchYear('');
   } catch (error) {
     console.log('Error uploading file or saving data:', error);
+    swal("Error", "An Error Occured!", "error");
   }
 };
 
@@ -138,6 +142,7 @@ const fetchUploadedFiles = () => {
   axios.get(`http://localhost:5000/lecturernotes/uploadedfiles/${user.name}`)
     .then(response => {
       setUploadedFiles(response.data);
+
       console.log(user.name);
       console.log(response.data)
     })
@@ -192,13 +197,13 @@ const fetchUploadedFiles = () => {
         </Nav>
         <Tab.Content>
         <Tab.Pane eventKey="tab1" className="tab">
-            <h1>Notes</h1>
+            <h1 className='topiclec'>Lecture Notes</h1>
             <Container>
-            <Row>
-            <Col>
+            <Row className='uploadsec'>
+            <Col sm={3}>
               <div className='form-group'>
                 <label htmlFor="class" className='class'>Class Type</label>
-                <select className="form-select form-control inputbox" aria-label="Default select example" onChange={(e) => setClasstype(e.target.value)}>
+                <select className="form-select form-control  uploadfile" aria-label="Default select example" onChange={(e) => setClasstype(e.target.value)}>
                         <option value="grade06">Grade 06</option>
                         <option value="grade07">Grade 07</option>
                         <option value="grade08">Grade 08</option>
@@ -209,10 +214,10 @@ const fetchUploadedFiles = () => {
                 </select>
               </div>
             </Col>
-            <Col>
+            <Col sm={3}>
               <div className='form-group'>
                 <label htmlFor="batch" className='batch'>Batch Year</label>
-                <select className="form-select form-control" aria-label="Default select example" onChange={(e) => setBatchYear(e.target.value)}>
+                <select className="form-select form-control uploadfile" aria-label="Default select example" onChange={(e) => setBatchYear(e.target.value)}>
                 <option value="">None</option>
                   <option value="2023">2023</option>
                   <option value="2024">2024</option>
@@ -225,12 +230,15 @@ const fetchUploadedFiles = () => {
                 </select>
               </div>
             </Col>
-            <Col>
+            <Col sm={3}>
             <Form.Group controlId="formFileMultiple" className="mb-3">
                 <Form.Label>Upload the Note</Form.Label>
-                <Form.Control type="file" multiple onChange={handleFileUpload}/>
+                <Form.Control type="file" multiple onChange={handleFileUpload} />
             </Form.Group>
-            <Button type='submit' className='btn btn-success' onClick={handleSubmit}>Upload</Button>
+            
+            </Col>
+            <Col sm={3}>
+            <Button type='submit' className='btn btn-success upload' onClick={handleSubmit}><FaUpload/> upload</Button>
             </Col>
             </Row>
             <Row>
@@ -246,17 +254,17 @@ const fetchUploadedFiles = () => {
     }, {})
   ).map(([groupKey, group]) => (
     <div key={groupKey}>
-      <h5>{group[0].batchyear} {group[0].classtype}</h5>
+      <h5 className='uploadtitle'>{group[0].batchyear} {group[0].classtype}</h5>
       {group.map((file) => (
         <div key={file.originalFileName}>
-          <a
+         <a className='lecnote'
             href={`http://localhost:5000/lecturernotes/download/${file.originalFileName}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {file.originalFileName}
+          <p className='notelink'><FaPenAlt/> {file.originalFileName}</p>
           </a>
-          <hr />
+          
         </div>
       ))}
     </div>
@@ -271,7 +279,7 @@ const fetchUploadedFiles = () => {
           </Tab.Content>
         <Tab.Content>
           <Tab.Pane eventKey="tab2" className="tab">
-<h1>Student details</h1>
+<h1 className='topiclec'>Student details</h1>
             <Container>
               <div className="search-bar">
                
@@ -351,7 +359,7 @@ const fetchUploadedFiles = () => {
           <Tab.Pane eventKey="tab3" className="tab"></Tab.Pane></Tab.Content>
           <Tab.Content>
           <Tab.Pane eventKey="tab4" className="tab">
-            <h1>Exam Results</h1>
+            <h1 className='topiclec'>Exam Results</h1>
             <Container>
               <Results />
               <hr></hr>

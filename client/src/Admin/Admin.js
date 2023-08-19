@@ -1,19 +1,14 @@
 
 import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown } from 'react-bootstrap';
-import { useParams } from 'react-router';
 import './Admin.css';
-import { FaCalculator, FaCalendar, FaChartBar, FaCompass,FaPoll,FaShieldAlt,FaSignOutAlt, FaUserEdit, FaUserPlus } from "react-icons/fa";
-import {Row,Col} from 'react-bootstrap';
-import { Table,Form} from 'react-bootstrap';
+import { FaCalendar, FaChartBar, FaCompass,FaPoll,FaShieldAlt,FaUserEdit, FaUserPlus } from "react-icons/fa";
 import Timetable from './Timetable/Timetable';
 import StdDetails from './Registration/Student/stddetails';
-import TeacherDetails from './Registration/Teacher/teacherDetails';
 import Account from './Account Creation/Account';
 import Subject from './Registration/subjects/Subject';
 import Results from './Results/Results';
 import PollingSystem from './Polling/PollingSystem';
-import { useUser } from '../UserContext';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import OtherAccount from './Account Creation/otherusers/other';
@@ -85,13 +80,18 @@ export default function Admin ()  {
               <h4>Students  User Account Management</h4>
               </Container>
               <Account/>
+              
+              
             </Tab.Pane>
+            <Tab.Content>
             <Tab.Pane eventKey="tab4" className='tab'>
               <Container>
               <h4>Timetable Management</h4>
-</Container>
               <Timetable/>
+</Container>
+              
             </Tab.Pane>
+            </Tab.Content>
             <Tab.Pane eventKey="tab5" className='tab'>
               <Container>
               <h4>Exam Results</h4></Container>

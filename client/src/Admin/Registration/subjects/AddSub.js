@@ -54,9 +54,15 @@ export default function Addsub(){
                         setClasstype(e.target.value);
                     }}
                     >
+                    <option selected>Class type</option>
+                    <option value="grade06">Grade 06</option>
+                    <option value="grade07">Grade 07</option>
+                    <option value="grade08">Grade 08</option>
+                    <option value="grade09">Grade 09</option>
+                    <option value="grade10">Grade 10</option>
+                    <option value="grade11">Grade 11</option>
                         <option value="A/L">A/L</option>
-                        <option value="O/L">O/L</option>
-                        <option value="Both">All</option>
+                        
                     </select>
                 </div>
                     </Col>
