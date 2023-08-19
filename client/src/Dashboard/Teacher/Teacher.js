@@ -25,6 +25,11 @@ export default function Teacher() {
   const[originalFileName,setoriginalFileName]=useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+ 
+  
+  
   
 
 
@@ -127,7 +132,7 @@ export default function Teacher() {
 
     
 
-    setUploadedFiles([...uploadedFiles, uploadResponse.data]);
+    setUploadedFiles(prevUploadedFiles => [...prevUploadedFiles, uploadResponse.data]);
 
     setUploadedFile(null);
     setClasstype('');
@@ -150,6 +155,45 @@ const fetchUploadedFiles = () => {
       console.error('Error fetching uploaded files:', error);
     });
 };
+const handleCheckboxChange = (fileId) => {
+  if (selectedFiles.includes(fileId)) {
+    setSelectedFiles(selectedFiles.filter((id) => id !== fileId));
+    console.log(`Deselected file ID: ${fileId}`);
+  } else {
+    setSelectedFiles([...selectedFiles, fileId]);
+    console.log(`Selected file ID: ${fileId}`);
+  }
+};
+
+
+
+const handleDeleteSelectedFiles = async () => {
+  try {
+    if (selectedFiles.length === 0) {
+      console.log('No files selected for deletion.');
+      return;
+    }
+
+    // Assuming selectedFiles contains objects with an 'id' field
+    const selectedIds = selectedFiles.map(file => file._id);
+
+    
+    await Promise.all(selectedIds.map(async (_id) => {
+      await axios.delete(`http://localhost:5000/lecturernotes/delete/${_id}`);
+    }));
+
+    
+    setUploadedFiles((prevUploadedFiles) =>
+      prevUploadedFiles.filter((file) => !selectedIds.includes(file._id))
+    );
+
+    setSelectedFiles([]);
+  } catch (error) {
+    console.log('Error deleting files:', error);
+    swal('Error', 'An Error Occurred while deleting files!', 'error');
+  }
+};
+
 
   return (
     <div>
@@ -232,13 +276,19 @@ const fetchUploadedFiles = () => {
             </Col>
             <Col sm={3}>
             <Form.Group controlId="formFileMultiple" className="mb-3">
-                <Form.Label>Upload the Note</Form.Label>
+                <Form.Label>Files:</Form.Label>
                 <Form.Control type="file" multiple onChange={handleFileUpload} />
             </Form.Group>
             
             </Col>
             <Col sm={3}>
-            <Button type='submit' className='btn btn-success upload' onClick={handleSubmit}><FaUpload/> upload</Button>
+            <Button type='submit' className='btn btn-success upload' onClick={handleSubmit}><FaUpload/> upload</Button> <Button
+            className="btn btn-danger delete"
+            onClick={handleDeleteSelectedFiles}
+          >
+            Delete Selected
+          </Button>
+          
             </Col>
             </Row>
             <Row>
@@ -255,16 +305,24 @@ const fetchUploadedFiles = () => {
   ).map(([groupKey, group]) => (
     <div key={groupKey}>
       <h5 className='uploadtitle'>{group[0].batchyear} {group[0].classtype}</h5>
-      {group.map((file) => (
-        <div key={file.originalFileName}>
-         <a className='lecnote'
-            href={`http://localhost:5000/lecturernotes/download/${file.originalFileName}`}
+      {group.map((lecturernotes) => (
+        <div key={lecturernotes._id}>
+          <a
+            className='lecnote'
+            href={`http://localhost:5000/lecturernotes/download/${lecturernotes.originalFileName}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-          <p className='notelink'><FaPenAlt/> {file.originalFileName}</p>
+            <p className='notelink'>
+              <FaPenAlt /> {lecturernotes.originalFileName}
+              <input
+                type="checkbox"
+                value={lecturernotes._id}
+                onChange={() => handleCheckboxChange(lecturernotes._id)} // Pass only the ID
+                checked={selectedFiles.includes(lecturernotes._id)} // Use "checked" instead of "check"
+              />
+            </p>
           </a>
-          
         </div>
       ))}
     </div>

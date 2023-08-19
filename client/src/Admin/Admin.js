@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Navbar, Nav, Container, Tab, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, Tab, NavDropdown ,Col,Row} from 'react-bootstrap';
 import './Admin.css';
 import { FaCalendar, FaChartBar, FaCompass,FaPoll,FaShieldAlt,FaUserEdit, FaUserPlus } from "react-icons/fa";
 import Timetable from './Timetable/Timetable';
@@ -12,6 +12,7 @@ import PollingSystem from './Polling/PollingSystem';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import OtherAccount from './Account Creation/otherusers/other';
+import Qrprint from './Registration/Student/qrprint/qrprint';
 
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
@@ -65,6 +66,16 @@ export default function Admin ()  {
           <Container>
           <h4>Subject and Lecturer Details</h4>
           <Subject/>
+          <Row>
+          <Col sm={8}>
+          <h4>Details of Class Attendance</h4>
+          </Col>
+          <Col sm={4}>
+          <h4>QR Code Details</h4>
+          <Qrprint/>
+          </Col>
+          </Row>
+         
           </Container>
         </Tab.Pane>
             <Tab.Pane eventKey="tab2" className='tab'>
