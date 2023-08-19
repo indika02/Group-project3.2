@@ -5,7 +5,7 @@ import { Tab } from 'react-bootstrap';
 import { Row, Col, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { useUser } from '../../UserContext';
-import { FaChartBar,FaFileAlt, FaFileDownload, FaPenAlt, FaPoll, FaUpload, FaUser } from 'react-icons/fa';
+import { FaChartBar,FaCut,FaFileAlt, FaFileDownload, FaPenAlt, FaPoll, FaRecycle, FaRemoveFormat, FaTrashAlt, FaUpload, FaUser } from 'react-icons/fa';
 import Results from '../../Admin/Results/Results';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -174,17 +174,12 @@ const handleDeleteSelectedFiles = async () => {
       return;
     }
 
-    // Assuming selectedFiles contains objects with an 'id' field
-    const selectedIds = selectedFiles.map(file => file._id);
-
-    
-    await Promise.all(selectedIds.map(async (_id) => {
+    await Promise.all(selectedFiles.map(async (_id) => {
       await axios.delete(`http://localhost:5000/lecturernotes/delete/${_id}`);
     }));
 
-    
     setUploadedFiles((prevUploadedFiles) =>
-      prevUploadedFiles.filter((file) => !selectedIds.includes(file._id))
+      prevUploadedFiles.filter((file) => !selectedFiles.includes(file._id))
     );
 
     setSelectedFiles([]);
@@ -193,6 +188,7 @@ const handleDeleteSelectedFiles = async () => {
     swal('Error', 'An Error Occurred while deleting files!', 'error');
   }
 };
+
 
 
   return (
@@ -227,17 +223,14 @@ const handleDeleteSelectedFiles = async () => {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="tab3">
-              <FaPoll /> Making polls
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tab4">
               <FaChartBar /> Exam Results
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="tab5">Forum</Nav.Link>
-          </Nav.Item>
+          <Nav.Link eventKey="tab4">
+            <FaPoll /> Making polls
+          </Nav.Link>
+        </Nav.Item>
         </Nav>
         <Tab.Content>
         <Tab.Pane eventKey="tab1" className="tab">
@@ -283,10 +276,11 @@ const handleDeleteSelectedFiles = async () => {
             </Col>
             <Col sm={3}>
             <Button type='submit' className='btn btn-success upload' onClick={handleSubmit}><FaUpload/> upload</Button> <Button
-            className="btn btn-danger delete"
+            className="btn btn-danger deletefiles"
             onClick={handleDeleteSelectedFiles}
+            
           >
-            Delete Selected
+            <FaTrashAlt/> Delete
           </Button>
           
             </Col>
@@ -314,14 +308,15 @@ const handleDeleteSelectedFiles = async () => {
             rel="noopener noreferrer"
           >
             <p className='notelink'>
-              <FaPenAlt /> {lecturernotes.originalFileName}
-              <input
+              <FaPenAlt /> {lecturernotes.originalFileName}  </p><Form.Check
                 type="checkbox"
                 value={lecturernotes._id}
-                onChange={() => handleCheckboxChange(lecturernotes._id)} // Pass only the ID
-                checked={selectedFiles.includes(lecturernotes._id)} // Use "checked" instead of "check"
+                onChange={() => handleCheckboxChange(lecturernotes._id)} 
+                checked={selectedFiles.includes(lecturernotes._id)} 
+                className='deletecheck'
+                
               />
-            </p>
+           
           </a>
         </div>
       ))}
@@ -413,25 +408,18 @@ const handleDeleteSelectedFiles = async () => {
             </Container>
           </Tab.Pane>
           </Tab.Content>
+         
           <Tab.Content>
-          <Tab.Pane eventKey="tab3" className="tab"></Tab.Pane></Tab.Content>
-          <Tab.Content>
-          <Tab.Pane eventKey="tab4" className="tab">
+          <Tab.Pane eventKey="tab3" className="tab">
             <h1 className='topiclec'>Exam Results</h1>
             <Container>
               <Results />
               <hr></hr>
             </Container>
           </Tab.Pane>
-          <Tab.Pane eventKey="tab5" className="tab">
-            {userProfile && (
-              <div>
-                <p>Email: {userName}</p>
-              </div>
-            )}
-            
-          </Tab.Pane>
         </Tab.Content>
+        <Tab.Content>
+        <Tab.Pane eventKey="tab4" className="tab"></Tab.Pane></Tab.Content>
       </Tab.Container>
       
     </div>
