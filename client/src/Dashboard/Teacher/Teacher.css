@@ -29,8 +29,13 @@
 .upload{
  margin-top: 33px;
  border-radius: 0;
- background-color: blueviolet;
- border-color: blueviolet;
+
+}
+
+.deletefiles{
+  margin-top: 33px;
+  border-radius: 0;
+  margin-left: 4px;
 }
 
 .uploadfile{
@@ -45,5 +50,10 @@
 .topiclec{
   margin-top: 20px;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+}
+
+.deletecheck{
+  text-align: right;
   
 }
