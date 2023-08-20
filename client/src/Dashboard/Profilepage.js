@@ -25,7 +25,7 @@
     
 
     const fetchUserProfile = (email)=>{
-      fetch(`http://localhost:5000/user/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
+      fetch(`http://localhost:5000/account/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
         setUserProfile(data);
         console.log(data)
       }).catch((error)=>{
@@ -38,7 +38,7 @@
     const handleFormSubmit = (e) => {
       e.preventDefault();
 
-      fetch(`http://localhost:5000/user/update/${user.email}`, {
+      fetch(`http://localhost:5000/account/update/${user.email}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -47,9 +47,9 @@
       })
         .then((response) => response.json())
         .then((data) => {
-          setUserProfile(data.User);
+          setUserProfile(data.Account);
           swal("Success", "Profile Updating is Successfully completed", "success");
-          console.log(data.User)
+          console.log(data)
         })
         .catch((error) => {
           console.log("Error updating user profile", error);
@@ -86,7 +86,7 @@
               </div>
               <div className='form-group'>
                   <label for="name">Student's Full Name</label>
-                  <input type='text' className='form-control' id='name' value={userProfile?.name} readOnly
+                  <input type='text' className='form-control' id='name' value={userProfile?.name}
                 
                   />
         </div>
@@ -159,8 +159,8 @@
                   <Row>
                   <Col>
                   <div className='form-group'>
-                      <label for="type" className='type'>Class Type</label>
-                      <input type='text' className='form-control' id='Classtype' value={userProfile?.classtype} readOnly
+                      <label for="type" className='type'>Qualifications</label>
+                      <input type='text' className='form-control' id='Classtype' value={userProfile?.qualifications}
                 
                   />
               </div>

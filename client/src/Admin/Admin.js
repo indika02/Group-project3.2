@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import OtherAccount from './Account Creation/otherusers/other';
 import Qrprint from './Registration/Student/qrprint/qrprint';
+import StdProfile from './Registration/Student/stdprofile';
+import PollMaker from './Polling/PollingSystem';
 
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
@@ -20,9 +22,9 @@ export default function Admin ()  {
 
   return (
     <div className="AdminPanal">
-       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
       <Container>
-        <Navbar.Brand href="#home" className='header'>Siyathra Higher Education Institue</Navbar.Brand>
+        <Navbar.Brand href="#home" className='header'>Siyathra Higher Education Institute</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -38,7 +40,7 @@ export default function Admin ()  {
       </Container>
     </Navbar>
         <Tab.Container defaultActiveKey="tab1">
-          <Nav variant="tabs" className="mb-3">
+          <Nav variant="tabs" className="mb-3 tabadmin">
             <Nav.Item>
               <Nav.Link eventKey="tab1" ><FaCompass/> Dashboard</Nav.Link>
             </Nav.Item>
@@ -82,7 +84,13 @@ export default function Admin ()  {
               <Container>
               <h4>Student Details</h4>
              <StdDetails/>
-          
+          <Row>
+          <Col>
+          <h4>Student's Profile Details</h4>
+          <StdProfile/>
+          </Col>
+        
+          </Row>
               
               </Container>
             </Tab.Pane>
@@ -111,7 +119,7 @@ export default function Admin ()  {
             <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>Making Polls</h4></Container>
-              <PollingSystem/>
+              <PollMaker/>
             </Tab.Pane>
             <Tab.Pane eventKey="tab7" className='tab'>
               <Container>

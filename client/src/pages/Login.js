@@ -38,6 +38,8 @@ localStorage.setItem('user', JSON.stringify(response.data));
         navigate(`/admin`);
       }else if(response.data.usertype==="attendancemarker"){
         navigate(`/qrcodescanner`);
+      }else if(response.data.usertype==="generaladmin"){
+        navigate(`/admin`);
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {

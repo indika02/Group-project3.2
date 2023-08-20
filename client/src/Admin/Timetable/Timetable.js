@@ -4,7 +4,7 @@ import { Form, Col, Row, Table, Container } from "react-bootstrap";
 import axios from "axios";
 import swal from 'sweetalert';
 import './timetable.css'
-import { FaTrash } from "react-icons/fa";
+import { FaClock, FaTrash } from "react-icons/fa";
 
 export default function Timetable() {
   const [date, setDate] = useState("");
@@ -211,7 +211,7 @@ export default function Timetable() {
           </Col>
         </Row>
 
-        <button className="btn btn-success timetablebtn" type="submit">Save</button>
+        <button className="btn btn-success timetablebtn" type="submit"><FaClock/> Save</button>
       </Form>
 
       <Container>

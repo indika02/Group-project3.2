@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Card, Form, Button, Container, Row, Col, ProgressBar } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
-function PollingSystem() {
-  const [polls, setPolls] = useState([]);
+function PollMaker() {
   const [newQuestion, setNewQuestion] = useState('');
-  const [newOptions, setNewOptions] = useState(['', '']);
-  const [userVotes, setUserVotes] = useState({});
+  const [newOptions, setNewOptions] = useState([]);
 
   const handleAddOption = () => {
     setNewOptions([...newOptions, '']);
@@ -16,25 +14,24 @@ function PollingSystem() {
     setNewOptions(updatedOptions);
   };
 
-  const handleVote = (question, selectedOption) => {
-    setUserVotes({ ...userVotes, [question]: selectedOption });
-  };
-
   const handleSubmit = () => {
+    // You can save the new poll data to your backend or store it locally
     const newPoll = {
       question: newQuestion,
       options: newOptions.filter((option) => option.trim() !== ''),
-      votes: {},
     };
 
-    setPolls([...polls, newPoll]);
+    console.log(newPoll); // For testing purposes
+    // TODO: Send new poll data to your backend or update state/store
+
+    // Clear input fields after submitting
     setNewQuestion('');
-    setNewOptions(['', '']);
+    setNewOptions([]);
   };
 
   return (
     <Container>
-      <h1>Polling and Voting System</h1>
+      <h1>Poll Maker</h1>
       <Form>
         <Form.Group controlId="newQuestion">
           <Form.Label>New Question:</Form.Label>
@@ -59,15 +56,13 @@ function PollingSystem() {
                   }}
                 />
               </Col>
-              <Col sm={2}>
-                {index > 1 && (
-                  <Button
-                    variant="danger"
-                    onClick={() => handleRemoveOption(index)}
-                  >
-                    Remove
-                  </Button>
-                )}
+              <Col sm={1}>
+                <Button
+                  variant="danger"
+                  onClick={() => handleRemoveOption(index)}
+                >
+                  Delete
+                </Button>
               </Col>
             </Row>
           </Form.Group>
@@ -76,46 +71,11 @@ function PollingSystem() {
           Add Option
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
-          Add Poll
+          Create Poll
         </Button>
       </Form>
-      {polls.map((poll, pollIndex) => (
-        <Card key={pollIndex} className="mt-4">
-          <Card.Body>
-            <Card.Title>{poll.question}</Card.Title>
-            <Form>
-              {poll.options.map((option, optionIndex) => (
-                <Form.Check
-                  key={optionIndex}
-                  type="radio"
-                  label={option}
-                  checked={userVotes[poll.question] === option}
-                  onChange={() => handleVote(poll.question, option)}
-                />
-              ))}
-            </Form>
-            {userVotes[poll.question] && (
-              <div>
-                <h5>Your Vote: {userVotes[poll.question]}</h5>
-                <ProgressBar
-                  now={
-                    (poll.votes[userVotes[poll.question]] || 0) /
-                    Object.values(poll.votes).reduce((sum, voteCount) => sum + voteCount, 0) *
-                    100
-                  }
-                  label={`${Math.round(
-                    ((poll.votes[userVotes[poll.question]] || 0) /
-                      Object.values(poll.votes).reduce((sum, voteCount) => sum + voteCount, 0)) *
-                      100
-                  )}%`}
-                />
-              </div>
-            )}
-          </Card.Body>
-        </Card>
-      ))}
     </Container>
   );
 }
 
-export default PollingSystem;
+export default PollMaker;

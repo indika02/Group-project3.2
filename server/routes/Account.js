@@ -9,13 +9,7 @@ router.route("/add").post(async (req, res) => {
     const newAccount = new Account({
       index,
       name,
-      dob,
-      age,
-      address,
       email,
-      contactpersonal,
-      contacthome,
-      educationalqualification,
       usertype,
       dpwd,
       accountstate,
@@ -121,6 +115,85 @@ router.route("/update/:email").put(async(req,res)=>{
     }
   } catch (err) {
     res.status(500).send({ status: "Error with updating data" ,err});
+  }
+});
+
+router.route("/userdetail/:email").get((req, res) => {
+  const userEmail = req.params.email;
+
+  Account.findOne({ email: userEmail })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+     
+      const userProfile = {
+      index:user.index,
+      name:user.name,
+      dob:user.dob,
+      age:user.age,
+      gender:user.gender,
+      contactpersonal:user.contactpersonal,
+      contacthome:user.contacthome,
+      address:user.address,
+      email:user.email,
+     qualifications:user.qualifications,
+     usertype:user.usertype,
+     dpwd:user.dpwd,
+     accountstate:user.accountstate,
+      };
+
+      res.json(userProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Error!' });
+    });
+});
+router.route("/update/:email").put(async(req,res)=>{
+  let email=req.params.email;
+  const{
+    index,
+    name,
+    dob,
+    age,
+    gender,
+    contactpersonal,
+    contacthome,
+    address,
+    qualifications,
+    dpwd,
+    accountstate
+  }=req.body;
+
+  const updateProfile={
+    index,
+    name,
+    dob,
+    age,
+    gender,
+    contactpersonal,
+    contacthome,
+    email,
+    address,
+    qualifications,
+    dpwd,
+    accountstate
+  }
+
+  try {
+    const updatedUser = await Account.findOneAndUpdate({ email: email }, updateProfile, {
+      new: true,
+    });
+
+    if (updatedUser) {
+      res.status(200).send({ status: "User updated", User: updatedUser });
+    } else {
+      res.status(404).send({ status: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ status: "Error with updating data" });
   }
 });
 

@@ -33,6 +33,7 @@ const AccountRouter=require("./routes/Account");
 const Results=require("./routes/ExamResults");
 const LecturerNotes=require("./routes/LecturerNotes");
 const fileUpload = require("express-fileupload");
+const Polls=require("./routes/Poll");
 
 app.use("/user",userRouter)
 app.use("/timetable",timetableRouter);
@@ -40,6 +41,7 @@ app.use("/subject",SubjectRouter);
 app.use("/account",AccountRouter);
 app.use("/results",Results);
 app.use("/lecturernotes",LecturerNotes);
+app.use("/polls",Polls);
 app.use(fileUpload());
 
 
