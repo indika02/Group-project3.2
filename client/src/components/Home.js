@@ -12,7 +12,7 @@ const Home = () => {
         <Col xs={12} md={7} className="col-md-7">
           <div className="home-content">
             {/* <h1>Siyathra E-Learning Management System</h1> */}
-            <h1>Siyathra Higher Education Institute</h1>
+            <h2><span className="typing-animation">Siyathra Higher Education Institute</span></h2>
             <h3>Polpithigama, Kurunegala</h3>
             <Link to="/login">
               <button className="lmsbtn">Student Portal</button>

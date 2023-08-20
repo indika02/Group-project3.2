@@ -7,9 +7,10 @@ import swal from "sweetalert";
 import bcrypt from 'bcryptjs';
 import { Container, Table } from "react-bootstrap";
 import { FaEdit, FaRecycle, FaRemoveFormat, FaTrash } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 export default function OtherAccount() {
-
+  const user = useSelector(state => state.auth.user);
     const[name,setName]=useState("");
     const[email,setEmail]=useState("");
     const[dpwd,setDpwd]=useState("1234");
@@ -51,6 +52,11 @@ export default function OtherAccount() {
     async function sendData(e){
         e.preventDefault();
 
+        if (user.usertype !== "generaladmin") {
+          swal("Error", "You do not have permission to create accounts.", "error");
+          return;
+        }
+
         const encryptedPassword = await encryptPassword(dpwd);
 
         const newAccount={
@@ -76,6 +82,10 @@ export default function OtherAccount() {
 
     const handleDelete = async (id) => {
       try {
+        if (user.usertype !== "generaladmin") {
+          swal("Error", "You do not have permission to delete accounts.", "error");
+          return;
+        }
         const result = await swal({
           title: "Are you sure?",
           text: "Once deleted, you will not be able to recover this account!",
@@ -127,7 +137,7 @@ export default function OtherAccount() {
                     <Col>
                     <div className='form-group'>
                     <label for="Index">Email Address</label>
-                    <input type='text' className='form-control' id='email' placeholder="Email Address" 
+                    <input type='email' className='form-control' id='email' placeholder="Email Address" 
                      onChange={(e)=>{
                         setEmail(e.target.value);
                     }}

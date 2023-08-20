@@ -24,6 +24,29 @@ const QRCodeScanner = () => {
     const [AllLecturers, setAllLecturers] = useState([]);
   const userName = user.name;
 
+  const handleDropdownChange = (e, dropdownType) => {
+    const selectedValue = e.target.value;
+    console.log(`Selected ${dropdownType}:`, selectedValue);
+    
+  
+    switch (dropdownType) {
+      case 'classType':
+        
+        break;
+      case 'batchYear':
+
+        break;
+      case 'lecturerName':
+        
+        break;
+      case 'subject':
+       
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleScan = (result) => {
     if (result) {
       setResult(result.text);
@@ -33,7 +56,7 @@ const QRCodeScanner = () => {
   };
 
   const parseQRCodeText = (qrCodeText) => {
-    const parsedValues = qrCodeText.split(';'); // Assuming values are separated by a semicolon
+    const parsedValues = qrCodeText.split(';');
     if (parsedValues.length >= 2) {
       setIndex(parsedValues[0]);
       setName(parsedValues[1]);
@@ -80,7 +103,7 @@ const QRCodeScanner = () => {
     <div>
       <Row>
         <Col>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='nav'>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='nav' fixed='top'>
         <Container>
           
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -106,7 +129,7 @@ const QRCodeScanner = () => {
     <Col sm={3}>
     <div className='form-group'>
                 <label htmlFor="class" className='class'>Class Type</label>
-                <select className="form-select form-control inputbox" aria-label="Default select example">
+                <select className="form-select form-control inputbox" aria-label="Default select example" onChange={(e) => handleDropdownChange(e, 'classType')}>
                 <option selected>Class type</option>
                         <option value="grade06">Grade 06</option>
                         <option value="grade07">Grade 07</option>
@@ -122,7 +145,7 @@ const QRCodeScanner = () => {
     <Col sm={3}>
     <div className='form-group'>
     <label htmlFor="batch" className='batch'>Batch Year</label>
-    <select className="form-select form-control" aria-label="Default select example">
+    <select className="form-select form-control" aria-label="Default select example" onChange={(e) => handleDropdownChange(e, 'batchYear')}>
       <option value="">None</option>
       <option value="2023">2023</option>
       <option value="2024">2024</option>
@@ -138,7 +161,7 @@ const QRCodeScanner = () => {
     <Col sm={3}>
     <div className='form-group'>
                 <label htmlFor="Lname">Lectuer Name</label>
-                <select id="country" className="form-select form-control" onChange={(e) => setLecturerName(e.target.value)}>
+                <select id="country" className="form-select form-control" onChange={(e) => handleDropdownChange(e, 'lecturerName')}>
                   <option value="">Select the Lecturer</option>
                   {AllLecturers.map((item) => (
                     <option key={item._id} value={item.Lname}>{item.Lname}</option>
@@ -149,7 +172,7 @@ const QRCodeScanner = () => {
     <Col sm={3}>
     <div className='form-group'>
     <label htmlFor="Lname">Select the Subject</label>
-    <select id="country" className="form-select form-control" onChange={(e) => setSubject(e.target.value)}>
+    <select id="country" className="form-select form-control" onChange={(e) => handleDropdownChange(e, 'subject')}>
       <option value="">Select the Subject</option>
       {Allsubjects.map((item) => (
         <option key={item._id} value={item.subject}>{item.subject}</option>

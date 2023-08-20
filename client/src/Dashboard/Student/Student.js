@@ -5,11 +5,12 @@
           import {Row,Col} from 'react-bootstrap';
           import { useState } from 'react';
           import { Table } from 'react-bootstrap';
-          import { FaChartBar,FaVoteYea } from 'react-icons/fa';
+          import { FaBell, FaChartBar,FaVoteYea } from 'react-icons/fa';
           import { Link } from 'react-router-dom';
           import axios from 'axios';
           import { useSelector,useDispatch } from 'react-redux';
           import { setUserProfileData } from '../../features/actions';
+import VotingComponent from '../../Admin/Polling/Voting';
 
           function Student() {
             const user = useSelector(state => state.auth.user);
@@ -105,7 +106,7 @@
               <div>
               <Row>
               <Col>
-               <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+               <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
                 <Container>
                   <Navbar.Brand href="#home">Siyathra Learning Management System</Navbar.Brand>
                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -114,7 +115,7 @@
                       {/* Add your navigation links here */}
                     </Nav>
                     <Nav>
-                      <NavDropdown title={user.email} id="login-dropdown">
+                     <NavDropdown title={user.email} id="login-dropdown">
                       <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
@@ -131,7 +132,7 @@
                 
                 
               <Tab.Container defaultActiveKey="tab1">
-                <Nav variant="tabs">
+                <Nav variant="tabs" className='tabadmin'>
                   <Nav.Item>
                     <Nav.Link eventKey="tab1">Courses</Nav.Link>
                   </Nav.Item>
@@ -147,7 +148,7 @@
                 </Nav>
                 <Tab.Content>
                   <Tab.Pane eventKey="tab1" className='tab'>
-                    <h1>My Subjects</h1>
+                    <h1 className='topiclec'>My Subjects</h1>
                       <Container>
 
                       {userProfiledata && (
@@ -285,7 +286,7 @@
                     </Container>
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab2" className='tab'>
-                    <h1>Exam Results</h1>
+                    <h1 className='topiclec'>Exam Results</h1>
                   <Container>
                   {userProfile && (
                         <div>
@@ -333,14 +334,14 @@
                     
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab3" className='tab'>
-                    <h1>Open Forum</h1>
+                    <h1 className='topiclec'>Open Forum</h1>
                     <p>This is the content of Tab 3.</p>
 
 
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab4" className='tab'>
-                    <h1>Polls</h1>
-                
+                    <h1 className='topiclec'>Polls</h1>
+                <VotingComponent/>
                   </Tab.Pane>
                 </Tab.Content>
               </Tab.Container>

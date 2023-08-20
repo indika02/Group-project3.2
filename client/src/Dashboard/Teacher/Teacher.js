@@ -193,7 +193,7 @@ const handleDeleteSelectedFiles = async () => {
 
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
         <Container>
           <Navbar.Brand href="#home">Siyathra Learning management system</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -210,7 +210,7 @@ const handleDeleteSelectedFiles = async () => {
         </Container>
       </Navbar>
       <Tab.Container defaultActiveKey="tab1">
-        <Nav variant="tabs">
+        <Nav variant="tabs" className='tabadmin'>
         <Nav.Item>
             <Nav.Link eventKey="tab1">
               <FaFileAlt/>Notes

@@ -119,7 +119,7 @@ export default function Account() {
                     <Col sm={4}>
                     <div className='form-group'>
                     <label for="Index">Email Address</label>
-                    <input type='text' className='form-control' id='email' placeholder="Email Address" 
+                    <input type='email' className='form-control' id='email' placeholder="Email Address" 
                      onChange={(e)=>{
                         setEmail(e.target.value);
                     }}

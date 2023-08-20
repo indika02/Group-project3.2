@@ -10,7 +10,28 @@ const AccountSchema=new Schema({
     name : {
         type:String,
     },
+    dob:{
+        type:String,
+    },
+    age:{
+        type:String,
+    },
+    gender:{
+        type:String,
+    },
+    contactpersonal:{
+        type:String,
+    },
+    contacthome:{
+        type:String,
+    },
     email : {
+        type:String,
+    },
+    address:{
+        type:String,
+    },
+    qualifications:{
         type:String,
     },
     usertype : {

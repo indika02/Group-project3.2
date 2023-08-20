@@ -1,0 +1,30 @@
+.stdprofile{
+    margin-left: 10px;
+}
+.profile{
+    padding-top: 10px;
+}
+
+.profiledetails{
+    margin-top: 20px;
+   
+}
+
+.profiledetails p{
+    text-align: left;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: rgb(182, 213, 223);
+   
+}
+
+.profiledetails p ul{
+    list-style-type: decimal-leading-one;
+}
+.profiledetails p ul li{
+    font-weight: bold;
+}
+
+.searchprofile{
+    border-radius: 0;
+}
