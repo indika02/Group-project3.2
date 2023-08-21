@@ -122,7 +122,7 @@ export default function OtherAccount() {
                     <Col>
                     <div className='form-group'>
                     <label for="Index">Name</label>
-                    <select id="country" className="form-select form-control" 
+                    <select id="" className="form-select form-control sname" 
                     onChange={(e)=>{
                         setName(e.target.value);
                     }}
@@ -181,7 +181,6 @@ export default function OtherAccount() {
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Email</th>
                       <th>Type</th>
                       <th>Delete</th>
                     </tr>
@@ -190,7 +189,6 @@ export default function OtherAccount() {
                     {Accountdetails.map((account) => (
                       <tr key={account._id}>
                         <td>{account.name}</td>
-                        <td>{account.email}</td>
                         <td>{account.usertype}</td>
                         <button className="deluser" onClick={() => handleDelete(account._id)}><FaTrash/></button>
                       </tr>

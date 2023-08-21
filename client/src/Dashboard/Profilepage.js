@@ -49,7 +49,7 @@
         .then((data) => {
           setUserProfile(data.Account);
           swal("Success", "Profile Updating is Successfully completed", "success");
-          console.log(data)
+          console.log(data.Account)
         })
         .catch((error) => {
           console.log("Error updating user profile", error);

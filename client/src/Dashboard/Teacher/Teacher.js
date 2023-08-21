@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import swal from 'sweetalert';
+import Resultfilter from '../../Admin/Results/Resultsfilter';
 
 export default function Teacher() {
   const user = useSelector(state => state.auth.user);
@@ -415,6 +416,8 @@ const handleDeleteSelectedFiles = async () => {
             <Container>
               <Results />
               <hr></hr>
+              <h4>Overall Results</h4>
+              <Resultfilter/>
             </Container>
           </Tab.Pane>
         </Tab.Content>

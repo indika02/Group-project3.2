@@ -124,7 +124,6 @@ export default function Admin ()  {
             <Tab.Pane eventKey="tab7" className='tab'>
               <Container>
               <h4>TEAM</h4>
-              <h5>User Accounts</h5>
               <OtherAccount/>
               
               </Container>

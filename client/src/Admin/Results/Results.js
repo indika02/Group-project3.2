@@ -266,19 +266,7 @@
           </div>
           </Col>
           
-          <Col>
-          <ResponsiveContainer width="100%" height={350} ref={chartRef}>
-            <BarChart data={getChartData()}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="grade" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
-         
-        </Col>
+          
           </Row>
       </Container>
     );

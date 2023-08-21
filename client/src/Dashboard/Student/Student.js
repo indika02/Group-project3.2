@@ -10,7 +10,7 @@
           import axios from 'axios';
           import { useSelector,useDispatch } from 'react-redux';
           import { setUserProfileData } from '../../features/actions';
-import VotingComponent from '../../Admin/Polling/Voting';
+
 
           function Student() {
             const user = useSelector(state => state.auth.user);
@@ -341,7 +341,7 @@ import VotingComponent from '../../Admin/Polling/Voting';
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab4" className='tab'>
                     <h1 className='topiclec'>Polls</h1>
-                <VotingComponent/>
+                
                   </Tab.Pane>
                 </Tab.Content>
               </Tab.Container>

@@ -22,7 +22,23 @@ const QRCodeScanner = () => {
   const codeReaderRef = useRef(null);
   const [Allsubjects, setAllsubjects] = useState([]);
     const [AllLecturers, setAllLecturers] = useState([]);
+    const [scanningEnabled, setScanningEnabled] = useState(true);
   const userName = user.name;
+
+  const resetScannerState = () => {
+    setResult('');
+    setIndex('');
+    setName('');
+    setGrade('');
+    setbatchYear('');
+    setTimeout(() => setScanningEnabled(true), 30000);
+  };
+
+  useEffect(() => {
+    if (index) {
+      fetchUserProfiledata(index);
+    }
+  }, [index]);
 
   const handleDropdownChange = (e, dropdownType) => {
     const selectedValue = e.target.value;
@@ -51,7 +67,9 @@ const QRCodeScanner = () => {
     if (result) {
       setResult(result.text);
       parseQRCodeText(result.text); 
+      fetchUserProfiledata(result.index);
       showQRCodeDetectedAlert(result.text);
+
     }
   };
 
@@ -99,6 +117,17 @@ const QRCodeScanner = () => {
       console.log('Error fetching data.', error);
     });
   }, []);
+
+  const fetchUserProfiledata = (index) => {
+    fetch(`http://localhost:5000/user/userdetails/${index}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("User Profile Data:", data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data", error);
+      });
+  };
   return (
     <div>
       <Row>
