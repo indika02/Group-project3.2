@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const AttendanceSchema = new mongoose.Schema({
   date: {
-    type: Date,
+    type: String, 
+    default: new Date().toISOString()
     
   },
   time:{
@@ -13,7 +14,7 @@ const AttendanceSchema = new mongoose.Schema({
     
   },
   batchYear: {
-    type: Number,
+    type: String,
    
   },
   lecturerName: {
@@ -24,19 +25,14 @@ const AttendanceSchema = new mongoose.Schema({
     type: String,
     
   },
-  attendedStudents: [
-    {
-      index: {
+  index: {
+        type: String,    
+},
+  name: {
         type: String,
-       
-      },
-      name: {
-        type: String,
-        
       },
     },
-  ],
-});
+);
 
 
 const Attendance = mongoose.model('Attendance', AttendanceSchema);

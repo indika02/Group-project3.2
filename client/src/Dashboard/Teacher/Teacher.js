@@ -406,9 +406,13 @@ const handleDeleteSelectedFiles = async () => {
                 )}
                 </div>
             </div>
+            <Row>
+            <h1 className='topicattendance'>Attendance Details</h1>
+            </Row>
             </Container>
           </Tab.Pane>
           </Tab.Content>
+          
          
           <Tab.Content>
           <Tab.Pane eventKey="tab3" className="tab">

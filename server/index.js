@@ -34,6 +34,7 @@ const Results=require("./routes/ExamResults");
 const LecturerNotes=require("./routes/LecturerNotes");
 const fileUpload = require("express-fileupload");
 const Polls=require("./routes/Poll");
+const Attendance=require("./routes/Attendance");
 
 app.use("/user",userRouter)
 app.use("/timetable",timetableRouter);
@@ -42,6 +43,7 @@ app.use("/account",AccountRouter);
 app.use("/results",Results);
 app.use("/lecturernotes",LecturerNotes);
 app.use("/polls",Polls);
+app.use("/attendance",Attendance);
 app.use(fileUpload());
 
 
