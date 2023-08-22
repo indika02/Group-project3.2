@@ -15,16 +15,15 @@ function PollMaker() {
   };
 
   const handleSubmit = () => {
-    // You can save the new poll data to your backend or store it locally
+    
     const newPoll = {
       question: newQuestion,
       options: newOptions.filter((option) => option.trim() !== ''),
     };
 
-    console.log(newPoll); // For testing purposes
-    // TODO: Send new poll data to your backend or update state/store
+    console.log(newPoll); 
 
-    // Clear input fields after submitting
+   
     setNewQuestion('');
     setNewOptions([]);
   };
