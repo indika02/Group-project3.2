@@ -15,6 +15,7 @@ import OtherAccount from './Account Creation/otherusers/other';
 import Qrprint from './Registration/Student/qrprint/qrprint';
 import StdProfile from './Registration/Student/stdprofile';
 import PollMaker from './Polling/PollingSystem';
+import Attendance from './attendance/attendance';
 
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
@@ -69,14 +70,12 @@ export default function Admin ()  {
           <h4>Subject and Lecturer Details</h4>
           <Subject/>
           <Row>
-          <Col sm={8}>
+          <Col sm={12}>
           <h4>Details of Class Attendance</h4>
-          </Col>
-          <Col sm={4}>
-          <h4>QR Code Details</h4>
-          <Qrprint/>
+          <Attendance/>
           </Col>
           </Row>
+          
          
           </Container>
         </Tab.Pane>
@@ -90,6 +89,14 @@ export default function Admin ()  {
           <StdProfile/>
           </Col>
         
+          </Row>
+          <Row>
+          <Col sm={4}>
+          <h4>QR Code Details</h4>
+          <Qrprint/>
+          </Col>
+          <Col sm={8}>
+          </Col>
           </Row>
               
               </Container>

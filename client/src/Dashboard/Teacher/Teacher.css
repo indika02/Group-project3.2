@@ -58,6 +58,17 @@
   
 }
 
-.tab h4{
+
+  .tab h4{
+    background-color: rgb(138, 148, 215);
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 10px;
+}
+.topicattendance{
   text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

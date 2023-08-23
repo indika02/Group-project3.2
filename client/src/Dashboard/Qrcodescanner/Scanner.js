@@ -3,7 +3,7 @@ import { BrowserMultiFormatReader } from '@zxing/library';
 import './Scanner.css'; // Import custom CSS for styling
 import swal from 'sweetalert'; // Import SweetAlert library
 import { Col, Row } from 'react-bootstrap';
-import { Navbar, Nav, Container,Image,Button,NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container,Image,Button,NavDropdown,Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
  import { useSelector,useDispatch } from 'react-redux';
@@ -13,62 +13,36 @@ import axios from 'axios';
 const QRCodeScanner = () => {
   const user = useSelector(state => state.auth.user);
   const [result, setResult] = useState('');
-  const [index, setIndex] = useState('');
+  const [studentIndex, setStudentIndex] = useState('');
   const [name, setName] = useState('');
   const [grade, setGrade] = useState('');
-  const [batchYear, setbatchYear] = useState('');
-  const [lecturerName, setLecturerName] = useState("");
-  const [subject, setSubject] = useState("");
+  const [stdbatchYear, setstdbatchYear] = useState('');
+  const [selectedlecturerName, setSelectedLecturerName] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [selectedClassType, setSelectedClassType] = useState('');
+  const [selectedBatchYear, setSelectedBatchYear] = useState('');
+  const[selectedclassTime,setSelectedclassTime]=useState('');
   const codeReaderRef = useRef(null);
   const [Allsubjects, setAllsubjects] = useState([]);
-    const [AllLecturers, setAllLecturers] = useState([]);
-    const [scanningEnabled, setScanningEnabled] = useState(true);
-  const userName = user.name;
+  const [AllLecturers, setAllLecturers] = useState([]);
 
-  const resetScannerState = () => {
-    setResult('');
-    setIndex('');
-    setName('');
-    setGrade('');
-    setbatchYear('');
-    setTimeout(() => setScanningEnabled(true), 30000);
-  };
+
+
 
   useEffect(() => {
-    if (index) {
-      fetchUserProfiledata(index);
+    if (studentIndex) {
+      fetchUserProfiledata(studentIndex);
     }
-  }, [index]);
+  }, [studentIndex]);
 
-  const handleDropdownChange = (e, dropdownType) => {
-    const selectedValue = e.target.value;
-    console.log(`Selected ${dropdownType}:`, selectedValue);
-    
-  
-    switch (dropdownType) {
-      case 'classType':
-        
-        break;
-      case 'batchYear':
 
-        break;
-      case 'lecturerName':
-        
-        break;
-      case 'subject':
-       
-        break;
-      default:
-        break;
-    }
-  };
 
   const handleScan = (result) => {
     if (result) {
       setResult(result.text);
       parseQRCodeText(result.text); 
-      fetchUserProfiledata(result.index);
-      showQRCodeDetectedAlert(result.text);
+      fetchUserProfiledata(result.studentIndex);
+      
 
     }
   };
@@ -76,10 +50,10 @@ const QRCodeScanner = () => {
   const parseQRCodeText = (qrCodeText) => {
     const parsedValues = qrCodeText.split(';');
     if (parsedValues.length >= 2) {
-      setIndex(parsedValues[0]);
+      setStudentIndex(parsedValues[0]);
       setName(parsedValues[1]);
       setGrade(parsedValues[2]);
-      setbatchYear(parsedValues[3]);
+      setstdbatchYear(parsedValues[3]);
     }
   };
 
@@ -87,9 +61,7 @@ const QRCodeScanner = () => {
     console.error(error);
   };
 
-  const showQRCodeDetectedAlert = (qrCodeText) => {
-    swal('QR Code Detected', 'success');
-  };
+
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
@@ -123,11 +95,48 @@ const QRCodeScanner = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("User Profile Data:", data);
+  
+        if (data.classtype === selectedClassType && data.batchyear === selectedBatchYear && 
+          (data.Lname1 === selectedlecturerName || data.Lname2 === selectedlecturerName || 
+          data.Lname3 === selectedlecturerName || data.Lname4 === selectedlecturerName) && 
+          (data.subject1 === selectedSubject || data.subject2 === selectedSubject || 
+          data.subject3 === selectedSubject || data.subject4 === selectedSubject)) {
+            
+         
+  
+          const attendanceData = {
+            date: new Date(), 
+            time: selectedclassTime,
+            classType: selectedClassType,
+            batchYear: selectedBatchYear,
+            lecturerName: selectedlecturerName, 
+            subject: selectedSubject,
+            index: data.index,
+            name: data.name,
+          };
+          axios.post('http://localhost:5000/attendance/add', attendanceData)
+            .then(response => {
+              console.log("Attendance data stored:", response.data);
+              swal("Success", "Attendance data stored successfully!", "success");
+              
+            })
+            .catch(error => {
+              console.log("Error storing attendance data", error);
+              swal("Error", "An Error Occured!", "error");
+              
+            });
+        } else {
+          console.log("User profile data does not match selected values");
+          swal("Error", "You have not Registered for this!", "error");
+          
+        }
       })
       .catch((error) => {
         console.log("Error fetching user data", error);
+        
       });
   };
+  
   return (
     <div>
       <Row>
@@ -155,10 +164,22 @@ const QRCodeScanner = () => {
 
     <div className='select'>
     <Row>
-    <Col sm={3}>
+    <Col sm={2}>
+    <Form.Group controlId="Time" className="mb-3">
+      <Form.Label>Time</Form.Label>
+      <Form.Control
+        type="time"
+        onChange={(e) => setSelectedclassTime(e.target.value)}
+        required
+      />
+    </Form.Group>
+  </Col>
+    <Col sm={2}>
     <div className='form-group'>
                 <label htmlFor="class" className='class'>Class Type</label>
-                <select className="form-select form-control inputbox" aria-label="Default select example" onChange={(e) => handleDropdownChange(e, 'classType')}>
+                <select className="form-select form-control inputbox" aria-label="Default select example"  onChange={(e) => {
+                  setSelectedClassType(e.target.value);
+                }}>
                 <option selected>Class type</option>
                         <option value="grade06">Grade 06</option>
                         <option value="grade07">Grade 07</option>
@@ -171,10 +192,12 @@ const QRCodeScanner = () => {
                 </select>
               </div>
     </Col>
-    <Col sm={3}>
+    <Col sm={2}>
     <div className='form-group'>
     <label htmlFor="batch" className='batch'>Batch Year</label>
-    <select className="form-select form-control" aria-label="Default select example" onChange={(e) => handleDropdownChange(e, 'batchYear')}>
+    <select className="form-select form-control" aria-label="Default select example"   onChange={(e) => {
+      setSelectedBatchYear(e.target.value);
+    }}>
       <option value="">None</option>
       <option value="2023">2023</option>
       <option value="2024">2024</option>
@@ -187,10 +210,12 @@ const QRCodeScanner = () => {
     </select>
   </div>
     </Col>
-    <Col sm={3}>
+    <Col sm={2}>
     <div className='form-group'>
                 <label htmlFor="Lname">Lectuer Name</label>
-                <select id="country" className="form-select form-control" onChange={(e) => handleDropdownChange(e, 'lecturerName')}>
+                <select id="country" className="form-select form-control"  onChange={(e) => {
+                  setSelectedLecturerName(e.target.value);
+                }} >
                   <option value="">Select the Lecturer</option>
                   {AllLecturers.map((item) => (
                     <option key={item._id} value={item.Lname}>{item.Lname}</option>
@@ -198,10 +223,12 @@ const QRCodeScanner = () => {
                 </select>
               </div>
     </Col>
-    <Col sm={3}>
+    <Col sm={2}>
     <div className='form-group'>
     <label htmlFor="Lname">Select the Subject</label>
-    <select id="country" className="form-select form-control" onChange={(e) => handleDropdownChange(e, 'subject')}>
+    <select id="country" className="form-select form-control"  onChange={(e) => {
+      setSelectedSubject(e.target.value);
+    }}>
       <option value="">Select the Subject</option>
       {Allsubjects.map((item) => (
         <option key={item._id} value={item.subject}>{item.subject}</option>
@@ -216,11 +243,10 @@ const QRCodeScanner = () => {
       <div className="scanner-container">
        
         <video id="videoElement" className="video-element" autoPlay></video>
-        <p>{result}</p>
-        <p>Index: {index}</p>
+        <p>Index: {studentIndex}</p>
         <p>Name: {name}</p>
         <p>Grade: {grade}</p>
-        <p>batchYear: {batchYear}</p>
+        <p>batchYear: {stdbatchYear}</p>
       </div>
       </Col>
       </Row>
