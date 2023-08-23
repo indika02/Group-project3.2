@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import Resultfilter from '../../Admin/Results/Resultsfilter';
+import AttendanceTeacher from '../../Admin/attendance/attedanceteacher';
 
 export default function Teacher() {
   const user = useSelector(state => state.auth.user);
@@ -235,8 +236,9 @@ const handleDeleteSelectedFiles = async () => {
         </Nav>
         <Tab.Content>
         <Tab.Pane eventKey="tab1" className="tab">
-            <h1 className='topiclec'>Lecture Notes</h1>
-            <Container>
+        <Container>
+            <h4>Lecture Notes</h4>
+           
             <Row className='uploadsec'>
             <Col sm={3}>
               <div className='form-group'>
@@ -333,8 +335,9 @@ const handleDeleteSelectedFiles = async () => {
           </Tab.Content>
         <Tab.Content>
           <Tab.Pane eventKey="tab2" className="tab">
-<h1 className='topiclec'>Student details</h1>
+
             <Container>
+            <h4>Student details</h4>
               <div className="search-bar">
                
                 <Form>
@@ -407,17 +410,17 @@ const handleDeleteSelectedFiles = async () => {
                 </div>
             </div>
             <Row>
-            <h1 className='topicattendance'>Attendance Details</h1>
+            <h4>Attendance Details</h4>
+            <AttendanceTeacher/>
             </Row>
             </Container>
           </Tab.Pane>
           </Tab.Content>
-          
-         
           <Tab.Content>
           <Tab.Pane eventKey="tab3" className="tab">
-            <h1 className='topiclec'>Exam Results</h1>
+            
             <Container>
+            <h4>Exam Results</h4>
               <Results />
               <hr></hr>
               <h4>Overall Results</h4>

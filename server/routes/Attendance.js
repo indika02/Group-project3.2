@@ -36,4 +36,29 @@ router.route("/").get((req, res) => {
       });
   });
 
+
+  router.route("/attendancedetails/:lecturerName").get((req, res) => {
+    const lecturerName = req.params.lecturerName;
+  
+    Attendance.find({ lecturerName })
+      .then((results) => {
+        if (results.length === 0) {
+          return res.status(404).json({ error: "Results not found for the given lecturer" });
+        }
+  
+        const attendanceresults = results.map((result) => ({
+          date:result.date,
+          classType: result.classType,
+          index: result.index,
+          name:result.name,
+          batchyear: result.batchYear,
+        }));
+  
+        res.json(attendanceresults);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: 'Error!' });
+      });
+  });
 module.exports=router;
