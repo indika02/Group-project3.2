@@ -16,6 +16,7 @@ import Qrprint from './Registration/Student/qrprint/qrprint';
 import StdProfile from './Registration/Student/stdprofile';
 import PollMaker from './Polling/PollingSystem';
 import Attendance from './attendance/attendance';
+import Adminhome from './home/adminhome';
 
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
@@ -67,6 +68,7 @@ export default function Admin ()  {
           <Tab.Content>
           <Tab.Pane eventKey="tab1" className='tab'>
           <Container>
+          <Adminhome/>
           <h4>Subject and Lecturer Details</h4>
           <Subject/>
           <Row>
