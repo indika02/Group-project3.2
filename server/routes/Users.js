@@ -229,6 +229,17 @@ router.route("/userdetails/:index").get((req, res) => {
     });
 });
 
-
+router.route("/total/count").get((req, res) => {
+  User.countDocuments({})
+    .then((count) => {
+     
+      res.json({ count: count });
+      
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'An error occurred while counting documents' });
+    });
+});
 
 module.exports = router;
