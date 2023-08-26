@@ -56,13 +56,10 @@ export default function Admin ()  {
               <Nav.Link eventKey="tab4"><FaCalendar/> Timetable</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab5"><FaChartBar/> Exam Results</Nav.Link>
+              <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab6"><FaPoll/>Making Polls</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="tab7"><FaShieldAlt/>Team </Nav.Link>
+              <Nav.Link eventKey="tab6"><FaShieldAlt/>Team </Nav.Link>
             </Nav.Item>
           </Nav>
           <Tab.Content>
@@ -120,17 +117,13 @@ export default function Admin ()  {
               
             </Tab.Pane>
             </Tab.Content>
+            
             <Tab.Pane eventKey="tab5" className='tab'>
-              <Container>
-              <h4>Exam Results</h4></Container>
-              <Results/>
-            </Tab.Pane>
-            <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>Making Polls</h4></Container>
               <PollMaker/>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab7" className='tab'>
+            <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>TEAM</h4>
               <OtherAccount/>

@@ -61,4 +61,22 @@ router.route("/").get((req, res) => {
         res.status(500).json({ error: 'Error!' });
       });
   });
+  
+  const today = new Date();
+today.setHours(0, 0, 0, 0); // Set the time to the beginning of the day
+
+router.route("/total/count").get((req, res) => {
+  Attendance.countDocuments({ date: { $gte: today } }) // Filter by dates greater than or equal to today
+    .then((count) => {
+      res.json({ count: count });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'An error occurred while counting documents' });
+    });
+});
+
+
+
+  
 module.exports=router;
