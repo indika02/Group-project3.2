@@ -4,17 +4,19 @@ import { FaSearch } from "react-icons/fa";
 import './stdprofile.css';
 import swal from "sweetalert";
 import axios from "axios";
+import { useSelector,useDispatch } from 'react-redux';
 
 
 
 export default function StdProfile(){
+    const user = useSelector(state => state.auth.user);
     const [userProfiledata, setUserProfiledata] = useState(null);
     const [index, setIndex] = useState('');
+    const userEmail=user.email;
 
-
-    const handleFetchuserProfile = async () => {
+    const handleFetchuserProfile = async (userEmail) => {
         try {
-          const response = await axios.get(`http://localhost:5000/user/userdetails/${index}`);
+          const response = await axios.get(`http://localhost:5000/account/userdetails/${userEmail}`);
           setUserProfiledata(response.data);
           console.log(response.data)
         } catch (error) {
@@ -26,6 +28,7 @@ export default function StdProfile(){
     return(
         <div className="stdprofile">
         <Row className="profile">
+        <h4>Personnal Dettails</h4>
         <Col>
         <input
         type="text"

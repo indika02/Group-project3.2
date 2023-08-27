@@ -1,12 +1,13 @@
   import React from "react";
   import { useParams } from "react-router";
-  import { useUser } from '../UserContext';
-  import { Container,Navbar,Nav,NavDropdown,Row,Col,Form } from "react-bootstrap";
+
+  import { Container,Navbar,Nav,NavDropdown,Row,Col,Form,Image,Button } from "react-bootstrap";
   import './profilepage.css';
   import { useState,useEffect } from "react";
   import swal from "sweetalert";
   import { useSelector,useDispatch } from 'react-redux';
-  import { setUserProfileData } from '../features/actions';
+  import { setUserProfileData } from '../../../features/actions';
+import { FaDownload } from "react-icons/fa";
 
 
 
@@ -17,10 +18,12 @@
   
     const dispatch = useDispatch();
     const [userProfile,setUserProfile]=useState(null);
+    const [Userprofile,setUserprofile]=useState(null);
     const [updatedProfile, setUpdatedProfile] = useState(null);
     
     useEffect(() => {
       fetchUserProfile(user.email);
+      fetchUser(user.email);
     }, [user.email, user?.index]);
     
 
@@ -33,8 +36,14 @@
       });
     };
 
-
-
+    const fetchUser = (email)=>{
+      fetch(`http://localhost:5000/user/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
+        setUserprofile(data);
+        console.log(data)
+      }).catch((error)=>{
+        console.log("Error fetching user data",error);
+      });
+    };
     const handleFormSubmit = (e) => {
       e.preventDefault();
 
@@ -57,6 +66,15 @@
         });
     };
 
+    const handleDownloadQRCode = () => {
+      
+      const downloadLink = document.createElement('a');
+      downloadLink.href = userProfile?.qrCode;
+      downloadLink.download = `${user.index}_qr_code.png`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
     return(
       <>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -78,18 +96,28 @@
         <Row>
           
         <form className="form" onSubmit={handleFormSubmit}>
-          <div className='form-group'>
+        <h4 className="profileh">Personal Details</h4>
+        <Row>
+        <Col>
+        <div className='form-group'>
                   <label for="index">Student's Enrollement No</label>
                   <input type='text' className='form-control' id='index' value={userProfile?.index}readOnly
                 
                   />
               </div>
-              <div className='form-group'>
+        </Col>
+        <Col>
+        <div className='form-group'>
                   <label for="name">Student's Full Name</label>
-                  <input type='text' className='form-control' id='name' value={userProfile?.name}
+                  <input type='text' className='form-control' id='name' value={userProfile?.name}  onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
                 
                   />
         </div>
+        </Col>
+        </Row>
+        
+          
+              
               <Row>
                   <Col>
                   <div className='form-group'>
@@ -108,10 +136,15 @@
                   </Col>
                   <Col>
                   <div className='form-group'>
-                      <label for="gender" className='gender'>Gender</label>
-                      <input type='text' className='form-control' id='gender'  value={userProfile?.gender}readOnly 
+                <label htmlFor="class" className='class'>Gender</label>
+                <select className="form-select form-control inputbox" aria-label="Default select example"  value={userProfile?.gender} onChange={(e) => setUserProfile({ ...userProfile, gender: e.target.value })}>
                 
-                  />
+                        <option value="">select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        
+                        
+                </select>
               </div>
                   </Col>
               </Row>
@@ -150,17 +183,33 @@
                       <Col>
                       <div className='form-group'>
                   <label for="email">Email Address</label>
-                  <input type='email' className='form-control' id='email' value={userProfile?.email} onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
+                  <input type='email' className='form-control' id='email' value={userProfile?.email} readOnly
                 
                   />
               </div>
                       </Col>
                   </Row>
                   <Row>
+                  <h4 className="profileh">Qr code</h4>
+
+        <Col>
+        
+        
+                    <div className='qrcode'>
+                  <Image src={Userprofile?.qrCode} fluid style={{ width: '300px', height: '300px' }} className='qrimg' />
+                  <Button variant="primary" className="btnqrcode"onClick={handleDownloadQRCode}>
+                <FaDownload/>
+              </Button>
+              </div>
+                
+        </Col>
+        </Row>
+                  <h4 className="profileh">Educational Details</h4>
+                  <Row>
                   <Col>
                   <div className='form-group'>
                       <label for="type" className='type'>Qualifications</label>
-                      <input type='text' className='form-control' id='Classtype' value={userProfile?.qualifications}
+                      <input type='text' className='form-control' id='Classtype' value={userProfile?.qualifications} onChange={(e) => setUserProfile({ ...userProfile, qualifications: e.target.value })}
                 
                   />
               </div>
@@ -168,7 +217,7 @@
                   <Col>
                   <div className='form-group'>
                       <label for="batch" className='batch'>Batch Year</label>
-                      <input type='text' className='form-control' id='batchyear' value={userProfile?.batchyear} readOnly
+                      <input type='text' className='form-control' id='batchyear' value={Userprofile?.batchyear} readOnly
                 
                   />
               </div>
@@ -179,28 +228,28 @@
                   <Row>
                   <Col>
                   <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer1' value={userProfile?.Lname1} readOnly
+                  <input type='text' className='form-control' id='Lecturer1' value={Userprofile?.Lname1} readOnly
                   
                   />
               </div>
                       </Col>
                       <Col>
                       <div className='form-group'>
-                      <input type='text' className='form-control' id='Subject1' value={userProfile?.subject1} readOnly
+                      <input type='text' className='form-control' id='Subject1' value={Userprofile?.subject1} readOnly
                   
                   />
               </div>
                   </Col>
                   <Col>
                   <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer2' value={userProfile?.Lname2} readOnly
+                  <input type='text' className='form-control' id='Lecturer2' value={Userprofile?.Lname2} readOnly
                 
                   />
               </div>
                       </Col>
                       <Col>
                       <div className='form-group'>
-                      <input type='text' className='form-control' id='Subject2'  value={userProfile?.subject2} readOnly
+                      <input type='text' className='form-control' id='Subject2'  value={Userprofile?.subject2} readOnly
                 
                   />
               </div>
@@ -209,21 +258,21 @@
                   <Row className='sub'>
                   <Col>
                   <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer3' value={userProfile?.Lname3} readOnly
+                  <input type='text' className='form-control' id='Lecturer3' value={Userprofile?.Lname3} readOnly
                 
                   />
               </div>
                       </Col>
                       <Col>
                       <div className='form-group'>
-                      <input type='text' className='form-control' id='Subject3'   value={userProfile?.subject3} readOnly
+                      <input type='text' className='form-control' id='Subject3'   value={Userprofile?.subject3} readOnly
                 
                   />
               </div>
                   </Col>
                   <Col>
                   <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer4' value={userProfile?.Lname4} readOnly
+                  <input type='text' className='form-control' id='Lecturer4' value={Userprofile?.Lname4} readOnly
                 
                   />
               </div>
@@ -232,7 +281,7 @@
                       <Col>
                       <div className='form-group'>
 
-                      <input type='text' className='form-control' id='Subject4'  value={userProfile?.subject4} readOnly
+                      <input type='text' className='form-control' id='Subject4'  value={Userprofile?.subject4} readOnly
                   />
       
                       </div>
@@ -244,6 +293,7 @@
           </form>
           
         </Row>
+
         
         
     

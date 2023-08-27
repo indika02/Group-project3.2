@@ -2,7 +2,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown ,Col,Row} from 'react-bootstrap';
 import './Admin.css';
-import { FaCalendar, FaChartBar, FaCompass,FaPoll,FaShieldAlt,FaUserEdit, FaUserPlus } from "react-icons/fa";
+import { FaCalendar, FaChartBar, FaCompass,FaKey,FaPoll,FaShieldAlt,FaSignOutAlt,FaUser,FaUserEdit, FaUserPlus } from "react-icons/fa";
 import Timetable from './Timetable/Timetable';
 import StdDetails from './Registration/Student/stddetails';
 import Account from './Account Creation/Account';
@@ -33,9 +33,11 @@ export default function Admin ()  {
           </Nav>
           <Nav>
             <NavDropdown title={user.email}id="login-dropdown">
-            <NavDropdown.Item as={Link} to="">Profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/otherprofile"><FaUser/> Profile</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
           </NavDropdown>
           </Nav>
         </Navbar.Collapse>

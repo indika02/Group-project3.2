@@ -6,6 +6,9 @@ import './Polls.css';
 function PollMaker() {
   const [newQuestion, setNewQuestion] = useState('');
   const [newOptions, setNewOptions] = useState([]);
+  const[Lname,setLname]=useState("");
+  const [classType,setClassType]=useState("");
+  const[batchYear,setBatchyear]=useState("");
 
   const handleAddOption = () => {
     setNewOptions([...newOptions, '']);
