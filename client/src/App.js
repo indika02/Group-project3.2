@@ -14,8 +14,10 @@ import StdRegform from './Admin/Registration/Student/StdRegform';
 import TeaReg from './Admin/Registration/Teacher/TeaReg';
 import Addsub from './Admin/Registration/subjects/AddSub';
 import Teacher from './Dashboard/Teacher/Teacher';
-import Profilepage from './Dashboard/Profilepage';
+import Profilepage from './Dashboard/profileupdate/student/Profilepage';
 import QRCodeScanner from './Dashboard/Qrcodescanner/Scanner';
+import OtherProfile from './Dashboard/profileupdate/other/otherprofile';
+import Reset from './Dashboard/resetpwd/reset';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -47,6 +49,8 @@ function App() {
             <Route path="/TeaRegForm" element={<TeaReg />} />
             <Route path="/Addsub" element={<Addsub />} />
             <Route path='/profilepage' element={<Profilepage/>}/>
+            <Route path='/otherprofile' element={<OtherProfile/>}/>
+            <Route path='/pwdreset' element={<Reset/>}/>
             <Route path='/qrcodescanner' element={<QRCodeScanner/>}/>
           </Routes>
         </BrowserRouter>

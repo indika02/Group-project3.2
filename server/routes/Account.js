@@ -93,30 +93,30 @@ router.route("/").get((req, res) => {
     });
 });
 
-router.route("/update/:email").put(async(req,res)=>{
-  let email=req.params.email;
-  const{
-  accountstate
-  }=req.body;
+// router.route("/update/:email").put(async(req,res)=>{
+//   let email=req.params.email;
+//   const{
+//   accountstate
+//   }=req.body;
 
-  const updateState={
-    accountstate,
-  }
+//   const updateState={
+//     accountstate,
+//   }
 
-  try {
-    const updatedstate = await Account.findOneAndUpdate({ email: email }, updateState, {
-      new: true,
-    });
+//   try {
+//     const updatedstate = await Account.findOneAndUpdate({ email: email }, updateState, {
+//       new: true,
+//     });
 
-    if (updatedstate) {
-      res.status(200).send({ status: "User updated" });
-    } else {
-      res.status(404).send({ status: "User not found" });
-    }
-  } catch (err) {
-    res.status(500).send({ status: "Error with updating data" ,err});
-  }
-});
+//     if (updatedstate) {
+//       res.status(200).send({ status: "Users updated" });
+//     } else {
+//       res.status(404).send({ status: "User not found" });
+//     }
+//   } catch (err) {
+//     res.status(500).send({ status: "Error with updating data" ,err});
+//   }
+// });
 
 router.route("/userdetail/:email").get((req, res) => {
   const userEmail = req.params.email;
@@ -188,7 +188,8 @@ router.route("/update/:email").put(async(req,res)=>{
     });
 
     if (updatedUser) {
-      res.status(200).send({ status: "User updated", User: updatedUser });
+      res.status(200).send({ status: "Users updated", User: updatedUser });
+      console.log(updatedUser)
     } else {
       res.status(404).send({ status: "User not found" });
     }

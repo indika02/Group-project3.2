@@ -3,6 +3,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import './attendance.css';
 import { Table,Row,Col } from "react-bootstrap";
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 
 export default function Attendance(){
 
@@ -12,7 +13,16 @@ export default function Attendance(){
     const [selectedBatchYear, setSelectedBatchYear] = useState('');
     const [selectedDate,setSelectedDate]=useState('');
     const[selectedLname,setSelectedLname]=useState('');
+    const[stdcount,setStdcount]=useState("");
+    const[attendees,setAttendees]=useState("");
     const [Lname,setLName]=useState([]);
+    const data = [
+      { name: 'Total', value: stdcount },
+      { name: 'Today', value: attendees }, 
+    ];
+  
+   
+    const COLORS = ['#0088FE', 'Red'];
   
     useEffect(() => {
       setLoading(true);
@@ -36,6 +46,21 @@ export default function Attendance(){
         console.error("Failed to fetch TAttendance Details:", error);
       }
     };
+
+    useEffect(() => {
+      fetch("http://localhost:5000/user/total/count")
+          .then(response => response.json())
+          .then(json => setStdcount(json.count)) 
+          .catch(error => console.error("Error fetching data:", error));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/attendance/total/count")
+        .then(response => response.json())
+        .then(json => setAttendees(json.count)) 
+        .catch(error => console.error("Error fetching data:", error));
+}, []);
+  
     return(
         <div>
 
@@ -99,6 +124,8 @@ export default function Attendance(){
         </div>
         </Col>
         </Row>
+        <Row>
+        <Col>
         <div>
         {loading ? (
           <div>Loading...</div>
@@ -140,6 +167,29 @@ export default function Attendance(){
           </>
         )}
      </div>
+     </Col>
+     </Row>
+     <Row>
+     <Col sm={6}  className="attendgraph">
+     <PieChart width={400} height={400}>
+     <Pie
+       dataKey="value"
+       data={data}
+       cx={200}
+       cy={200}
+       outerRadius={80}
+       fill="#8884d8"
+       label
+     >
+       {data.map((entry, index) => (
+         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+       ))}
+     </Pie>
+     <Legend />
+     <Tooltip />
+   </PieChart>
+     </Col>
+     </Row>
         </div>
     );
 }

@@ -5,13 +5,10 @@ function VotingComponent({ poll }) {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleVote = () => {
-    // TODO: Send the selected option to your backend for vote recording
 
-    // For testing purposes, update the poll's vote count locally
     poll.votes[selectedOption] = (poll.votes[selectedOption] || 0) + 1;
     setSelectedOption('');
-
-    // TODO: Update the poll's vote count in your state/store
+    
   };
 
   return (

@@ -61,16 +61,7 @@ Nav{
   
 }
 
-.qrcol .qrcode .qrimg{
-  margin-top: 100px;
-}
 
-.qrcode .btnqrcode{
-    width: 100px;
-    align-items: center;
-    background-color: rgb(21, 136, 224);
-    margin-left: 100px;
-}
 
 .subjects{
   border: 1px solid rgb(226, 225, 225);

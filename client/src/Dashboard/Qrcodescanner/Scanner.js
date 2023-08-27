@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
  import { useSelector,useDispatch } from 'react-redux';
  import { setUserProfileData } from '../../features/actions';
+import { FaKey, FaSignOutAlt, FaUser } from 'react-icons/fa';
  
 
 const QRCodeScanner = () => {
@@ -151,9 +152,11 @@ const QRCodeScanner = () => {
             </Nav>
             <Nav>
               <NavDropdown title={user.email} id="login-dropdown">
-              <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/otherprofile"><FaUser/> Profile</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+              <NavDropdown.Divider/>
+              <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
             </NavDropdown>
             </Nav>
           </Navbar.Collapse>

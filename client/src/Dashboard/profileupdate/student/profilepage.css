@@ -27,3 +27,23 @@
   .form .gender{
     padding-top: 10px;
   }
+  .profileh{
+    background-color: rgb(138, 148, 215);
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+ .qrcode .qrimg{
+  margin-top: 10px;
+}
+
+.qrcode .btnqrcode{
+    width: 100px;
+    float: right;
+    background-color: rgb(21, 136, 224);
+    border-style: none;
+   
+}

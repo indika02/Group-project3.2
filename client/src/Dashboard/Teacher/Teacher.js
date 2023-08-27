@@ -5,7 +5,7 @@ import { Tab } from 'react-bootstrap';
 import { Row, Col, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { useUser } from '../../UserContext';
-import { FaChartBar,FaCut,FaFileAlt, FaFileDownload, FaPenAlt, FaPoll, FaRecycle, FaRemoveFormat, FaTrashAlt, FaUpload, FaUser } from 'react-icons/fa';
+import { FaChartBar,FaCut,FaFileAlt, FaFileDownload, FaKey, FaPenAlt, FaPoll, FaRecycle, FaRemoveFormat, FaSignOutAlt, FaTrashAlt, FaUpload, FaUser } from 'react-icons/fa';
 import Results from '../../Admin/Results/Results';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -203,10 +203,12 @@ const handleDeleteSelectedFiles = async () => {
             <Nav className="me-auto"></Nav>
             <Nav>
               <NavDropdown title={user.email} id="login-dropdown">
-                <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
-              </NavDropdown>
+              <NavDropdown.Item as={Link} to="/otherprofile"><FaUser/> Profile</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+              <NavDropdown.Divider/>
+              <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
+            </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

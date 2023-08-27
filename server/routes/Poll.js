@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Poll = require('../models/Poll');
 
-// Create a new poll
 router.post('/create', async (req, res) => {
   try {
     const { question, options } = req.body;
@@ -17,7 +16,6 @@ router.post('/create', async (req, res) => {
   }
 });
 
-// Get all polls
 router.get('/list', async (req, res) => {
   try {
     const polls = await Poll.find();
@@ -27,7 +25,6 @@ router.get('/list', async (req, res) => {
   }
 });
 
-// Vote on a poll
 router.post('/vote', async (req, res) => {
   try {
     const { pollId, selectedOption } = req.body;

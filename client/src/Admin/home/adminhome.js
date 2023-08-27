@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { Row,Col } from "react-bootstrap";
 import './adminhome.css';
-import { FaBook, FaCalendar, FaUser, FaUserPlus, FaUsers } from "react-icons/fa";
+import { FaBook,FaUser, FaUserPlus, FaUsers } from "react-icons/fa";
 
 export default function Adminhome(){
 

@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../features/actions';
+import { Col,Row } from "react-bootstrap";
+import { FaKey, FaSign, FaSignInAlt } from "react-icons/fa";
 
 const Login = () => {
   const [emailOrIndex, setEmailOrIndex] = useState("");
@@ -61,9 +63,12 @@ localStorage.setItem('user', JSON.stringify(response.data));
   return (
     <div className="login">
       <Container>
-        <Form>
+      <Row>
+     
+    <Col sm={12}>
+    <Form className="formlogin">
           {/* <img src={logo} alt="Logo" fluid /> */}
-          <h4>Sign In</h4>
+          <h1 className="sign"><FaKey/> Login to Account</h1>
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -90,8 +95,12 @@ localStorage.setItem('user', JSON.stringify(response.data));
           >
             Login
           </button>
-          <Link to="/reset-password">Reset Your Password</Link>
+          
         </Form>
+    </Col>
+    
+    </Row>
+        
       </Container>
     </div>
   );

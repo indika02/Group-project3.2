@@ -2,7 +2,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Tab, NavDropdown ,Col,Row} from 'react-bootstrap';
 import './Admin.css';
-import { FaCalendar, FaChartBar, FaCompass,FaPoll,FaShieldAlt,FaUserEdit, FaUserPlus } from "react-icons/fa";
+import { FaCalendar, FaChartBar, FaCompass,FaKey,FaPoll,FaShieldAlt,FaSignOutAlt,FaUser,FaUserEdit, FaUserPlus } from "react-icons/fa";
 import Timetable from './Timetable/Timetable';
 import StdDetails from './Registration/Student/stddetails';
 import Account from './Account Creation/Account';
@@ -33,9 +33,11 @@ export default function Admin ()  {
           </Nav>
           <Nav>
             <NavDropdown title={user.email}id="login-dropdown">
-            <NavDropdown.Item as={Link} to="">Profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/otherprofile"><FaUser/> Profile</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
           </NavDropdown>
           </Nav>
         </Navbar.Collapse>
@@ -56,13 +58,10 @@ export default function Admin ()  {
               <Nav.Link eventKey="tab4"><FaCalendar/> Timetable</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab5"><FaChartBar/> Exam Results</Nav.Link>
+              <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab6"><FaPoll/>Making Polls</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="tab7"><FaShieldAlt/>Team </Nav.Link>
+              <Nav.Link eventKey="tab6"><FaShieldAlt/>Team </Nav.Link>
             </Nav.Item>
           </Nav>
           <Tab.Content>
@@ -120,17 +119,13 @@ export default function Admin ()  {
               
             </Tab.Pane>
             </Tab.Content>
+            
             <Tab.Pane eventKey="tab5" className='tab'>
-              <Container>
-              <h4>Exam Results</h4></Container>
-              <Results/>
-            </Tab.Pane>
-            <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>Making Polls</h4></Container>
               <PollMaker/>
             </Tab.Pane>
-            <Tab.Pane eventKey="tab7" className='tab'>
+            <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>TEAM</h4>
               <OtherAccount/>

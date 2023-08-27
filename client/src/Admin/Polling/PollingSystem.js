@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { FaMarker, FaPlus, FaTrash } from 'react-icons/fa';
+import './Polls.css';
 
 function PollMaker() {
   const [newQuestion, setNewQuestion] = useState('');
   const [newOptions, setNewOptions] = useState([]);
+  const[Lname,setLname]=useState("");
+  const [classType,setClassType]=useState("");
+  const[batchYear,setBatchyear]=useState("");
 
   const handleAddOption = () => {
     setNewOptions([...newOptions, '']);
@@ -30,7 +35,6 @@ function PollMaker() {
 
   return (
     <Container>
-      <h1>Poll Maker</h1>
       <Form>
         <Form.Group controlId="newQuestion">
           <Form.Label>New Question:</Form.Label>
@@ -55,24 +59,25 @@ function PollMaker() {
                   }}
                 />
               </Col>
-              <Col sm={1}>
+              <Col sm={2}>
                 <Button
-                  variant="danger"
+                  variant="danger" className='pollbtn-del'
                   onClick={() => handleRemoveOption(index)}
                 >
-                  Delete
+                  <FaTrash/>
                 </Button>
               </Col>
             </Row>
           </Form.Group>
         ))}
-        <Button variant="secondary" onClick={handleAddOption}>
-          Add Option
+        <Button variant="secondary" onClick={handleAddOption}  className='pollbtn'>
+          <FaPlus/>
         </Button>
-        <Button variant="primary" onClick={handleSubmit}>
-          Create Poll
+        <Button variant="primary" onClick={handleSubmit}  className='pollbtn'>
+          <FaMarker/>
         </Button>
       </Form>
+      
     </Container>
   );
 }

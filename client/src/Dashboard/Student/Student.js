@@ -5,7 +5,7 @@
           import {Row,Col} from 'react-bootstrap';
           import { useState } from 'react';
           import { Table } from 'react-bootstrap';
-          import { FaBell, FaChartBar,FaVoteYea } from 'react-icons/fa';
+          import { FaBell, FaChartBar,FaKey,FaSignOutAlt,FaUser,FaVoteYea } from 'react-icons/fa';
           import { Link } from 'react-router-dom';
           import axios from 'axios';
           import { useSelector,useDispatch } from 'react-redux';
@@ -65,17 +65,6 @@
                   });
               };
               
-              
-       
-              const handleDownloadQRCode = () => {
-      
-                const downloadLink = document.createElement('a');
-                downloadLink.href = userProfiledata?.qrCode;
-                downloadLink.download = `${user.index}_qr_code.png`;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-              };
               const fetchUploadedFiles = async () => {
                 try {
                   const response = await axios.get('http://localhost:5000/lecturernotes/uploadedfile');
@@ -116,9 +105,11 @@
                     </Nav>
                     <Nav>
                      <NavDropdown title={user.email} id="login-dropdown">
-                      <NavDropdown.Item as={Link} to="/profilepage">Profile</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="/profilepage"><FaUser/> Profile</NavDropdown.Item>
                       <NavDropdown.Divider />
-                      <NavDropdown.Item as={Link} to="/login">Logout</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+                      <NavDropdown.Divider/>
+                      <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                   </Navbar.Collapse>
@@ -128,7 +119,7 @@
               </Row>
              
               <Row>
-                <Col md={9}>
+                <Col md={12}>
                 
                 
               <Tab.Container defaultActiveKey="tab1">
@@ -346,14 +337,7 @@
                 </Tab.Content>
               </Tab.Container>
                   </Col>
-                  <Col className='qrcol' md={3}>
-                    <div className='qrcode'>
-                  <Image src={userProfiledata?.qrCode} fluid style={{ width: '300px', height: '300px' }} className='qrimg' />
-                  <Button variant="primary" className="btnqrcode"onClick={handleDownloadQRCode}>
-                Download
-              </Button>
-              </div>
-                  </Col>
+
     </Row>
             
       
