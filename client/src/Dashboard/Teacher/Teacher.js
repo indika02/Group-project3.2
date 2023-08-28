@@ -19,16 +19,14 @@ export default function Teacher() {
   const [userProfile, setUserProfile] = useState(null);
   const [stdDetails, setStdDetails] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchText, setSearchText] = useState('');
-  const [batchYearFilter, setBatchYearFilter] = useState('');
-  const [classTypeFilter, setClassTypeFilter] = useState('');
   const [classtype, setClasstype] = useState("");
-  const [batchyear, setBatchYear] = useState("");
-  const[originalFileName,setoriginalFileName]=useState("");
+  const [batchyear, setBatchYear] = useState(""); 
+  const [selectedClassType, setSelectedClassType] = useState('');
+  const [selectedBatchYear, setSelectedBatchYear] = useState('');
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const [selectedEnrollmentNo, setSelectedEnrollmentNo] = useState('');
  
   
   
@@ -70,32 +68,9 @@ export default function Teacher() {
       });
   };
 
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-  };
+  
 
-  const handleBatchYearFilterChange = (e) => {
-    setBatchYearFilter(e.target.value);
-  };
-
-  const handleClassTypeFilterChange = (e) => {
-    setClassTypeFilter(e.target.value);
-  };
-
-  const filteredStdDetails = stdDetails.filter((stdData) => {
-    const fullName = stdData.name.toLowerCase();
-    const index = stdData.index.toLowerCase();
-    const searchValue = searchText.toLowerCase();
-    const batchYear = stdData.batchyear.toLowerCase();
-    const classType = stdData.classtype.toLowerCase();
-
-    const isNameOrIndexMatch = fullName.includes(searchValue) || index.includes(searchValue);
-    const isBatchYearMatch = batchYear.includes(batchYearFilter.toLowerCase());
-    const isClassTypeMatch = classType.includes(classTypeFilter.toLowerCase());
-
-    return isNameOrIndexMatch && isBatchYearMatch && isClassTypeMatch;
-  });
-
+  
   const handleFileUpload = async (e) => {
     try {
       const file = e.target.files[0];
@@ -340,42 +315,55 @@ const handleDeleteSelectedFiles = async () => {
 
             <Container>
             <h4>Student details</h4>
-              <div className="search-bar">
+              <Row className="attendance">
+              <Col sm={3}>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Enter Enrollment No."
+          value={selectedEnrollmentNo}
+          onChange={(e) => setSelectedEnrollmentNo(e.target.value)}
+        />
+      </Col>
+              <Col sm={3}>
+        <select
+          className="form-select form-control" value={selectedClassType}
+          onChange={(e) => {
+            setSelectedClassType(e.target.value);
+          }}
+        >
+          <option value="">All Class Types</option>
+          <option value="grade06">Grade 06</option>
+          <option value="grade07">Grade 07</option>
+          <option value="grade08">Grade 08</option>
+          <option value="grade09">Grade 09</option>
+          <option value="grade10">Grade 10</option>
+          <option value="grade11">Grade 11</option>
+          <option value="A/L">A/L</option>
+         
+        </select>
+        </Col>
+        <Col sm={3}>
+        <select
+          className="form-select form-control" value={selectedBatchYear}
+          onChange={(e) => {
+            setSelectedBatchYear(e.target.value);
+          }}
+        >
+          <option value="">All Batch Years</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+        </select>
+        </Col>
+              </Row>
                
-                <Form>
-                  <Row>
-                    <Col>
-                    <FormControl
-                    type="text"
-                    placeholder="Search by Name or Index No"
-                    value={searchText}
-                    onChange={handleSearchChange}
-                    className='search'
-                  />
-                    </Col>
-                    <Col>
-                    <FormControl
-                    type="text"
-                    placeholder="Filter by Batch Year"
-                    value={batchYearFilter}
-                    onChange={handleBatchYearFilterChange}
-                    className='search'
-                  />
-                    </Col>
-                    <Col>
-                     
-                  <FormControl
-                    type="text"
-                    placeholder="Filter by Class Type"
-                    value={classTypeFilter}
-                    onChange={handleClassTypeFilterChange}
-                    className='search'
-                  />
-                    </Col>
-                  </Row>
-                  
-                  </Form>
-                
+
+            
             <div>
               {loading ? (
                 <div>Loading...</div>
@@ -394,7 +382,10 @@ const handleDeleteSelectedFiles = async () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredStdDetails.map((stdData) => (
+                      {stdDetails.filter(stdData=>
+                        (selectedEnrollmentNo === '' || stdData.index === selectedEnrollmentNo) &&
+                      (selectedClassType === '' || stdData.classtype === selectedClassType) &&
+                      (selectedBatchYear === '' || stdData.batchyear === selectedBatchYear) ).map((stdData) => (
                         <tr key={stdData.index}>
                           <td>{stdData.index}</td>
                           <td>{stdData.name}</td>
@@ -410,7 +401,7 @@ const handleDeleteSelectedFiles = async () => {
                 </>
                 )}
                 </div>
-            </div>
+            
             <Row>
             <h4>Attendance Details</h4>
             <AttendanceTeacher/>

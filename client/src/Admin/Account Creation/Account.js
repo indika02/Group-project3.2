@@ -6,7 +6,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import bcrypt from 'bcryptjs';
 import { Container, Table } from "react-bootstrap";
-import { FaAccusoft, FaEdit, FaRecycle, FaRemoveFormat, FaTrash, FaUserAlt } from "react-icons/fa";
+import {FaTrash, FaUserAlt } from "react-icons/fa";
 
 export default function Account() {
 
@@ -18,6 +18,8 @@ export default function Account() {
     const[usertype,setUsertype]=useState("student");
     const [Accountdetails, setAccountdetails] = useState([]);
   const [loading, setLoading] = useState(false);
+   const [selectedEnrollmentNo, setSelectedEnrollmentNo] = useState('');
+
 
 
     useEffect(() => {
@@ -143,6 +145,17 @@ export default function Account() {
 
                 </div>
                 <Container>
+                <Row className="indexacc">
+                <Col sm={3}>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Enrollment No."
+                  value={selectedEnrollmentNo}
+                  onChange={(e) => setSelectedEnrollmentNo(e.target.value)}
+                />
+              </Col>
+                </Row>
                 {loading ? (
               <div>Loading...</div>
             ) : (
@@ -151,14 +164,18 @@ export default function Account() {
                   <thead>
                     <tr>
                       <th>Enrollement No</th>
+                      <th>Name</th>
                       <th>Email</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Accountdetails.map((account) => (
+                   {Accountdetails.filter(account => 
+                    (selectedEnrollmentNo === '' || account.index === selectedEnrollmentNo)
+                  ).map((account) => (
                       <tr key={account._id}>
                         <td>{account.index}</td>
+                        <td>{account.name}</td>
                         <td>{account.email}</td>
                         <button className="deluser" onClick={() => handleDelete(account._id)}><FaTrash/></button>
                       </tr>

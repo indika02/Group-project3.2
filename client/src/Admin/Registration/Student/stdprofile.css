@@ -14,12 +14,15 @@
     text-align: left;
     font-size: 18px;
     font-weight: 400;
-    background-color: rgb(182, 213, 223);
+    border: 3px solid rgb(229, 215, 232);
+    border-radius: 06px;
+    padding-left: 4px;
    
 }
 
 .profiledetails p ul{
-    list-style-type: decimal-leading-one;
+   list-style: none;
+    margin-left: 20px;
 }
 .profiledetails p ul li{
     font-weight: bold;

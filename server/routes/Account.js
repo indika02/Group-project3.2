@@ -1,6 +1,51 @@
 const bcrypt = require("bcrypt");
 const router = require("express").Router();
 const Account = require("../models/Account");
+const nodemailer = require('nodemailer');
+const otpGenerator = require('otp-generator')
+
+router.route('/password-reset/:email').post(async (req, res) => {
+  const userEmail = req.params.email;
+
+ 
+ 
+
+const otppwd=otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+
+ 
+
+
+  const emailData = {
+    to: userEmail,
+    subject: 'Password Reset OTP',
+    text: `Your OTP for password reset: ${otppwd}`,
+  };
+console.log(emailData)
+  const transporter = nodemailer.createTransport({
+    host:"smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'iit19002@std.uwu.ac.lk', 
+      pass: 'Iit19002@#',
+    },
+  });
+
+  const mailOptions = {
+    from: 'indikasenarathna356@gmail.com', // Your email address
+    to: userEmail,
+    subject: 'Password Reset OTP',
+    text: `Your OTP for password reset: ${otppwd}`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'OTP sent successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error sending OTP' });
+  }
+});
 
 router.route("/add").post(async (req, res) => {
   const { index, name, email, usertype, dpwd, accountstate } = req.body;
@@ -93,30 +138,6 @@ router.route("/").get((req, res) => {
     });
 });
 
-// router.route("/update/:email").put(async(req,res)=>{
-//   let email=req.params.email;
-//   const{
-//   accountstate
-//   }=req.body;
-
-//   const updateState={
-//     accountstate,
-//   }
-
-//   try {
-//     const updatedstate = await Account.findOneAndUpdate({ email: email }, updateState, {
-//       new: true,
-//     });
-
-//     if (updatedstate) {
-//       res.status(200).send({ status: "Users updated" });
-//     } else {
-//       res.status(404).send({ status: "User not found" });
-//     }
-//   } catch (err) {
-//     res.status(500).send({ status: "Error with updating data" ,err});
-//   }
-// });
 
 router.route("/userdetail/:email").get((req, res) => {
   const userEmail = req.params.email;
@@ -164,7 +185,8 @@ router.route("/update/:email").put(async(req,res)=>{
     address,
     qualifications,
     dpwd,
-    accountstate
+    accountstate,
+    profilepic
   }=req.body;
 
   const updateProfile={
@@ -179,7 +201,8 @@ router.route("/update/:email").put(async(req,res)=>{
     address,
     qualifications,
     dpwd,
-    accountstate
+    accountstate,
+    profilepic
   }
 
   try {

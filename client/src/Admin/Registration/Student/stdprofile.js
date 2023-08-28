@@ -5,6 +5,7 @@ import './stdprofile.css';
 import swal from "sweetalert";
 import axios from "axios";
 import { useSelector,useDispatch } from 'react-redux';
+import { useEffect } from "react";
 
 
 
@@ -13,10 +14,11 @@ export default function StdProfile(){
     const [userProfiledata, setUserProfiledata] = useState(null);
     const [index, setIndex] = useState('');
     const userEmail=user.email;
-
-    const handleFetchuserProfile = async (userEmail) => {
+    
+   
+    const handleFetchuserProfile = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/account/userdetails/${userEmail}`);
+          const response = await axios.get(`http://localhost:5000/user/userdetails/${index}`);
           setUserProfiledata(response.data);
           console.log(response.data)
         } catch (error) {
@@ -28,7 +30,7 @@ export default function StdProfile(){
     return(
         <div className="stdprofile">
         <Row className="profile">
-        <h4>Personnal Dettails</h4>
+        
         <Col>
         <input
         type="text"
@@ -97,10 +99,10 @@ export default function StdProfile(){
        <Row>
        <Col>
        <p>Subjects:  <ul>
-       <li>{userProfiledata?.Lname1} - {userProfiledata?.subject1}</li>
-       <li>{userProfiledata?.Lname2} - {userProfiledata?.subject2}</li>
-       <li>{userProfiledata?.Lname3} - {userProfiledata?.subject3}</li>
-       <li>{userProfiledata?.Lname4} - {userProfiledata?.subject4}</li>
+       <li>{userProfiledata?.Lname1} {userProfiledata?.subject1}</li>
+       <li>{userProfiledata?.Lname2} {userProfiledata?.subject2}</li>
+       <li>{userProfiledata?.Lname3} {userProfiledata?.subject3}</li>
+       <li>{userProfiledata?.Lname4} {userProfiledata?.subject4}</li>
        </ul></p>
        </Col>
        </Row>
