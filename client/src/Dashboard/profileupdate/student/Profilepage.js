@@ -1,15 +1,15 @@
   import React from "react";
-  import { useParams } from "react-router";
 
-  import { Container,Navbar,Nav,NavDropdown,Row,Col,Form,Image,Button } from "react-bootstrap";
+
+  import { Container,Navbar,Nav,Row,Col,Form,Image,Button } from "react-bootstrap";
   import './profilepage.css';
   import { useState,useEffect } from "react";
   import swal from "sweetalert";
   import { useSelector,useDispatch } from 'react-redux';
   import { setUserProfileData } from '../../../features/actions';
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaTrash, FaUpload } from "react-icons/fa";
 
-
+import { useRef } from "react";
 
 
 
@@ -20,6 +20,9 @@ import { FaDownload } from "react-icons/fa";
     const [userProfile,setUserProfile]=useState(null);
     const [Userprofile,setUserprofile]=useState(null);
     const [updatedProfile, setUpdatedProfile] = useState(null);
+    const [profilePicture, setProfilePicture] = useState(null);
+    const fileInputRef = useRef(null);
+
     
     useEffect(() => {
       fetchUserProfile(user.email);
@@ -67,13 +70,32 @@ import { FaDownload } from "react-icons/fa";
     };
 
     const handleDownloadQRCode = () => {
-      
       const downloadLink = document.createElement('a');
-      downloadLink.href = userProfile?.qrCode;
+      downloadLink.href = Userprofile?.qrCode;
       downloadLink.download = `${user.index}_qr_code.png`;
+      downloadLink.style.display = 'none';
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
+    };
+
+    const handlePictureChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setProfilePicture(reader.result);
+        
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    const handleResetPicture = () => {
+      setProfilePicture(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
     };
     return(
       <>
@@ -87,12 +109,13 @@ import { FaDownload } from "react-icons/fa";
     <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <div class="custom-div">
-                <h1> User profile</h1>
-              </div>
+              
             </div>
           </div>
         </div>
+        <Row>
+        <Col><Image src={profilePicture} className="profilepic" roundedCircle fluid style={{ width: '200px', height: '200px' }} /></Col>
+        </Row>
         <Row>
           
         <form className="form" onSubmit={handleFormSubmit}>
@@ -190,6 +213,18 @@ import { FaDownload } from "react-icons/fa";
                       </Col>
                   </Row>
                   <Row>
+                  <Col sm={8}>
+                  <div className='form-group'>
+                  <label for="email">Upload Your Profile Picture</label>
+                  <Form.Control type="file" accept="image/*" ref={fileInputRef} onChange={handlePictureChange} />
+
+                  </div>
+                  </Col>
+                  <Col sm={4}>
+                  <Button className="btn btn-success btnprofilepic" onClick={handleResetPicture} disabled={!profilePicture}>
+              <FaTrash/>
+            </Button>
+                  </Col>
                   <h4 className="profileh">Qr code</h4>
 
         <Col>
@@ -209,84 +244,32 @@ import { FaDownload } from "react-icons/fa";
                   <Col>
                   <div className='form-group'>
                       <label for="type" className='type'>Qualifications</label>
-                      <input type='text' className='form-control' id='Classtype' value={userProfile?.qualifications} onChange={(e) => setUserProfile({ ...userProfile, qualifications: e.target.value })}
+                      <input type='textarea' className='form-control' id='Classtype' value={userProfile?.qualifications} onChange={(e) => setUserProfile({ ...userProfile, qualifications: e.target.value })}
                 
                   />
               </div>
                   </Col>
-                  <Col>
-                  <div className='form-group'>
-                      <label for="batch" className='batch'>Batch Year</label>
-                      <input type='text' className='form-control' id='batchyear' value={Userprofile?.batchyear} readOnly
-                
-                  />
-              </div>
-                  </Col>
+                  
+              </Row>
+              <Row>
+              <Col className="profilesub">
+              <div className='form-group'>
+              <label for="type" className='type'>Batch Year</label>
+
+              <p>{Userprofile?.batchyear}</p>
+      </div>
+      </Col>
               </Row>
                       <div className='form-group'>
                   <label for="subjects">Subjects</label>
                   <Row>
-                  <Col>
-                  <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer1' value={Userprofile?.Lname1} readOnly
-                  
-                  />
-              </div>
+                  <Col className="profilesub">
+                  <p>{Userprofile?.Lname1}  {Userprofile?.subject1}</p>
+                  <p>{Userprofile?.Lname2}  {Userprofile?.subject2}</p>
+                  <p>{Userprofile?.Lname3}  {Userprofile?.subject3}</p>
+                  <p>{Userprofile?.Lname4}  {Userprofile?.subject4}</p>
                       </Col>
-                      <Col>
-                      <div className='form-group'>
-                      <input type='text' className='form-control' id='Subject1' value={Userprofile?.subject1} readOnly
-                  
-                  />
-              </div>
-                  </Col>
-                  <Col>
-                  <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer2' value={Userprofile?.Lname2} readOnly
-                
-                  />
-              </div>
-                      </Col>
-                      <Col>
-                      <div className='form-group'>
-                      <input type='text' className='form-control' id='Subject2'  value={Userprofile?.subject2} readOnly
-                
-                  />
-              </div>
-                      </Col>
-                  </Row>
-                  <Row className='sub'>
-                  <Col>
-                  <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer3' value={Userprofile?.Lname3} readOnly
-                
-                  />
-              </div>
-                      </Col>
-                      <Col>
-                      <div className='form-group'>
-                      <input type='text' className='form-control' id='Subject3'   value={Userprofile?.subject3} readOnly
-                
-                  />
-              </div>
-                  </Col>
-                  <Col>
-                  <div className='form-group'>
-                  <input type='text' className='form-control' id='Lecturer4' value={Userprofile?.Lname4} readOnly
-                
-                  />
-              </div>
-                    
-                      </Col>
-                      <Col>
-                      <div className='form-group'>
-
-                      <input type='text' className='form-control' id='Subject4'  value={Userprofile?.subject4} readOnly
-                  />
-      
-                      </div>
-                      </Col>
-                  </Row>
+                      </Row>
               </div>      
           
               <button type='submit' className='savebtn'>Save</button>

@@ -77,9 +77,7 @@ export default function OtherProfile(){
   <div class="container-fluid">
         <div class="row">
           <div class="col">
-            <div class="custom-div">
-              <h1> User profile</h1>
-            </div>
+          
           </div>
         </div>
       </div>
@@ -88,17 +86,10 @@ export default function OtherProfile(){
       <form className="form" onSubmit={handleFormSubmit}>
       <h4 className="profileh">Personal Details</h4>
       <Row>
+     
       <Col>
       <div className='form-group'>
-                <label for="index">Student's Enrollement No</label>
-                <input type='text' className='form-control' id='index' value={userProfile?.index}readOnly
-              
-                />
-            </div>
-      </Col>
-      <Col>
-      <div className='form-group'>
-                <label for="name">Student's Full Name</label>
+                <label for="name">Full Name</label>
                 <input type='text' className='form-control' id='name' value={userProfile?.name}  onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
               
                 />
@@ -107,36 +98,7 @@ export default function OtherProfile(){
       </Row>
         
             
-            <Row>
-                <Col>
-                <div className='form-group'>
-                <label for="dob">Date of Birth</label>
-                <input type='date' className='form-control' id='dob'  value={userProfile?.dob} onChange={(e) => setUserProfile({ ...userProfile, dob: e.target.value })}
-                
-                />
-            </div>
-                </Col>
-                <Col>
-                <div className='form-group'>
-                    <label for="age" className='age'>Age</label>
-                    <input type='text' className='form-control' id='age'  value={userProfile?.age} onChange={(e) => setUserProfile({ ...userProfile, age: e.target.value })}/>
-                </div>
-            
-                </Col>
-                <Col>
-                <div className='form-group'>
-              <label htmlFor="class" className='class'>Gender</label>
-              <select className="form-select form-control inputbox" aria-label="Default select example"  value={userProfile?.gender} onChange={(e) => setUserProfile({ ...userProfile, gender: e.target.value })}>
-              
-                      <option value="">select</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      
-                      
-              </select>
-            </div>
-                </Col>
-            </Row>
+           
             
         
 
@@ -182,86 +144,22 @@ export default function OtherProfile(){
                 <Row>
                 <Col>
                 <div className='form-group'>
-                    <label for="type" className='type'>Qualifications</label>
-                    <input type='text' className='form-control' id='Classtype' value={userProfile?.qualifications} onChange={(e) => setUserProfile({ ...userProfile, qualifications: e.target.value })}
+                    <label for="type" className='type'>About Your Educational Qualifications</label>
+                    <input type='textarea' className='form-control textarea' id='Classtype' value={userProfile?.qualifications} onChange={(e) => setUserProfile({ ...userProfile, qualifications: e.target.value })}
               
                 />
             </div>
                 </Col>
-                <Col>
-                <div className='form-group'>
-                    <label for="batch" className='batch'>Batch Year</label>
-                    <input type='text' className='form-control' id='batchyear' value={Userprofile?.batchyear} readOnly
-              
-                />
-            </div>
-                </Col>
+             
             </Row>
-                    <div className='form-group'>
-                <label for="subjects">Subjects</label>
-                <Row>
-                <Col>
-                <div className='form-group'>
-                <input type='text' className='form-control' id='Lecturer1' value={Userprofile?.Lname1} readOnly
-                
-                />
-            </div>
-                    </Col>
-                    <Col>
-                    <div className='form-group'>
-                    <input type='text' className='form-control' id='Subject1' value={Userprofile?.subject1} readOnly
-                
-                />
-            </div>
-                </Col>
-                <Col>
-                <div className='form-group'>
-                <input type='text' className='form-control' id='Lecturer2' value={Userprofile?.Lname2} readOnly
-              
-                />
-            </div>
-                    </Col>
-                    <Col>
-                    <div className='form-group'>
-                    <input type='text' className='form-control' id='Subject2'  value={Userprofile?.subject2} readOnly
-              
-                />
-            </div>
-                    </Col>
-                </Row>
-                <Row className='sub'>
-                <Col>
-                <div className='form-group'>
-                <input type='text' className='form-control' id='Lecturer3' value={Userprofile?.Lname3} readOnly
-              
-                />
-            </div>
-                    </Col>
-                    <Col>
-                    <div className='form-group'>
-                    <input type='text' className='form-control' id='Subject3'   value={Userprofile?.subject3} readOnly
-              
-                />
-            </div>
-                </Col>
-                <Col>
-                <div className='form-group'>
-                <input type='text' className='form-control' id='Lecturer4' value={Userprofile?.Lname4} readOnly
-              
-                />
-            </div>
+                   
+            
+                    
+       
                   
-                    </Col>
-                    <Col>
-                    <div className='form-group'>
-
-                    <input type='text' className='form-control' id='Subject4'  value={Userprofile?.subject4} readOnly
-                />
-    
-                    </div>
-                    </Col>
-                </Row>
-            </div>      
+                   
+            
+              
         
             <button type='submit' className='savebtn'>Save</button>
         </form>

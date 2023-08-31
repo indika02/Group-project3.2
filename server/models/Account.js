@@ -42,6 +42,9 @@ const AccountSchema=new Schema({
     },
     accountstate : {
         type:String,
+    },
+    profilepic : {
+        type:String,
     }
 })
 
