@@ -220,7 +220,8 @@ import { useRef } from "react";
 
                   </div>
                   </Col>
-                  <Col sm={4}>
+                 
+                  <Col sm={2}>
                   <Button className="btn btn-success btnprofilepic" onClick={handleResetPicture} disabled={!profilePicture}>
               <FaTrash/>
             </Button>
@@ -257,6 +258,15 @@ import { useRef } from "react";
               <label for="type" className='type'>Batch Year</label>
 
               <p>{Userprofile?.batchyear}</p>
+
+      </div>
+      </Col>
+      <Col className="profilesub">
+              <div className='form-group'>
+              <label for="type" className='type'>Class</label>
+
+              <p>{Userprofile?.classtype}</p>
+              
       </div>
       </Col>
               </Row>

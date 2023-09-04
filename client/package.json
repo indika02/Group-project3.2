@@ -32,6 +32,7 @@
     "react-chat-engine": "^1.11.28",
     "react-crud-icons": "^1.2.2",
     "react-dom": "^18.2.0",
+    "react-facebook": "^9.0.12",
     "react-icons": "^4.10.1",
     "react-iframe": "^1.8.5",
     "react-pdf": "^7.3.3",

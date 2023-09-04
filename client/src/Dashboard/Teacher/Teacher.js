@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import Resultfilter from '../../Admin/Results/Resultsfilter';
 import AttendanceTeacher from '../../Admin/attendance/attedanceteacher';
+import PollMaker from '../../Admin/Polling/PollingSystem';
 
 export default function Teacher() {
   const user = useSelector(state => state.auth.user);
@@ -422,7 +423,14 @@ const handleDeleteSelectedFiles = async () => {
           </Tab.Pane>
         </Tab.Content>
         <Tab.Content>
-        <Tab.Pane eventKey="tab4" className="tab"></Tab.Pane></Tab.Content>
+        <Tab.Pane eventKey="tab4" className="tab">
+        <Container>
+        <h4>Poll making</h4>
+
+      <PollMaker/>
+        </Container>
+       
+        </Tab.Pane></Tab.Content>
       </Tab.Container>
       
     </div>
