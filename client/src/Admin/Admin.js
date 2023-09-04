@@ -52,16 +52,14 @@ export default function Admin ()  {
               <Nav.Link eventKey="tab2"><FaUserPlus/>Students Details</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="tab3"><FaUserEdit/> User Accounts</Nav.Link>
+              <Nav.Link eventKey="tab3"><FaUserEdit/> Accounts</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="tab4"><FaCalendar/> Timetable</Nav.Link>
             </Nav.Item>
+           
             <Nav.Item>
-              <Nav.Link eventKey="tab5"><FaPoll/>Making Polls</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="tab6"><FaShieldAlt/>Team </Nav.Link>
+              <Nav.Link eventKey="tab5"><FaShieldAlt/> Team</Nav.Link>
             </Nav.Item>
           </Nav>
           <Tab.Content>
@@ -104,7 +102,7 @@ export default function Admin ()  {
             </Tab.Pane>
             <Tab.Pane eventKey="tab3" className='tab'>
               <Container>
-              <h4>Students  User Account Management</h4>
+              <h4>Students' Account Management</h4>
               </Container>
               <Account/>
               
@@ -120,12 +118,8 @@ export default function Admin ()  {
             </Tab.Pane>
             </Tab.Content>
             
+            
             <Tab.Pane eventKey="tab5" className='tab'>
-              <Container>
-              <h4>Making Polls</h4></Container>
-              <PollMaker/>
-            </Tab.Pane>
-            <Tab.Pane eventKey="tab6" className='tab'>
               <Container>
               <h4>TEAM</h4>
               <OtherAccount/>

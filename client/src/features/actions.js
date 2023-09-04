@@ -17,3 +17,12 @@ export const setUserProfileData = (data) => {
     payload: data,
   };
 };
+
+export const VOTED_OR_NOT='VOTED_OR_NOT';
+
+  export const setVotedData=(data)=>{
+    return{
+      type:VOTED_OR_NOT,
+      payload:data,
+    }
+  }

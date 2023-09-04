@@ -1,58 +1,111 @@
-import React, { useState } from 'react';
-import { Card, Form, Button, ProgressBar } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, ListGroup, ListGroupItem, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
+import { useSelector,useDispatch } from 'react-redux';
+import { setUserProfileData } from '../../features/actions';
 
-function VotingComponent({ poll }) {
-  const [selectedOption, setSelectedOption] = useState('');
+export default function Voting() {
+  const user = useSelector(state => state.auth.user);
+  const userProfiledata = useSelector(state => state.userProfile.userProfiledata);
+  const [polls, setPolls] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [hasVoted, setHasVoted] = useState({});
 
-  const handleVote = () => {
+  useEffect(() => {
+    fetchPollDetails();
+  }, []);
 
-    poll.votes[selectedOption] = (poll.votes[selectedOption] || 0) + 1;
-    setSelectedOption('');
-    
+  const fetchPollDetails = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/polls/list");
+     
+      const filteredPolls = response.data.filter((poll) => {
+        const matchesLname =
+          userProfiledata.Lname1.includes(poll.Lname) ||
+          userProfiledata.Lname2.includes(poll.Lname) ||
+          userProfiledata.Lname3.includes(poll.Lname) ||
+          userProfiledata.Lname4.includes(poll.Lname);
+  
+        const matchesSubject =
+          userProfiledata.subject1.includes(poll.subject) ||
+          userProfiledata.subject2.includes(poll.subject) ||
+          userProfiledata.subject3.includes(poll.subject) ||
+          userProfiledata.subject4.includes(poll.subject);
+  
+        const matchesBatchYear = poll.batchYear === userProfiledata.batchyear;
+        const matchesClassType = poll.classType === userProfiledata.classtype;
+  
+        return matchesLname && matchesSubject && matchesBatchYear && matchesClassType;
+      });
+      setPolls(filteredPolls);
+      console.log("Filtered Polls:", filteredPolls);
+    } catch (error) {
+      console.error("Failed to fetch Poll Details:", error);
+    }
+  };
+  
+
+
+  const handleOptionChange = (pollId, option) => {
+    setSelectedOptions((prevSelectedOptions) => ({
+      ...prevSelectedOptions,
+      [pollId]: option,
+    }));
+  };
+
+  const handleVote = async (pollId) => {
+    const selectedOption = selectedOptions[pollId];
+    if (selectedOption) {
+      try {
+        await axios.post("http://localhost:5000/polls/vote", { pollId, selectedOption });
+        fetchPollDetails();
+        setHasVoted((prevHasVoted) => ({
+          ...prevHasVoted,
+          [pollId]: true,
+        }));
+      } catch (error) {
+        console.error("Failed to vote:", error);
+      }
+    }
   };
 
   return (
-    <Card className="mt-4">
-      <Card.Body>
-        <Card.Title>{poll.question}</Card.Title>
-        <Form>
-          {poll.options.map((option, optionIndex) => (
-            <Form.Check
-              key={optionIndex}
-              type="radio"
-              label={option}
-              checked={selectedOption === option}
-              onChange={() => setSelectedOption(option)}
-            />
+    <Container>
+      <div>
+        <Row>
+          {polls.map((poll, pollIndex) => (
+            <Col key={pollIndex}>
+              <Card>
+                <Card.Body>
+                  <Card.Title>{poll.question}</Card.Title>
+                  <p>Class Type: {poll.classType}</p>
+                  <p>Batch Year: {poll.batchYear}</p>
+                  <p>Lecturer Name: {poll.Lname}</p>
+                  <p>Subject: {poll.subject}</p>
+                  <ListGroup>
+                    {poll.options.map((option, index) => (
+                      <ListGroupItem key={index}>
+                        <Form.Check
+                          type="radio"
+                          name={`pollOption-${poll._id}`}
+                          label={option.text}
+                          value={option.text}
+                          checked={selectedOptions[poll._id] === option.text}
+                          onChange={() => handleOptionChange(poll._id, option.text)}
+                          disabled={hasVoted[poll._id]}
+                        />
+                      </ListGroupItem>
+                    ))}
+                  </ListGroup>
+                  <Button variant="primary" onClick={() => handleVote(poll._id)} disabled={hasVoted[poll._id]}>
+                    Vote
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </Form>
-        {selectedOption && (
-          <div>
-            <Button variant="primary" onClick={handleVote}>
-              Vote
-            </Button>
-          </div>
-        )}
-        {selectedOption && poll.votes[selectedOption] !== undefined && (
-          <div>
-            <h5>Your Vote: {selectedOption}</h5>
-            <ProgressBar
-              now={
-                (poll.votes[selectedOption] || 0) /
-                Object.values(poll.votes).reduce((sum, voteCount) => sum + voteCount, 0) *
-                100
-              }
-              label={`${Math.round(
-                ((poll.votes[selectedOption] || 0) /
-                  Object.values(poll.votes).reduce((sum, voteCount) => sum + voteCount, 0)) *
-                  100
-              )}%`}
-            />
-          </div>
-        )}
-      </Card.Body>
-    </Card>
+        </Row>
+      </div>
+    </Container>
   );
 }
-
-export default VotingComponent;

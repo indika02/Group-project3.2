@@ -92,11 +92,9 @@ export default function StdDetails() {
                   <tr>
                     <th>Enrollment No.</th>
                     <th>Name</th>
-                    <th>Email</th>
                     <th>Class</th>
                     <th>Batch</th>
                     <th colSpan={4}>Subjects</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -108,14 +106,12 @@ export default function StdDetails() {
                     <tr key={studentdetail._id}>
                       <td>{studentdetail.index}</td>
                       <td>{studentdetail.name}</td>
-                      <td>{studentdetail.email}</td>
                       <td>{studentdetail.classtype}</td>
                       <td>{studentdetail.batchyear}</td>
                       <td>{studentdetail.subject1}</td>
                       <td>{studentdetail.subject2}</td>
                       <td>{studentdetail.subject3}</td>
                       <td>{studentdetail.subject4}</td>
-                      <td><FaEdit/></td>
                     </tr>
                   ))}
                 </tbody>

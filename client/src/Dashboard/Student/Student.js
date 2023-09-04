@@ -10,6 +10,7 @@
           import axios from 'axios';
           import { useSelector,useDispatch } from 'react-redux';
           import { setUserProfileData } from '../../features/actions';
+import Voting from '../../Admin/Polling/Voting';
 
 
           function Student() {
@@ -101,7 +102,6 @@
                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                   <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                      {/* Add your navigation links here */}
                     </Nav>
                     <Nav>
                      <NavDropdown title={user.email} id="login-dropdown">
@@ -301,8 +301,8 @@
           </thead>
           <tbody>
           {examResults
-            .slice() // Create a copy of the examResults array before sorting
-            .sort((a, b) => new Date(b.Doe) - new Date(a.Doe)) // Sort by date in descending order
+            .slice() 
+            .sort((a, b) => new Date(b.Doe) - new Date(a.Doe)) 
             .map((result, index) => (
               <tr key={index}>
                 <td>{result.Doe}</td>
@@ -332,7 +332,7 @@
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab4" className='tab'>
                     <h1 className='topiclec'>Polls</h1>
-                
+                <Voting/>
                   </Tab.Pane>
                 </Tab.Content>
               </Tab.Container>
