@@ -12,3 +12,31 @@
     height: 40px;
     border-radius: 0;
 }
+
+.vote{
+    margin: 6px;
+    float: right;
+    border-radius: 0;
+}
+
+.polldel{
+    margin: 6px;
+    float: right;
+    border-radius: 0;
+}
+
+.poll-qu{
+    text-align: center;
+    background-color: rgb(63, 130, 174);
+    color: white;
+}
+
+.pollc{
+    margin-top: 20px;
+    background-color:  rgb(248, 251, 252);
+}
+
+.polld{
+    margin-top: 20px;
+    
+}

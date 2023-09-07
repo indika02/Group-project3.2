@@ -5,7 +5,7 @@
           import {Row,Col} from 'react-bootstrap';
           import { useState } from 'react';
           import { Table } from 'react-bootstrap';
-          import { FaBell, FaChartBar,FaKey,FaSignOutAlt,FaUser,FaVoteYea } from 'react-icons/fa';
+          import { FaBell, FaChartBar,FaKey,FaPenAlt,FaSignOutAlt,FaUser,FaVoteYea } from 'react-icons/fa';
           import { Link } from 'react-router-dom';
           import axios from 'axios';
           import { useSelector,useDispatch } from 'react-redux';
@@ -146,7 +146,7 @@ import Voting from '../../Admin/Polling/Voting';
                         <>{userProfiledata && userProfiledata.subject1 && (
                           <div className='subjects'>
                             <p>{userProfiledata?.subject1}- {userProfiledata?.Lname1}</p>
-                            <h5>Notes</h5>
+                            <h5 className="notes">Notes</h5>
                             <div className='uploaded-files'>
     {uploadedFiles.map((file) => {
       console.log('Checking:', file.originalFileName, userProfiledata);
@@ -155,14 +155,16 @@ import Voting from '../../Admin/Polling/Voting';
         console.log('Match found:', file.originalFileName);
         return (
           <div key={file.originalFileName}>
-            <a
-              href={`http://localhost:5000/lecturernotes/download/${file.originalFileName}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {file.originalFileName}
-            </a>
-            <hr />
+       
+         <a className='lecnotes'
+          href={`http://localhost:5000/lecturernotes/download/${file.originalFileName}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {file.originalFileName}
+        </a>
+           
+           
           </div>
         );
       }

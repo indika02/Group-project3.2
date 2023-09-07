@@ -5,15 +5,19 @@ import './Polls.css';
 import PollDisplay from './pollDisplay';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { useSelector,useDispatch } from 'react-redux';
+import { setUserProfileData } from '../../features/actions';
+
 
 
 function PollMaker() {
+  const user = useSelector(state => state.auth.user);
   const [newQuestion, setNewQuestion] = useState('');
   const [newOptions, setNewOptions] = useState([]);
   const[Lname,setLname]=useState("");
   const [classType,setClassType]=useState("");
   const[batchYear,setBatchyear]=useState("");
-  const [lecturerName, setLecturerName] = useState("");
+ 
   const [subject, setSubject] = useState("");
   const [AllLecturers, setAllLecturers] = useState([]);
   const [Allsubjects, setAllsubjects] = useState([]);
@@ -24,6 +28,7 @@ function PollMaker() {
     axios.get('http://localhost:5000/subject/').then((response) => {
       setAllsubjects(response.data);
       setAllLecturers(response.data);
+   
     }).catch((error) => {
       console.log('Error fetching data.', error);
     });
@@ -36,13 +41,17 @@ function PollMaker() {
   const fetchPollDetails = async () => {
     try {
       const response = await axios.get("http://localhost:5000/polls/list");
-      setPolls(response.data);
+      const pollsData = response.data; 
+      const pollLnames = pollsData.map((poll) => poll.Lname);
+      console.log(pollLnames);
 
+      const filteredPolls = pollsData.filter((poll) => poll.Lname === user.name);
+      setPolls(filteredPolls);
     } catch (error) {
       console.error("Failed to fetch Poll Details:", error);
     }
   };
-
+  
   const handleAddOption = () => {
     setNewOptions([...newOptions, '']);
   };
@@ -58,33 +67,56 @@ function PollMaker() {
       options: newOptions.filter((option) => option.trim() !== ''),
       batchYear: batchYear,
       classType: classType,
-      Lname: Lname,
+      Lname: user.name,
       subject:subject,
     };
   
     console.log(newPoll);
   
     axios
-      .post("http://localhost:5000/polls/add", newPoll) // Send the newPoll object in the POST request
+      .post("http://localhost:5000/polls/add", newPoll)
       .then(() => {
         
         swal("Success", "Adding Successful!", "success");
         setNewQuestion('');
         setNewOptions([]);
-        setBatchyear(''); // Reset batchYear
-        setClassType(''); // Reset classType
-        setLname(''); // Reset Lname
+        setBatchyear(''); 
+        setClassType(''); 
+        setLname('');
+        fetchPollDetails();
       })
       .catch((err) => {
         swal("Error", "Invalid Data Input!", "error");
       });
   };
   
+  const handleDelete = async (id) => {
+    try {
+      const result = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this poll!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+  
+      if (result) {
+        await axios.delete(`http://localhost:5000/polls/delete/${id}`);
+        swal("Success", "Poll Deleted successfull!", "success");
+        fetchPollDetails();
+      } else {
+        swal("Cancelled", "Account was not deleted.", "info");
+      }
+    } catch (error) {
+      swal("Error!", "Failed to delete Account!", "error");
+      console.log(error);
+    }
+  };
 
   return (
     <Container>
-    <Row>
-    <Col sm={3}>
+    <Row className='polld'>
+    <Col sm={4}>
         <select
           className="form-select form-control"
           onChange={(e) => {
@@ -102,7 +134,7 @@ function PollMaker() {
          
         </select>
         </Col>
-        <Col sm={3}>
+        <Col sm={4}>
         <select
           className="form-select form-control"
           onChange={(e) => {
@@ -119,22 +151,12 @@ function PollMaker() {
           <option value="2029">2029</option>
         </select>
         </Col>
-        <Col sm={3}>
-        <div className='form-group'>
-          
-          <select id="country" className="form-select form-control" onChange={(e) => setLname(e.target.value)}>
-            <option value="">Select the Lecturer</option>
-            {AllLecturers.map((item) => (
-              <option key={item._id} value={item.Lname}>{item.Lname}</option>
-            ))}
-          </select>
-        </div>
-      </Col>
-      <Col sm={3}>
+        
+      <Col sm={4}>
       <div className='form-group'>
       
       <select id="country" className="form-select form-control" onChange={(e) => setSubject(e.target.value)}>
-        <option value="">Select the Subject</option>
+        <option value="">Select your Subject</option>
         {Allsubjects.map((item) => (
           <option key={item._id} value={item.subject}>{item.subject}</option>
         ))}
@@ -142,7 +164,7 @@ function PollMaker() {
     </div>
       </Col>
     </Row>
-      <Form>
+      <Row className='pollc'>
         <Form.Group controlId="newQuestion">
           <Form.Label>New Question:</Form.Label>
           <Form.Control
@@ -183,16 +205,17 @@ function PollMaker() {
         <Button variant="primary" onClick={handleSubmit}  className='pollbtn'>
           <FaMarker/>
         </Button>
-      </Form>
       
-      <div>
+      
+      </Row>
+      
       <Row>
       
         {polls.map((poll, pollIndex) => (
           <Col key={pollIndex} sm={4}>
             <Card className="mb-3">
               <Card.Body>
-                <Card.Title>{poll.question}</Card.Title>
+                <Card.Title className='poll-qu'>{poll.question}</Card.Title>
                 <p>Class Type: {poll.classType}</p>
                 <p>Batch Year: {poll.batchYear}</p>
                 <p>Lecturer Name: {poll.Lname}</p>
@@ -211,12 +234,14 @@ function PollMaker() {
                   ))}
                 </ListGroup>
               </Card.Body>
+
+              <Button class="btn btn-danger polldel" onClick={() => handleDelete(poll._id)}><FaTrash/></Button>
             </Card>
           </Col>
         ))}
         
       </Row>
-    </div>
+    
     </Container>
   );
 }
