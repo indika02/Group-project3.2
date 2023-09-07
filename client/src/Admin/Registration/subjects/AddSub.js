@@ -10,6 +10,7 @@ export default function Addsub(){
     const [Lname,setLName]=useState("");
     const [classtype,setClasstype]=useState("");
     const[subject,setSubject]=useState("");
+    const[email,setEmail]=useState("");
 
     function sendData(e){
         e.preventDefault();
@@ -17,7 +18,8 @@ export default function Addsub(){
         const newSubject={
             Lname,
             classtype,
-            subject
+            subject,
+            email
         }
 
         console.log(newSubject);
@@ -45,6 +47,16 @@ export default function Addsub(){
                 </div>
                     </Col>
                 </Row>
+                <Col>
+                <div className='form-group'>
+                <label for="lecturer">Email Address</label>
+                <input type='email' className='form-control' id='index'
+                onChange={(e)=>{
+                    setEmail(e.target.value);
+                }}
+                />
+            </div>
+                </Col>
                 <Row>
                     <Col>
                     <div className='form-group'>

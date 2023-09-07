@@ -3,6 +3,8 @@ import { Container, Row, Col, Card, ListGroup, ListGroupItem, Form, Button } fro
 import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
 import { setUserProfileData } from '../../features/actions';
+import "./Polls.css";
+import { FaVoteYea } from 'react-icons/fa';
 
 export default function Voting() {
   const user = useSelector(state => state.auth.user);
@@ -77,7 +79,7 @@ export default function Voting() {
             <Col key={pollIndex}>
               <Card>
                 <Card.Body>
-                  <Card.Title>{poll.question}</Card.Title>
+                  <Card.Title className='poll-qu'>{poll.question}</Card.Title>
                   <p>Class Type: {poll.classType}</p>
                   <p>Batch Year: {poll.batchYear}</p>
                   <p>Lecturer Name: {poll.Lname}</p>
@@ -97,8 +99,8 @@ export default function Voting() {
                       </ListGroupItem>
                     ))}
                   </ListGroup>
-                  <Button variant="primary" onClick={() => handleVote(poll._id)} disabled={hasVoted[poll._id]}>
-                    Vote
+                  <Button variant="primary" className="vote" onClick={() => handleVote(poll._id)} disabled={hasVoted[poll._id]}>
+                    <FaVoteYea/> Vote
                   </Button>
                 </Card.Body>
               </Card>

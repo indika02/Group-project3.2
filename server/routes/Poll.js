@@ -32,7 +32,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.get('/list', async (req, res) => {
+router.get('/list/', async (req, res) => {
   try {
     const polls = await Poll.find();
     res.json(polls);
@@ -40,6 +40,9 @@ router.get('/list', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch polls' });
   }
 });
+
+
+
 
 router.post('/vote', async (req, res) => {
   try {
@@ -71,6 +74,21 @@ router.post('/vote', async (req, res) => {
     res.json(updatedPoll);
   } catch (error) {
     res.status(400).json({ error: 'Failed to vote' });
+  }
+});
+
+router.route("/delete/:id").delete(async (req, res) => {
+  const id = req.params.id;
+  try {
+    const poll = await Poll.findByIdAndDelete(id);
+    if (poll) {
+      res.status(200).send({ status: 'Poll deleted' });
+    } else {
+      res.status(404).send({ status: 'Poll not found' });
+    }
+  } catch (err) {
+    console.error("fdd",err.message);
+    res.status(500).send({ status: 'Error with deleting Poll', error: err.message });
   }
 });
 

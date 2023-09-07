@@ -13,6 +13,9 @@ const SubjectSchema=new Schema({
     },
     subject :{
         type:String,
+    },
+    email:{
+        type:String,
     }
 })
 

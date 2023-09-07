@@ -7,10 +7,11 @@
       const Lname=req.body.Lname;
       const classtype=req.body.classtype;
       const subject=req.body.subject;
+      const email=req.body.email;
       
       
       try {
-          const {Lname,classtype,subject1,subject2,subject3 } = req.body;
+          const {Lname,classtype,subject1,subject2,subject3,email } = req.body;
           const existingSubject = await Subject.findOne({ Lname});
           if (existingSubject) {
             return res.status(400).json({ error: 'Index number already exists' });
@@ -18,7 +19,8 @@
       const newSubject=new Subject({
           Lname,
           classtype,
-          subject
+          subject,
+          email
       })
 
       await newSubject.save();
