@@ -21,6 +21,7 @@ import Adminhome from './home/adminhome';
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
 
+  
 
   return (
     <div className="AdminPanal">
