@@ -33,7 +33,7 @@ import { useRef } from "react";
     const fetchUserProfile = (email)=>{
       fetch(`http://localhost:5000/account/userdetail/${email}`).then((response)=>response.json()).then((data)=>{
         setUserProfile(data);
-        console.log(data)
+        
       }).catch((error)=>{
         console.log("Error fetching user data",error);
       });
@@ -113,9 +113,7 @@ import { useRef } from "react";
             </div>
           </div>
         </div>
-        <Row>
-        <Col><Image src={profilePicture} className="profilepic" roundedCircle fluid style={{ width: '200px', height: '200px' }} /></Col>
-        </Row>
+        
         <Row>
           
         <form className="form" onSubmit={handleFormSubmit}>
@@ -214,18 +212,10 @@ import { useRef } from "react";
                   </Row>
                   <Row>
                   <Col sm={8}>
-                  <div className='form-group'>
-                  <label for="email">Upload Your Profile Picture</label>
-                  <Form.Control type="file" accept="image/*" ref={fileInputRef} onChange={handlePictureChange} />
-
-                  </div>
+                 
                   </Col>
                  
-                  <Col sm={2}>
-                  <Button className="btn btn-success btnprofilepic" onClick={handleResetPicture} disabled={!profilePicture}>
-              <FaTrash/>
-            </Button>
-                  </Col>
+                  
                   <h4 className="profileh">Qr code</h4>
 
         <Col>

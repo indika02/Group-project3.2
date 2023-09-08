@@ -67,7 +67,6 @@ localStorage.setItem('user', JSON.stringify(response.data));
      
     <Col sm={12}>
     <Form className="formlogin">
-          {/* <img src={logo} alt="Logo" fluid /> */}
           <h1 className="sign"><FaKey/> Login to Account</h1>
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
