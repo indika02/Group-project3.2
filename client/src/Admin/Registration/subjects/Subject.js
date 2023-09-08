@@ -62,7 +62,7 @@ export default function Subject() {
                     <th>Lecturer Name</th>
                     <th>Class</th>
                     <th>Subject</th>
-                    <th>Email</th>
+                  
                   </tr>
                 </thead>
                 <tbody>
@@ -73,7 +73,7 @@ export default function Subject() {
                       <td>{subjectdetail.Lname}</td>
                       <td>{subjectdetail.classtype}</td>
                       <td>{subjectdetail.subject}</td>
-                      <td>{subjectdetail.email}</td>
+                     
                     </tr>
                   ))}
                 </tbody>

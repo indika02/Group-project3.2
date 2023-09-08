@@ -11,6 +11,7 @@
           import { useSelector,useDispatch } from 'react-redux';
           import { setUserProfileData } from '../../features/actions';
 import Voting from '../../Admin/Polling/Voting';
+import Chat from '../chat/chat';
 
 
           function Student() {
@@ -163,8 +164,6 @@ import Voting from '../../Admin/Polling/Voting';
         >
           {file.originalFileName}
         </a>
-           
-           
           </div>
         );
       }
@@ -328,7 +327,7 @@ import Voting from '../../Admin/Polling/Voting';
                   </Tab.Pane>
                   <Tab.Pane eventKey="tab3" className='tab'>
                     <h1 className='topiclec'>Open Forum</h1>
-                    <p>This is the content of Tab 3.</p>
+                  
 
 
                   </Tab.Pane>
