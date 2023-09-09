@@ -57,18 +57,17 @@ export default function StdProfile(){
         </Col>
         </Row>
         <Row>
-        <Col sm={6}>
+        <Col sm={4}>
         <p>Date of Birth: {userProfiledata?.dob}</p>
         </Col>
-        <Col sm={6}>
+        <Col sm={4}>
         <p>Age: {userProfiledata?.age}</p>
         </Col>
-        </Row>
-        <Row>
-        <Col>
+        <Col sm={4}>
         <p>Gender: {userProfiledata?.gender}</p>
         </Col>
         </Row>
+        
         <Row>
         <Col sm={6}>
         <p>Contact No(Personal): {userProfiledata?.contactpersonal}</p>
@@ -87,7 +86,7 @@ export default function StdProfile(){
         </Row>
        <Row>
        <Col sm={6}>
-       <p>Class Type: {userProfiledata?.classtype}</p>
+       <p>Class: {userProfiledata?.classtype}</p>
        </Col>
        <Col sm={6}>
        <p>Batch Year: {userProfiledata?.batchyear}</p>

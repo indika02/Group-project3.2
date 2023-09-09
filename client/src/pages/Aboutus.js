@@ -8,6 +8,7 @@ import './Aboutus.css';
 import bg from '../images/bg1.jpg';
 import ScrollRevealContainer from '../components/ScrollRevealComponent';
 import poster from '../images/studentspage.png';
+import class1 from '../images/class1.jpg';
 
 const Aboutus = () => {
   return (
@@ -41,9 +42,13 @@ const Aboutus = () => {
           </Col>
         </Row>
         <Row className='about'>
-          <Col>
+        <h3>Why should you choose us?</h3>
+        <Col sm={4}>
+        <img src={class1} alt="Class" fluid className='classimg1'/>
+        </Col>
+          <Col sm={8}>
           <ScrollRevealContainer>
-          <h3>Why should you choose us?</h3>
+          
         <p>Proudly Present for the first time in Siyane city, "Siyathra Higher Education Institute ", Sri Lanka's only one state of the art auditorium built with luxury oh high technology and modern technology for the children of the future. The Siyathra Higher Education Institute has designed to be aesthetically pleasing, both indoors and outdoors with modern amenities like Air-Conditioned auditorium, Sophisticated loudspeakers, widescreen mounted to make the lecturer and the lecture clear, comfortable seating that allows you to sit in one sitting for an extended period without any difficulties and the restaurant. In the short period since its founding, we have been able to become the heir to the great results of Kurunegala under the guidance of an outstanding staff.</p>
         </ScrollRevealContainer>
           </Col>

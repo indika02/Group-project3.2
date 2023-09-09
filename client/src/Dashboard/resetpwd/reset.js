@@ -76,7 +76,7 @@ export default function Reset() {
       case "Strong":
         return "success";
       default:
-        return "danger"; // Default color for unknown strength
+        return "danger";
     }
   };
 
@@ -113,7 +113,7 @@ export default function Reset() {
                 <Form.Control
                   type="password"
                   placeholder="Enter your Default password"
-                  
+                  required 
                 />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
@@ -123,6 +123,7 @@ export default function Reset() {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required 
                 />
                 <Form.Text className="text-muted">
                   Your password should be at least 8 characters long.
@@ -140,6 +141,7 @@ export default function Reset() {
                   placeholder="Enter your password again"
                   value={reEnterPassword}
                   onChange={(e) => setReEnterPassword(e.target.value)}
+                  required 
                 />
                 {passwordMatchError && (
                     <Alert variant="danger">Passwords do not match!</Alert>
