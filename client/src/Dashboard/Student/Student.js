@@ -1,17 +1,17 @@
           import React, { useEffect } from 'react';
-          import { Navbar, Nav, Container,Image,Button,NavDropdown } from 'react-bootstrap';
+          import { Navbar, Nav, Container,NavDropdown } from 'react-bootstrap';
           import './Student.css';
           import { Tab } from 'react-bootstrap';
           import {Row,Col} from 'react-bootstrap';
           import { useState } from 'react';
           import { Table } from 'react-bootstrap';
-          import { FaBell, FaChartBar,FaKey,FaPenAlt,FaSignOutAlt,FaUser,FaVoteYea } from 'react-icons/fa';
+          import { FaChartBar,FaKey,FaSignOutAlt,FaUser,FaVoteYea } from 'react-icons/fa';
           import { Link } from 'react-router-dom';
           import axios from 'axios';
           import { useSelector,useDispatch } from 'react-redux';
           import { setUserProfileData } from '../../features/actions';
-import Voting from '../../Admin/Polling/Voting';
-import Chat from '../chat/chat';
+          import Voting from '../../Admin/Polling/Voting';
+          
 
 
           function Student() {
