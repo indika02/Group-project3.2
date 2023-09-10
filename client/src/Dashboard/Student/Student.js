@@ -99,7 +99,7 @@
               <Col>
                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
                 <Container>
-                  <Navbar.Brand href="#home">Siyathra Learning Management System</Navbar.Brand>
+                  <Navbar.Brand as={Link} to="/student">Siyathra Learning Management System</Navbar.Brand>
                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                   <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">

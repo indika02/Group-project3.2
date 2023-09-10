@@ -1,8 +1,7 @@
 const router = require("express").Router();
 let User = require("../models/Users");
 const QrCode = require('qrcode');
-const fs = require("fs");
-const path = require('path');
+
 
 router.route("/add").post(async (req, res) => {
   const {

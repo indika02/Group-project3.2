@@ -1,15 +1,13 @@
   import React from "react";
-
-
-  import { Container,Navbar,Nav,Row,Col,Form,Image,Button } from "react-bootstrap";
+  import { Container,Navbar,Nav,Row,Col,Form,Image,Button ,NavDropdown} from "react-bootstrap";
   import './profilepage.css';
   import { useState,useEffect } from "react";
   import swal from "sweetalert";
   import { useSelector,useDispatch } from 'react-redux';
   import { setUserProfileData } from '../../../features/actions';
-import { FaDownload, FaTrash, FaUpload } from "react-icons/fa";
-
-import { useRef } from "react";
+import { FaDownload, FaUser,FaKey,FaSignOutAlt } from "react-icons/fa";
+import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
 
 
 
@@ -21,7 +19,7 @@ import { useRef } from "react";
     const [Userprofile,setUserprofile]=useState(null);
     const [updatedProfile, setUpdatedProfile] = useState(null);
     const [profilePicture, setProfilePicture] = useState(null);
-    const fileInputRef = useRef(null);
+
 
     
     useEffect(() => {
@@ -49,24 +47,35 @@ import { useRef } from "react";
     };
     const handleFormSubmit = (e) => {
       e.preventDefault();
-
-      fetch(`http://localhost:5000/account/update/${user.email}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userProfile),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setUserProfile(data.Account);
-          swal("Success", "Profile Updating is Successfully completed", "success");
-          console.log(data.Account)
-        })
-        .catch((error) => {
-          console.log("Error updating user profile", error);
-          swal("Error", "An error occured!", "error");
-        });
+    
+      Swal.fire({
+        title: 'Confirm Update',
+        text: 'Are you sure you want to update your profile?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:5000/account/update/${user.email}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userProfile),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              setUserProfile(data.Account);
+              Swal.fire('Success', 'Profile Updating is Successfully completed', 'success');
+              console.log(data.Account);
+            })
+            .catch((error) => {
+              console.log('Error updating user profile', error);
+              Swal.fire('Error', 'An error occurred!', 'error');
+            });
+        }
+      });
     };
 
     const handleDownloadQRCode = () => {
@@ -91,21 +100,32 @@ import { useRef } from "react";
       }
     };
 
-    const handleResetPicture = () => {
-      setProfilePicture(null);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = null;
-      }
-    };
+ 
     return(
       <>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand href="#home">Siyathra Learning Management System</Navbar.Brand>
-              <Nav className="me-auto">
-              </Nav>
-          </Container>
-        </Navbar>
+      <Row>
+      <Col>
+       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+        <Container>
+          <Navbar.Brand as={Link} to="/student">Siyathra Learning Management System</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+            </Nav>
+            <Nav>
+             <NavDropdown title={user.email} id="login-dropdown">
+              <NavDropdown.Item as={Link} to="/profilepage"><FaUser/> Profile</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+              <NavDropdown.Divider/>
+              <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
+            </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      </Col>
+      </Row>
     <div class="container-fluid">
           <div class="row">
             <div class="col">

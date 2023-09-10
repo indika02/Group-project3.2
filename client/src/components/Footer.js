@@ -32,7 +32,7 @@ const Footer = () => {
     </ul>
     </div>
     <hr></hr>
-    <p>2023 <i class='bx bx-copyright'></i> All rights reserved by Siyathra Higher Eduacation Institute Polpithigama, Kurunegala</p>
+    <p className='pfooter'>2023 <i class='bx bx-copyright'></i> All rights reserved by Siyathra Higher Eduacation Institute Polpithigama, Kurunegala</p>
   </div>
   );
 }

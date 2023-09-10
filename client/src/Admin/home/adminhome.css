@@ -11,7 +11,7 @@
 
 .classcount{
     height:70px;
-    background-color: red;
+    background-color: rgb(58, 12, 122);
     border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
@@ -29,9 +29,14 @@
 
 .account{
     height: 70px;
-    background-color: rgb(184, 13, 227);
+    background-color: rgb(160, 12, 165);
     border-radius: 10px;
     font-size: 20px;
     font-weight: 400;
     color: white;
+}
+
+.countp{
+    text-align: center;
+    padding-top: 5px;
 }
