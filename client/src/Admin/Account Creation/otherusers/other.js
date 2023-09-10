@@ -182,6 +182,7 @@ export default function OtherAccount() {
                     <tr>
                       <th>Name</th>
                       <th>Type</th>
+                      <th>email</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -190,6 +191,7 @@ export default function OtherAccount() {
                       <tr key={account._id}>
                         <td>{account.name}</td>
                         <td>{account.usertype}</td>
+                        <td>{account.email}</td>
                         <button className="deluser" onClick={() => handleDelete(account._id)}><FaTrash/></button>
                       </tr>
                     ))}

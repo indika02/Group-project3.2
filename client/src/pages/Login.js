@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from '../UserContext';
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import logo from "../images/logo.png";
 import "./Login.css";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2';
-import { useSelector, useDispatch } from 'react-redux';
+import swal from 'sweetalert';
+import { useDispatch } from 'react-redux';
 import { loginUser } from '../features/actions';
-import { Col,Row } from "react-bootstrap";
-import { FaKey, FaSign, FaSignInAlt } from "react-icons/fa";
+import { Col,Row,Alert } from "react-bootstrap";
+import { FaKey, FaSignInAlt} from "react-icons/fa";
 
 const Login = () => {
   const [emailOrIndex, setEmailOrIndex] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleAlertClose = () => {
+    setShowAlert(false);
+  };
+
   const onLogin = async () => {
     const credentials = {
       emailOrIndex,
@@ -45,23 +49,16 @@ localStorage.setItem('user', JSON.stringify(response.data));
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Incorrect password',
-          text: 'Please enter the correct password.',
-        });
+        swal("Error!", "Incorrect Username or Password!", "error");
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Login error',
-          text: 'An error occurred while logging in.',
-        });
+        swal("Error!", "Please use correct username and Password!", "error");
       }
     }
   };
 
   return (
     <div className="login">
+    
       <Container>
       <Row>
      
@@ -86,16 +83,24 @@ localStorage.setItem('user', JSON.stringify(response.data));
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-
+          <p>
+          <Link to="" onClick={() => setShowAlert(true)}>Forgotten your username or password?</Link>
+        </p>
+        {showAlert && (
+          <Alert variant="danger" onClose={handleAlertClose} dismissible>
+            Please Contact your system administrator!
+          </Alert>
+        )}
           <button
             type="button"
             className="btn btn-primary btnlogin"
             onClick={onLogin}
           >
-            Login
+           <FaSignInAlt/> Login
           </button>
-          
+         
         </Form>
+     
     </Col>
     
     </Row>

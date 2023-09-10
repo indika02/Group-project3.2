@@ -5,8 +5,10 @@
     import Footer from '../components/Footer';
     import NavBar from '../components/navBar';
     import swal from 'sweetalert';
+    
 
 import emailjs from '@emailjs/browser';
+import { Form } from 'react-bootstrap';
 
 export const ContactUs = () => {
   const form = useRef();
@@ -36,17 +38,51 @@ export const ContactUs = () => {
           <form ref={form} onSubmit={sendEmail}>
           <h3>Send your Suggestions,inquiries and Feedback</h3>
           <p>Your email address will not be published.</p>
-          
-            <input type='text' name='Name' id='' placeholder='Enter Your Name'  
-          />
-            <input type='email' name='Email' id='' placeholder='example@gmail.com' 
-           />
-            <input type='phone' name='Contactno' id='' placeholder='+94'
-            
+          <Form.Group className="mb-3" controlId="formGroupEmail">
+           
+            <Form.Control
+              type="text"
+              placeholder="Enter Your Name here"
+              className="input"
+              name='Name'
             />
-          <textarea name='Message' id='' cols="30" rows="4" placeholder='Type Here.......'
-        
+          </Form.Group>
+          
+           
+          <Row>
+          <Col>
+          <Form.Group className="mb-3" controlId="formGroupEmail">
+          <Form.Control
+            type="Email"
+            placeholder="Enter Your Email Address Here"
+            className="input"
+            name='Email'
           />
+        </Form.Group>
+          </Col>
+          <Col>
+          <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Control
+          type="text"
+          placeholder="Enter Your Contact No. here"
+          className="input"
+          name='Contactno'
+        />
+      </Form.Group>
+          </Col>
+          </Row>
+          
+        
+          <Form.Group className="mb-3" controlId="formGroupEmail">
+          <Form.Control
+            as="textarea"  
+            rows={4}     
+            placeholder="Enter Your Message here..."
+            className="input"
+            name="Message"
+          />
+        </Form.Group>
+        
           <button type='submit' value='Send' className='sendm'>Send</button>
           </form> 
           </Col>

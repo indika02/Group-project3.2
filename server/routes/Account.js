@@ -1,51 +1,8 @@
 const bcrypt = require("bcrypt");
 const router = require("express").Router();
 const Account = require("../models/Account");
-const nodemailer = require('nodemailer');
-const otpGenerator = require('otp-generator')
-
-router.route('/password-reset/:email').post(async (req, res) => {
-  const userEmail = req.params.email;
-
- 
- 
-
-const otppwd=otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
-
- 
 
 
-  const emailData = {
-    to: userEmail,
-    subject: 'Password Reset OTP',
-    text: `Your OTP for password reset: ${otppwd}`,
-  };
-console.log(emailData)
-  const transporter = nodemailer.createTransport({
-    host:"smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'iit19002@std.uwu.ac.lk', 
-      pass: 'Iit19002@#',
-    },
-  });
-
-  const mailOptions = {
-    from: 'indikasenarathna356@gmail.com', // Your email address
-    to: userEmail,
-    subject: 'Password Reset OTP',
-    text: `Your OTP for password reset: ${otppwd}`,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'OTP sent successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error sending OTP' });
-  }
-});
 
 router.route("/add").post(async (req, res) => {
   const { index, name, email, usertype, dpwd, accountstate } = req.body;
@@ -248,4 +205,32 @@ router.route("/total/count").get((req, res) => {
       res.status(500).json({ error: 'An error occurred while counting documents' });
     });
 });
+
+router.route("/reset/:email").put(async (req, res) => {
+  const resetEmail = req.params.email; // Rename the parameter to avoid conflict
+  const { dpwd } = req.body; // Keep this as it is
+
+  const updatepwd = {
+    dpwd, // Keep this as it is
+  };
+
+  try {
+    const updatedpwd = await Account.findOneAndUpdate(
+      { email: resetEmail }, // Use the renamed parameter here
+      updatepwd,
+      {
+        new: true,
+      }
+    );
+
+    if (updatedpwd) {
+      res.status(200).send({ status: "User updated", User: updatedpwd });
+    } else {
+      res.status(404).send({ status: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ status: "Error with updating data" });
+  }
+});
+
 module.exports = router;

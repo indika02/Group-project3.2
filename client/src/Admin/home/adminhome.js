@@ -34,22 +34,22 @@ export default function Adminhome(){
         <Row>
         <Col>
         <div className="stdcount">
-        <p><FaUsers/> Total Students <br></br>{stdcount}</p>
+        <p className="countp"><FaUsers/> Total Students <br></br>{stdcount}</p>
         </div>
         </Col>
         <Col>
         <div className="classcount">
-        <p><FaBook/>   Total Classes <br></br>{subcount}</p>
+        <p className="countp"><FaBook/>   Total Classes <br></br>{subcount}</p>
         </div>
         </Col>
         <Col>
         <div className="lecturercount">
-        <p><FaUser/> Total Lecturers <br></br>{subcount}</p>
+        <p className="countp"><FaUser/> Total Lecturers <br></br>{subcount}</p>
         </div>
         </Col>
         <Col>
         <div className="account">
-        <p><FaUserPlus/> User Accounts <br></br>{accounts}</p>
+        <p className="countp"><FaUserPlus/> User Accounts <br></br>{accounts}</p>
         </div>
         </Col>
         </Row>

@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import './reset.css';
 import { setUserProfileData } from "../../features/actions";
 import { useSelector } from "react-redux";
-import { Form, Row, Col, Container, ProgressBar } from "react-bootstrap";
+import { Form, Row, Col, Container, ProgressBar,Nav,NavDropdown,Navbar } from "react-bootstrap";
 import { FaKey, FaSave } from "react-icons/fa";
 import { Alert } from "react-bootstrap";
+import bcrypt from 'bcryptjs';
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import { FaUser,FaSignOutAlt } from "react-icons/fa";
 
 export default function Reset() {
   const user = useSelector((state) => state.auth.user);
@@ -88,8 +93,103 @@ export default function Reset() {
     }
   };
 
+  async function encryptPassword(password){
+    try{
+      const encryptedPassword=await bcrypt.hash(password,10);
+      return encryptedPassword;
+    }catch(error){
+      throw new Error('Password encryption failed');
+    }
+  }
+
+  const resetPassword = async (e) => {
+    e.preventDefault();
+  
+    Swal.fire({
+      title: 'Confirm Password Reset',
+      text: 'Are you sure you want to reset your password?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const encryptedPassword = await encryptPassword(password);
+  
+          // Include only the encrypted password in the request data
+          const userData = {
+            dpwd: encryptedPassword,
+          };
+  
+          // Get the user's email from userProfile
+          const userEmail = userProfile?.email;
+  
+          // Check if userEmail is defined
+          if (!userEmail) {
+            Swal.fire({
+              title: 'User Email Missing',
+              text: 'User email is missing. Please try again later.',
+              icon: 'error',
+            });
+            return;
+          }
+  
+          console.log(userData);
+  
+          // Update the URL to include userEmail
+          const resetURL = `http://localhost:5000/account/reset/${userEmail}`;
+  
+          // Send the PUT request using the updated URL
+          const response = await axios.put(resetURL, userData);
+            Swal.fire({
+              title: 'Password Reset Successful',
+              text: 'Your password has been successfully updated.',
+              icon: 'success',
+            });
+        
+        } catch (error) {
+          console.error('Error resetting password:', error);
+          Swal.fire({
+            title: 'Password Reset Failed',
+            text: 'An error occurred while resetting your password. Please try again later.',
+            icon: 'error',
+          });
+        }
+      }
+    });
+  };
+  
+  
+  
+  
+
+
   return (
     <div className="reset">
+    <Row>
+    <Col>
+     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+      <Container>
+        <Navbar.Brand as={Link} to="/student">Siyathra Learning Management System</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+          </Nav>
+          <Nav>
+           <NavDropdown title={user.email} id="login-dropdown">
+            <NavDropdown.Item as={Link} to="/profilepage"><FaUser/> Profile</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item as={Link} to="/login"><FaSignOutAlt/> Logout</NavDropdown.Item>
+          </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+    </Col>
+    </Row>
       <Container>
         <Row>
           <Col sm={12}>
@@ -150,6 +250,7 @@ export default function Reset() {
               <button
                 type="button"
                 className="btn btn-primary btnreset"
+                onClick={resetPassword}
               >
                 Send
               </button>
