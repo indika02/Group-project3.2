@@ -112,3 +112,16 @@ Nav{
   text-align: center;
 }
 
+.contentt{
+  margin-top: 30px;
+}
+ 
+.navitems{
+  background-color: #000000;
+  height: 43pc;
+}
+.navlink{
+  text-align: left;
+  color: wheat;
+  
+}

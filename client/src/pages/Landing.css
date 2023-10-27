@@ -18,14 +18,14 @@ header{
     color:#460691;
     text-align: center;
 }
-.classes,.row-aboutus,.map,.row-contactus,.feedback{
+.classes,.row-aboutus,.map,.row-contactus,.feedback, .results{
     padding-top: 80px;
 }
 
 .circular-image {
     width: 400px;
     height: 500px;
-    background-image: url('https://siyathra.lk/assets/img/siyathra-kamburupitiya.jpeg');
+    background-image: url(../images/class2.jpg);
     max-width: 100%;
     max-height: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -44,7 +44,7 @@ header{
 }
 .aboutussec{
     justify-content: center;
-   padding-top: 120px;
+   padding-top: 50px;
    text-align: justify;
     text-justify: inter-word;
 }

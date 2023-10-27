@@ -21,45 +21,15 @@ export default function Qrprint() {
   };
 
   const handlePrintQRCode = () => {
-    const printWindow = window.open('', '_blank');
-    const qrCodeImage = userProfiledata?.qrCode;
-    const qrCodeImgTag = `<img src="${qrCodeImage}" style="width: 300px; height: 300px;" />`;
-
-    const printContent = `
-      <html>
-        <head>
-          <style>
-            @media print {
-              body * {
-                visibility: hidden;
-              }
-              .print-container, .print-container * {
-                visibility: visible;
-              }
-              .print-container {
-                position: absolute;
-                left: 0;
-                top: 0;
-              }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="print-container">
-            ${qrCodeImgTag}
-          </div>
-        </body>
-      </html>
-    `;
-
-    printWindow.document.open();
-    printWindow.document.write(printContent);
-    printWindow.document.close();
-    printWindow.onload = () => {
-      printWindow.print();
-      printWindow.close();
-    };
-  };
+    const downloadLink = document.createElement('a');
+      downloadLink.href =   userProfiledata?.qrCode;
+      downloadLink.download = `${userProfiledata?.index}_qr_code.png`;
+      downloadLink.style.display = 'none';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+  
+  }
   return (
     <div>
       <Row className='qrc'>

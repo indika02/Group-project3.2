@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table,Col,Row } from "react-bootstrap";
-import { FaEdit, FaUserPlus } from "react-icons/fa";
+import { FaTrash, FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
+import './stddetails.css';
 
 export default function StdDetails() {
   const [studentdetails, setStudentdetails] = useState([]);
@@ -28,6 +30,27 @@ export default function StdDetails() {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const result = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this user!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+  
+      if (result) {
+        await axios.delete(`http://localhost:5000/user/delete/${id}`);
+        swal("Success", "User Removed!", "success");
+        fetchStudentDetails();
+      } else {
+        swal("Cancelled", "User not deleted.", "info");
+      }
+    } catch (error) {
+      swal("Error!", "Failed to delete User!", "error");
+    }
+  };
   return (
     <div className="stdfilter">
       <Container>
@@ -95,6 +118,7 @@ export default function StdDetails() {
                     <th>Class</th>
                     <th>Batch</th>
                     <th colSpan={4}>Subjects</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -112,6 +136,7 @@ export default function StdDetails() {
                       <td>{studentdetail.subject2}</td>
                       <td>{studentdetail.subject3}</td>
                       <td>{studentdetail.subject4}</td>
+                      <button className="deluser" onClick={() => handleDelete(studentdetail._id)}><FaTrash/></button>
                     </tr>
                   ))}
                 </tbody>

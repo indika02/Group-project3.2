@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useState,useEffect } from "react";
 import axios from "axios";
 import { Table ,Row,Col} from "react-bootstrap";
+import { format } from 'date-fns';
 
  export default function AttendanceTeacher(){
     const user = useSelector(state => state.auth.user);
@@ -33,11 +34,18 @@ import { Table ,Row,Col} from "react-bootstrap";
         <Row className="attendance">
         <Col sm={3}>
         <div className='form-group'>
-        <input type='date' className='form-control' id='date' value={selectedDate}
-        onChange={(e)=>{
-            setSelectedDate(e.target.value);
-        }}
-        />
+        <input
+  type="date"
+  className="form-control"
+  id="date"
+  value={selectedDate}
+  onChange={(e) => {
+    // Format the selected date to match your database format (e.g., 'DD-MM-YYYY')
+    const formattedDate = format(new Date(e.target.value), 'dd-MM-yyyy');
+    setSelectedDate(formattedDate);
+  }}
+/>
+
     </div>
         </Col>
         <Col sm={3}>

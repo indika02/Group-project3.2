@@ -17,8 +17,8 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 70px;
-	padding: 0 2rem;
+	height: 40px;
+	padding: 0 0rem;
 	background-color: var(--mainColor);
 	color: var(--textColor);
 	
@@ -26,16 +26,20 @@ header {
 }
 
 nav a {
-	margin: 0 1rem;
+	
 	color: var(--textColor);
 	text-decoration: none;
 	font-style: normal;
 	font-weight: normal;
+	text-align: center;
+  	padding: 14px 16px;
 }
 
 nav a:hover {
-	color: var(--secondaryColor);
+	color: white;
+	background-color: #311056;
 }
+
 
 header .nav-btn {
 	padding: 5px;

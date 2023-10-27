@@ -25,7 +25,8 @@ export default function Admin ()  {
 
   return (
     <div className="AdminPanal">
-       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed='top'>
+
       <Container>
         <Navbar.Brand href="#home" className='header'>Siyathra Higher Education Institute</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -44,7 +45,7 @@ export default function Admin ()  {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-        <Tab.Container defaultActiveKey="tab1">
+    <Tab.Container defaultActiveKey="tab1">
           <Nav variant="tabs" className="mb-3 tabadmin">
             <Nav.Item>
               <Nav.Link eventKey="tab1" ><FaCompass/> Dashboard</Nav.Link>

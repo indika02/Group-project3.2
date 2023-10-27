@@ -6,8 +6,11 @@ router.post('/add',async(req,res)=>{
     try{
         const{date,time,classType,batchYear,lecturerName,subject,index,name}=req.body;
 
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
+
         const newAttendance=new Attendance({
-            date,
+            date:formattedDate,
             time,
             classType,
             batchYear,

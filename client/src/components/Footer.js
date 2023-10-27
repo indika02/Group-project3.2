@@ -8,6 +8,7 @@ const Footer = () => {
   return (
     <div className='footer'>
       <div className='footer-content'>
+      
     <ul className='footer-links'>
       <h4><a href='#'>www.siyathra.lk</a></h4>
       <li><a href='#'>Home</a></li>
@@ -25,10 +26,12 @@ const Footer = () => {
       <li><a href='#'>University of Peradeniya</a></li>
     </ul>
     <ul className='footer-links'>
-      <h4>Social Media</h4>
-      <a href='#'><i class='bx bxl-facebook-circle bx-sm'></i></a>
-      <a href='#'><i class='bx bxl-youtube bx-sm' ></i></a>
-      <a href='#'><i class='bx bxl-whatsapp bx-sm' ></i></a>
+      <h4>Subjects</h4>
+      <li><a href='#'>Art</a></li>
+      <li><a href='#'>Commerce</a></li>
+      <li><a href='#'>Science</a></li> 
+      <li><a href='#'>Technology</a></li>
+      <li><a href='#'>O/L</a></li>
     </ul>
     </div>
     <hr></hr>

@@ -18,6 +18,7 @@ import Profilepage from './Dashboard/profileupdate/student/Profilepage';
 import QRCodeScanner from './Dashboard/Qrcodescanner/Scanner';
 import OtherProfile from './Dashboard/profileupdate/other/otherprofile';
 import Reset from './Dashboard/resetpwd/reset';
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         </div>
       ) : (
         <BrowserRouter>
+        
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/aboutus" element={<Aboutus />} />
@@ -52,7 +54,14 @@ function App() {
             <Route path='/otherprofile' element={<OtherProfile/>}/>
             <Route path='/pwdreset' element={<Reset/>}/>
             <Route path='/qrcodescanner' element={<QRCodeScanner/>}/>
-          </Routes>
+            
+            
+         
+            
+            
+            </Routes>
+           
+
         </BrowserRouter>
       )}
     </div>

@@ -171,7 +171,7 @@ const handleDeleteSelectedFiles = async () => {
 
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed='top'>
         <Container>
           <Navbar.Brand href="#home">Siyathra Learning management system</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
