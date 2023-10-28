@@ -1,9 +1,10 @@
-.Lecturers h1{
+.card .content .name{
     font-family: 'Poppins',serif;
-    color: #460691;
+    color: #000000;
     font-weight: 600;
     text-align: center;
-    padding-top: 100px;
+    font-size: 20px;
+    
 }
 
 .Lecturers h3{
@@ -15,7 +16,7 @@
     text-align: left;
 }
 
-.card {
+.Lecturers .card {
     max-width: 350px;
     border: none;
     border-radius: 4px;
@@ -26,7 +27,7 @@
   justify-content: center;
   }
   
-  .card img {
+  .Lecturers .card img {
     width: 150px;
     height: 150px;
     display: block;
@@ -34,11 +35,11 @@
 
   }
   
-  .card-content {
+  .Lecturers  .content {
     padding: 16px;
   }
   
-  .card-content h1 {
+  .Lecturers  .content h1 {
     text-align: center;
     font-family: 'Poppins', serif;
     padding-top: 5px;
@@ -48,7 +49,7 @@
     margin-top: 0;
   }
   
-  .card-content p {
+  .Lecturers   .content p {
     font-size: 14px;
     text-transform: capitalize;
     text-align: center;
@@ -56,6 +57,10 @@
     color: gray;
   }
 
-  .card-content .degree{
+  .Lecturers  .content .degree{
     color: black;
+  }
+
+  .Lecturers h2{
+    margin-top: 100px;
   }

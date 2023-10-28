@@ -20,52 +20,60 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
           <h2>Art</h2>
           
             <Col sm={3}>
+            <ScrollRevealContainer>
             <div class="card">
               <img src={profilepic} alt="Card Image"/>
-              <div class="card-content">
-                <h1>Mr. Bandula Ekanayaka</h1>
-                <p>SINHALA</p>
-                <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
-                <p><FaEnvelope/> bandula@gmail.com</p>
-                <p><FaPhone/>+94 77 34 23356</p>
-              </div>
-            </div>
-            </Col>
-            <Col sm={3}>
-            <div class="card">
-              <img src={profilepic} alt="Card Image"/>
-              <div class="card-content">
-              <h1>Mr. Bandula Ekanayaka</h1>
+              <div class="content">
+              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
               <p>SINHALA</p>
                 <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
                 <p><FaEnvelope/> bandula@gmail.com</p>
                 <p><FaPhone/>+94 77 34 23356</p>
               </div>
             </div>
+            </ScrollRevealContainer>
             </Col>
             <Col sm={3}>
+            <ScrollRevealContainer>
             <div class="card">
               <img src={profilepic} alt="Card Image"/>
-              <div class="card-content">
-              <h1>Mr. Bandula Ekanayaka</h1>
-                <p>SINHALA</p>
-                <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
-                <p><FaEnvelope/> bandula@gmail.com</p>
-                <p><FaPhone/>+94 77 34 23356</p>
-              </div>
-            </div>
-            </Col>
-            <Col sm={3}>
-            <div class="card">
-              <img src={profilepic} alt="Card Image"/>
-              <div class="card-content">
-              <h1>Mr. Bandula Ekanayaka</h1>
+              <div class="content">
+              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
               <p>SINHALA</p>
                 <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
                 <p><FaEnvelope/> bandula@gmail.com</p>
                 <p><FaPhone/>+94 77 34 23356</p>
               </div>
             </div>
+            </ScrollRevealContainer>
+            </Col>
+            <Col sm={3}>
+            <ScrollRevealContainer>
+            <div class="card">
+              <img src={profilepic} alt="Card Image"/>
+              <div class="content">
+              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
+              <p>SINHALA</p>
+                <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
+                <p><FaEnvelope/> bandula@gmail.com</p>
+                <p><FaPhone/>+94 77 34 23356</p>
+              </div>
+            </div>
+            </ScrollRevealContainer>
+            </Col>
+            <Col sm={3}>
+            <ScrollRevealContainer>
+            <div class="card">
+              <img src={profilepic} alt="Card Image"/>
+              <div class="content">
+              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
+              <p>SINHALA</p>
+                <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
+                <p><FaEnvelope/> bandula@gmail.com</p>
+                <p><FaPhone/>+94 77 34 23356</p>
+              </div>
+            </div>
+            </ScrollRevealContainer>
             </Col>
             
           </Row>

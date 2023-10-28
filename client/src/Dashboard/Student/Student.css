@@ -4,9 +4,12 @@ Nav{
   color: black;
 }
 
+
+
 .tab h1{
   text-align: center;
 }
+
 
 .card {
   max-width: 300px;
@@ -124,4 +127,8 @@ Nav{
   text-align: left;
   color: wheat;
   
+}
+
+#login-dropdown{
+    color: white;
 }

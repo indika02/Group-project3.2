@@ -54,7 +54,7 @@ router.route("/:email").get((req, res) => {
 router.post("/login", (req, res) => {
   const { emailOrIndex, password } = req.body;
 
-  // Determine if input is an email or an index
+
   const isEmail = emailOrIndex.includes("@");
   const query = isEmail ? { email: emailOrIndex } : { index: emailOrIndex };
 

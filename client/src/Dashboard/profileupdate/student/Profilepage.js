@@ -142,7 +142,7 @@ import axios from "axios";
       <>
       <Row>
       <Col>
-       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed='top'>
         <Container>
           <Navbar.Brand as={Link} to="/student">Siyathra Learning Management System</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -150,7 +150,7 @@ import axios from "axios";
             <Nav className="me-auto">
             </Nav>
             <Nav>
-             <NavDropdown title={user.email} id="login-dropdown">
+             <NavDropdown title={`${user.index} : ${user.name}`} id="login-dropdown">
               <NavDropdown.Item as={Link} to="/profilepage"><FaUser/> Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>

@@ -20,7 +20,7 @@
           <Col className='col-md-3'>
           <ScrollRevealContainer>
       <div class="cards">
-    <img src={art} alt="Card Image"/>
+    <img src={art} alt="Cards Image"/>
   
     <div class="overlay">
     <div class="text"><h2>කලා</h2></div>
@@ -31,7 +31,7 @@
           <Col className='col-md-3'>
           <ScrollRevealContainer>
       <div class="cards">
-      <img src={science} alt="Card Image"/>
+      <img src={science} alt="Cards Image"/>
   
      <div class="overlay">
     <div class="text"><h2>විද්‍යා/ගණිත</h2></div>
@@ -42,7 +42,7 @@
           <Col className='col-md-3'>
           <ScrollRevealContainer>
       <div class="cards">
-      <img src={commerce} alt="Card Image"/>
+      <img src={commerce} alt="Cards Image"/>
      <div class="overlay">
     <div class="text"><h2>වාණිජ</h2></div>
   </div>
@@ -52,7 +52,7 @@
           <Col className='col-md-3'>
           <ScrollRevealContainer>
           <div class="cards">
-          <img src={technology} alt="Card Image"/>
+          <img src={technology} alt="Cards Image"/>
         <div class="overlay">
     <div class="text"><h2>තාක්ෂණවේදය</h2></div>
   </div>

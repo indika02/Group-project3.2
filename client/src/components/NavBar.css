@@ -1,5 +1,5 @@
 
-.nav{
+.navbarm{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -13,35 +13,34 @@
 	--textColor: #000000;
 }
 
-header {
+.headernav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	height: 40px;
-	padding: 0 0rem;
+	
 	background-color: var(--mainColor);
 	color: var(--textColor);
 	
 	
 }
 
-nav a {
+.navm a {
 	
 	color: var(--textColor);
 	text-decoration: none;
 	font-style: normal;
 	font-weight: normal;
 	text-align: center;
-  	padding: 14px 16px;
+  	padding: 20px 16px;
 }
 
-nav a:hover {
+.navm a:hover {
 	color: white;
 	background-color: #311056;
 }
 
-
-header .nav-btn {
+.headernav .nav-btn {
 	padding: 5px;
 	cursor: pointer;
 	background: transparent;
@@ -53,19 +52,19 @@ header .nav-btn {
 	font-size: 1.0rem;
 }
 
-header div,
-nav {
+.headernav div,
+.navm {
 	display: flex;
 	align-items: center;
 }
 
 @media only screen and (max-width: 1024px) {
-	header .nav-btn {
+	.headernav.nav-btn {
 		visibility: visible;
 		opacity: 1;
 	}
 
-	header nav {
+	.headernav nav {
 		position: fixed;
 		top: -100vh;
 		left: 0;
@@ -81,22 +80,22 @@ nav {
       
 	}
 
-	header .responsive_nav {
+	.headernav .responsive_nav {
 		transform: translateY(100vh);
         z-index: 1;
 	}
 
-	nav .nav-close-btn {
+.navm .nav-close-btn {
 		position: absolute;
 		top: 2rem;
 		right: 2rem;
 	}
 
-	nav a {
+	.navm a {
 		font-size: 1.0rem;
 	}
 }
 
-header img{
+.headernav img{
     height: 60px;
 }

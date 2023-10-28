@@ -23,8 +23,8 @@
               const [userProfile,setUserProfile]=useState(null);
               const [examResults, setExamResults] = useState([]);
               const [uploadedFiles, setUploadedFiles] = useState([]);
-
-
+              const [sentMessages, setSentMessages] = useState([]);
+              const [loading, setLoading] = useState(false); 
               
               
               useEffect(() => {
@@ -33,9 +33,20 @@
                   fetchUserProfiledata(user.email);
                   fetchExamResults(user.index);
                   fetchUploadedFiles();
+                  fetchMessages();
                 }
               }, [user.email, user.index]);
               
+              const fetchMessages = async () => {
+                try {
+                  const response = await axios.get("http://localhost:5000/annoucement/");
+                  
+                  setSentMessages(response.data);
+                  setLoading(false);
+                } catch (error) {
+                  console.error("Failed to fetch Student Details:", error);
+                }
+              };
 
               const fetchUserProfile = (email)=>{
                 fetch(`http://localhost:5000/account/${email}`).then((response)=>response.json()).then((data)=>{
@@ -58,7 +69,7 @@
                 fetch(`http://localhost:5000/user/userdetail/${email}`)
                   .then((response) => response.json())
                   .then((data) => {
-                    // Assuming your action creator setUserProfileData is defined and imported correctly
+                    
                     dispatch(setUserProfileData(data));
                     console.log("User Profile Data:", data);
                   })
@@ -97,7 +108,7 @@
               <div>
               <Row>
               <Col>
-               <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+               <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed='top'>
                 <Container>
                   <Navbar.Brand as={Link} to="/student">Siyathra Learning Management System</Navbar.Brand>
                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -105,7 +116,7 @@
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
-                     <NavDropdown title={user.email} id="login-dropdown">
+                     <NavDropdown title={`${user.index} : ${user.name}`} id="login-dropdown">
                       <NavDropdown.Item as={Link} to="/profilepage"><FaUser/> Profile</NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
