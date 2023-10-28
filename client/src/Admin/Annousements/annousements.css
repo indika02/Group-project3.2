@@ -1,0 +1,20 @@
+.send{
+    float: right;
+    width: 100px;
+    border-radius: 0;
+    margin-top: 40px;
+}
+
+.message{
+    margin: 10px;
+    height: 200px;
+}
+
+.sendmsg{
+    margin-top: 100px;
+}
+
+.delmsg{
+    height: 40px;
+    border-radius: 0;
+}

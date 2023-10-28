@@ -5,11 +5,11 @@
   import swal from "sweetalert";
   import { useSelector,useDispatch } from 'react-redux';
   import { setUserProfileData } from '../../../features/actions';
-import { FaDownload, FaUser,FaKey,FaSignOutAlt } from "react-icons/fa";
+import { FaDownload, FaUser,FaKey,FaSignOutAlt, FaUpload } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
 
-
+import axios from "axios";
 
   export default function Profilepage(){
     const user = useSelector(state => state.auth.user);
@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
     const [Userprofile,setUserprofile]=useState(null);
     const [updatedProfile, setUpdatedProfile] = useState(null);
     const [profilePicture, setProfilePicture] = useState(null);
+    const [profilePictureUrl, setProfilePictureUrl] = useState(null);
 
 
     
@@ -78,6 +79,8 @@ import { Link } from "react-router-dom";
       });
     };
 
+
+
     const handleDownloadQRCode = () => {
       const downloadLink = document.createElement('a');
       downloadLink.href = Userprofile?.qrCode;
@@ -89,23 +92,57 @@ import { Link } from "react-router-dom";
     };
 
     const handlePictureChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setProfilePicture(reader.result);
-        
-        };
-        reader.readAsDataURL(file);
+      try {
+        const file = e.target.files[0];
+        setProfilePicture(file);
+      } catch (error) {
+        console.log('Error uploading file:', error);
       }
     };
+  
+  
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      if (!profilePicture) {
+        console.log('No file selected.');
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append('file', profilePicture);
+      formData.append('email',user.email );
+      formData.append('index',userProfile?.index)
+     
+  
+      const uploadResponse = await axios.post('http://localhost:5000/account/upload-profile-pic', formData);
+      console.log('File uploaded successfully. Response:', uploadResponse.data);
+      swal("Success", "Uploading Successful!", "success");
 
- 
+    } catch (error) {
+      console.log('Error uploading file or saving data:', error);
+      swal("Error", "An Error Occured!", "error");
+    }
+  };
+  
+     useEffect(() => {
+    axios.get(`http://localhost:5000/account/profile-pic/${userProfile?.index}`)
+      .then((response) => {
+        setProfilePictureUrl(response.data);
+        console.log("url is: ",profilePictureUrl);
+
+      })
+      .catch((error) => {
+        console.error('Error fetching profile picture:', error);
+      });
+  }, [userProfile?.index]);
+
     return(
       <>
       <Row>
       <Col>
-       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed='top'>
         <Container>
           <Navbar.Brand as={Link} to="/student">Siyathra Learning Management System</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -113,7 +150,7 @@ import { Link } from "react-router-dom";
             <Nav className="me-auto">
             </Nav>
             <Nav>
-             <NavDropdown title={user.email} id="login-dropdown">
+             <NavDropdown title={`${user.index} : ${user.name}`} id="login-dropdown">
               <NavDropdown.Item as={Link} to="/profilepage"><FaUser/> Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item as={Link} to="/pwdreset"><FaKey/> Change Password</NavDropdown.Item>
@@ -135,7 +172,7 @@ import { Link } from "react-router-dom";
         </div>
         
         <Row>
-          
+          <Container>
         <form className="form" onSubmit={handleFormSubmit}>
         <h4 className="profileh">Personal Details</h4>
         <Row>
@@ -151,7 +188,6 @@ import { Link } from "react-router-dom";
         <div className='form-group'>
                   <label for="name">Student's Full Name</label>
                   <input type='text' className='form-control' id='name' value={userProfile?.name}  onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
-                
                   />
         </div>
         </Col>
@@ -230,10 +266,9 @@ import { Link } from "react-router-dom";
               </div>
                       </Col>
                   </Row>
+                  
                   <Row>
-                  <Col sm={8}>
-                 
-                  </Col>
+               
                  
                   
                   <h4 className="profileh">Qr code</h4>
@@ -294,7 +329,7 @@ import { Link } from "react-router-dom";
           
               <button type='submit' className='savebtn'>Save</button>
           </form>
-          
+          </Container>
         </Row>
 
         

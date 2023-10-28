@@ -102,7 +102,7 @@ if (Lname4 && subject4) {
 });
 
 router.route("/").get((req, res) => {
-  User.find({}, '-_id -__v') // Exclude _id and __v fields from the response
+  User.find({}, ' -__v')
     .then((users) => {
       res.json(users);
     })
@@ -241,4 +241,19 @@ router.route("/total/count").get((req, res) => {
     });
 });
 
+
+router.route("/delete/:id").delete(async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findByIdAndDelete(id);
+    if (user) {
+      res.status(200).send({ status: 'user Removed' });
+    } else {
+      res.status(404).send({ status: 'user not found' });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ status: 'Error with deleting user', error: err.message });
+  }
+});
 module.exports = router;

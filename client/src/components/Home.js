@@ -9,23 +9,19 @@ const Home = () => {
   return (
     <div>
       <Row className="homerow">
-        <Col xs={12} md={7} className="col-md-7">
+        <Col>
           <div className="home-content">
-            {/* <h1>Siyathra E-Learning Management System</h1> */}
-            <h2><span className="typing-animation">Siyathra Higher Education Institute</span></h2>
+          <h2 className='heading'>Siyathra Higher Education Institute</h2>
+           
             <h3>Polpithigama, Kurunegala</h3>
             <Link to="/login">
               <button className="lmsbtn">Student Portal</button>
             </Link>
+            
           </div>
+          
         </Col>
-        <Col xs={12} md={5}>
-          <img
-            src={mainpic}
-            className="img-fluid" id='homeimg'
-            alt="Home Image"
-          />
-        </Col>
+      
       </Row>
     </div>
   );

@@ -43,7 +43,7 @@ const AccountSchema=new Schema({
     accountstate : {
         type:String,
     },
-    profilepic : {
+    originalFileName : {
         type:String,
     }
 })

@@ -6,6 +6,7 @@ import './stdreg.css';
 import swal from 'sweetalert';
 import QRCode from 'qrcode.react';
 
+
 export default function StdRegform() {
 
     const [index,setIndex]=useState("");
@@ -37,6 +38,10 @@ export default function StdRegform() {
     function sendData(e){
         e.preventDefault();
 
+        if (!index || !name || !dob || !age || !gender || !contactpersonal || !classtype || !batchyear) {
+            swal("Error", "Please fill out all required fields!", "error");
+            return;
+          }
         const newStudent={
             index,
             name,

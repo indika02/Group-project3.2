@@ -17,8 +17,8 @@ export default function Account() {
     const[accountstate,setAccountStatus]=useState("active");
     const[usertype,setUsertype]=useState("student");
     const [Accountdetails, setAccountdetails] = useState([]);
-  const [loading, setLoading] = useState(false);
-   const [selectedEnrollmentNo, setSelectedEnrollmentNo] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [selectedEnrollmentNo, setSelectedEnrollmentNo] = useState('');
 
 
 

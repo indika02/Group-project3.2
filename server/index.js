@@ -35,6 +35,7 @@ const LecturerNotes=require("./routes/LecturerNotes");
 const fileUpload = require("express-fileupload");
 const Polls=require("./routes/Poll");
 const Attendance=require("./routes/Attendance");
+const Annoucement=require("./routes/Annousement");
 
 app.use("/user",userRouter)
 app.use("/timetable",timetableRouter);
@@ -45,7 +46,7 @@ app.use("/lecturernotes",LecturerNotes);
 app.use("/polls",Polls);
 app.use("/attendance",Attendance);
 app.use(fileUpload());
-
+app.use("/annoucement",Annoucement);
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port number: ${PORT}`);

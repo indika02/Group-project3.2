@@ -1,41 +1,39 @@
 const express=require("express");
 const router=express.Router();
-const Attendance=require('../models/Attendance');
+const Annoucement=require('../models/Annousement');
 
 router.post('/add',async(req,res)=>{
     try{
-        const{date,time,classType,batchYear,lecturerName,subject,index,name}=req.body;
+        const{Lname,subject,classtype,batchyear,message}=req.body;
 
         const currentDate = new Date();
         const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
 
-        const newAttendance=new Attendance({
+        const newAnnoucement=new Annoucement({
             date:formattedDate,
-            time,
-            classType,
-            batchYear,
-            lecturerName,
+            message,
+            Lname,
             subject,
-            index,
-            name
+            classtype,
+            batchyear
         });
 
-        const savedAttendance=await newAttendance.save();
-        res.json(savedAttendance);
+        const savedAnnoucement=await newAnnoucement.save();
+        res.json(savedAnnoucement);
     }catch(error){
-        console.log('Error adding attendance:',error);
-        res.status(500).json({error:'An error occured while adding attendance'});
+        console.log('Error Saving Message:',error);
+        res.status(500).json({error:'An error occured while saving!'});
     }
 });
 
 router.route("/").get((req, res) => {
-    Attendance.find()
-      .then((attendance) => {
-        res.json(attendance);
+    Annoucement.find()
+      .then((annoucement) => {
+        res.json(annoucement);
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json({ error: 'Error fetching attendance' });
+        res.status(500).json({ error: 'Error fetching message' });
       });
   });
 
@@ -64,20 +62,22 @@ router.route("/").get((req, res) => {
         res.status(500).json({ error: 'Error!' });
       });
   });
-  
-  const today = new Date();
-today.setHours(0, 0, 0, 0); // Set the time to the beginning of the day
 
-router.route("/total/count").get((req, res) => {
-  Attendance.countDocuments({ date: { $gte: today } }) // Filter by dates greater than or equal to today
-    .then((count) => {
-      res.json({ count: count });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: 'An error occurred while counting documents' });
-    });
-});
+  router.route("/delete/:id").delete(async (req, res) => {
+    const id = req.params.id;
+    try {
+      const user = await Annoucement.findByIdAndDelete(id);
+      if (user) {
+        res.status(200).send({ status: ' Removed' });
+      } else {
+        res.status(404).send({ status: ' not found' });
+      }
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send({ status: 'Error with deleting Message', error: err.message });
+    }
+  });
+
 
 
 

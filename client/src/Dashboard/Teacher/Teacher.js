@@ -5,7 +5,7 @@ import { Tab } from 'react-bootstrap';
 import { Row, Col, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { useUser } from '../../UserContext';
-import { FaChartBar,FaCut,FaFileAlt, FaFileDownload, FaKey, FaPenAlt, FaPoll, FaRecycle, FaRemoveFormat, FaSignOutAlt, FaTrashAlt, FaUpload, FaUser } from 'react-icons/fa';
+import { FaChartBar,FaCut,FaEvernote,FaFile,FaFileAlt, FaFileDownload, FaKey, FaPenAlt, FaPoll, FaRecycle, FaRemoveFormat, FaSignOutAlt, FaTrashAlt, FaUpload, FaUser } from 'react-icons/fa';
 import Results from '../../Admin/Results/Results';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import swal from 'sweetalert';
 import Resultfilter from '../../Admin/Results/Resultsfilter';
 import AttendanceTeacher from '../../Admin/attendance/attedanceteacher';
 import PollMaker from '../../Admin/Polling/PollingSystem';
+import Annousements from '../../Admin/Annousements/annousements';
 
 export default function Teacher() {
   const user = useSelector(state => state.auth.user);
@@ -171,7 +172,7 @@ const handleDeleteSelectedFiles = async () => {
 
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
+      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed='top'>
         <Container>
           <Navbar.Brand href="#home">Siyathra Learning management system</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -209,6 +210,11 @@ const handleDeleteSelectedFiles = async () => {
           <Nav.Item>
           <Nav.Link eventKey="tab4">
             <FaPoll /> Making polls
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="tab5">
+            <FaFile /> Annoucements
           </Nav.Link>
         </Nav.Item>
         </Nav>
@@ -428,6 +434,15 @@ const handleDeleteSelectedFiles = async () => {
         <h4>Poll making</h4>
 
       <PollMaker/>
+        </Container>
+       
+        </Tab.Pane></Tab.Content>
+        <Tab.Content>
+        <Tab.Pane eventKey="tab5" className="tab">
+        <Container>
+        <h4>Annoucements</h4>
+<Annousements/>
+    
         </Container>
        
         </Tab.Pane></Tab.Content>

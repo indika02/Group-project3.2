@@ -4,6 +4,8 @@ import axios from "axios";
 import './attendance.css';
 import { Table,Row,Col } from "react-bootstrap";
 import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
+import { format } from 'date-fns';
+
 
 export default function Attendance(){
 
@@ -67,11 +69,18 @@ export default function Attendance(){
         <Row className="attendance">
         <Col sm={3}>
         <div className='form-group'>
-        <input type='date' className='form-control' id='date' value={selectedDate}
-        onChange={(e)=>{
-            setSelectedDate(e.target.value);
+        <input
+        type="date"
+        className="form-control"
+        id="date"
+        value={selectedDate}
+        onChange={(e) => {
+          // Format the selected date to match your database format (e.g., 'DD-MM-YYYY')
+          const formattedDate = format(new Date(e.target.value), 'dd-MM-yyyy');
+          setSelectedDate(formattedDate);
         }}
-        />
+      />
+      
     </div>
         </Col>
         <Col sm={3}>
@@ -169,27 +178,7 @@ export default function Attendance(){
      </div>
      </Col>
      </Row>
-     <Row>
-     <Col sm={6}  className="attendgraph">
-     <PieChart width={400} height={400}>
-     <Pie
-       dataKey="value"
-       data={data}
-       cx={200}
-       cy={200}
-       outerRadius={80}
-       fill="#8884d8"
-       label
-     >
-       {data.map((entry, index) => (
-         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-       ))}
-     </Pie>
-     <Legend />
-     <Tooltip />
-   </PieChart>
-     </Col>
-     </Row>
+    
         </div>
     );
 }

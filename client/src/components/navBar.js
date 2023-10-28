@@ -14,10 +14,10 @@
 			};
 
 			return (
-				<div className="nav">
-				<header>
+				<div className="navbarm">
+				<header className="headernav">
 					<img src={logo} fluid></img>
-					<nav ref={navRef}>
+					<nav ref={navRef} className="navm">
 						<Link to="/">Home</Link>
 						<Link to="/aboutus">About us</Link>
 						<Link to="/Lecturer">Our Lecturers</Link>

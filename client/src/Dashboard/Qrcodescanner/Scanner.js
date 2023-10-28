@@ -142,7 +142,7 @@ const QRCodeScanner = () => {
     <div>
       <Row>
         <Col>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='nav' fixed='top'>
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" className='nav' fixed='top'>
         <Container>
           
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
