@@ -37,16 +37,7 @@
                 }
               }, [user.email, user.index]);
               
-              const fetchMessages = async () => {
-                try {
-                  const response = await axios.get("http://localhost:5000/annoucement/");
-                  
-                  setSentMessages(response.data);
-                  setLoading(false);
-                } catch (error) {
-                  console.error("Failed to fetch Student Details:", error);
-                }
-              };
+            
 
               const fetchUserProfile = (email)=>{
                 fetch(`http://localhost:5000/account/${email}`).then((response)=>response.json()).then((data)=>{
@@ -71,7 +62,7 @@
                   .then((data) => {
                     
                     dispatch(setUserProfileData(data));
-                    console.log("User Profile Data:", data);
+                    
                   })
                   .catch((error) => {
                     console.log("Error fetching user data", error);
@@ -98,12 +89,37 @@
                   });
               
                   setUploadedFiles(matchingFiles);
-                  console.log(matchingFiles);
+                 
                 } catch (error) {
                   console.error('Error fetching uploaded files:', error);
                 }
               };
               
+                const fetchMessages = async () => {
+                try {
+                  const response = await axios.get("http://localhost:5000/annoucement/");
+                  const allMessages = response.data;
+                   const matchingMsg = allMessages.filter((file) => {
+                    const hasMatchingLname = [
+                      userProfiledata?.Lname1,
+                      userProfiledata?.Lname2,
+                      userProfiledata?.Lname3,
+                      userProfiledata?.Lname4,
+                    ].includes(file.Lname);
+              
+                    const hasMatchingClassType = userProfiledata?.classtype === file.classtype;
+                    const hasMatchingBatchYear = userProfiledata?.batchyear === file.batchyear;
+              
+                    return hasMatchingLname && hasMatchingClassType && hasMatchingBatchYear;
+                  });
+
+                  setSentMessages(matchingMsg);
+                  
+                  
+                } catch (error) {
+                  console.error("Failed to fetch Student Details:", error);
+                }
+              };
             return (
               <div>
               <Row>
@@ -157,14 +173,39 @@
                       {userProfiledata && (
                         <>{userProfiledata && userProfiledata.subject1 && (
                           <div className='subjects'>
-                            <p>{userProfiledata?.subject1}- {userProfiledata?.Lname1}</p>
+                            <p className='main'>{userProfiledata?.subject1}- {userProfiledata?.Lname1}</p>
+                            <h4>Annoucements</h4>
+                            {sentMessages.length > 0 ? (
+                              sentMessages.map((file) => {
+                                const fileLname = file.Lname;
+                                if (userProfiledata.Lname1 === fileLname) {
+                                  return (
+                                    <div className='message'>
+                                   
+                                    <div
+                                    key={file._id}
+                                    className="content"
+                                    dangerouslySetInnerHTML={{ __html: file.message }}
+                                    style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }}
+                                  ></div>
+                                  
+
+                                    <p className='message-content'>{file.date}</p>
+                                    </div>
+                                  );
+                                }
+                                return null;
+                              })
+                            ) : (
+                              <p>No messages available.</p>
+                            )}
                             <h5 className="notes">Notes</h5>
                             <div className='uploaded-files'>
     {uploadedFiles.map((file) => {
-      console.log('Checking:', file.originalFileName, userProfiledata);
+      
       const fileLname = file.Lname;
       if (userProfiledata.Lname1=== fileLname) {
-        console.log('Match found:', file.originalFileName);
+       
         return (
           <div key={file.originalFileName}>
        
@@ -186,14 +227,39 @@
                         )}
                         {userProfiledata && userProfiledata.subject2 && (
                           <div className='subjects'>
-                            <p>{userProfiledata?.subject2} {userProfiledata?.Lname2}</p>
-                            <h5>Notes</h5>
+                          <p className='main'>{userProfiledata?.subject2}- {userProfiledata?.Lname2}</p>
+                          <h4>Annoucements</h4>
+                          {sentMessages.length > 0 ? (
+                            sentMessages.map((file) => {
+                              const fileLname = file.Lname;
+                              if (userProfiledata.Lname2 === fileLname) {
+                                return (
+                                  <div className='message'>
+                                 
+                                  <div
+                                  key={file._id}
+                                  className="content"
+                                  dangerouslySetInnerHTML={{ __html: file.message }}
+                                  style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }}
+                                ></div>
+                                
+
+                                  <p className='message-content'>{file.date}</p>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })
+                          ) : (
+                            <p>No messages available.</p>
+                          )}
+                          <h5 className="notes">Notes</h5>
                             <div className='uploaded-files'>
     {uploadedFiles.map((file) => {
-      console.log('Checking:', file.originalFileName, userProfiledata);
+    
       const fileLname = file.Lname;
       if (userProfiledata.Lname2=== fileLname) {
-        console.log('Match found:', file.originalFileName);
+      
         return (
           <div key={file.originalFileName}>
             <a
@@ -214,14 +280,39 @@
                         )}
                         {userProfiledata && userProfiledata.subject3 && (
                           <div className='subjects'>
-                            <p>{userProfiledata?.subject3} {userProfiledata?.Lname3}</p>
-                            <h5>Notes</h5>
+                          <p className='main'>{userProfiledata?.subject3}- {userProfiledata?.Lname3}</p>
+                          <h4>Annoucements</h4>
+                          {sentMessages.length > 0 ? (
+                            sentMessages.map((file) => {
+                              const fileLname = file.Lname;
+                              if (userProfiledata.Lname3 === fileLname) {
+                                return (
+                                  <div className='message'>
+                                 
+                                  <div
+                                  key={file._id}
+                                  className="content"
+                                  dangerouslySetInnerHTML={{ __html: file.message }}
+                                  style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }}
+                                ></div>
+                                
+
+                                  <p className='message-content'>{file.date}</p>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })
+                          ) : (
+                            <p>No messages available.</p>
+                          )}
+                          <h5 className="notes">Notes</h5>
                             <div className='uploaded-files'>
     {uploadedFiles.map((file) => {
-      console.log('Checking:', file.originalFileName, userProfiledata);
+     
       const fileLname = file.Lname;
       if (userProfiledata.Lname3=== fileLname) {
-        console.log('Match found:', file.originalFileName);
+        
         return (
           <div key={file.originalFileName}>
             <a
@@ -242,14 +333,39 @@
                         )}
                         {userProfiledata && userProfiledata.subject4 && (
                           <div className='subjects'>
-                            <p>{userProfiledata?.subject4} {userProfiledata?.Lname4}</p>
-                            <h5>Notes</h5>
+                          <p className='main'>{userProfiledata?.subject4}- {userProfiledata?.Lname4}</p>
+                          <h4>Annoucements</h4>
+                          {sentMessages.length > 0 ? (
+                            sentMessages.map((file) => {
+                              const fileLname = file.Lname;
+                              if (userProfiledata.Lname4 === fileLname) {
+                                return (
+                                  <div className='message'>
+                                 
+                                  <div
+                                  key={file._id}
+                                  className="content"
+                                  dangerouslySetInnerHTML={{ __html: file.message }}
+                                  style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }}
+                                ></div>
+                                
+
+                                  <p className='message-content'>{file.date}</p>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })
+                          ) : (
+                            <p>No messages available.</p>
+                          )}
+                          <h5 className="notes">Notes</h5>
                             <div className='uploaded-files'>
     {uploadedFiles.map((file) => {
-      console.log('Checking:', file.originalFileName, userProfiledata);
+     
       const fileLname = file.Lname;
       if (userProfiledata.Lname4=== fileLname) {
-        console.log('Match found:', file.originalFileName);
+        
         return (
           <div key={file.originalFileName}>
             <a
