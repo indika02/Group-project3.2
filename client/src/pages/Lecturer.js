@@ -24,7 +24,7 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
             <div class="card">
               <img src={profilepic} alt="Card Image"/>
               <div class="content">
-              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
+              <h1 className='name'>Bandula Ekanayaka</h1>
               <p>SINHALA</p>
                 <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
                 <p><FaEnvelope/> bandula@gmail.com</p>
@@ -38,7 +38,7 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
             <div class="card">
               <img src={profilepic} alt="Card Image"/>
               <div class="content">
-              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
+              <h1 className='name'>Bandula Ekanayaka</h1>
               <p>SINHALA</p>
                 <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
                 <p><FaEnvelope/> bandula@gmail.com</p>
@@ -52,7 +52,7 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
             <div class="card">
               <img src={profilepic} alt="Card Image"/>
               <div class="content">
-              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
+              <h1 className='name'>Bandula Ekanayaka</h1>
               <p>SINHALA</p>
                 <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
                 <p><FaEnvelope/> bandula@gmail.com</p>
@@ -66,7 +66,7 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
             <div class="card">
               <img src={profilepic} alt="Card Image"/>
               <div class="content">
-              <h1 className='name'>Mr. Bandula Ekanayaka</h1>
+              <h1 className='name'>Bandula Ekanayaka</h1>
               <p>SINHALA</p>
                 <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
                 <p><FaEnvelope/> bandula@gmail.com</p>
@@ -76,6 +76,68 @@ import { FaEnvelope, FaPhone } from 'react-icons/fa';
             </ScrollRevealContainer>
             </Col>
             
+          </Row>
+          </ScrollRevealContainer>
+          <ScrollRevealContainer>
+          <Row>
+          <h2>Commerce</h2>
+
+          <Col sm={3}>
+          <ScrollRevealContainer>
+          <div class="card">
+            <img src={profilepic} alt="Card Image"/>
+            <div class="content">
+            <h1 className='name'>Bandula Ekanayaka</h1>
+            <p>SINHALA</p>
+              <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
+              <p><FaEnvelope/> bandula@gmail.com</p>
+              <p><FaPhone/>+94 77 34 23356</p>
+            </div>
+          </div>
+          </ScrollRevealContainer>
+          </Col>
+          <Col sm={3}>
+          <ScrollRevealContainer>
+          <div class="card">
+            <img src={profilepic} alt="Card Image"/>
+            <div class="content">
+            <h1 className='name'>Bandula Ekanayaka</h1>
+            <p>SINHALA</p>
+              <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
+              <p><FaEnvelope/> bandula@gmail.com</p>
+              <p><FaPhone/>+94 77 34 23356</p>
+            </div>
+          </div>
+          </ScrollRevealContainer>
+          </Col>
+          <Col sm={3}>
+          <ScrollRevealContainer>
+          <div class="card">
+            <img src={profilepic} alt="Card Image"/>
+            <div class="content">
+            <h1 className='name'>Bandula Ekanayaka</h1>
+            <p>SINHALA</p>
+              <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
+              <p><FaEnvelope/> bandula@gmail.com</p>
+              <p><FaPhone/>+94 77 34 23356</p>
+            </div>
+          </div>
+          </ScrollRevealContainer>
+          </Col>
+          <Col sm={3}>
+          <ScrollRevealContainer>
+          <div class="card">
+            <img src={profilepic} alt="Card Image"/>
+            <div class="content">
+            <h1 className='name'>Bandula Ekanayaka</h1>
+            <p>SINHALA</p>
+              <p className='degree'>Graduated from University of Colombo(1st class honours) </p>
+              <p><FaEnvelope/> bandula@gmail.com</p>
+              <p><FaPhone/>+94 77 34 23356</p>
+            </div>
+          </div>
+          </ScrollRevealContainer>
+          </Col>
           </Row>
           </ScrollRevealContainer>
         </Container>

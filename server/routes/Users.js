@@ -88,7 +88,7 @@ if (Lname4 && subject4) {
 }
 
       
-      // Generate the QR code as a Base64 encoded string
+    
       const qrCodeBase64 = await QrCode.toDataURL(qrCodeData);
       newUser.qrCode = qrCodeBase64;
     }
