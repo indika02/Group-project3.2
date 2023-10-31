@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from 'react-redux';
 import { useState,useEffect } from "react";
 import axios from "axios";
-import { Container,Table ,Row,Col} from "react-bootstrap";
+import { Container,Table ,Row,Col,Button} from "react-bootstrap";
 import './results.css';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -13,10 +13,12 @@ export default function Resultfilter(){
     const [selectedClassType, setSelectedClassType] = useState('');
     const [selectedBatchYear, setSelectedBatchYear] = useState('');
     const [selectedEnrollmentNo, setSelectedEnrollmentNo] = useState('');
+  
 
     useEffect(()=>{
         setLoading(true);
         fetchResults(user.name);
+        
     },[user.name]);
 
     const fetchResults=async(Lname)=>{
@@ -46,11 +48,15 @@ export default function Resultfilter(){
         return Object.keys(gradeCounts).map((grade) => ({ grade, count: gradeCounts[grade] }));
       };
       
+      
+      
+     
     return(
         <div className="filterresults">
         <Container>
         <Row>
-        <Col sm={3}>
+        <Row>
+        <Col sm={2}>
         <input
           type="text"
           className="form-control"
@@ -59,7 +65,7 @@ export default function Resultfilter(){
           onChange={(e) => setSelectedEnrollmentNo(e.target.value)}
         />
       </Col>
-        <Col sm={3}>
+        <Col sm={2}>
         <select
           className="form-select form-control"
           onChange={(e) => {
@@ -77,7 +83,7 @@ export default function Resultfilter(){
          
         </select>
         </Col>
-        <Col sm={3}>
+        <Col sm={2}>
         <select
         className="form-select form-control"
         onChange={(e) => {
@@ -96,6 +102,8 @@ export default function Resultfilter(){
         </Col>
         
         </Row>
+        
+        <Col md={8}>
         <div>
           {loading ? (
             <div>Loading...</div>
@@ -134,16 +142,20 @@ export default function Resultfilter(){
             </>
           )}
         </div>
+        </Col>
+        <Col md={4}>
         <div className="chart">
-  <BarChart width={600} height={400} data={getGradeCounts(filteredResults)}>
+  <BarChart width={400} height={400} data={getGradeCounts(filteredResults)}>
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis dataKey="grade" />
     <YAxis />
     <Tooltip />
     <Legend />
-    <Bar dataKey="count" fill="#8884d8" />
+    <Bar dataKey="count" fill="darkblue" />
   </BarChart>
 </div>
+        </Col>
+        </Row>
 
         </Container>
             

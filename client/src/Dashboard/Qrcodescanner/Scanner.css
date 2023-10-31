@@ -6,19 +6,19 @@
     justify-content: center;
     min-height: 70vh; 
     min-width: 100%;
-   margin: 20px;
+  
    box-sizing: border-box;
   }
   
   .video-element {
     width: 100%;
-    max-width: 400px; /* Adjust maximum width for responsiveness */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 300px;
+    height: auto;
   }
   
 .select{
   margin-left: 50px;
   margin-right: 50px;
-  margin-top: 50px;
+  margin-top: 70px;
 }
 

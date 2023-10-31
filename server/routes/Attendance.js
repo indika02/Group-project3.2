@@ -4,14 +4,14 @@ const Attendance=require('../models/Attendance');
 
 router.post('/add',async(req,res)=>{
     try{
-        const{date,time,classType,batchYear,lecturerName,subject,index,name}=req.body;
+        const{date,classType,batchYear,lecturerName,subject,index,name}=req.body;
 
         const currentDate = new Date();
         const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
 
         const newAttendance=new Attendance({
             date:formattedDate,
-            time,
+    
             classType,
             batchYear,
             lecturerName,

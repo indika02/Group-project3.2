@@ -12,8 +12,6 @@
           import { setUserProfileData } from '../../features/actions';
           import Voting from '../../Admin/Polling/Voting';
           
-
-
           function Student() {
             const user = useSelector(state => state.auth.user);
             const userProfiledata = useSelector(state => state.userProfile.userProfiledata);
@@ -153,21 +151,21 @@
               <Tab.Container defaultActiveKey="tab1">
                 <Nav variant="tabs" className='tabadmin'>
                   <Nav.Item>
-                    <Nav.Link eventKey="tab1">Courses</Nav.Link>
+                    <Nav.Link eventKey="tab1"> Courses</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="tab2"><FaChartBar/>Exam Results</Nav.Link>
+                    <Nav.Link eventKey="tab2"><FaChartBar/> Exam Results</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="tab3">Forum</Nav.Link>
+                    <Nav.Link eventKey="tab3"> Forum</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="tab4"><FaVoteYea/>Polls</Nav.Link>
+                    <Nav.Link eventKey="tab4"><FaVoteYea/> Polls</Nav.Link>
                   </Nav.Item>
                 </Nav>
                 <Tab.Content>
                   <Tab.Pane eventKey="tab1" className='tab'>
-                    <h1 className='topiclec'>My Subjects</h1>
+                    <h1 className='topiclec'>Your Subjects</h1>
                       <Container>
 
                       {userProfiledata && (
