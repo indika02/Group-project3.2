@@ -425,7 +425,9 @@ const handleDeleteSelectedFiles = async () => {
               <hr></hr>
               <h4>Overall Results</h4>
               <Resultfilter/>
+             
             </Container>
+            
           </Tab.Pane>
         </Tab.Content>
         <Tab.Content>

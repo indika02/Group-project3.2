@@ -144,7 +144,6 @@ export default function Attendance(){
               <thead>
                 <tr>
                   <th>Date</th>
-                  <th>Time</th>
                   <th>Class</th>
                   <th>Batchyear</th>
                   <th>Lecturer Name</th>
@@ -162,7 +161,6 @@ export default function Attendance(){
                   ).map((attendancedetails) => (
                   <tr key={attendancedetails._id}>
                     <td>{attendancedetails.date}</td>
-                    <td>{attendancedetails.time}</td>
                     <td>{attendancedetails.classType}</td>
                     <td>{attendancedetails.batchYear}</td>
                     <td>{attendancedetails.lecturerName}</td>
@@ -177,8 +175,7 @@ export default function Attendance(){
         )}
      </div>
      </Col>
-     </Row>
-    
+     </Row>   
         </div>
     );
 }

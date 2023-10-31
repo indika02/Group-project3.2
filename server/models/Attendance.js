@@ -6,9 +6,6 @@ const AttendanceSchema = new mongoose.Schema({
     default: new Date().toISOString()
     
   },
-  time:{
-     type:String,
-  },
   classType: {
     type: String,
     

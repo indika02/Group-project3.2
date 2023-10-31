@@ -17,6 +17,7 @@ import StdProfile from './Registration/Student/stdprofile';
 import PollMaker from './Polling/PollingSystem';
 import Attendance from './attendance/attendance';
 import Adminhome from './home/adminhome';
+import NoticeUpload from './Timetable/Noticeupload';
 
 export default function Admin ()  {
   const user = useSelector(state => state.auth.user); 
@@ -115,6 +116,7 @@ export default function Admin ()  {
               <Container>
               <h4>Timetable Management</h4>
               <Timetable/>
+              
 </Container>
               
             </Tab.Pane>

@@ -30,7 +30,7 @@ const ExamResultSchema = new Schema({
       
       },
       marks: {
-        type: String, // Change the data type to String to match the provided data
+        type: String, 
      
       },
       grade:{
